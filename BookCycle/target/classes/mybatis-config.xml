@@ -30,7 +30,7 @@
             </dataSource>
         </environment>
         <environment id="test">
-            <transactionManager type="JDBC"></transactionManager>
+            <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF8&amp;rewriteBatchedStatements=true"/>
@@ -44,5 +44,6 @@
         <mapper resource="com\wcm533\dao\impl\BookMapper.xml"/>
         <mapper resource="com\wcm533\dao\impl\UserMapper.xml"/>
         <mapper resource="com\wcm533\dao\impl\BookDetailsMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\BookListMapper.xml"/>
     </mappers>
 </configuration>
