@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:绑定一个作用的接口-->
+<mapper namespace="com.wcm533.dao.BookMapper">
+    <insert id="addBook" parameterType="book">
+        insert into book (name,author,stock,loan,points,img_path) values (#{name},#{author},#{stock},#{loan},#{points},#{imgPath})
+    </insert>
+    <delete id="deleteBook" parameterType="map">
+        delete from book where id=#{id}
+    </delete>
+    <update id="updateBook" parameterType="book">
+        update book set name=#{name},author=#{author},stock=#{stock},loan=#{loan},points=#{points},img_path=#{imgPath} where id=#{id}
+    </update>
+    <select id="queryAllBooks" resultType="book">
+        select * from book
+    </select>
+    <select id="queryBookByAuthor" resultType="book">
+        select * from book where author=#{author}
+    </select>
+    <select id="queryBookById" resultType="book">
+        select * from book where id=#{id}
+    </select>
+    <select id="queryBookByName" resultType="book">
+        select * from book where name  like "%"#{name}"%"
+    </select>
+    <select id="queryForPageTotalCount" resultType="int">
+        select count(*) from book
+    </select>
+    <select id="queryForItems" parameterType="map" resultType="book">
+        select * from book limit #{begin},#{pageSize}
+    </select>
+    <select id="queryForPageTotalCountByPrice" parameterType="map" resultType="int">
+        select count(*) from book where points between #{min} and #{max}
+    </select>
+    <select id="queryForItemsByPrice" parameterType="map" resultType="book">
+        select * from book where points between #{min} and #{max} order by points limit #{begin},#{pageSize}
+    </select>
+</mapper>
