@@ -41,7 +41,8 @@
     </environments>
     <mappers>
         <!--注册Mapper-->
-        <mapper resource="com\wcm533\dao\impl\BookMapper.xml"></mapper>
-        <mapper resource="com\wcm533\dao\impl\UserMapper.xml"></mapper>
+        <mapper resource="com\wcm533\dao\impl\BookMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\UserMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\BookDetailsMapper.xml"/>
     </mappers>
 </configuration>

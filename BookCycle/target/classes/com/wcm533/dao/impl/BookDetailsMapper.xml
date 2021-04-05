@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:绑定一个作用的接口-->
+<mapper namespace="com.wcm533.dao.BookDetailsMapper">
+    <insert id="addBookDetails" parameterType="bookDetails">
+        insert into book_details (book_id,edition,book_concern,date_publication,summary) values (#{bookId},#{edition},#{bookConcern},#{datePublication},#{summary})
+    </insert>
+    <delete id="deleteBookDetails" parameterType="map">
+        delete from book_details where book_id=#{bookId}
+    </delete>
+    <update id="updateBookDetails" parameterType="bookDetails">
+        update book_details set book_id=#{bookId},edition=#{edition},book_concern=#{bookConcern},date_publication=#{datePublication},summary=#{summary} where book_id=#{bookId}
+    </update>
+    <select id="queryBookDetailsByBookId" parameterType="map" resultType="bookDetails">
+        select * from book_details where book_id=#{bookId}
+    </select>
+</mapper>
