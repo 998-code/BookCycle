@@ -1,0 +1,57 @@
+package com.wcm533.dao;
+
+import com.wcm533.pojo.EndowBookList;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+/**
+ * @ClassName EndowBookListMapper
+ * @Descripyion TODO
+ * @Author 吴超民
+ * @Date 2021/04/06 14:57
+ **/
+public interface EndowBookListMapper {
+
+    /**
+     * 保存书单
+     * @param endowBookList
+     * @return
+     */
+    int addBookList(EndowBookList endowBookList);
+
+    /**
+     * 删除书单
+     * @param bookListId
+     * @return
+     */
+    int deleteBookList(@Param("bookListId") String bookListId);
+
+    /**
+     * 修改书单状态
+     * @param bookListId
+     * @param status
+     * @return
+     */
+    int changeBookListStatus(@Param("bookListId") String bookListId,@Param("status") int status);
+
+    /**
+     * 查询所有书单
+     * @return
+     */
+    List<EndowBookList> queryAllBookLists();
+
+    /**
+     * 根据用户id查询所有书单
+     * @param userId
+     * @return
+     */
+    List<EndowBookList> queryBooksByUserId(@Param("userId") int userId);
+
+    /**
+     * 根据书单id查询书单
+     * @param bookListId
+     * @return
+     */
+    EndowBookList queryBookByBookListId(@Param("bookListId") String bookListId);
+}

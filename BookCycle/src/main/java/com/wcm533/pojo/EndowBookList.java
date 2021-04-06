@@ -3,24 +3,24 @@ package com.wcm533.pojo;
 import java.util.Date;
 
 /**
- * @ClassName BookList
+ * @ClassName EndowBookList
  * @Descripyion TODO
  * @Author 吴超民
- * @Date 2021/04/05 18:35
+ * @Date 2021/04/06 14:53
  **/
-public class BookList {
-    
+public class EndowBookList {
+
     private String bookListId;
     private Date createTime;
     private int points;
     private int status;
     private int userId;
 
-    public BookList(){
+    public EndowBookList(){
 
     }
 
-    public BookList(String bookListId, Date createTime, int points, int status, int userId) {
+    public EndowBookList(String bookListId, Date createTime, int points, int status, int userId) {
         this.bookListId = bookListId;
         this.createTime = createTime;
         this.points = points;
@@ -28,7 +28,7 @@ public class BookList {
         this.userId = userId;
     }
 
-    public BookList(String bookListId, Date createTime, int points, int userId) {
+    public EndowBookList(String bookListId, Date createTime, int points, int userId) {
         this.bookListId = bookListId;
         this.createTime = createTime;
         this.points = points;
@@ -77,7 +77,7 @@ public class BookList {
 
     @Override
     public String toString() {
-        return "BookList{" +
+        return "EndowBookList{" +
                 "bookListId='" + bookListId + '\'' +
                 ", createTime=" + createTime +
                 ", points=" + points +

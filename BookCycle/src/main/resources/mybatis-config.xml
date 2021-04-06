@@ -45,5 +45,10 @@
         <mapper resource="com\wcm533\dao\impl\UserMapper.xml"/>
         <mapper resource="com\wcm533\dao\impl\BookDetailsMapper.xml"/>
         <mapper resource="com\wcm533\dao\impl\BookListMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\BookListItemsMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\EndowBookListMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\EndowBookListItemsMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\ArticleMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\NewsMapper.xml"/>
     </mappers>
 </configuration>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:绑定一个作用的接口-->
+<mapper namespace="com.wcm533.dao.NewsMapper">
+    <insert id="addNews" parameterType="news">
+        insert into news (title,author,date,stem_from,content) values (#{title},#{author},#{date},#{stemFrom},#{content})
+    </insert>
+    <delete id="deleteNews" parameterType="map">
+        delete from news where id=#{id}
+    </delete>
+    <update id="updateNews" parameterType="news">
+        update news set title=#{title},author=#{author},date=#{date},stem_from=#{stemFrom},content=#{content} where id=#{id}
+    </update>
+    <select id="queryAllNews" resultType="news">
+        select * from news
+    </select>
+    <select id="queryNewsById" parameterType="map" resultType="news">
+        select * from news where id=#{id}
+    </select>
+    <select id="queryNewsByTitle" parameterType="map" resultType="news">
+        select * from news where title like "%"#{title}"%"
+    </select>
+</mapper>
