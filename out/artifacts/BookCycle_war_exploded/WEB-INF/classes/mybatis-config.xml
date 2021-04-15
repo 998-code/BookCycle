@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--引入外部jdbc配置文件-->
+    <properties resource="druid.properties">
+    </properties>
+    <settings>
+        <!--默认日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+<!--        <setting name="logImpl" value="LOG4J"/>-->
+        <!--开启驼峰命名转换-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    <!--设置别名-->
+    <typeAliases>
+        <!--扫描包中的所有实体类，别名为类名首字母小写-->
+        <package name="com.wcm533.pojo"/>
+    </typeAliases>
+    <!--配置运行环境，可配置多套环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${prop.driverClassName}"/>
+                <property name="url" value="${prop.url}"/>
+                <property name="username" value="${prop.username}"/>
+                <property name="password" value="${prop.password}"/>
+            </dataSource>
+        </environment>
+        <environment id="test">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF8&amp;rewriteBatchedStatements=true"/>
+                <property name="username" value="usr1"/>
+                <property name="password" value="123456"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--注册Mapper-->
+        <mapper resource="com\wcm533\dao\impl\BookMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\UserMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\BookDetailsMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\BookListMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\BookListItemsMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\EndowBookListMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\EndowBookListItemsMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\ArticleMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\NewsMapper.xml"/>
+    </mappers>
+</configuration>

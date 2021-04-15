@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:绑定一个作用的接口-->
+<mapper namespace="com.wcm533.dao.ArticleMapper">
+    <insert id="addArticle" parameterType="article">
+        insert into article (name,author,date,summary,img_path) values (#{name},#{author},#{date},#{summary},#{imgPath})
+    </insert>
+    <delete id="deleteArticle" parameterType="map">
+        delete from article where id=#{id}
+    </delete>
+    <update id="updateArticle" parameterType="article">
+        update article set name=#{name},author=#{author},date=#{date},summary=#{summary},img_path=#{imgPath} where id=#{id}
+    </update>
+    <select id="queryAllArticles" resultType="article">
+        select * from article
+    </select>
+    <select id="queryArticleById" parameterType="map" resultType="article">
+        select * from article where id=#{id}
+    </select>
+    <select id="queryArticleByName" parameterType="map" resultType="article">
+        select * from article where name=#{name}
+    </select>
+</mapper>

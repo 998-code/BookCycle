@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:绑定一个作用的接口-->
+<mapper namespace="com.wcm533.dao.EndowBookListMapper">
+    <insert id="addBookList" parameterType="endowBookList">
+        insert into endow_book_list (book_list_id,create_time,points,user_id) values (#{bookListId},#{createTime},#{points},#{userId})
+    </insert>
+    <delete id="deleteBookList" parameterType="map">
+
+    </delete>
+    <update id="changeBookListStatus" parameterType="map">
+        update endow_book_list set status=#{status} where book_list_id=#{bookListId}
+    </update>
+    <select id="queryAllBookLists" resultType="endowBookList">
+        select * from endow_book_list
+    </select>
+    <select id="queryBooksByUserId" parameterType="map" resultType="endowBookList">
+        select * from endow_book_list where user_id=#{userId}
+    </select>
+    <select id="queryBookByBookListId" parameterType="map" resultType="endowBookList">
+        select * from endow_book_list where book_list_id=#{bookListId}
+    </select>
+</mapper>
