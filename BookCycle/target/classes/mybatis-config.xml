@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <!--引入外部jdbc配置文件-->
-    <properties resource="druid.properties">
-    </properties>
+<!--    <properties resource="druid.properties">-->
+<!--    </properties>-->
     <settings>
         <!--默认日志-->
         <setting name="logImpl" value="STDOUT_LOGGING"/>
@@ -19,26 +19,26 @@
         <package name="com.wcm533.pojo"/>
     </typeAliases>
     <!--配置运行环境，可配置多套环境-->
-    <environments default="development">
-        <environment id="development">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="${prop.driverClassName}"/>
-                <property name="url" value="${prop.url}"/>
-                <property name="username" value="${prop.username}"/>
-                <property name="password" value="${prop.password}"/>
-            </dataSource>
-        </environment>
-        <environment id="test">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF8&amp;rewriteBatchedStatements=true"/>
-                <property name="username" value="usr1"/>
-                <property name="password" value="123456"/>
-            </dataSource>
-        </environment>
-    </environments>
+<!--    <environments default="development">-->
+<!--        <environment id="development">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="${prop.driverClassName}"/>-->
+<!--                <property name="url" value="${prop.url}"/>-->
+<!--                <property name="username" value="${prop.username}"/>-->
+<!--                <property name="password" value="${prop.password}"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--        <environment id="test">-->
+<!--            <transactionManager type="JDBC"/>-->
+<!--            <dataSource type="POOLED">-->
+<!--                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+<!--                <property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF8&amp;rewriteBatchedStatements=true"/>-->
+<!--                <property name="username" value="usr1"/>-->
+<!--                <property name="password" value="123456"/>-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--    </environments>-->
     <mappers>
         <!--注册Mapper-->
         <mapper resource="com\wcm533\dao\impl\BookMapper.xml"/>
@@ -50,5 +50,7 @@
         <mapper resource="com\wcm533\dao\impl\EndowBookListItemsMapper.xml"/>
         <mapper resource="com\wcm533\dao\impl\ArticleMapper.xml"/>
         <mapper resource="com\wcm533\dao\impl\NewsMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\PointsMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\ReservationMapper.xml"/>
     </mappers>
 </configuration>

@@ -75,6 +75,28 @@ public interface UserMapper {
     User queryUserByUsername(@Param("username") String username);
 
     /**
+     * 查询邮箱是否已被注册
+     * @param email
+     * @return
+     */
+    User queryUserByEmail(@Param("email") String email);
+
+    /**
+     * 通过账号，密码登录
+     * @param id
+     * @param password
+     * @return
+     */
+    User queryUserByIdAndPassword(@Param("id") int id,@Param("password") String password);
+
+    /**
+     * 通过邮箱，密码登录
+     * @param email
+     * @param password
+     * @return
+     */
+    User queryUserByEmailAndPassword(@Param("email") String email,@Param("password") String password);
+    /**
      * 在登录时，验证账号、密码正确性
      * @param username
      * @param password

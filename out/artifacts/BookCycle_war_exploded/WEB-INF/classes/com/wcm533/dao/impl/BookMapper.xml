@@ -25,11 +25,14 @@
     <select id="queryBookByName" resultType="book">
         select * from book where name  like "%"#{name}"%"
     </select>
+    <select id="queryBookByClassification" parameterType="map" resultType="book">
+        select * from book where classification = #{classification}
+    </select>
     <select id="queryForPageTotalCount" resultType="int">
         select count(*) from book
     </select>
     <select id="queryForItems" parameterType="map" resultType="book">
-        select * from book limit #{begin},#{pageSize}
+        select * from book order by id desc limit #{begin},#{pageSize}
     </select>
     <select id="queryForPageTotalCountByPrice" parameterType="map" resultType="int">
         select count(*) from book where points between #{min} and #{max}

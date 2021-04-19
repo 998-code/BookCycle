@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8"> 
+   <title>书籍管理</title> 
+   <link rel="stylesheet" href="../../../static/css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="../../../static/css/body/body.css">
+   <script src="../../../static/js/jquery-3.6.0.js"></script>
+   <script src="../../../static/css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+   
+</head>
+<body>
+    <div class="container">
+
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="page-header">
+                    <h1>
+                        <small><a class="btn btn-primary" href="#">返回上一页</a></small>
+                        <small style="float: right;margin-top:15px;">书籍管理</small>
+                    </h1>
+                </div>
+            </div>
+        </div>
+     
+        <div class="row clearfix">
+            <div class="col-md-1 column">
+        
+            </div>
+            <div class="col-md-5 column">
+                <img src="../../../static/img/bookimg1.jpg" class="img-thumbnail" style="height: 600px; width: 400px;">
+            </div>
+            
+            <div class="col-md-5 column">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                      <label for="name" class="col-sm-2 control-label">图书名称</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" placeholder="请输入图书名称">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="author" class="col-sm-2 control-label">图书作者</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="author" placeholder="请输入图书作者">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock" class="col-sm-2 control-label">图书总数</label>
+                        <div class="col-sm-10">
+                          <input type="number" class="form-control" id="stock" placeholder="请输入图书总数">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loan" class="col-sm-2 control-label">借出数目</label>
+                        <div class="col-sm-10">
+                          <input type="number" class="form-control" id="loan" placeholder="请输入已借出的数目">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="points" class="col-sm-2 control-label">图书积分</label>
+                        <div class="col-sm-10">
+                          <input type="number" class="form-control" id="points" placeholder="请输入图书积分">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edition" class="col-sm-2 control-label">图书版次</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="edition" placeholder="请输入图书版次">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="datePubliction" class="col-sm-2 control-label">出版时间</label>
+                        <div class="col-sm-10">
+                          <input type="date" class="form-control" id="datePubliction" placeholder="请输入出版时间">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bookConcern" class="col-sm-2 control-label">出版社</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="bookConcern" placeholder="请输入出版社">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="summary" class="col-sm-2 control-label">简要描述</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="7" id="summary" placeholder="请输入图书概述"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="img" class="col-sm-2 control-label">上传图片</label>
+                        <div class="col-sm-10">
+                          <input type="file" id="img">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary">确认保存</button>
+                      </div>
+                    </div>
+                  </form>
+            </div>
+            <div class="col-md-1 column">
+        
+            </div>
+        </div>
+            
+    </div>
+
+</body>
+</html>

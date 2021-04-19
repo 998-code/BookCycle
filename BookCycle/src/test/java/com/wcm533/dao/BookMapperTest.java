@@ -18,7 +18,7 @@ public class BookMapperTest extends TestCase {
     public void testAddBook() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-        Book book = new Book(0,"Java核心技术2","宋红康",12,8,5,null);
+        Book book = new Book(0,"Java核心技术2","宋红康",12,8,5,1,null);
         int i = mapper.addBook(book);
         System.out.println(i);
         sqlSession.close();
@@ -35,7 +35,7 @@ public class BookMapperTest extends TestCase {
     public void testUpdateBook() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-        Book book = new Book(75,"Java核心技术3","宋红康",12,8,5,null);
+        Book book = new Book(75,"Java核心技术3","宋红康",12,8,5,1,null);
         int i = mapper.updateBook(book);
         System.out.println(i);
         sqlSession.close();
@@ -64,7 +64,7 @@ public class BookMapperTest extends TestCase {
     public void testQueryBookById() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-        Book book = mapper.queryBookById(75);
+        Book book = mapper.queryBookById(70);
         System.out.println(book);
         sqlSession.close();
     }
@@ -73,6 +73,16 @@ public class BookMapperTest extends TestCase {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
         List<Book> books = mapper.queryBookByName("Java");
+        for (Book book : books) {
+            System.out.println(book);
+        }
+        sqlSession.close();
+    }
+
+    public void testQueryBookByClassification() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        BookMapper mapper = sqlSession.getMapper(BookMapper.class);
+        List<Book> books = mapper.queryBookByClassification(1);
         for (Book book : books) {
             System.out.println(book);
         }

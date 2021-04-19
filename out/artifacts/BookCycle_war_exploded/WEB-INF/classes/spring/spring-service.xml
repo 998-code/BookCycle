@@ -11,17 +11,17 @@
     <context:component-scan base-package="com.wcm533.service" />
 
     <!--BookServiceImpl注入到IOC容器中-->
-    <bean id="BookServiceImpl" class="com.wcm533.service.impl.BookServiceImpl">
-        <property name="bookMapper" ref="bookMapper"/>
-    </bean>
+<!--    <bean id="BookServiceImpl" class="com.wcm533.service.impl.BookServiceImpl">-->
+<!--        <property name="bookMapper" ref="bookMapper"/>-->
+<!--    </bean>-->
     <bean id="UserServiceImpl" class="com.wcm533.service.impl.UserServiceImpl">
         <property name="userMapper" ref="userMapper"></property>
     </bean>
-    <bean id="OrderServiceImpl" class="com.wcm533.service.impl.OrderServiceImpl">
-        <property name="orderMapper" ref="orderMapper"></property>
-        <property name="orderItemMapper" ref="orderItemMapper"></property>
-        <property name="bookMapper" ref="bookMapper"></property>
-    </bean>
+<!--    <bean id="OrderServiceImpl" class="com.wcm533.service.impl.OrderServiceImpl">-->
+<!--        <property name="orderMapper" ref="orderMapper"></property>-->
+<!--        <property name="orderItemMapper" ref="orderItemMapper"></property>-->
+<!--        <property name="bookMapper" ref="bookMapper"></property>-->
+<!--    </bean>-->
     <!-- 配置事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- 注入数据库连接池 -->

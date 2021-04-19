@@ -28,6 +28,15 @@
     <select id="queryUserByUsername" resultType="user">
         select * from user where username=#{username}
     </select>
+    <select id="queryUserByEmail" parameterType="map" resultType="user">
+        select * from user where email=#{email}
+    </select>
+    <select id="queryUserByIdAndPassword" resultType="user">
+        select * from user where  id=#{id} and password=#{password}
+    </select>
+    <select id="queryUserByEmailAndPassword" resultType="user">
+        select * from user where  email=#{email} and password=#{password}
+    </select>
     <select id="queryUserByUsernameAndPassword" resultType="user">
         select * from user where  username=#{username} and password=#{password}
     </select>

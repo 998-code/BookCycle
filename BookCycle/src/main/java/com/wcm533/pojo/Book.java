@@ -1,5 +1,7 @@
 package com.wcm533.pojo;
 
+import java.util.Arrays;
+
 /**
  * @ClassName Book
  * @Descripyion TODO
@@ -14,20 +16,22 @@ public class Book {
     private int stock;
     private int loan;
     private int points;
-    private String imgPath;
+    private int classification;
+    private byte[] bookImg;
 
     public Book(){
 
     }
 
-    public Book(int id, String name, String author, int stock, int loan, int points, String imgPath) {
+    public Book(int id, String name, String author, int stock, int loan, int points, int classification, byte[] bookImg) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.stock = stock;
         this.loan = loan;
         this.points = points;
-        this.imgPath = imgPath;
+        this.classification = classification;
+        this.bookImg = bookImg;
     }
 
     public int getId() {
@@ -78,12 +82,20 @@ public class Book {
         this.points = points;
     }
 
-    public String getImgPath() {
-        return imgPath;
+    public int getClassification() {
+        return classification;
     }
 
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
+    public void setClassification(int classification) {
+        this.classification = classification;
+    }
+
+    public byte[] getBookImg() {
+        return bookImg;
+    }
+
+    public void setBookImg(byte[] bookImg) {
+        this.bookImg = bookImg;
     }
 
     @Override
@@ -95,7 +107,8 @@ public class Book {
                 ", stock=" + stock +
                 ", loan=" + loan +
                 ", points=" + points +
-                ", imgPath='" + imgPath + '\'' +
+                ", classification=" + classification +
+                ", bookImg=" + Arrays.toString(bookImg) +
                 '}';
     }
 }

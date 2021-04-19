@@ -73,6 +73,55 @@ label{
     border-style: none;
     border-bottom: 2px solid #dddddd;
 }
+.navFirst{
+    background-color: #fc0808f5;
+    font-weight: bolder;
+    height: 40px;
+    color: snow;
+}
+.navActive a:visited{
+    background-color:#f1c6c6f5;
+    color: black;
+}
+.navActive a:hover{
+    color: red;
+}
+.list-group-horizontal .list-group-item {
+    display: inline-block;
+    font-size: 16px;
+}
+.list-group-horizontal .list-group-item {
+    font-weight: bolder;
+    border: none;
+    margin-bottom: 0;
+    margin-left:-4px;
+    margin-right: 0;
+}
+.pFont{
+    color: rgb(66, 161, 107);
+    font-weight: bolder;
+}
+.pFont:hover{
+    color:coral;
+}
+.pFont span{
+    float: right;
+    color: silver;
+}
+.pFont span:hover{
+    color:coral;
+}
+.bookSubClass{
+    width: 100%;
+    margin-top: 10px;
+    font-size: 12px;
+}
+.bookSubClass a:visited{
+    color:black
+}
+.bookSubClass a:hover{
+    color:coral;
+}
 /* th{
     text-align: center;
 } */

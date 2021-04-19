@@ -1,7 +1,25 @@
 
+function myHome() {
+    location.href="home";
+}
+function myInformation() {
+    location.href="information";
+}
+function myHand() {
+    location.href="hand";
+}
+function myBookList() {
+    location.href="bookList";
+}
+function myPoints() {
+    location.href="points";
+}
+function myBespeak() {
+    location.href="bespeak";
+}
 // function myInformation() {
 //     $('#homepage').html("");
-//     $('#homepage').load("information.html");
+//     $('#homepage').load("information2.jsp");
 //     // var str=document.getElementById("information").innerHTML;
 //     // $('#homepage').html(str);        
 // }
@@ -12,4 +30,10 @@
     </div> 
 </script> */
 
-  
+
+// $(function () {
+//     $('#homepageUl a').click(function () {
+//         $(this).siblings('a').removeClass('active');
+//         $(this).addClass('active');
+//     })
+// })

@@ -62,6 +62,13 @@ public interface BookMapper {
     List<Book> queryBookByName(@Param("name") String name);
 
     /**
+     * 根据图书分类查询图书
+     * @param classification
+     * @return
+     */
+    List<Book> queryBookByClassification(@Param("classification") int classification);
+
+    /**
      * 查询图书总数
      * @return
      */

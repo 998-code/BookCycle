@@ -91,6 +91,30 @@ public class UserMapperTest extends TestCase {
         sqlSession.close();
     }
 
+    public void testQueryUserByEmail() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = mapper.queryUserByEmail("zhaoliu@qq.com");
+        System.out.println(user);
+        sqlSession.close();
+    }
+
+    public void testQueryUserByIdAndPassword() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = mapper.queryUserByIdAndPassword(1914, "123456");
+        System.out.println(user);
+        sqlSession.close();
+    }
+
+    public void testQueryUserByEmailAndPassword() {
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        User user = mapper.queryUserByEmailAndPassword("zhaoliu@qq.com", "666666");
+        System.out.println(user);
+        sqlSession.close();
+    }
+
     public void testQueryUserByUsernameAndPassword() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
