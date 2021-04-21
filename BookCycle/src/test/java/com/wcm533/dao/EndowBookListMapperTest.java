@@ -52,7 +52,7 @@ public class EndowBookListMapperTest extends TestCase {
     public void testQueryBooksByUserId() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         EndowBookListMapper mapper = sqlSession.getMapper(EndowBookListMapper.class);
-        List<EndowBookList> endowBookLists = mapper.queryBooksByUserId(1914);
+        List<EndowBookList> endowBookLists = mapper.queryBookListsByUserId(1914,0,2);
         for (EndowBookList endowBookList : endowBookLists) {
             System.out.println(endowBookList);
         }

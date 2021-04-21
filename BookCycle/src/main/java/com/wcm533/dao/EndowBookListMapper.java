@@ -1,5 +1,6 @@
 package com.wcm533.dao;
 
+import com.wcm533.pojo.BookList;
 import com.wcm533.pojo.EndowBookList;
 import org.apache.ibatis.annotations.Param;
 
@@ -42,11 +43,21 @@ public interface EndowBookListMapper {
     List<EndowBookList> queryAllBookLists();
 
     /**
-     * 根据用户id查询所有书单
-     * @param userId
+     * 通过分页查询书单
+     * @param begin
+     * @param pageSize
      * @return
      */
-    List<EndowBookList> queryBooksByUserId(@Param("userId") int userId);
+    List<EndowBookList> queryAllBookListsByPage(@Param("begin") int begin, @Param("pageSize") int pageSize);
+
+    /**
+     * 根据用户id查询所有书单
+     * @param userId
+     * @param begin
+     * @param pageSize
+     * @return
+     */
+    List<EndowBookList> queryBookListsByUserId(@Param("userId") int userId, @Param("begin") int begin,@Param("pageSize") int pageSize);
 
     /**
      * 根据书单id查询书单

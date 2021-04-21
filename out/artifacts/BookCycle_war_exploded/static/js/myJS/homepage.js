@@ -37,3 +37,16 @@ function myBespeak() {
 //         $(this).addClass('active');
 //     })
 // })
+
+// $(function () {
+//     let time = $(".time").val();
+//     console.log(time);
+//     let date = new Date(time).getTime();
+//     var s = (date.getFullYear()) + "-" +
+//         (date.getMonth() + 1) + "-" +
+//         (date.getDate()) + " " +
+//         (date.getHours()) + ":" +
+//         (date.getMinutes()) + ":" +
+//         (date.getSeconds());
+//     console.log(s);
+// })

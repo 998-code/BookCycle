@@ -42,11 +42,21 @@ public interface BookListMapper {
     List<BookList> queryAllBookLists();
 
     /**
-     * 根据用户id查询所有书单
-     * @param userId
+     * 通过分页查询书单
+     * @param begin
+     * @param pageSize
      * @return
      */
-    List<BookList> queryBooksByUserId(@Param("userId") int userId);
+    List<BookList> queryAllBookListsByPage(@Param("begin") int begin,@Param("pageSize") int pageSize);
+
+    /**
+     * 根据用户id查询所有书单
+     * @param userId
+     * @param begin
+     * @param pageSize
+     * @return
+     */
+    List<BookList> queryBookListsByUserId(@Param("userId") int userId, @Param("begin") int begin,@Param("pageSize") int pageSize);
 
     /**
      * 根据书单id查询书单

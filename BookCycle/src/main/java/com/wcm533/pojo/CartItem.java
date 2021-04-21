@@ -13,18 +13,18 @@ public class CartItem {
     private Integer id;
     private String name;
     private Integer count;
-    private BigDecimal price;
-    private BigDecimal totalPrice;
+    private int points;
+    private int totalPoints;
 
     public CartItem() {
     }
 
-    public CartItem(Integer id, String name, Integer count, BigDecimal price, BigDecimal totalPrice) {
+    public CartItem(Integer id, String name, Integer count, int points, int totalPoints) {
         this.id = id;
         this.name = name;
         this.count = count;
-        this.price = price;
-        this.totalPrice = totalPrice;
+        this.points = points;
+        this.totalPoints = totalPoints;
     }
 
     public Integer getId() {
@@ -51,20 +51,20 @@ public class CartItem {
         this.count = count;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public int getPoints() {
+        return points;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPoints(int points) {
+        this.points = points;
     }
 
-    public BigDecimal getTotalPrice() {
-        return totalPrice;
+    public int getTotalPoints() {
+        return totalPoints;
     }
 
-    public void setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
     }
 
     @Override
@@ -73,8 +73,8 @@ public class CartItem {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", count=" + count +
-                ", price=" + price +
-                ", totalPrice=" + totalPrice +
+                ", points=" + points +
+                ", totalPoints=" + totalPoints +
                 '}';
     }
 }

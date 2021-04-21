@@ -9,7 +9,15 @@ import java.util.Date;
  * @Date 2021/04/05 18:35
  **/
 public class BookList {
-    
+
+    public static final Integer READY=0;
+    public static final Integer SEND=1;
+    public static final Integer BORROW=2;
+    public static final Integer RETURN=3;
+    public static final Integer CANCEL=4;
+    public static final Integer USER_PAGE_SIZE=4;
+    public static final Integer MANAGER_PAGE_SIZE=4;
+
     private String bookListId;
     private Date createTime;
     private int points;

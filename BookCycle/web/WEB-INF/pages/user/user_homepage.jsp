@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
    <meta charset="utf-8"> 
@@ -58,7 +59,16 @@
                             </span>
 
                             <div style="display: inline-block; margin-top: 10px;">
-                                <span style="border:1px solid #dddddd;padding: 2px;color: #837d7d;border-radius: 4px;">普通会员</span>
+                                <span style="border:1px solid #d43f3a;padding: 2px;color: #d43f3a;border-radius: 4px;">
+                                    <c:choose>
+                                        <c:when test="${sessionScope.user.authority==1}">
+                                            普通会员
+                                        </c:when>
+                                        <c:when test="${sessionScope.user.authority==2}">
+                                            超级会员
+                                        </c:when>
+                                    </c:choose>
+                                </span>
                             </div>
 
                             <div style="margin-top: 10px;">
@@ -73,7 +83,7 @@
                             </div>
                         </div>
                         <div style="border:1px solid #dddddd;float: right;margin-right: 20%; margin-top:70px ;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
-                            <a href="#"><span style="color: #837d7d;">修改资料</span></a>
+                            <a href="javascript:void(0);" onclick="myInformation()"><span style="color: #837d7d;">修改资料</span></a>
                         </div>
 
                     </div>
@@ -104,31 +114,39 @@
                                     </thead>
                          
                                     <tbody>
-                                        <tr>
-                                            <td>16176247950501914</td>
-                                            <td>2021-04-05 12:13:15</td>
-                                            <td>38</td>
-                                            <td>借阅中</td>
-                                            <td>借书单</td>
-                                            <td style="padding: 2px;">
-                                                <button type="button" class="btn btn-primary">
-                                                    确认接收
-                                                </button>
-                                            </td>
-                                        </tr>    
-                                        <tr>
-                                            <td>16176247950501914</td>
-                                            <td>2021-04-05 12:13:15</td>
-                                            <td>38</td>
-                                            <td>已还</td>
-                                            <td>借书单</td>
-                                            <td style="padding: 2px;">
-                                                <button type="button" class="btn btn-primary">
-                                                    确认接收
-                                                </button>
-                                            </td>
-                                        </tr>    
-                                        <tr>
+                                        <c:forEach items="${requestScope.bookLists}" var="bookList">
+                                            <tr>
+                                                <td>${bookList.bookListId}</td>
+                                                <td class="time">${bookList.createTime}</td>
+                                                <td>${bookList.points}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${bookList.status==0}">
+                                                            准备中
+                                                        </c:when>
+                                                        <c:when test="${bookList.status==1}">
+                                                            已出库
+                                                        </c:when>
+                                                        <c:when test="${bookList.status==2}">
+                                                            借阅中
+                                                        </c:when>
+                                                        <c:when test="${bookList.status==3}">
+                                                            已归还
+                                                        </c:when>
+                                                        <c:when test="${bookList.status==4}">
+                                                            已取消
+                                                        </c:when>
+                                                    </c:choose>
+                                                </td>
+                                                <td>借书单</td>
+                                                <td style="padding: 2px;">
+                                                    <button type="button" class="btn btn-primary">
+                                                        确认接收
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                        <%--<tr>
                                             <td>16176247950501914</td>
                                             <td>2021-04-05 12:13:15</td>
                                             <td>38</td>
@@ -139,8 +157,8 @@
                                                     确认接收
                                                 </button>
                                             </td>
-                                        </tr>    
-                                        <tr>
+                                        </tr>    --%>
+                                        <%--<tr>
                                             <td>16176247950501914</td>
                                             <td>2021-04-05 12:13:15</td>
                                             <td>38</td>
@@ -151,7 +169,7 @@
                                                     确认接收
                                                 </button>
                                             </td>
-                                        </tr>       
+                                        </tr>       --%>
                                     </tbody>
                                 </table>
                             </div>
@@ -183,28 +201,28 @@
                                     </thead>
                          
                                     <tbody>
-                                        <tr>
-                                            <td>1968</td>
-                                            <td>编译原理</td>
-                                            <td>借阅中</td>
-                                            <td>12</td>
-                                            <td style="padding: 2px;">
-                                                <button type="button" class="btn btn-primary">
-                                                    借阅
-                                                </button>
-                                            </td>
-                                        </tr>    
-                                        <tr>
-                                            <td>1969</td>
-                                            <td>计算机系统</td>
-                                            <td>可借阅</td>
-                                            <td>15</td>
-                                            <td style="padding: 2px;">
-                                                <button type="button" class="btn btn-primary">
-                                                    借阅
-                                                </button>
-                                            </td>
-                                        </tr>          
+                                        <c:forEach items="${requestScope.reservations}" var="reseration">
+                                            <tr>
+                                                <td>${reseration.bookId}</td>
+                                                <td>${reseration.bookName}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${reseration.status==0}">
+                                                            借阅中
+                                                        </c:when>
+                                                        <c:when test="${reseration.status==1}">
+                                                            可借阅
+                                                        </c:when>
+                                                    </c:choose>
+                                                </td>
+                                                <td>${reseration.points}</td>
+                                                <td style="padding: 2px;">
+                                                    <button type="button" class="btn btn-primary">
+                                                        借阅
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

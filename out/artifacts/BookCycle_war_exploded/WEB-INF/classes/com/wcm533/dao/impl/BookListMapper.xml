@@ -16,8 +16,11 @@
     <select id="queryAllBookLists" resultType="bookList">
         select * from book_list
     </select>
-    <select id="queryBooksByUserId" parameterType="map" resultType="bookList">
-        select * from book_list where user_id=#{userId}
+    <select id="queryAllBookListsByPage" parameterType="map" resultType="bookList">
+        select * from book_list order by create _time desc limit #{begin},#{pageSize}
+    </select>
+    <select id="queryBookListsByUserId" parameterType="map" resultType="bookList">
+        select * from book_list where user_id=#{userId} order by create_time desc limit #{begin},#{pageSize}
     </select>
     <select id="queryBookByBookListId" parameterType="map" resultType="bookList">
         select * from book_list where book_list_id=#{bookListId}

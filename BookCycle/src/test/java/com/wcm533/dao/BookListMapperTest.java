@@ -50,7 +50,7 @@ public class BookListMapperTest extends TestCase {
     public void testQueryBooksByUserId() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookListMapper mapper = sqlSession.getMapper(BookListMapper.class);
-        List<BookList> bookLists = mapper.queryBooksByUserId(1914);
+        List<BookList> bookLists = mapper.queryBookListsByUserId(1914,0,4);
         for (BookList bookList : bookLists) {
             System.out.println(bookList);
         }

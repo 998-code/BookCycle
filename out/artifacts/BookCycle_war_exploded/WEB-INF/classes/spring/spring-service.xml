@@ -17,6 +17,23 @@
     <bean id="UserServiceImpl" class="com.wcm533.service.impl.UserServiceImpl">
         <property name="userMapper" ref="userMapper"></property>
     </bean>
+
+    <bean id="BookListServiceImpl" class="com.wcm533.service.impl.BookListServiceImpl">
+        <property name="bookListMapper" ref="bookListMapper"></property>
+        <property name="bookListItemsMapper" ref="bookListItemsMapper"></property>
+        <property name="bookMapper" ref="bookMapper"></property>
+    </bean>
+
+    <bean id="EndowBookListServiceImpl" class="com.wcm533.service.impl.EndowBookListServiceImpl">
+        <property name="endowBookListMapper" ref="endowBookListMapper"></property>
+        <property name="endowBookListItemsMapper" ref="endowBookListItemsMapper"></property>
+        <property name="bookMapper" ref="bookMapper"></property>
+    </bean>
+
+    <bean id="ReservationServiceImpl" class="com.wcm533.service.impl.ReservationServiceImpl">
+        <property name="reservationMapper" ref="reservationMapper"></property>
+        <property name="bookMapper" ref="bookMapper"></property>
+    </bean>
 <!--    <bean id="OrderServiceImpl" class="com.wcm533.service.impl.OrderServiceImpl">-->
 <!--        <property name="orderMapper" ref="orderMapper"></property>-->
 <!--        <property name="orderItemMapper" ref="orderItemMapper"></property>-->

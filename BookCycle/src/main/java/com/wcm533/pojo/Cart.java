@@ -28,7 +28,7 @@ public class Cart {
         }else{
             //item存在  --将item中商品数量加一，设置总价
             item.setCount(item.getCount()+1);
-            item.setTotalPrice(item.getPrice().multiply(new BigDecimal(item.getCount())));
+            item.setTotalPoints(item.getPoints()*item.getCount());
         }
     }
 
@@ -57,7 +57,7 @@ public class Cart {
         if(cartItem!=null){
             //设置商品总数，总价
             cartItem.setCount(count);
-            cartItem.setTotalPrice(cartItem.getPrice().multiply(new BigDecimal(cartItem.getCount())));
+            cartItem.setTotalPoints(cartItem.getPoints()*cartItem.getCount());
         }
     }
 
@@ -72,10 +72,10 @@ public class Cart {
         return totalCount;
     }
 
-    public BigDecimal getTotalPrice() {
-        BigDecimal totalPrice =new BigDecimal(0);
+    public int getTotalPrice() {
+        int totalPrice =0;
         for(CartItem item:items.values()){
-            totalPrice=totalPrice.add(item.getTotalPrice());
+            totalPrice=totalPrice+item.getTotalPoints();
         }
         return totalPrice;
     }

@@ -6,7 +6,60 @@
     <link id="favicon" rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png" type="image/svg+xml" />
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
-   
+   <script>
+       $(function () {
+           $("#username").change(function () {
+               var username = $("#username").val();
+               var usernamePatt=/^[(a-zA-Z0-9\u4e00-\u9fa5){1}_#]{2,12}$/;
+               if(!usernamePatt.test(username)){
+                   $("#username").val("${sessionScope.user.username}");
+                   $("span.errorUsername").text("用户名["+username+"]不合法！");
+                   return false;
+               }
+               $.post({
+                   url:"${pageContext.request.contextPath}/user/ajaxUsername",
+                   data:{"username":username},
+                   success:function (data) {
+                       if(data){
+                           $("#username").val("${sessionScope.user.username}");
+                           $("span.errorUsername").text("用户名["+username+"]已存在！");
+                       }else{
+                           $("span.errorUsername").text("用户名可用！");
+                       }
+                   }
+               });
+           });
+
+           $("#email").change(function () {
+               let email = $("#email").val();
+               var emailPatt = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
+               if(!emailPatt.test(email)){
+                   $("#email").val("${sessionScope.user.email}")
+                   $("span.errorEmail").text("邮箱["+email+"]格式不匹配！");
+                   return false;
+               }
+               $.post({
+                   url:"${pageContext.request.contextPath}/user/ajaxEmail",
+                   data:{"email":email},
+                   success:function (data) {
+                       if(data){
+                           $("#email").val("${sessionScope.user.email}")
+                           $("span.errorEmail").text("该邮箱["+email+"]已被注册！");
+                       }else{
+                           $("span.errorEmail").text("该邮箱可用！");
+                       }
+                   }
+               });
+           });
+
+           let onclick = $("#updatePassword").onclick(function () {
+              var userId = ${sessionScope.user.id};
+              let oldPassword = $("#oldPassword").val();
+              let newPassword = $("#newPassword").val();
+
+           });
+       })
+   </script>
 </head>
 <body>
     <div class="container">
@@ -50,27 +103,33 @@
                     </div>
 
                     <div style="margin-top: 20px;">
-                        <form class="form-horizontal" role="form">
+                        <form action="${pageContext.request.contextPath}/user/updateUser" method="post" class="form-horizontal" role="form">
+                            <input type="hidden" name="id" value="${sessionScope.user.id}">
                             <div class="form-group">
                               <label class="col-sm-2 control-label" style="color: #837d7d;">昵称：</label>
                               <div class="col-sm-10" style="width: 30%;display: inline-block;">
-                                <input type="text" class="form-control" value="只想搞钱的小民">
+                                <input type="text" name="username" id="username" class="form-control" value="${sessionScope.user.username}">
                               </div>
-                              <span style="display: inline-block; margin-top: 5px; color: #a19c9c;">注：修改一次昵称需要消耗6积分</span>
+                              <span class="errorUsername" style="display: inline-block; margin-top: 5px; color: #a19c9c;">
+                                   ${empty requestScope.errorUsername?"注：修改一次昵称需要消耗6积分":requestScope.errorUsername}
+                              </span>
                             </div>
 
                             <div class="form-group">
                               <label class="col-sm-2 control-label" style="color: #837d7d;">用户ID：</label>
                               <div class="col-sm-10" style="margin-top: 7px;font-size: 16px;color: #a19c9c;">
-                                <span>1914</span>
+                                    <span>${sessionScope.user.id}</span>
                               </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" style="color: #837d7d;">邮箱：</label>
                                 <div class="col-sm-10" style="width: 30%;display: inline-block;">
-                                  <input type="text" class="form-control" value="3688752385@qq.com">
+                                  <input type="text" name="email" id="email" class="form-control" value="${sessionScope.user.email}">
                                 </div>
+                                <span class="errorEmail" style="display: inline-block; margin-top: 5px; color: #a19c9c;">
+                                    ${empty requestScope.errorEmail?"":requestScope.errorEmail}
+                                </span>
                             </div>
 
                             <div class="form-group">
@@ -83,12 +142,60 @@
 
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" style="color: #837d7d;">密码：</label>
-                              <div class="col-sm-10" style="width: 30%;margin-top: 10px;font-size: 16px;color: #a19c9c;">
-                                <span>********</span>
-                              </div>
-                              <div style="border:1px solid #dddddd;float: right; margin-top: 10px; margin-right: 40%;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
-                                <a href="#"><span style="color: #837d7d;">修改密码</span></a>
-                              </div>
+                                <div class="col-sm-10" style="width: 30%;margin-top: 10px;font-size: 16px;color: #a19c9c;">
+                                    <span>********</span>
+                                </div>
+                                <div style="border:1px solid #dddddd;float: right; margin-top: 10px; margin-right: 40%;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal">
+                                        <span style="color: #837d7d;">修改密码</span>
+                                    </a>
+                                    <!-- 模态框（Modal） -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel">修改密码</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-horizontal" role="form" style="margin-left: 5%;">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-2 control-label" style="color: #837d7d;">原密码：</label>
+                                                            <div class="col-sm-10" style="width: 50%;display: inline-block;">
+                                                                <input type="password" class="form-control" name="oldPassword" id="oldPassword" placeholder="请输入原密码">
+                                                            </div>
+                                                            <span class="errorOld" style="display: inline-block; margin-top: 5px; color: #a19c9c;">
+                                                                ${empty requestScope.errorEmail?"":requestScope.errorEmail}
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group" style="margin-top: 30px;">
+                                                            <label class="col-sm-2 control-label" style="color: #837d7d;">新密码：</label>
+                                                            <div class="col-sm-10" style="width: 50%;display: inline-block;">
+                                                                <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="请输入新密码">
+                                                            </div>
+                                                            <span class="errorNew" style="display: inline-block; margin-top: 5px; color: #a19c9c;">
+                                                                ${empty requestScope.errorEmail?"":requestScope.errorEmail}
+                                                            </span>
+                                                        </div>
+                                                        <div class="form-group" style="margin-top: 30px;">
+                                                            <label class="col-sm-2 control-label" style="color: #837d7d;">确认密码：</label>
+                                                            <div class="col-sm-10" style="width: 50%;display: inline-block;">
+                                                                <input type="password" class="form-control" name="confirm" id="confirm" placeholder="确认密码">
+                                                            </div>
+                                                            <span class="errorConfirm" style="display: inline-block; margin-top: 5px; color: #a19c9c;">
+                                                                ${empty requestScope.errorEmail?"":requestScope.errorEmail}
+                                                            </span>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                                    <button type="button" id="updatePassword" class="btn btn-primary">保存</button>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal -->
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group" style="margin: 0; margin-top: 20px; border-top: 1px solid #dddddd;">

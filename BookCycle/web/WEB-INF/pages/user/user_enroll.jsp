@@ -43,7 +43,7 @@
 
             $("#sub_btn").click(function () {
                 var username = $("#username").val();
-                var usernamePatt=/^\w{5,12}$/;
+                var usernamePatt=/^[(a-zA-Z0-9\u4e00-\u9fa5){1}_#]{2,12}$/;
                 if(!usernamePatt.test(username)){
                     $("span.errorMsg").text("用户名不合法！");
                     return false;

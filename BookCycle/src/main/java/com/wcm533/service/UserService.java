@@ -19,4 +19,9 @@ public interface UserService {
     int enrollUser(User user);
 
 
+    int update(User user);
+
+    User getUserById(int id);
+
+    boolean updateUserPassword(String password, int userId);
 }
