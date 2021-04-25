@@ -3,10 +3,14 @@
 <head>
    <meta charset="utf-8"> 
    <title>个人中心</title>
-    <link id="favicon" rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png" type="image/svg+xml" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
-   
+   <script>
+       function myHead() {
+           location.href="head";
+       }
+   </script>
 </head>
 <body>
     <div class="container">
@@ -35,7 +39,7 @@
                         <span href="#" class="list-group-item ulSpan" >个人中心</span>
                         <a href="javascript:void(0);" onclick="myHome()" class="list-group-item"><span class="glyphicon glyphicon-home">&nbsp;首&nbsp;&nbsp;页</span></a>
                         <a href="javascript:void(0);" onclick="myInformation()" class="list-group-item"><span class="glyphicon glyphicon-user">&nbsp;我的信息</span></a>
-                        <a href="javascript:void(0);" onclick="myHand()" class="list-group-item"><span class="glyphicon glyphicon-picture">&nbsp;我的头像</span></a>
+                        <a href="javascript:void(0);" onclick="myHead()" class="list-group-item"><span class="glyphicon glyphicon-picture">&nbsp;我的头像</span></a>
                         <a href="javascript:void(0);" onclick="myBookList()" class="list-group-item"><span class="glyphicon glyphicon-book">&nbsp;我的书单</span></a>
                         <a href="javascript:void(0);" onclick="myPoints()" class="list-group-item"><span class="glyphicon glyphicon-usd">&nbsp;我的积分</span></a>
                         <a href="javascript:void(0);" onclick="myBespeak()" class="list-group-item active"><span class="glyphicon glyphicon-time">&nbsp;我的预约</span></a>

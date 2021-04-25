@@ -14,7 +14,7 @@
         update user set username=#{username},password=#{password},email=#{email},points=#{points},authority=#{authority} where id=#{id}
     </update>
     <update id="replaceHead" parameterType="map">
-        update user set head_img=#{headImg} where id=#{id}
+        update user set head_img_path=#{headImgPath}, head_img=#{headImg} where id=#{id}
     </update>
     <select id="queryAllUsers" resultType="user">
         select * from user

@@ -3,6 +3,7 @@ package com.wcm533.service;
 import com.wcm533.pojo.BookList;
 import com.wcm533.pojo.BookListItems;
 import com.wcm533.pojo.Cart;
+import com.wcm533.pojo.ItemsDetails;
 
 import java.util.List;
 
@@ -16,19 +17,19 @@ public interface BookListService {
 
     String createBookList(Cart cart,int userId);
 
-    int deleteBookList(String bookListId);
+    boolean deleteBookList(String bookListId);
 
-    int readyBookList(String bookListId);
+    boolean readyBookList(String bookListId);
 
-    int sendBookList(String bookListId);
+    boolean sendBookList(String bookListId);
 
-    int borrowBookList(String bookListId);
+    boolean borrowBookList(String bookListId);
 
-    int returnBookList(String bookListId);
+    boolean returnBookList(String bookListId);
 
-    int cancelBookList(String bookListId);
+    boolean cancelBookList(String bookListId);
 
-    List<BookListItems> queryBookListItems(String bookListId);
+    List<ItemsDetails> queryBookListItems(String bookListId);
 
     List<BookList> queryBookLists(int begin,int pageSize);
 

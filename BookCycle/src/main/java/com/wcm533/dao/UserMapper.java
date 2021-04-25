@@ -42,7 +42,7 @@ public interface UserMapper {
      * @param headImg
      * @return
      */
-    int replaceHead(@Param("headImg") byte[] headImg,@Param("id") int id);
+    int replaceHead(@Param("headImg") byte[] headImg,@Param("headImgPath") String headImgPath,@Param("id") int id);
 
     /**
      * 查询所有用户

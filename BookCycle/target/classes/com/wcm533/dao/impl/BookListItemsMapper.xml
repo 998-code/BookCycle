@@ -5,7 +5,7 @@
 <!--namespace:绑定一个作用的接口-->
 <mapper namespace="com.wcm533.dao.BookListItemsMapper">
    <insert id="addBookListItems" parameterType="bookListItems">
-       insert into book_list_items (book_name,points,book_list_id) values (#{bookName},#{points},#{bookListId})
+       insert into book_list_items (book_id,book_name,points,book_list_id) values (#{bookId},#{bookName},#{points},#{bookListId})
    </insert>
     <select id="queryBookListItemsByBookListId" parameterType="map" resultType="bookListItems">
         select * from book_list_items where book_list_id=#{bookListId}

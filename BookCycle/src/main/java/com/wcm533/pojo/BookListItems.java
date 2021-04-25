@@ -9,6 +9,7 @@ package com.wcm533.pojo;
 public class BookListItems {
     
     private int id;
+    private int bookId;
     private String bookName;
     private int points;
     private String bookListId;
@@ -17,14 +18,16 @@ public class BookListItems {
         
     }
 
-    public BookListItems(int id, String bookName, int points, String bookListId) {
+    public BookListItems(int id, int bookId, String bookName, int points, String bookListId) {
         this.id = id;
+        this.bookId = bookId;
         this.bookName = bookName;
         this.points = points;
         this.bookListId = bookListId;
     }
 
-    public BookListItems(String bookName, int points, String bookListId) {
+    public BookListItems(int bookId, String bookName, int points, String bookListId) {
+        this.bookId = bookId;
         this.bookName = bookName;
         this.points = points;
         this.bookListId = bookListId;
@@ -36,6 +39,14 @@ public class BookListItems {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
     public String getBookName() {
@@ -66,6 +77,7 @@ public class BookListItems {
     public String toString() {
         return "BookListItems{" +
                 "id=" + id +
+                ", bookId=" + bookId +
                 ", bookName='" + bookName + '\'' +
                 ", points=" + points +
                 ", bookListId='" + bookListId + '\'' +

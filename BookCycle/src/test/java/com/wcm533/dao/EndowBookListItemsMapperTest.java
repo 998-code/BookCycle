@@ -19,9 +19,9 @@ public class EndowBookListItemsMapperTest extends TestCase {
     public void testAddBookListItems() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         EndowBookListItemsMapper mapper = sqlSession.getMapper(EndowBookListItemsMapper.class);
-        EndowBookListItems endowBookListItems = new EndowBookListItems("Javascript从入门到精通",8,"16176935259661914");
-        EndowBookListItems endowBookListItems1 = new EndowBookListItems("Java核心技术",10,"16176935259661914");
-        EndowBookListItems endowBookListItems2 = new EndowBookListItems("MySQL技术内幕:InnoDB存储引擎",10,"16176935259661914");
+        EndowBookListItems endowBookListItems = new EndowBookListItems(49,"Javascript从入门到精通",8,"16176935259661914");
+        EndowBookListItems endowBookListItems1 = new EndowBookListItems(45,"Java核心技术",10,"16176935259661914");
+        EndowBookListItems endowBookListItems2 = new EndowBookListItems(46,"MySQL技术内幕:InnoDB存储引擎",10,"16176935259661914");
         int i = mapper.addBookListItems(endowBookListItems);
         mapper.addBookListItems(endowBookListItems1);
         mapper.addBookListItems(endowBookListItems2);

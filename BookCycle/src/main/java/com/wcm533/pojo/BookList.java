@@ -10,11 +10,11 @@ import java.util.Date;
  **/
 public class BookList {
 
-    public static final Integer READY=0;
-    public static final Integer SEND=1;
-    public static final Integer BORROW=2;
-    public static final Integer RETURN=3;
-    public static final Integer CANCEL=4;
+    public static final Integer READY=0;//准备中
+    public static final Integer SEND=1;//已出库
+    public static final Integer BORROW=2;//借阅中
+    public static final Integer RETURN=3;//已归还
+    public static final Integer CANCEL=4;//取消
     public static final Integer USER_PAGE_SIZE=4;
     public static final Integer MANAGER_PAGE_SIZE=4;
 

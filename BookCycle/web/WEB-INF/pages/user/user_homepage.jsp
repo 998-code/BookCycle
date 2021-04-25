@@ -4,11 +4,62 @@
 <head>
    <meta charset="utf-8"> 
    <title>个人中心</title>
-    <link id="favicon" rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png" type="image/svg+xml" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
    <script>
+       $(function () {
+           $(".receive").click(function () {
+               let ul = $(this).parent().parent();
+               let status = $.trim(ul.children("td").eq(3).text());
+               let bookListId = ul.find("td:first").text();
+               if(status!="已出库"){
+                   alert("书单["+bookListId+"]"+status+"，不能接收！");
+               }else{
+                   if(confirm("你确定接收书单["+bookListId+"]吗？")){
+                       $.post({
+                           url:"${pageContext.request.contextPath}/bookList/receive",
+                           data:{"bookListId":bookListId},
+                           success:function (data) {
+                               if(data){
+                                   ul.children("td").eq(3).text("借阅中");
+                               }else{
+                                   alert("书单["+bookListId+"]接收失败！");
+                               }
+                           }
+                       });
+                   }
+               }
+           });
 
+           $(".cancel").click(function () {
+               let ul = $(this).parent().parent();
+               let status = $.trim(ul.children("td").eq(3).text());
+               let bookListId = ul.find("td:first").text();
+               if(status!="准备中"){
+                   alert("书单["+bookListId+"]"+status+"，不能取消！");
+               }else{
+                   if(confirm("你确定取消书单["+bookListId+"]吗？")){
+                       $.post({
+                           url:"${pageContext.request.contextPath}/bookList/cancel",
+                           data:{"bookListId":bookListId},
+                           success:function (data) {
+                               if(data){
+                                   ul.children("td").eq(3).text("已取消");
+                               }else{
+                                   alert("书单["+bookListId+"]取消失败！");
+                               }
+                           }
+                       });
+                   }
+               }
+
+           });
+       });
+
+       function myHead() {
+           location.href="head";
+       }
 
    </script>
 </head>
@@ -39,7 +90,7 @@
                         <span href="#" class="list-group-item ulSpan">个人中心</span>
                         <a href="javascript:void(0);" onclick="myHome()" class="list-group-item active"><span class="glyphicon glyphicon-home">&nbsp;首&nbsp;&nbsp;页</span></a>
                         <a href="javascript:void(0);" onclick="myInformation()" class="list-group-item"><span class="glyphicon glyphicon-user">&nbsp;我的信息</span></a>
-                        <a href="javascript:void(0);" onclick="myHand()" class="list-group-item"><span class="glyphicon glyphicon-picture">&nbsp;我的头像</span></a>
+                        <a href="javascript:void(0);" onclick="myHead()" class="list-group-item"><span class="glyphicon glyphicon-picture">&nbsp;我的头像</span></a>
                         <a href="javascript:void(0);" onclick="myBookList()" class="list-group-item"><span class="glyphicon glyphicon-book">&nbsp;我的书单</span></a>
                         <a href="javascript:void(0);" onclick="myPoints()" class="list-group-item"><span class="glyphicon glyphicon-usd">&nbsp;我的积分</span></a>
                         <a href="javascript:void(0);" onclick="myBespeak()" class="list-group-item"><span class="glyphicon glyphicon-time">&nbsp;我的预约</span></a>
@@ -50,7 +101,7 @@
                     <!-- 首页 -->
                     <div style="border-bottom: 1px solid #dddddd;height: 160px;">
                         <div style="width: 100px;height: 100px;float: left;margin-left: 30px;margin-top: 30px;">
-                            <img src="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png" class="img-thumbnail">
+                            <img src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" class="img-thumbnail">
                         </div>
 
                         <div style="width: 40%; height: 100px;margin-left: 30px; margin-top: 30px;float: left;">
@@ -96,7 +147,7 @@
                         </div>
 
                         <div style="border:1px solid #dddddd;float: right;margin-right: 20%; margin-top:15px ;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
-                            <a href="#"><span style="color: #837d7d;">全部书单</span></a>
+                            <a href="javascript:void(0);" onclick="myBookList()"><span style="color: #837d7d;">全部书单</span></a>
                         </div>
                         
                         <div class="row clearfix">
@@ -114,7 +165,7 @@
                                     </thead>
                          
                                     <tbody>
-                                        <c:forEach items="${requestScope.bookLists}" var="bookList">
+                                        <c:forEach items="${sessionScope.bookLists}" var="bookList">
                                             <tr>
                                                 <td>${bookList.bookListId}</td>
                                                 <td class="time">${bookList.createTime}</td>
@@ -139,37 +190,12 @@
                                                     </c:choose>
                                                 </td>
                                                 <td>借书单</td>
-                                                <td style="padding: 2px;">
-                                                    <button type="button" class="btn btn-primary">
-                                                        确认接收
-                                                    </button>
+                                                <td>
+                                                    <a href="javascript:void(0);" class="receive">接收</a> |
+                                                    <a href="javascript:void(0);" class="cancel">取消</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>
-                                        <%--<tr>
-                                            <td>16176247950501914</td>
-                                            <td>2021-04-05 12:13:15</td>
-                                            <td>38</td>
-                                            <td>已还</td>
-                                            <td>借书单</td>
-                                            <td style="padding: 2px;">
-                                                 <button type="button" class="btn btn-primary">
-                                                    确认接收
-                                                </button>
-                                            </td>
-                                        </tr>    --%>
-                                        <%--<tr>
-                                            <td>16176247950501914</td>
-                                            <td>2021-04-05 12:13:15</td>
-                                            <td>38</td>
-                                            <td>已还</td>
-                                            <td>借书单</td>
-                                            <td style="padding: 2px;">
-                                                <button type="button" class="btn btn-primary">
-                                                    确认接收
-                                                </button>
-                                            </td>
-                                        </tr>       --%>
                                     </tbody>
                                 </table>
                             </div>
@@ -201,7 +227,7 @@
                                     </thead>
                          
                                     <tbody>
-                                        <c:forEach items="${requestScope.reservations}" var="reseration">
+                                        <c:forEach items="${sessionScope.reservations}" var="reseration">
                                             <tr>
                                                 <td>${reseration.bookId}</td>
                                                 <td>${reseration.bookName}</td>

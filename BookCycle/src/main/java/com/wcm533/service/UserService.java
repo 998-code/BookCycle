@@ -1,6 +1,7 @@
 package com.wcm533.service;
 
 import com.wcm533.pojo.User;
+import org.omg.CORBA.portable.InputStream;
 
 /**
  * @ClassName UserService
@@ -18,10 +19,11 @@ public interface UserService {
 
     int enrollUser(User user);
 
-
-    int update(User user);
+    boolean update(User user);
 
     User getUserById(int id);
 
     boolean updateUserPassword(String password, int userId);
+
+    boolean replaceHead(byte[] head,String headImgPath,int userId);
 }

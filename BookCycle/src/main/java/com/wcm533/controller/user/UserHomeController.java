@@ -1,13 +1,8 @@
 package com.wcm533.controller.user;
 
-import com.wcm533.service.impl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName UserHome
@@ -20,45 +15,38 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/user")
 public class UserHomeController {
 
-    @Autowired
-    @Qualifier("UserServiceImpl")
-    private UserServiceImpl userService;
-
-    @Autowired
-    HttpServletRequest reques;
-
     @RequestMapping("/home")
-    public String home(Model model){
+    public String home(){
 
         return "user/user_homepage";
     }
 
     @RequestMapping("/information")
-    public String information(Model model){
+    public String information(){
 
         return "user/information";
     }
 
-    @RequestMapping("/hand")
-    public String hand(Model model){
+    @RequestMapping("/head")
+    public String head(){
 
-        return "user/hand";
+        return "user/head";
     }
 
     @RequestMapping("/bookList")
-    public String bookList(Model model){
+    public String bookList(){
 
         return "user/bookList";
     }
 
     @RequestMapping("/points")
-    public String points(Model model){
+    public String points(){
 
         return "user/points";
     }
 
     @RequestMapping("/bespeak")
-    public String bespeak(Model model){
+    public String bespeak(){
 
         return "user/bespeak";
     }

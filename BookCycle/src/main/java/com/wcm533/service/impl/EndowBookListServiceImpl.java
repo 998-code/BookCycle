@@ -1,12 +1,13 @@
 package com.wcm533.service.impl;
 
+import com.wcm533.dao.BookDetailsMapper;
 import com.wcm533.dao.BookMapper;
 import com.wcm533.dao.EndowBookListItemsMapper;
 import com.wcm533.dao.EndowBookListMapper;
-import com.wcm533.pojo.Cart;
-import com.wcm533.pojo.EndowBookList;
+import com.wcm533.pojo.*;
 import com.wcm533.service.EndowBookListService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ public class EndowBookListServiceImpl implements EndowBookListService {
     private EndowBookListMapper endowBookListMapper;
     private EndowBookListItemsMapper endowBookListItemsMapper;
     private BookMapper bookMapper;
+    private BookDetailsMapper bookDetailsMapper;
 
     public void setEndowBookListMapper(EndowBookListMapper endowBookListMapper) {
         this.endowBookListMapper = endowBookListMapper;
@@ -33,34 +35,73 @@ public class EndowBookListServiceImpl implements EndowBookListService {
         this.bookMapper = bookMapper;
     }
 
-    @Override
-    public int createBookList(Cart cart, String userId) {
-        return 0;
+    public void setBookDetailsMapper(BookDetailsMapper bookDetailsMapper) {
+        this.bookDetailsMapper = bookDetailsMapper;
     }
 
     @Override
-    public int deleteBookList(String bookListId) {
-        return 0;
+    public boolean createBookList(Cart cart, String userId) {
+        return false;
     }
 
     @Override
-    public int readyBookList(String id) {
-        return 0;
+    public boolean deleteBookList(String bookListId) {
+        if(endowBookListMapper.deleteBookList(bookListId)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int borrowBookList(String id) {
-        return 0;
+    public boolean readyBookList(String bookListId) {
+        if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.READY)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int returnBookList(String id) {
-        return 0;
+    public boolean processingBookList(String bookListId) {
+        if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.PROCESSING)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int cancelBookList(String bookListId) {
-        return 0;
+    public boolean completedBookList(String bookListId) {
+        if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.COMPLETED)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean cancelBookList(String bookListId) {
+        if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.CANCEL)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public List<ItemsDetails> queryBookListItems(String bookListId) {
+        List<ItemsDetails> itemsDetails=new ArrayList<ItemsDetails>();
+        List<EndowBookListItems> bookListItems = endowBookListItemsMapper.queryBookListItemsByBookListId(bookListId);
+        for (EndowBookListItems bookListItem : bookListItems) {
+            Book book = bookMapper.queryBookById(bookListItem.getBookId());
+            BookDetails bookDetails = bookDetailsMapper.queryBookDetailsByBookId(bookListItem.getBookId());
+            ItemsDetails iD = new ItemsDetails();
+            iD.setBookId(bookListItem.getBookId());
+            iD.setBookName(bookListItem.getBookName());
+            iD.setBookAuthor(book.getAuthor());
+            iD.setBookConcern(bookDetails.getBookConcern());
+            iD.setEdition(bookDetails.getEdition());
+            iD.setPoints(bookListItem.getPoints());
+            itemsDetails.add(iD);
+        }
+        System.out.println(itemsDetails);
+        return itemsDetails;
     }
 
     @Override

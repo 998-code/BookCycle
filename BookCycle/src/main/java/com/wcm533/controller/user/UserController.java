@@ -1,20 +1,22 @@
-package com.wcm533.controller;
+package com.wcm533.controller.user;
 
 import com.wcm533.pojo.*;
-import com.wcm533.service.BookListService;
 import com.wcm533.service.impl.BookListServiceImpl;
 import com.wcm533.service.impl.EndowBookListServiceImpl;
 import com.wcm533.service.impl.ReservationServiceImpl;
 import com.wcm533.service.impl.UserServiceImpl;
+import com.wcm533.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
-
+import java.io.*;
 import java.util.List;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
@@ -39,6 +41,10 @@ public class UserController {
     private BookListServiceImpl bookListService;
 
     @Autowired
+    @Qualifier("EndowBookListServiceImpl")
+    private EndowBookListServiceImpl endowBookListService;
+
+    @Autowired
     @Qualifier("ReservationServiceImpl")
     private ReservationServiceImpl reservationService;
 
@@ -47,7 +53,7 @@ public class UserController {
 
 
     @RequestMapping("/getLogin")
-    public String getLogin(Model model){
+    public String getLogin(){
 
         return "user/user_login";
     }
@@ -57,10 +63,15 @@ public class UserController {
         User user = userService.login(key, password);
         if(user!=null){
             request.getSession().setAttribute("user",user);
+            String realPath = request.getServletContext().getRealPath("/static/img/userImg/");
+            System.out.println(realPath);
+            FileUtils.byteToFile(user.getHeadImg(),realPath,"img"+user.getId()+user.getHeadImgPath());
             List<BookList> bookLists = bookListService.queryBookListsByUserId(user.getId(), 0, BookList.USER_PAGE_SIZE);
+            List<EndowBookList> endowBookLists = endowBookListService.queryBookListsByUserId(user.getId(), 0, EndowBookList.USER_PAGE_SIZE);
             List<ReservationDetails> reservations = reservationService.queryReservationByUserId(user.getId(), 0, 2);
-            model.addAttribute("reservations",reservations);
-            model.addAttribute("bookLists",bookLists);
+            request.getSession().setAttribute("bookLists",bookLists);
+            request.getSession().setAttribute("endowBookLists",endowBookLists);
+            request.getSession().setAttribute("reservations",reservations);
             return "user/user_homepage";
         }else {
             model.addAttribute("msg","登录名或密码错误！");
@@ -104,7 +115,7 @@ public class UserController {
                 }else {
                     userService.enrollUser(user);
                     request.getSession().setAttribute("user",user);
-                    return "/user/user_homepage";
+                    return "redirect:/user/getLogin";
                 }
             }
         }else {
@@ -117,29 +128,53 @@ public class UserController {
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(User user,Model model){
+    public boolean updateUser(String username,String email,String address){
+        User user = (User) request.getSession().getAttribute("user");
+        user.setUsername(username);
+        user.setEmail(email);
+        boolean update = userService.update(user);
         User userById = userService.getUserById(user.getId());
-        System.out.println(user.getId());
-        System.out.println(user.getUsername());
-        System.out.println(user.getEmail());
-        String username = userById.getUsername();
-        String email = userById.getEmail();
-        if(!userService.existsUsername(user.getUsername())||user.getUsername().equals(username)){
-            if(!userService.existsEmail(user.getEmail())||user.getEmail().equals(email)){
-                userService.update(user);
-            }else{
-                model.addAttribute("errorEmail","邮箱已被注册！");
-            }
-        }else{
-            model.addAttribute("errorUsername","该昵称已被使用！");
-        }
-        return "/user/information";
+        request.getSession().setAttribute("user",userById);
+        return update;
     }
 
     @RequestMapping("/ajaxUpdatePassword")
     @ResponseBody
-    public boolean updateUserPassword(String password,int userId){
-        return userService.updateUserPassword(password,userId);
+    public boolean updateUserPassword(String oldPassword,String newPassword,String userId){
+        if(userId!=null&&userId.length()!=0){
+            if(userService.getUserById(Integer.parseInt(userId)).getPassword().equals(oldPassword)){
+                return userService.updateUserPassword(newPassword,Integer.parseInt(userId));
+            }
+        }
+
+        return false;
+    }
+
+    @PostMapping("/updateHead")
+    public String updateHead(@RequestParam("file") MultipartFile file){
+        String originalFilename = file.getOriginalFilename();
+        int lastIndexOf = originalFilename.lastIndexOf(".");
+        String headImgPath = originalFilename.substring(lastIndexOf);
+        User user =(User)request.getSession().getAttribute("user");
+        if (file.isEmpty()) {
+            request.getSession().setAttribute("errorHead","文件不存在");
+            return "user/head";
+        }
+        try {
+            byte[] head = file.getBytes();
+            userService.replaceHead(head,headImgPath,user.getId());
+            String path = request.getServletContext().getRealPath("/static/img/userImg");
+            File realPath = new File(path);
+            if (!realPath.exists()){
+                realPath.mkdir();
+            }
+            file.transferTo(new File(realPath +"/"+ "img"+user.getId()+user.getHeadImgPath()));
+            request.getSession().setAttribute("errorHead","头像上传成功！");
+            return "redirect:head";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "user/head";
     }
 
     @RequestMapping("/ajaxUsername")

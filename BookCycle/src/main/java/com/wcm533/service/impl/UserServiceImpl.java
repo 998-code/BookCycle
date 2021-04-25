@@ -3,6 +3,7 @@ package com.wcm533.service.impl;
 import com.wcm533.dao.UserMapper;
 import com.wcm533.pojo.User;
 import com.wcm533.service.UserService;
+import com.wcm533.utils.FileUtils;
 
 /**
  * @ClassName UserServiceImpl
@@ -54,19 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int update(User user) {
-        User userById = userMapper.queryUserById(user.getId());
-        User updateUser = new User();
-        updateUser.setUsername(user.getUsername());
-        updateUser.setEmail(user.getEmail());
-        updateUser.setId(userById.getId());
-        updateUser.setPassword(userById.getPassword());
-        updateUser.setAuthority(userById.getAuthority());
-        updateUser.setPoints(userById.getPoints());
-        updateUser.setHeadImg(userById.getHeadImg());
-        updateUser.setHeadImgPath(userById.getHeadImgPath());
-        int i = userMapper.updateUser(updateUser);
-        return i;
+    public boolean update(User user) {
+        if (userMapper.updateUser(user)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -86,8 +79,16 @@ public class UserServiceImpl implements UserService {
         updateUser.setPoints(userById.getPoints());
         updateUser.setHeadImg(userById.getHeadImg());
         updateUser.setHeadImgPath(userById.getHeadImgPath());
-        int i = userMapper.updateUser(updateUser);
-        if(i==1){
+        if(userMapper.updateUser(updateUser)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean replaceHead(byte[] head,String headImgPath, int userId) {
+//        FileUtils.byteToFile(head,"web\\static\\img\\","img"+userId+headImgPath);
+        if(userMapper.replaceHead(head,headImgPath, userId)>0){
             return true;
         }
         return false;

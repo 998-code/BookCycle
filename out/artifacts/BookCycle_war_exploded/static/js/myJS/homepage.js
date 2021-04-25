@@ -5,8 +5,8 @@ function myHome() {
 function myInformation() {
     location.href="information";
 }
-function myHand() {
-    location.href="hand";
+function myHead() {
+    location.href="head";
 }
 function myBookList() {
     location.href="bookList";
@@ -50,3 +50,6 @@ function myBespeak() {
 //         (date.getSeconds());
 //     console.log(s);
 // })
+
+// window.open("${pageContext.request.contextPath}/bookList/bookDetails");
+// return false;

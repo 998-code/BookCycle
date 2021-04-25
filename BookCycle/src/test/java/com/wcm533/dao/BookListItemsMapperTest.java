@@ -18,9 +18,9 @@ public class BookListItemsMapperTest extends TestCase {
     public void testAddBookListItems() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookListItemsMapper mapper = sqlSession.getMapper(BookListItemsMapper.class);
-        BookListItems bookListItems = new BookListItems("Javascript从入门到精通",8,"16176247950501914");
-        BookListItems bookListItems2 = new BookListItems("编译原理",15,"16176247950501914");
-        BookListItems bookListItems3 = new BookListItems("数据库系统概念",15,"16176247950501914");
+        BookListItems bookListItems = new BookListItems(23,"Javascript从入门到精通",8,"16176247950501914");
+        BookListItems bookListItems2 = new BookListItems(24,"编译原理",15,"16176247950501914");
+        BookListItems bookListItems3 = new BookListItems(25,"数据库系统概念",15,"16176247950501914");
         int i = mapper.addBookListItems(bookListItems);
         mapper.addBookListItems(bookListItems2);
         mapper.addBookListItems(bookListItems3);

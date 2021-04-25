@@ -3,10 +3,14 @@
 <head>
    <meta charset="utf-8"> 
    <title>个人中心</title>
-    <link id="favicon" rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png" type="image/svg+xml" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
-   
+   <script>
+       function myHead() {
+           location.href="head";
+       }
+   </script>
 </head>
 <body>
     <div class="container">
@@ -35,7 +39,7 @@
                         <span href="#" class="list-group-item ulSpan" >个人中心</span>
                         <a href="javascript:void(0);" onclick="myHome()" class="list-group-item"><span class="glyphicon glyphicon-home">&nbsp;首&nbsp;&nbsp;页</span></a>
                         <a href="javascript:void(0);" onclick="myInformation()" class="list-group-item"><span class="glyphicon glyphicon-user">&nbsp;我的信息</span></a>
-                        <a href="javascript:void(0);" onclick="myHand()" class="list-group-item"><span class="glyphicon glyphicon-picture">&nbsp;我的头像</span></a>
+                        <a href="javascript:void(0);" onclick="myHead()" class="list-group-item"><span class="glyphicon glyphicon-picture">&nbsp;我的头像</span></a>
                         <a href="javascript:void(0);" onclick="myBookList()" class="list-group-item"><span class="glyphicon glyphicon-book">&nbsp;我的书单</span></a>
                         <a href="javascript:void(0);" onclick="myBookList()" class="list-group-item active"><span class="glyphicon glyphicon-usd">&nbsp;我的积分</span></a>
                         <a href="javascript:void(0);" onclick="myBespeak()" class="list-group-item"><span class="glyphicon glyphicon-time">&nbsp;我的预约</span></a>
@@ -75,7 +79,7 @@
                                         <td>-38</td>
                                         <td>借书</td>
                                         <td>
-                                            <a href="#">详情</a>
+                                            <a href="#"data-toggle="modal" data-target="#pointsDetails">详情</a>
                                         </td>
                                     </tr>    
                                     <tr>
@@ -120,6 +124,24 @@
                                     </tr>              
                                 </tbody>
                             </table>
+
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="pointsDetails" tabindex="-1" role="dialog" aria-labelledby="pointsDetailsLabel" aria-hidden="true" >
+                                <div class="modal-dialog" style="width: 60%;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="pointsDetailsLabel">书单详情</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"  class="btn btn-primary" data-dismiss="modal">确定</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal -->
+                            </div>
 
                             <div class="row clearfix">
                                 <div class="col-md-12 colum">

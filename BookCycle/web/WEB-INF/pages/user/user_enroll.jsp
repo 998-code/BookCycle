@@ -72,6 +72,13 @@
                     return false;
                 }
                 $("span.errorMsg").text("");
+                let form = $("#enrollForm");
+                form.submit();
+                <%--$.post({--%>
+                <%--    url:"${pageContext.request.contextPath}/user/enroll",--%>
+                <%--    data:{"username":username,"password":password,"email":email,"code":code},--%>
+
+                <%--})--%>
             });
         });
     </script>
@@ -125,30 +132,30 @@
                     </span>
                 </div>
                 
-                <form action="${pageContext.request.contextPath}/user/enroll" method="post" class="form-horizontal" role="form" style="margin-left: 5%;font-size: 16px;">
+                <form action="${pageContext.request.contextPath}/user/enroll" method="post" id="enrollForm" class="form-horizontal" role="form" style="margin-left: 5%;font-size: 16px;">
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="username" id="username" value="${requestScope.user.username}" placeholder="昵称">
+                            <input type="text" class="form-control" id="username" name="username" value="${requestScope.user.username}" placeholder="昵称">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" name="password" id="password" value="${requestScope.user.password}" placeholder="密码（6个到16个字符组成，区分大小写）">
+                            <input type="password" class="form-control" id="password" name="password" value="${requestScope.user.password}" placeholder="密码（6个到16个字符组成，区分大小写）">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" name="repwd" id="repwd" value="${requestScope.user.password}" placeholder="确认密码">
+                            <input type="password" class="form-control" id="repwd" name="repwd" value="${requestScope.user.password}" placeholder="确认密码">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="email" id="email" value="${requestScope.user.email}" placeholder="邮箱">
+                            <input type="text" class="form-control" id="email" name="email" value="${requestScope.user.email}" placeholder="邮箱">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10" style="width: 40%;">
-                            <input type="text" class="form-control" style="height:40px" name="code" id="code" placeholder="请输入验证码">
+                            <input type="text" class="form-control" style="height:40px" id="code" name="code" placeholder="请输入验证码">
                         </div>
                         <div class="col-sm-10" style="width: 40%;border: 1px solid #dddddd;height: 40px;padding: 0px;">
                            <img id="code_img" title="点击刷新验证码" src="${pageContext.request.contextPath}/kaptcha.jpg" style="float: left; margin-left: 0px; width: 100%;height: 100%">
@@ -156,8 +163,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            
-                            <button type="submit" id="sub_btn" class="btn btn-primary" style="width: 100%;">注册</button>
+                            <input type="button" id="sub_btn" class="btn btn-primary" value="注册" style="width: 100%;">
                         </div>
                     </div>
                 </form>

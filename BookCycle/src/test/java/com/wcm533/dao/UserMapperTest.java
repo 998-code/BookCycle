@@ -50,7 +50,7 @@ public class UserMapperTest extends TestCase {
         //File file = new File("web\\static\\img\\img5.png");
         byte[] headImg = FileUtils.fileToByte("web\\static\\img\\img5.png");
 
-        int i = mapper.replaceHead(headImg, 1918);
+        int i = mapper.replaceHead(headImg,".png", 1918);
         System.out.println(i);
         sqlSession.close();
     }

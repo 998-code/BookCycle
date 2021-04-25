@@ -9,6 +9,7 @@ package com.wcm533.pojo;
 public class EndowBookListItems {
 
     private int id;
+    private int bookId;
     private String bookName;
     private int points;
     private String bookListId;
@@ -17,14 +18,16 @@ public class EndowBookListItems {
 
     }
 
-    public EndowBookListItems(int id, String bookName, int points, String bookListId) {
+    public EndowBookListItems(int id, int bookId, String bookName, int points, String bookListId) {
         this.id = id;
+        this.bookId = bookId;
         this.bookName = bookName;
         this.points = points;
         this.bookListId = bookListId;
     }
 
-    public EndowBookListItems(String bookName, int points, String bookListId) {
+    public EndowBookListItems(int bookId, String bookName, int points, String bookListId) {
+        this.bookId = bookId;
         this.bookName = bookName;
         this.points = points;
         this.bookListId = bookListId;
@@ -36,6 +39,14 @@ public class EndowBookListItems {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
     public String getBookName() {
@@ -64,8 +75,9 @@ public class EndowBookListItems {
 
     @Override
     public String toString() {
-        return "BookListItems{" +
+        return "EndowBookListItems{" +
                 "id=" + id +
+                ", bookId=" + bookId +
                 ", bookName='" + bookName + '\'' +
                 ", points=" + points +
                 ", bookListId='" + bookListId + '\'' +

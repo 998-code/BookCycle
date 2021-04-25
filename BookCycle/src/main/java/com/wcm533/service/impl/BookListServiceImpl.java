@@ -1,11 +1,13 @@
 package com.wcm533.service.impl;
 
+import com.wcm533.dao.BookDetailsMapper;
 import com.wcm533.dao.BookListItemsMapper;
 import com.wcm533.dao.BookListMapper;
 import com.wcm533.dao.BookMapper;
 import com.wcm533.pojo.*;
 import com.wcm533.service.BookListService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,7 @@ public class BookListServiceImpl implements BookListService {
     private BookListMapper bookListMapper;
     private BookListItemsMapper bookListItemsMapper;
     private BookMapper bookMapper;
+    private BookDetailsMapper bookDetailsMapper;
 
     public void setBookListMapper(BookListMapper bookListMapper) {
         this.bookListMapper = bookListMapper;
@@ -32,6 +35,10 @@ public class BookListServiceImpl implements BookListService {
 
     public void setBookMapper(BookMapper bookMapper) {
         this.bookMapper = bookMapper;
+    }
+
+    public void setBookDetailsMapper(BookDetailsMapper bookDetailsMapper) {
+        this.bookDetailsMapper = bookDetailsMapper;
     }
 
     @Override
@@ -47,7 +54,7 @@ public class BookListServiceImpl implements BookListService {
             //获取商品项
             CartItem cartItem = entry.getValue();
             //创建订单项
-            BookListItems bookListItems = new BookListItems( cartItem.getId(), cartItem.getName(), cartItem.getPoints(),  bookListId);
+            BookListItems bookListItems = new BookListItems( cartItem.getId(),cart.getTotalPrice(), cartItem.getName(), cartItem.getPoints(),  bookListId);
             //保存订单项到数据库
             bookListItemsMapper.addBookListItems(bookListItems);
             //更新库存和销量
@@ -61,38 +68,70 @@ public class BookListServiceImpl implements BookListService {
     }
 
     @Override
-    public int deleteBookList(String bookListId) {
-        return bookListMapper.deleteBookList(bookListId);
+    public boolean deleteBookList(String bookListId) {
+        if(bookListMapper.deleteBookList(bookListId)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int readyBookList(String bookListId) {
-        return bookListMapper.changeBookListStatus(bookListId,BookList.READY);
+    public boolean readyBookList(String bookListId) {
+        if(bookListMapper.changeBookListStatus(bookListId,BookList.READY)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int sendBookList(String bookListId) {
-        return bookListMapper.changeBookListStatus(bookListId,BookList.SEND);
+    public boolean sendBookList(String bookListId) {
+        if(bookListMapper.changeBookListStatus(bookListId,BookList.SEND)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int borrowBookList(String bookListId) {
-        return bookListMapper.changeBookListStatus(bookListId,BookList.BORROW);
+    public boolean borrowBookList(String bookListId) {
+        if(bookListMapper.changeBookListStatus(bookListId,BookList.BORROW)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int returnBookList(String bookListId) {
-        return bookListMapper.changeBookListStatus(bookListId,BookList.RETURN);
+    public boolean returnBookList(String bookListId) {
+        if(bookListMapper.changeBookListStatus(bookListId,BookList.RETURN)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int cancelBookList(String bookListId) {
-        return bookListMapper.changeBookListStatus(bookListId,BookList.CANCEL);
+    public boolean cancelBookList(String bookListId) {
+        if (bookListMapper.changeBookListStatus(bookListId,BookList.CANCEL)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public List<BookListItems> queryBookListItems(String bookListId) {
-        return bookListItemsMapper.queryBookListItemsByBookListId(bookListId);
+    public List<ItemsDetails> queryBookListItems(String bookListId) {
+        List<ItemsDetails> itemsDetails=new ArrayList<ItemsDetails>();
+        List<BookListItems> bookListItems = bookListItemsMapper.queryBookListItemsByBookListId(bookListId);
+        for (BookListItems bookListItem : bookListItems) {
+            Book book = bookMapper.queryBookById(bookListItem.getBookId());
+            BookDetails bookDetails = bookDetailsMapper.queryBookDetailsByBookId(bookListItem.getBookId());
+            ItemsDetails iD = new ItemsDetails();
+            iD.setBookId(bookListItem.getBookId());
+            iD.setBookName(bookListItem.getBookName());
+            iD.setBookAuthor(book.getAuthor());
+            iD.setBookConcern(bookDetails.getBookConcern());
+            iD.setEdition(bookDetails.getEdition());
+            iD.setPoints(bookListItem.getPoints());
+            itemsDetails.add(iD);
+        }
+        return itemsDetails;
     }
 
     @Override
@@ -104,4 +143,6 @@ public class BookListServiceImpl implements BookListService {
     public List<BookList> queryBookListsByUserId(int userId, int begin, int pageSize) {
         return bookListMapper.queryBookListsByUserId(userId,begin,pageSize);
     }
+
+
 }
