@@ -55,6 +55,36 @@
                }
 
            });
+
+           $(".borrowReservation").click(function () {
+               let ul = $(this).parent().parent();
+               let status = $.trim(ul.children("td").eq(2).text());
+               if(status=="可借阅"){
+                   let bookId = $.trim(ul.children("td").eq(0).text());
+                   let userId="${sessionScope.user.id}";
+                   $.post({
+                       url:"${pageContext.request.contextPath}/cart/addItem",
+                       data:{"bookId":bookId,"userId":userId},
+                       success:function (data) {
+
+                       }
+                   })
+               }
+           });
+
+           $(".cancelReservation").click(function () {
+               if(confirm("你确定要删除该预约吗？")){
+                   let ul = $(this).parent().parent();
+                   let id = $.trim(ul.children("td").eq(0).text());
+                   $.post({
+                       url:"${pageContext.request.contextPath}/user/cancelReservation",
+                       data:{"id":id},
+                       success:function (data) {
+
+                       }
+                   })
+               }
+           });
        });
 
        function myHead() {
@@ -124,7 +154,7 @@
 
                             <div style="margin-top: 10px;">
                                 <div style="width: 20px; height: 20px; border-radius: 10px; background-color: skyblue;display: inline-block;">
-                                    <a href="#"><span class="glyphicon glyphicon-usd" style="margin-left: 2px;margin-top: 2px;color: snow;"></span></a>
+                                    <a href="javascript:void(0);" onclick="myPoints()"><span class="glyphicon glyphicon-usd" style="margin-left: 2px;margin-top: 2px;color: snow;"></span></a>
                                 </div>
                                 <div style="display: inline-block;">
                                     <span>
@@ -210,7 +240,7 @@
                         </div>
 
                         <div style="border:1px solid #dddddd;float: right;margin-right: 20%; margin-top:15px ;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
-                            <a href="#"><span style="color: #837d7d;">全部预约</span></a>
+                            <a href="javascript:void(0);" onclick="myBespeak()"><span style="color: #837d7d;">全部预约</span></a>
                         </div>
 
                         <div class="row clearfix">
@@ -227,25 +257,24 @@
                                     </thead>
                          
                                     <tbody>
-                                        <c:forEach items="${sessionScope.reservations}" var="reseration">
+                                        <c:forEach items="${sessionScope.reservations}" var="reservation">
                                             <tr>
-                                                <td>${reseration.bookId}</td>
-                                                <td>${reseration.bookName}</td>
+                                                <td>${reservation.bookId}</td>
+                                                <td>${reservation.bookName}</td>
                                                 <td>
                                                     <c:choose>
-                                                        <c:when test="${reseration.status==0}">
+                                                        <c:when test="${reservation.status==0}">
                                                             借阅中
                                                         </c:when>
-                                                        <c:when test="${reseration.status==1}">
+                                                        <c:when test="${reservation.status==1}">
                                                             可借阅
                                                         </c:when>
                                                     </c:choose>
                                                 </td>
-                                                <td>${reseration.points}</td>
+                                                <td>${reservation.points}</td>
                                                 <td style="padding: 2px;">
-                                                    <button type="button" class="btn btn-primary">
-                                                        借阅
-                                                    </button>
+                                                    <a href="javascript:void(0);" class="borrowReservation">借阅</a> |
+                                                    <a href="javascript:void(0);" class="cancelReservation">取消</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>

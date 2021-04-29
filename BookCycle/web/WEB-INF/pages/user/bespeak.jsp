@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -7,6 +8,39 @@
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
    <script>
+
+       $(function () {
+           $(".borrowReservation").click(function () {
+               let ul = $(this).parent().parent();
+               let status = $.trim(ul.children("td").eq(2).text());
+               if(status=="可借阅"){
+                   let bookId = $.trim(ul.children("td").eq(0).text());
+                   let userId="${sessionScope.user.id}";
+                   $.post({
+                       url:"${pageContext.request.contextPath}/cart/addItem",
+                       data:{"bookId":bookId,"userId":userId},
+                       success:function (data) {
+
+                       }
+                   })
+               }
+           });
+
+           $(".cancelReservation").click(function () {
+               if(confirm("你确定要删除该预约吗？")){
+                   let ul = $(this).parent().parent();
+                   let id = $.trim(ul.children("td").eq(0).text());
+                   $.post({
+                       url:"${pageContext.request.contextPath}/user/cancelReservation",
+                       data:{"id":id},
+                       success:function (data) {
+
+                       }
+                   })
+               }
+           });
+       });
+
        function myHead() {
            location.href="head";
        }
@@ -62,6 +96,7 @@
                         <table class="table table-bordered" style="text-align: center;">
                             <thead>
                                 <tr>
+                                    <th style="text-align: center;" hidden>预约编号</th>
                                     <th style="text-align: center;">书籍编号</th>
                                     <th style="text-align: center;">书籍名称</th>
                                     <th style="text-align: center;">书籍状态</th>
@@ -71,66 +106,28 @@
                             </thead>
                  
                             <tbody>
-                                <tr>
-                                    <td>1901</td>
-                                    <td>Java核心技术</td>
-                                    <td>可借阅</td>
-                                    <td>8</td>
-                                    <td>
-                                        <a href="#">借阅</a>|
-                                        <a href="#">取消</a>
-                                    </td>
-                                </tr>    
-                                <tr>
-                                    <td>1901</td>
-                                    <td>Java核心技术</td>
-                                    <td>可借阅</td>
-                                    <td>8</td>
-                                    <td>
-                                        <a href="#">借阅</a>|
-                                        <a href="#">取消</a>
-                                    </td>
-                                </tr>    
-                                <tr>
-                                    <td>1901</td>
-                                    <td>Java核心技术</td>
-                                    <td>可借阅</td>
-                                    <td>8</td>
-                                    <td>
-                                        <a href="#">借阅</a>|
-                                        <a href="#">取消</a>
-                                    </td>
-                                </tr>    
-                                <tr>
-                                    <td>1901</td>
-                                    <td>Java核心技术</td>
-                                    <td>借阅中</td>
-                                    <td>8</td>
-                                    <td>
-                                        <a href="#">借阅</a>|
-                                        <a href="#">取消</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1901</td>
-                                    <td>Java核心技术</td>
-                                    <td>借阅中</td>
-                                    <td>8</td>
-                                    <td>
-                                        <a href="#">借阅</a>|
-                                        <a href="#">取消</a>
-                                    </td>
-                                </tr>    
-                                <tr>
-                                    <td>1901</td>
-                                    <td>Java核心技术</td>
-                                    <td>借阅中</td>
-                                    <td>8</td>
-                                    <td>
-                                        <a href="#">借阅</a>|
-                                        <a href="#">取消</a>
-                                    </td>
-                                </tr>              
+                                <c:forEach items="${requestScope.reservations}" var="reservation">
+                                    <tr>
+                                        <td hidden>${reservation.id}</td>
+                                        <td>${reservation.bookId}</td>
+                                        <td>${reservation.bookName}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${reservation.status==0}">
+                                                    借阅中
+                                                </c:when>
+                                                <c:when test="${reservation.status==1}">
+                                                    可借阅
+                                                </c:when>
+                                            </c:choose>
+                                        </td>
+                                        <td>${reservation.points}</td>
+                                        <td>
+                                            <a href="javascript:void(0);" class="borrowReservation">借阅</a> |
+                                            <a href="javascript:void(0);" class="cancelReservation">取消</a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                         </table>
                         

@@ -14,9 +14,9 @@ import java.util.List;
  **/
 public interface ReservationService {
 
-    int addReservation(Reservation reservation);
+    boolean addReservation(Reservation reservation);
 
-    int deleteReservation(int id);
+    boolean deleteReservation(int id);
 
     Reservation queryReservation(int id);
 

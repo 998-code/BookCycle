@@ -16,14 +16,20 @@
     <select id="queryAllBooks" resultType="book">
         select * from book
     </select>
-    <select id="queryBookByAuthor" resultType="book">
-        select * from book where author=#{author}
+    <select id="queryBookByAuthor" parameterType="map" resultType="book">
+        select * from book where author like "%"#{author}"%" limit #{begin},#{pageSize}
     </select>
-    <select id="queryBookById" resultType="book">
+    <select id="queryBookById" parameterType="map" resultType="book">
         select * from book where id=#{id}
     </select>
-    <select id="queryBookByName" resultType="book">
-        select * from book where name  like "%"#{name}"%"
+    <select id="queryBookByName" parameterType="map" resultType="book">
+        select * from book where name like "%"#{name}"%" limit #{begin},#{pageSize}
+    </select>
+    <select id="queryBooksByInfo" parameterType="map" resultType="book">
+        select * from book where CONCAT(author,name) like "%"#{info}"%" limit #{begin},#{pageSize}
+    </select>
+    <select id="queryBookCountByInfo" parameterType="map" resultType="int">
+        select count(*) from book where CONCAT(author,name) like "%"#{info}"%"
     </select>
     <select id="queryBookByClassification" parameterType="map" resultType="book">
         select * from book where classification = #{classification}
@@ -31,13 +37,13 @@
     <select id="queryForPageTotalCount" resultType="int">
         select count(*) from book
     </select>
-    <select id="queryForItems" parameterType="map" resultType="book">
+    <select id="queryForByPage" parameterType="map" resultType="book">
         select * from book order by id desc limit #{begin},#{pageSize}
     </select>
-    <select id="queryForPageTotalCountByPrice" parameterType="map" resultType="int">
-        select count(*) from book where points between #{min} and #{max}
+    <select id="queryForPageTotalCountByClassification" parameterType="map" resultType="int">
+        select count(*) from book where points = #{classification}
     </select>
-    <select id="queryForItemsByPrice" parameterType="map" resultType="book">
-        select * from book where points between #{min} and #{max} order by points limit #{begin},#{pageSize}
+    <select id="queryForPageByClassification" parameterType="map" resultType="book">
+        select * from book where points =#{classification} order by points limit #{begin},#{pageSize}
     </select>
 </mapper>

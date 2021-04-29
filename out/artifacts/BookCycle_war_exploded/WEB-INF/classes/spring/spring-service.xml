@@ -11,9 +11,14 @@
     <context:component-scan base-package="com.wcm533.service" />
 
     <!--BookServiceImpl注入到IOC容器中-->
-<!--    <bean id="BookServiceImpl" class="com.wcm533.service.impl.BookServiceImpl">-->
-<!--        <property name="bookMapper" ref="bookMapper"/>-->
-<!--    </bean>-->
+    <bean id="BookServiceImpl" class="com.wcm533.service.impl.BookServiceImpl">
+        <property name="bookMapper" ref="bookMapper"/>
+    </bean>
+
+    <bean id="BookDetailsServiceImpl" class="com.wcm533.service.impl.BookDetailsServiceImpl">
+        <property name="bookDetailsMapper" ref="bookDetailsMapper"></property>
+    </bean>
+
     <bean id="UserServiceImpl" class="com.wcm533.service.impl.UserServiceImpl">
         <property name="userMapper" ref="userMapper"></property>
     </bean>
@@ -35,6 +40,9 @@
     <bean id="ReservationServiceImpl" class="com.wcm533.service.impl.ReservationServiceImpl">
         <property name="reservationMapper" ref="reservationMapper"></property>
         <property name="bookMapper" ref="bookMapper"></property>
+    </bean>
+    <bean id="PointsServiceImpl" class="com.wcm533.service.impl.PointsServiceImpl">
+        <property name="pointsMapper" ref="pointsMapper"></property>
     </bean>
 <!--    <bean id="OrderServiceImpl" class="com.wcm533.service.impl.OrderServiceImpl">-->
 <!--        <property name="orderMapper" ref="orderMapper"></property>-->

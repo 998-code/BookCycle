@@ -3,10 +3,27 @@
 <html>
 <head>
    <meta charset="utf-8"> 
-   <title>书籍管理</title>
-    <link id="favicon" rel="shortcut icon" class="glyphicon glyphicon-book" type="image/svg+xml" />
+   <title>${requestScope.book.name}</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/bookimg1.jpg" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
-   
+   <script>
+       $(function () {
+           $("#addBookList").click(function () {
+               let bookId = $(this).attr("name");
+               alert(bookId);
+           });
+
+           $("#borrowNow").click(function () {
+               let bookId = $(this).attr("name");
+               alert(bookId);
+           });
+
+           $("#reservationBook").click(function () {
+               let bookId = $(this).attr("name");
+               alert(bookId);
+           });
+       });
+   </script>
 </head>
 <body>
     <div class="container">
@@ -27,14 +44,14 @@
         
             </div>
             <div class="col-md-5 column">
-                <img src="../../../static/img/bookimg1.jpg" class="img-thumbnail" style="height: 600px; width: 400px;">
+                <img src="${pageContext.request.contextPath}/static/img/bookimg1.jpg" class="img-thumbnail" style="height: 600px; width: 400px;">
             </div>
             
             <div class="col-md-5 column">
                 <div class="alert alert-warning" >
-                    <p></p>
+                    <p class="bookError"></p>
                 </div>
-                <h2>《三体2：黑暗森林》</h2>
+                <h2>《${requestScope.book.name}》</h2>
                 <div style="text-indent:2em;font-size: 16px;color: rgb(102, 100, 100);">
                     <p>《三体2：黑暗森林》是刘慈欣创作的长篇科幻小说，是“地球往事三部曲系列”的第二部作品，
                         于2008年5月首次出版，该书总共有三个章节：“上部 面壁者”、“中部 咒语”和“下部 黑暗森林”。
@@ -51,11 +68,11 @@
                     <ul class="list-group" style="border: none;">
                         <li class="list-group-item" style="border: none;">
                             <div style="display: inline-block;">书籍名称：</div>
-                            <div style="display: inline-block;">三体2：黑暗森林</div>
+                            <div style="display: inline-block;">${requestScope.book.name}</div>
                         </li>
                         <li class="list-group-item" style="border: none;border-top: 2px dashed #dddddd;">
                             <div style="display: inline-block;">书籍作者：</div>
-                            <div style="display: inline-block;">刘慈欣</div>
+                            <div style="display: inline-block;">${requestScope.book.author}</div>
                         </li>
                         <li class="list-group-item" style="border: none;border-top: 2px dashed #dddddd;">
                             <div style="display: inline-block;">书籍译者：</div>
@@ -63,22 +80,23 @@
                         </li>
                         <li class="list-group-item" style="border: none;border-top: 2px dashed #dddddd;">
                             <div style="display: inline-block;">书籍版本：</div>
-                            <div style="display: inline-block;">2008年5月第一版</div>
+                            <div style="display: inline-block;" class="date">${requestScope.bookDetails.datePublication}</div>
                         </li>
                         <li class="list-group-item" style="border: none;border-top: 2px dashed #dddddd;">
                             <div style="display: inline-block;">出版社：</div>
-                            <div style="display: inline-block;">机械工业出版社</div>
+                            <div style="display: inline-block;">${requestScope.bookDetails.bookConcern}</div>
                         </li>
                         <li class="list-group-item" style="font-size: 24px; font-weight: bolder;border: none;border-top: 2px dashed #dddddd;">
                             <div style="display: inline-block;">所需积分：</div>
-                            <div style="display: inline-block;color: orangered;">15</div>
+                            <div style="display: inline-block;color: orangered;">${requestScope.book.points}</div>
                         </li>
                     </ul>
                 </div>
+
                 <div>
-                    <button type="button" class="btn btn-danger" style="width: 30%;margin-left: 2%;">加入书单</button>
-                    <button type="button" class="btn btn-success" style="width: 30%;">立即借阅</button>
-                    <button type="button" class="btn btn-info disabled" style="width: 30%;">预约书籍</button>
+                    <button type="button" class="btn btn-danger" id="addBookList" name="${requestScope.book.id}" style="width: 30%;margin-left: 2%;">加入书单</button>
+                    <button type="button" class="btn btn-success" id="borrowNow" name="${requestScope.book.id}" style="width: 30%;">立即借阅</button>
+                    <button type="button" class="btn btn-info" id="reservationBook" name="${requestScope.book.id}" style="width: 30%;">预约书籍</button>
                 </div>
             </div>
             <div class="col-md-1 column">

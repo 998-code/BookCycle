@@ -56,6 +56,10 @@
                let username = $.trim($("#username").val());
                let email = $.trim($("#email").val());
                let address = $.trim($("#address").val());
+               if(username=="${sessionScope.user.username}"&&email=="${sessionScope.user.email}"){
+                   alert("提交的用户信息与原信息相同！");
+                   return false;
+               }
                if(confirm("你确定保存信息吗？")){
                    $.post({
                        url:"${pageContext.request.contextPath}/user/updateUser",

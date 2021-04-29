@@ -45,7 +45,7 @@ public interface BookMapper {
      * @param author
      * @return
      */
-    List<Book> queryBookByAuthor(@Param("author") String author);
+    List<Book> queryBookByAuthor(@Param("begin") int begin, @Param("pageSize") int pageSize,@Param("author") String author);
 
     /**
      * 根据id查询图书
@@ -59,7 +59,22 @@ public interface BookMapper {
      * @param name
      * @return
      */
-    List<Book> queryBookByName(@Param("name") String name);
+    List<Book> queryBookByName(@Param("begin") int begin, @Param("pageSize") int pageSize,@Param("name") String name);
+
+    /**
+     * 根据图书信息查询所有符合该信息的图书
+     * @param begin
+     * @param pageSize
+     * @param info
+     * @return
+     */
+    List<Book> queryBooksByInfo(@Param("begin") int begin, @Param("pageSize") int pageSize,@Param("info") String info);
+    /**
+     * 根据图书信息查询符合该信息的图书数量
+     * @param info
+     * @return
+     */
+    int queryBookCountByInfo(@Param("info") String info);
 
     /**
      * 根据图书分类查询图书
@@ -80,23 +95,21 @@ public interface BookMapper {
      * @param pageSize
      * @return
      */
-    List<Book> queryForItems(@Param("begin") int begin, @Param("pageSize") int pageSize);
+    List<Book> queryForByPage(@Param("begin") int begin, @Param("pageSize") int pageSize);
 
     /**
      * 根据积分区间查询图书总数
-     * @param min
-     * @param max
+     * @param classification
      * @return
      */
-    int queryForPageTotalCountByPrice(@Param("min") int min,@Param("max") int max);
+    int queryForPageTotalCountByClassification(@Param("classification") int classification);
 
     /**
      * 根据积分区间查询图书分页
      * @param begin
      * @param pageSize
-     * @param min
-     * @param max
+     * @param classification
      * @return
      */
-    List<Book> queryForItemsByPrice(@Param("begin") int begin,@Param("pageSize") int pageSize,@Param("min") int min,@Param("max") int max);
+    List<Book> queryForPageByClassification(@Param("begin") int begin,@Param("pageSize") int pageSize,@Param("classification") int classification);
 }

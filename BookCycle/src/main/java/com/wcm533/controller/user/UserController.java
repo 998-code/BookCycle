@@ -1,10 +1,7 @@
 package com.wcm533.controller.user;
 
 import com.wcm533.pojo.*;
-import com.wcm533.service.impl.BookListServiceImpl;
-import com.wcm533.service.impl.EndowBookListServiceImpl;
-import com.wcm533.service.impl.ReservationServiceImpl;
-import com.wcm533.service.impl.UserServiceImpl;
+import com.wcm533.service.impl.*;
 import com.wcm533.utils.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.util.Date;
 import java.util.List;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
@@ -49,13 +47,19 @@ public class UserController {
     private ReservationServiceImpl reservationService;
 
     @Autowired
+    @Qualifier("PointsServiceImpl")
+    private PointsServiceImpl pointsService;
+
+    @Autowired
     HttpServletRequest request;
 
 
     @RequestMapping("/getLogin")
     public String getLogin(){
-
-        return "user/user_login";
+        if(request.getSession().getAttribute("user")==null){
+            return "user/user_login";
+        }
+        return "redirect:home";
     }
 
     @PostMapping("/login")
@@ -68,11 +72,11 @@ public class UserController {
             FileUtils.byteToFile(user.getHeadImg(),realPath,"img"+user.getId()+user.getHeadImgPath());
             List<BookList> bookLists = bookListService.queryBookListsByUserId(user.getId(), 0, BookList.USER_PAGE_SIZE);
             List<EndowBookList> endowBookLists = endowBookListService.queryBookListsByUserId(user.getId(), 0, EndowBookList.USER_PAGE_SIZE);
-            List<ReservationDetails> reservations = reservationService.queryReservationByUserId(user.getId(), 0, 2);
+            List<ReservationDetails> reservations = reservationService.queryReservationByUserId(user.getId(), 0, ReservationDetails.USER_HOMEPAGE_PAGE_SIZE);
             request.getSession().setAttribute("bookLists",bookLists);
             request.getSession().setAttribute("endowBookLists",endowBookLists);
             request.getSession().setAttribute("reservations",reservations);
-            return "user/user_homepage";
+            return "redirect:home";
         }else {
             model.addAttribute("msg","登录名或密码错误！");
             model.addAttribute("key",key);
@@ -133,6 +137,8 @@ public class UserController {
         user.setUsername(username);
         user.setEmail(email);
         boolean update = userService.update(user);
+        Points points = new Points(user.getId(),new Date(),6,2,"");
+        pointsService.addPoints(points);
         User userById = userService.getUserById(user.getId());
         request.getSession().setAttribute("user",userById);
         return update;

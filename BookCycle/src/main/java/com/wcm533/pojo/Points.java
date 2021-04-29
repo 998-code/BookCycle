@@ -9,6 +9,12 @@ import java.util.Date;
  * @Date 2021/04/18 16:31
  **/
 public class Points {
+
+    public static final Integer BORROW_BOOKS=0;
+    public static final Integer DONATE_BOOKS=1;
+    public static final Integer CHANGE_USERNAME=2;
+    public static final Integer USER_PAGE_SIZE=8;
+
     private int id;
     private int userId;
     private Date date;

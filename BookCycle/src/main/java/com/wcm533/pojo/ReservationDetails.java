@@ -11,6 +11,10 @@ public class ReservationDetails {
     public static final int STATUS_NO=0;
     public static final int STATUS_YES=1;
 
+    public static final int USER_HOMEPAGE_PAGE_SIZE=2;
+    public static final int USER_RESERVATION_PAGE_SIZE=6;
+
+    private int id;
     private int bookId;
     private String bookName;
     private int status;
@@ -19,11 +23,20 @@ public class ReservationDetails {
     public ReservationDetails() {
     }
 
-    public ReservationDetails(int bookId, String bookName, int status, int points) {
+    public ReservationDetails(int id, int bookId, String bookName, int status, int points) {
+        this.id = id;
         this.bookId = bookId;
         this.bookName = bookName;
         this.status = status;
         this.points = points;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getBookId() {
@@ -61,7 +74,8 @@ public class ReservationDetails {
     @Override
     public String toString() {
         return "ReservationDetails{" +
-                "bookId=" + bookId +
+                "id=" + id +
+                ", bookId=" + bookId +
                 ", bookName='" + bookName + '\'' +
                 ", status=" + status +
                 ", points=" + points +

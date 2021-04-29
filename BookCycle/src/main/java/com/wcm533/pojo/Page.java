@@ -10,7 +10,7 @@ import java.util.List;
  **/
 public class Page<T> {
 
-    public static final Integer PAGE_INDEX_SIZE=4;
+    public static final Integer PAGE_INDEX_SIZE=8;
     public static final Integer PAGE_MANAGER_SIZE=12;
     //当前页码
     private Integer pageNo;

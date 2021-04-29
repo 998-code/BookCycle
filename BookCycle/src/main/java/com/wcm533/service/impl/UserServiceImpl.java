@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean update(User user) {
+        user.setPoints(user.getPoints()-6);
         if (userMapper.updateUser(user)>0){
             return true;
         }

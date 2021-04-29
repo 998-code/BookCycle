@@ -54,7 +54,7 @@ public class BookMapperTest extends TestCase {
     public void testQueryBooksByAuthor() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-        List<Book> books = mapper.queryBookByAuthor("宋红康");
+        List<Book> books = mapper.queryBookByAuthor(0,8,"宋红康");
         for (Book book : books) {
             System.out.println(book);
         }
@@ -72,7 +72,7 @@ public class BookMapperTest extends TestCase {
     public void testQueryBookByName() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-        List<Book> books = mapper.queryBookByName("Java");
+        List<Book> books = mapper.queryBookByName(0,8,"Java");
         for (Book book : books) {
             System.out.println(book);
         }
@@ -100,7 +100,7 @@ public class BookMapperTest extends TestCase {
     public void testQueryForItems() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-        List<Book> books = mapper.queryForItems(0, 8);
+        List<Book> books = mapper.queryForByPage(0, 8);
         for (Book book : books) {
             System.out.println(book);
         }
@@ -110,7 +110,7 @@ public class BookMapperTest extends TestCase {
     public void testQueryForPageTotalCountByPrice() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-        int i = mapper.queryForPageTotalCountByPrice(5, 10);
+        int i = mapper.queryForPageTotalCountByClassification(1);
         System.out.println(i);
         sqlSession.close();
     }
@@ -118,7 +118,7 @@ public class BookMapperTest extends TestCase {
     public void testQueryForItemsByPrice() {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         BookMapper mapper = sqlSession.getMapper(BookMapper.class);
-        List<Book> books = mapper.queryForItemsByPrice(0, 8, 5, 10);
+        List<Book> books = mapper.queryForPageByClassification(0,8,1);
         for (Book book : books) {
             System.out.println(book);
         }

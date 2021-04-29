@@ -30,13 +30,16 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public int addReservation(Reservation reservation) {
-        return 0;
+    public boolean addReservation(Reservation reservation) {
+        return false;
     }
 
     @Override
-    public int deleteReservation(int id) {
-        return 0;
+    public boolean deleteReservation(int id) {
+        if(reservationMapper.deleteReservation(id)>0){
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -51,6 +54,7 @@ public class ReservationServiceImpl implements ReservationService {
         for (Reservation reservation : reservations) {
             Book book = bookMapper.queryBookById(reservation.getBookId());
             ReservationDetails details = new ReservationDetails();
+            details.setId(reservation.getId());
             details.setBookId(book.getId());
             details.setBookName(book.getName());
             if(book.getStock()>book.getLoan()){
