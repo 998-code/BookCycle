@@ -12,24 +12,27 @@ public class BookListItems {
     private int bookId;
     private String bookName;
     private int points;
+    private int count;
     private String bookListId;
     
     public BookListItems(){
         
     }
 
-    public BookListItems(int id, int bookId, String bookName, int points, String bookListId) {
+    public BookListItems(int id, int bookId, String bookName, int points, int count, String bookListId) {
         this.id = id;
         this.bookId = bookId;
         this.bookName = bookName;
         this.points = points;
+        this.count = count;
         this.bookListId = bookListId;
     }
 
-    public BookListItems(int bookId, String bookName, int points, String bookListId) {
+    public BookListItems(int bookId, String bookName, int points, int count, String bookListId) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.points = points;
+        this.count = count;
         this.bookListId = bookListId;
     }
 
@@ -65,6 +68,14 @@ public class BookListItems {
         this.points = points;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public String getBookListId() {
         return bookListId;
     }
@@ -80,6 +91,7 @@ public class BookListItems {
                 ", bookId=" + bookId +
                 ", bookName='" + bookName + '\'' +
                 ", points=" + points +
+                ", count=" + count +
                 ", bookListId='" + bookListId + '\'' +
                 '}';
     }

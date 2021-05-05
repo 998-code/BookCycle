@@ -5,7 +5,7 @@
 <!--namespace:绑定一个作用的接口-->
 <mapper namespace="com.wcm533.dao.EndowBookListItemsMapper">
     <insert id="addBookListItems" parameterType="endowBookListItems">
-       insert into endow_book_list_items (book_id,book_name,points,book_list_id) values (#{bookId},#{bookName},#{points},#{bookListId})
+       insert into endow_book_list_items (book_id,book_name,points,count,book_list_id) values (#{bookId},#{bookName},#{points},#[count},#{bookListId})
    </insert>
     <select id="queryBookListItemsByBookListId" parameterType="map" resultType="endowBookListItems">
         select * from endow_book_list_items where book_list_id=#{bookListId}

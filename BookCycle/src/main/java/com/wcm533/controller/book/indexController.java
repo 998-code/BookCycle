@@ -41,6 +41,12 @@ public class indexController {
         return "client/index";
     }
 
+    @RequestMapping("/getDonate")
+    public String getDonate(){
+
+        return "client/donate_book";
+    }
+
    /* @RequestMapping("/getIndex")
     public String index(){
 

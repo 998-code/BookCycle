@@ -103,6 +103,8 @@
                                "<td>" + data[i].bookConcern + "</td>" +
                                "<td>" + data[i].edition + "</td>" +
                                "<td>" + data[i].points + "</td>" +
+                               "<td>" + data[i].count + "</td>" +
+                               "<td>" + data[i].totalPoints + "</td>" +
                                "</tr>"
                        }
                        $("#items").html(html);
@@ -179,6 +181,8 @@
                                "<td>" + data[i].bookConcern + "</td>" +
                                "<td>" + data[i].edition + "</td>" +
                                "<td>" + data[i].points + "</td>" +
+                               "<td>" + data[i].count + "</td>" +
+                               "<td>" + data[i].totalPoints + "</td>" +
                                "</tr>"
                        }
                        $("#endowItems").html(html);
@@ -366,6 +370,8 @@
                                                         <th>出版社</th>
                                                         <th>版本</th>
                                                         <th>积分</th>
+                                                        <th>数量</th>
+                                                        <th>总积分</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="items">
@@ -505,6 +511,8 @@
                                                         <th>出版社</th>
                                                         <th>版本</th>
                                                         <th>积分</th>
+                                                        <th>数量</th>
+                                                        <th>总积分</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody id="endowItems">

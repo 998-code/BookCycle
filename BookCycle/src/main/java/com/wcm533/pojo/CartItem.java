@@ -10,44 +10,46 @@ import java.math.BigDecimal;
  **/
 public class CartItem {
 
-    private Integer id;
-    private String name;
-    private Integer count;
+    private int bookId;
+    private String bookName;
+    private int count;
     private int points;
     private int totalPoints;
+    private int userId;
 
     public CartItem() {
     }
 
-    public CartItem(Integer id, String name, Integer count, int points, int totalPoints) {
-        this.id = id;
-        this.name = name;
+    public CartItem(int bookId, String bookName, int count, int points, int totalPoints, int userId) {
+        this.bookId = bookId;
+        this.bookName = bookName;
         this.count = count;
         this.points = points;
         this.totalPoints = totalPoints;
+        this.userId = userId;
     }
 
-    public Integer getId() {
-        return id;
+    public int getBookId() {
+        return bookId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
     }
 
-    public String getName() {
-        return name;
+    public String getBookName() {
+        return bookName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
     }
 
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
@@ -67,14 +69,23 @@ public class CartItem {
         this.totalPoints = totalPoints;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     @Override
     public String toString() {
         return "CartItem{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "bookId=" + bookId +
+                ", bookName='" + bookName + '\'' +
                 ", count=" + count +
                 ", points=" + points +
                 ", totalPoints=" + totalPoints +
+                ", userId=" + userId +
                 '}';
     }
 }

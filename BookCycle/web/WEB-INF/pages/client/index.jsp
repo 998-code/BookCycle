@@ -8,7 +8,7 @@
     <%@include file="../common/head.jsp"%>
     <script>
         $(function () {
-            $(".login").click(function () {
+            $("#login").click(function () {
                 window.open("${pageContext.request.contextPath}/user/getLogin");
                 return false;
             });
@@ -19,8 +19,18 @@
                 return false;
             });
 
-            $(".userHome").click(function () {
+            $("#borrowBookList").click(function () {
+                window.open("${pageContext.request.contextPath}/cart/getCart");
+                return false;
+            });
+
+            $("#userHome").click(function () {
                 window.open("${pageContext.request.contextPath}/user/home");
+                return false;
+            });
+
+            $("#donateBook").click(function () {
+                window.open("${pageContext.request.contextPath}/clientBook/getDonate");
                 return false;
             });
 
@@ -32,12 +42,50 @@
 
             $(".addBookList").click(function () {
                 let bookId = $(this).attr("name");
-                alert(bookId);
+                let bookName = $.trim($(this).parent().parent().find("a:first").text());
+                let totalCount;
+                $.get({
+                    url:"${pageContext.request.contextPath}/cart/addItem",
+                    data:{"bookId":bookId},
+                    success:function (data) {
+                        switch (data) {
+                            case 0:
+                                $(".book-alert").html("已将《"+bookName+"》添加到书单！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                                break;
+                            case 1:
+                                $(".book-alert").html("图书《"+bookName+"》添加出错，图书可能不存在！").addClass("book-alert-warning").show().delay(2500).fadeOut();
+                                break;
+                            case 2:
+                                $(".book-alert").html("图书《"+bookName+"》已添加到书单！").addClass("book-alert-warning").show().delay(2500).fadeOut();
+                                break;
+                            case 3:
+                                totalCount=${empty sessionScope.cart.totalCount ? 5:sessionScope.cart.totalCount};
+                                $(".book-alert").html("您最多只能添加"+totalCount+"本书！").addClass("book-alert-danger").show().delay(5000).fadeOut();
+                                break;
+                        }
+                    }
+                });
             });
 
             $(".borrowNow").click(function () {
                 let bookId = $(this).attr("name");
                 alert(bookId);
+            });
+
+            $(".previousPage").click(function () {
+                let pathname = window.location.pathname;
+                let No = ${requestScope.pageBook.pageNo};
+                let pageNo=No-1;
+                location.href=pathname+"?pageNo="+pageNo;
+                return false;
+            });
+
+            $(".nextPage").click(function () {
+                let pathname = window.location.pathname;
+                let No = ${requestScope.pageBook.pageNo};
+                let pageNo=No+1;
+                location.href=pathname+"?pageNo="+pageNo;
+                return false;
             });
 
             $(".pageBook").click(function () {
@@ -48,21 +96,60 @@
             });
         });
     </script>
+    <style>
+        .book-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 200px;
+            margin-left: -100px;
+            z-index: 99999;
+            padding: 15px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .book-alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+        .book-alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
+        }
+        .book-alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+        .book-alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
+    </style>
 </head>
 <body>
+
+    <div class="book-alert"></div>
+
     <div style="margin-bottom:0;height: 30px;background-color:#f0e9e9f5 ;">
         <div class="container">
             <div class="row clearfix" style="margin-top: 5px;">
                 <div class="col-md-12 column">
                     <div style="float: right;text-align: center;">
                         <c:if test="${sessionScope.user==null}">
-                            欢迎光临借书吧！请<a href="javascript:void(0);" class="login" style="display: inline-block;color: orangered;">登录</a>成为会员！
+                            欢迎光临借书吧！请<a href="javascript:void(0);" id="login" style="display: inline-block;color: orangered;">登录</a>成为会员！
                         </c:if>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 
     <div class="container">
         <div class="row clearfix" style="margin-top: 10px;height: 50px;">
@@ -79,17 +166,17 @@
             </div>
             <div class="col-md-4 column">
                 <div class="btn-group btn-group-justified" style="height: 40px;">
-                    <a href="javascript:void(0);" class="btn alert-danger" >
+                    <a href="javascript:void(0);" id="borrowBookList" class="btn alert-danger" >
                         <span class="glyphicon glyphicon glyphicon-book">
                             借阅书单
                         </span>
                     </a>
-                    <a href="javascript:void(0);" class="btn alert-info userHome">
+                    <a href="javascript:void(0);" id="userHome" class="btn alert-info">
                         <span class="glyphicon glyphicon-user">
                             个人中心
                         </span>
                     </a>
-                    <a href="javascript:void(0);" class="btn alert-success" >
+                    <a href="javascript:void(0);" id="donateBook" class="btn alert-success" >
                         <span class="glyphicon glyphicon glyphicon-gift">
                             我要捐书
                         </span>
@@ -101,7 +188,9 @@
     <!-- 头部分类栏 -->
     <div class="container" style="height: 55px;">
         <div class="row clearfix" style="margin-top: 10px;">
-            <div class="col-md-12 column">
+            <div class="col-md-1 column"></div>
+
+            <div class="col-md-10 column">
                 <ul class="list-group-horizontal">
                     <li class="list-group-item navFirst"><p>书籍分类</p></li>
                     <li class="list-group-item navActive"><a href="#">教育</a></li>
@@ -113,8 +202,9 @@
                     <li class="list-group-item navActive"><a href="#">科技</a></li>
                     <li class="list-group-item navActive"><a href="#">英文原版</a></li>
                 </ul>
-                  
             </div>
+
+            <div class="col-md-1 column"></div>
         </div>
     </div>
     
@@ -258,7 +348,34 @@
                     <!-- 分页 -->
                     <nav aria-label="Page navigation" style="text-align: center;margin-top: 0px;">
                         <ul class="pagination" style="display: inline-block;float: none;margin: 0em;">
-                            <c:forEach begin="1" end="${requestScope.pageBook.pageTotal}" var="i">
+                            <c:if test="${requestScope.pageBook.pageNo>1}">
+                                <li><a href="javascript:void(0);" class="previousPage">&laquo;</a></li>
+                            </c:if>
+
+                            <c:choose>
+                                <c:when test="${requestScope.pageBook.pageTotal<=5}">
+                                    <c:set var="begin" value="1"></c:set>
+                                    <c:set var="end" value="${requestScope.pageBook.pageTotal}"></c:set>
+                                </c:when>
+                                <c:when test="${requestScope.pageBook.pageTotal>5}">
+                                    <c:choose>
+                                        <c:when test="${requestScope.pageBook.pageNo<=3}">
+                                            <c:set var="begin" value="1"></c:set>
+                                            <c:set var="end" value="5"></c:set>
+                                        </c:when>
+                                        <c:when test="${requestScope.pageBook.pageNo>=requestScope.pageBook.pageTotal-3}">
+                                            <c:set var="begin" value="${requestScope.pageBook.pageTotal-4}"></c:set>
+                                            <c:set var="end" value="${requestScope.pageBook.pageTotal}"></c:set>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:set var="begin" value="${requestScope.pageBook.pageNo-2}"></c:set>
+                                            <c:set var="end" value="${requestScope.pageBook.pageNo+2}"></c:set>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:when>
+                            </c:choose>
+
+                            <c:forEach begin="${begin}" end="${end}" var="i">
                                 <c:if test="${requestScope.pageBook.pageNo==i}">
                                     <li class="active"><a href="javascript:void(0);" class="pageBook">${i}</a></li>
                                 </c:if>
@@ -267,6 +384,9 @@
                                 </c:if>
                             </c:forEach>
 
+                            <c:if test="${requestScope.pageBook.pageNo<requestScope.pageBook.pageTotal}">
+                                <li><a href="javascript:void(0);" class="nextPage">&raquo;</a></li>
+                            </c:if>
                         </ul>
                     </nav>
                 </div>

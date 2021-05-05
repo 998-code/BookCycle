@@ -7,10 +7,10 @@ import com.wcm533.service.impl.BookListServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +32,18 @@ public class BookListController {
 
     @Autowired
     HttpServletRequest request;
+
+
+    @RequestMapping("/create")
+    @ResponseBody
+    public String createBookList(String bookId,String bookCount){
+        String[] idArr=bookId.split(",");
+        String[] countArr=bookCount.split(",");
+        System.out.println(bookId);
+        System.out.println(bookCount);
+        return "createBookList";
+    }
+
 
     @RequestMapping("/receive")
     @ResponseBody

@@ -12,6 +12,14 @@ import java.util.Map;
  **/
 public class Cart {
 
+    public static final int ORDINARY_MEMBER_TOTAL_COUNT=5;
+    public static final int SUPER_MEMBER_TOTAL_COUNT=10;
+
+    public static final int SUCCESS=0;//成功
+    public static final int NOT_EXISTED=1;//图书不存在
+    public static final int ADDED=2;//已添加
+    public static final int INSUFFICIENT_PERMISSIONS=3;//权限不足
+
     private Map<Integer,CartItem> items=new LinkedHashMap<Integer, CartItem>();
 
     /**
@@ -20,11 +28,11 @@ public class Cart {
      */
     public void addItem(CartItem cartItem){
         //从Map集合中获取item
-        CartItem item = items.get(cartItem.getId());
+        CartItem item = items.get(cartItem.getBookId());
         //判断是否存在item
         if(item==null){
             //item不存在  --添加新的商品项
-            items.put(cartItem.getId(),cartItem);
+            items.put(cartItem.getBookId(),cartItem);
         }else{
             //item存在  --将item中商品数量加一，设置总价
             item.setCount(item.getCount()+1);

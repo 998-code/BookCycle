@@ -12,24 +12,27 @@ public class EndowBookListItems {
     private int bookId;
     private String bookName;
     private int points;
+    private int count;
     private String bookListId;
 
     public EndowBookListItems(){
 
     }
 
-    public EndowBookListItems(int id, int bookId, String bookName, int points, String bookListId) {
+    public EndowBookListItems(int id, int bookId, String bookName, int points, int count, String bookListId) {
         this.id = id;
         this.bookId = bookId;
         this.bookName = bookName;
         this.points = points;
+        this.count = count;
         this.bookListId = bookListId;
     }
 
-    public EndowBookListItems(int bookId, String bookName, int points, String bookListId) {
+    public EndowBookListItems(int bookId, String bookName, int points, int count, String bookListId) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.points = points;
+        this.count = count;
         this.bookListId = bookListId;
     }
 
@@ -65,6 +68,14 @@ public class EndowBookListItems {
         this.points = points;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
     public String getBookListId() {
         return bookListId;
     }
@@ -80,6 +91,7 @@ public class EndowBookListItems {
                 ", bookId=" + bookId +
                 ", bookName='" + bookName + '\'' +
                 ", points=" + points +
+                ", count=" + count +
                 ", bookListId='" + bookListId + '\'' +
                 '}';
     }

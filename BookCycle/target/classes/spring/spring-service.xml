@@ -44,6 +44,9 @@
     <bean id="PointsServiceImpl" class="com.wcm533.service.impl.PointsServiceImpl">
         <property name="pointsMapper" ref="pointsMapper"></property>
     </bean>
+    <bean id="CartItemServiceImpl" class="com.wcm533.service.impl.CartItemServiceImpl">
+        <property name="cartItemMapper" ref="cartItemMapper"></property>
+    </bean>
 <!--    <bean id="OrderServiceImpl" class="com.wcm533.service.impl.OrderServiceImpl">-->
 <!--        <property name="orderMapper" ref="orderMapper"></property>-->
 <!--        <property name="orderItemMapper" ref="orderItemMapper"></property>-->

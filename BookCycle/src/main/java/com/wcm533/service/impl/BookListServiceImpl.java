@@ -53,12 +53,12 @@ public class BookListServiceImpl implements BookListService {
         for(Map.Entry<Integer, CartItem> entry:cart.getItems().entrySet()){
             //获取商品项
             CartItem cartItem = entry.getValue();
+            Book book = bookMapper.queryBookById(cartItem.getBookId());
             //创建订单项
-            BookListItems bookListItems = new BookListItems( cartItem.getId(),cart.getTotalPrice(), cartItem.getName(), cartItem.getPoints(),  bookListId);
+            BookListItems bookListItems = new BookListItems( cartItem.getBookId(),book.getName(), cartItem.getPoints(), cartItem.getCount(),  bookListId);
             //保存订单项到数据库
             bookListItemsMapper.addBookListItems(bookListItems);
             //更新库存和销量
-            Book book = bookMapper.queryBookById(cartItem.getId());
             book.setStock(book.getStock()-cartItem.getCount());
             bookMapper.updateBook(book);
         }
@@ -129,6 +129,8 @@ public class BookListServiceImpl implements BookListService {
             iD.setBookConcern(bookDetails.getBookConcern());
             iD.setEdition(bookDetails.getEdition());
             iD.setPoints(bookListItem.getPoints());
+            iD.setCount(bookListItem.getCount());
+            iD.setTotalPoints(bookListItem.getPoints()*bookListItem.getCount());
             itemsDetails.add(iD);
         }
         return itemsDetails;

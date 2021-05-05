@@ -98,6 +98,8 @@ public class EndowBookListServiceImpl implements EndowBookListService {
             iD.setBookConcern(bookDetails.getBookConcern());
             iD.setEdition(bookDetails.getEdition());
             iD.setPoints(bookListItem.getPoints());
+            iD.setCount(bookListItem.getCount());
+            iD.setTotalPoints(bookListItem.getPoints()*bookListItem.getCount());
             itemsDetails.add(iD);
         }
         System.out.println(itemsDetails);

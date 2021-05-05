@@ -6,6 +6,7 @@
     <file url="file://$PROJECT_DIR$/BookCycle/src/main/java/com/wcm533/dao/impl/BookListItemsMapper.xml" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/BookCycle/src/main/java/com/wcm533/dao/impl/BookListMapper.xml" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/BookCycle/src/main/java/com/wcm533/dao/impl/BookMapper.xml" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/BookCycle/src/main/java/com/wcm533/dao/impl/CartItemMapper.xml" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/BookCycle/src/main/java/com/wcm533/dao/impl/EndowBookListItemsMapper.xml" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/BookCycle/src/main/java/com/wcm533/dao/impl/EndowBookListMapper.xml" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/BookCycle/src/main/java/com/wcm533/dao/impl/NewsMapper.xml" dialect="GenericSQL" />

@@ -10,6 +10,11 @@ import java.util.Arrays;
  **/
 public class User {
 
+    public static final int ORDINARY_MEMBER=1;
+    public static final int SUPER_MEMBER=2;
+    public static final int ORDINARY_ADMINISTRATOR=3;
+    public static final int SUPER_ADMINISTRATOR=4;
+
     private int id;
     private String username;
     private String password;

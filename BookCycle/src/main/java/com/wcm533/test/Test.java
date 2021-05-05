@@ -12,12 +12,13 @@ public class Test {
     public static void main(String[] args) {
 //        byte[] headImg = FileUtils.fileToByte("BookCycle/web/static/img/img1914.png");
 //        FileUtils.byteToFile(headImg,"BookCycle/web/static/img/userImg/","img1914.png");
-        String originalFilename = "tim.g (1).jpg";//timg (1).jpg
-        //获取最后一个.的位置
-        int lastIndexOf = originalFilename.lastIndexOf(".");
-        //获取文件的后缀名 .jpg
-        String suffix = originalFilename.substring(lastIndexOf);
+//        String originalFilename = "tim.g (1).jpg";//timg (1).jpg
+//        //获取最后一个.的位置
+//        int lastIndexOf = originalFilename.lastIndexOf(".");
+//        //获取文件的后缀名 .jpg
+//        String suffix = originalFilename.substring(lastIndexOf);
+//
+//        System.out.println("suffix = " + suffix);
 
-        System.out.println("suffix = " + suffix);
     }
 }

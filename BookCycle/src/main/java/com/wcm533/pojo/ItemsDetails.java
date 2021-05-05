@@ -14,17 +14,21 @@ public class ItemsDetails {
     private String bookConcern;
     private String edition;
     private int points;
+    private int count;
+    private int totalPoints;
 
     public ItemsDetails() {
     }
 
-    public ItemsDetails(int bookId, String bookName, String bookAuthor, String bookConcern, String edition, int points) {
+    public ItemsDetails(int bookId, String bookName, String bookAuthor, String bookConcern, String edition, int points, int count, int totalPoints) {
         this.bookId = bookId;
         this.bookName = bookName;
         this.bookAuthor = bookAuthor;
         this.bookConcern = bookConcern;
         this.edition = edition;
         this.points = points;
+        this.count = count;
+        this.totalPoints = totalPoints;
     }
 
     public int getBookId() {
@@ -75,6 +79,22 @@ public class ItemsDetails {
         this.points = points;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
     @Override
     public String toString() {
         return "ItemsDetails{" +
@@ -84,6 +104,8 @@ public class ItemsDetails {
                 ", bookConcern='" + bookConcern + '\'' +
                 ", edition='" + edition + '\'' +
                 ", points=" + points +
+                ", count=" + count +
+                ", totalPoints=" + totalPoints +
                 '}';
     }
 }
