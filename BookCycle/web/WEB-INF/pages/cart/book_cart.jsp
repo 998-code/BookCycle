@@ -10,9 +10,19 @@
 
     <script>
         $(function () {
+            $(".login").click(function () {
+                window.open("${pageContext.request.contextPath}/user/getLogin");
+                return false;
+            });
+
+            $("#userHome").click(function () {
+                window.open("${pageContext.request.contextPath}/user/home");
+                return false;
+            });
+
             $(".lessCount").click(function () {
-                let points = parseInt($.trim($(this).parent().parent().children("td").eq(1).children(
-                    "p").text()));
+                let points = parseInt($.trim($(this).parent().parent().children("td").eq(2).children(
+                    "p").eq(0).text()));
                 let input = $(this).parent().children("div").eq(0).children("input");
                 let count = input.val();
                 if (count > 1) {
@@ -20,12 +30,14 @@
                 }
                 input.val(count);
                 let totalPoints = count * points;
-                let num = $(this).parent().parent().children("td").eq(3).children("p").text(
+                $(this).parent().parent().children("td").eq(4).children("p").eq(0).text(
                     totalPoints);
+                bookCount();
+                totalPointss();
             });
             $(".plusCount").click(function () {
-                let points = parseInt($.trim($(this).parent().parent().children("td").eq(1).children(
-                    "p").text()));
+                let points = parseInt($.trim($(this).parent().parent().children("td").eq(2).children(
+                    "p").eq(0).text()));
                 let input = $(this).parent().children("div").eq(0).children("input");
                 let count = input.val();
                 if (count < 100) {
@@ -33,8 +45,9 @@
                 }
                 input.val(count);
                 let totalPoints = count * points;
-                let num = $(this).parent().parent().children("td").eq(3).children("p").text(
-                    totalPoints);
+                $(this).parent().parent().children("td").eq(4).children("p").eq(0).text(totalPoints);
+                bookCount();
+                totalPointss();
             });
 
             $("#checkAll").click(function(){
@@ -43,7 +56,8 @@
                 for(var i=0;i<checks.length;i++){
                     checks[i].checked=checkAll;
                 }
-
+                bookCount();
+                totalPointss();
             });
 
             $(".check").click(function(){
@@ -57,17 +71,16 @@
                     }
                 }
                 checkAll.checked=falg;
+                bookCount();
+                totalPointss();
             });
 
-            // $("#borrow").click(function(){
-            //     var arr = new Array();
-            // 	$("#bookBody :checkbox[checked]").each(function(i){
-            // 		arr[i] = $(this).val();
-            // 	});
-            // 	console.log(arr);
-            // });
-
             $("#borrow").click(function(){
+                let user="${sessionScope.user}";
+                if(user==""||user.length==0){
+                    alert("您还没有登录，请先登录！");
+                    return false;
+                }
                 let bookId = new Array();
                 let bookCount=new Array();
                 $(".check:checked").each(function(i){
@@ -87,6 +100,58 @@
             });
 
         });
+
+        function bookCount() {
+            let checks=document.getElementsByClassName("check");
+            var counts=new Array();
+            $("input[class=count]").each(function(){
+                counts.push($(this).val());
+            });
+            let bookCount=0;
+            for(var i=0;i<checks.length;i++){
+                if(checks[i].checked){
+                    bookCount+=parseInt(counts[i]);
+                }
+            }
+            $("#bookCount").text(bookCount);
+        }
+
+        function totalPointss(){
+            let checks=document.getElementsByClassName("check");
+            var points=new Array();
+            $("p[class=totalPoints]").each(function(){
+                points.push($.trim($(this).text()));
+            });
+            let totalPoints=0;
+            for(var i=0;i<points.length;i++){
+                if(checks[i].checked){
+                    totalPoints+=parseInt(points[i]);
+                }
+            }
+            $("#totalPoints").text(totalPoints);
+        }
+        // function bookCount(){
+        //     var counts=new Array();
+        //     $("input[class=count]").each(function(){
+        //             counts.push($(this).val());
+        //     });
+        //     let bookCount=0;
+        //     for(var i=0;i<counts.length;i++){
+        //         bookCount+=parseInt(counts[i]);
+        //     }
+        //     $("#bookCount").text(bookCount);
+        // }
+        // function totalPointss(){
+        //     var points=new Array();
+        //     $("p[class=totalPoints]").each(function(){
+        //         points.push($.trim($(this).text()));
+        //     });
+        //     let totalPoints=0;
+        //     for(var i=0;i<points.length;i++){
+        //         totalPoints+=parseInt(points[i]);
+        //     }
+        //     $("#totalPoints").text(totalPoints);
+        // }
     </script>
     <style>
         input:focus {
@@ -96,7 +161,12 @@
         button:focus {
             outline: none;
         }
-
+        .lessCount :hover{
+            color: coral;
+        }
+        .plusCount :hover{
+            color: coral;
+        }
         a:link {
             color: black;
         }
@@ -110,6 +180,9 @@
         a:active {
             color: #ff0033;
             text-decoration: none;
+        }
+        #userHome:link{
+            color: tomato;
         }
 
         /* 复选框 */
@@ -145,13 +218,20 @@
             <div class="col-md-1 column"></div>
             <div class="col-md-10 column">
                 <div style="float: left;text-align: center;">
-                    欢迎光临借书吧！请<a href="#" style="display: inline-block;color: orangered;">登录</a>成为会员！
+                    <c:if test="${sessionScope.user==null}">
+                        欢迎光临借书吧！请<a href="javascript:void(0);" class="login" style="display: inline-block;color: orangered;">登录</a>成为会员！
+                    </c:if>
+                    <c:if test="${sessionScope.user!=null}">
+                        您已登录，尊贵的会员:&nbsp;<p style="display: inline-block;color: tomato;font-weight: bold;">${sessionScope.user.username}</p>
+                    </c:if>
                 </div>
 
-                <div style="width: 15%;float: right;color: red;">
+                <div style="width: 15%;float: right;">
+                    <a href="javascript:void(0);" id="userHome">
                         <span class="glyphicon glyphicon-user">
                             个人中心
                         </span>
+                    </a>
                 </div>
             </div>
             <div class="col-md-1 column"></div>
@@ -186,16 +266,23 @@
         <div class="col-md-1 column"></div>
         <div class="col-md-10 column" style="margin-bottom:0;height: 40px;background-color:#f0e9e9f5 ;">
             <div style="height: 30px;margin-top: 5px;font-size: 20px;">
-                    <span class="glyphicon glyphicon-exclamation-sign"
-                          style="float:left;margin-top: 5px;color: darkorange;">
-                    </span>
-                <p style="float: left;font-size: 14px;margin-left:10px;margin-top: 6px;">
-                    您还没有登录！登录后借阅书单中的图书信息将保存到您的帐号中
-                </p>
-                <a href="javascript:void(0);" class="btn btn-danger"
-                   style="height:30px;margin-left:10px;color: snow;">
-                    立即登录
-                </a>
+                <span class="glyphicon glyphicon-exclamation-sign"
+                      style="float:left;margin-top: 5px;color: darkorange;">
+                </span>
+                <c:if test="${sessionScope.user==null}">
+                    <p style="float: left;font-size: 14px;margin-left:10px;margin-top: 6px;">
+                        您还没有登录！登录后借阅书单中的图书信息将保存到您的帐号中
+                    </p>
+                    <a href="javascript:void(0);" class="btn btn-danger login"
+                       style="height:30px;margin-left:10px;color: snow;">
+                        立即登录
+                    </a>
+                </c:if>
+                <c:if test="${sessionScope.user!=null}">
+                    <p style="float: left;font-size: 14px;margin-left:10px;margin-top: 6px;">
+                        您已登录，您可以在个人主页查看更多信息！
+                    </p>
+                </c:if>
             </div>
 
             <div style="margin-top: 10px;">
@@ -235,15 +322,15 @@
                                 </td>
 
                                 <td>
-                                    <p style="float: left;margin-top:10px;">
+                                    <p style="float: left;margin-top:10px;color: tomato;">
                                         ${item.points}
                                     </p>
-                                    <p style="float: left;margin-top:10px;">分</p>
+                                    <p style="float: left;margin-top:10px;color: tomato;">分</p>
                                 </td>
 
                                 <td>
                                     <button class="lessCount"
-                                            style="float: left;margin-top:10px;background-color: #dddddd;border: none; height:25px;width:25px;">
+                                            style="float: left;margin-top:10px;background-color: #f4f4f4;border: 1px solid #dddddd; height:25px;width:25px;">
                                         -
                                     </button>
                                     <div style="float: left;margin-top:10px;">
@@ -251,16 +338,16 @@
                                                style="border:0.5px solid #dddddd;width: 30px;height: 25px;text-align:center;line-height:25px;">
                                     </div>
                                     <button class="plusCount"
-                                            style="float: left;margin-top:10px;background-color: #dddddd ;border: none;height:25px;width: 25px;">
+                                            style="float: left;margin-top:10px;background-color: #f4f4f4 ;border: 1px solid #dddddd;height:25px;width: 25px;">
                                         +
                                     </button>
                                 </td>
 
                                 <td>
-                                    <p style="float: left;margin-top:10px;">
+                                    <p class="totalPoints" style="float: left;margin-top:10px;color: tomato;">
                                         ${item.totalPoints}
                                     </p>
-                                    <p style="float: left;margin-top:10px;">分</p>
+                                    <p style="float: left;margin-top:10px;color: tomato;">分</p>
                                 </td>
 
                                 <td style="font-size: 13px;">
@@ -276,7 +363,7 @@
                 <div style="margin-top: 30px;height: 50px; background-color: #f5ebeb;line-height:50px;">
                     <a href="javascript:void(0);" style="float: left; margin-left: 5%;">清空借阅书单</a>
                     <p style="float: left;margin-left: 10%;">共</p>
-                    <p style="float: left;color:#ff0033">4</p>
+                    <p id="bookCount" style="float: left;color:#ff0033">${sessionScope.cart.totalCount}</p>
                     <p style="float: left;">本图书</p>
                     <a href="javascript:void(0);" id="borrow" class="btn btn-danger"
                        style="width: 10%; text-align: center; font-size: 16px; font-weight: bold; float: right;margin-right: 5%; margin-top: 6px; color: snow;">
@@ -284,8 +371,8 @@
                     </a>
                     <div style="float: right;margin-right: 5%;">
                         <p style="float: left;">共计（积分）：</p>
-                        <p style="float: left;margin-left: 5px; margin-top: 1px;font-size: 24px; color: tomato;">
-                            48
+                        <p id="totalPoints" style="float: left;margin-left: 5px; margin-top: 1px;font-size: 24px; color: tomato;">
+                            ${sessionScope.cart.totalPrice}
                         </p>
                         <p style="float: left; margin-top: 1px; font-size: 20px; color: tomato;">
                             分

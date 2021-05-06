@@ -143,6 +143,9 @@
                         <c:if test="${sessionScope.user==null}">
                             欢迎光临借书吧！请<a href="javascript:void(0);" id="login" style="display: inline-block;color: orangered;">登录</a>成为会员！
                         </c:if>
+                        <c:if test="${sessionScope.user!=null}">
+                            您已登录，尊贵的会员:&nbsp;<p style="display: inline-block;color: tomato;font-weight: bold;">${sessionScope.user.username}</p>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -222,7 +225,7 @@
             <!-- 左侧分类栏 -->
             <div class="col-md-2 column">
                 <ul class="list-group">
-                    <p class="list-group-item" style="text-align: center;font-size: 18px;background-color: rgb(66, 161, 107);color: snow;">
+                    <p class="list-group-item" style="text-align: center;font-size: 18px;background-color: #dff0d8;color: #3c763d;">
                         书籍分类
                     </p>
                     <div class="list-group-item">
