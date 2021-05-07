@@ -35,13 +35,13 @@
             });
 
             $(".getBookDetails").click(function () {
-                let bookId = $(this).attr("name");
+                let bookId = $(this).data("book-id");
                 window.open("${pageContext.request.contextPath}/book/bookDetails/"+bookId);
                 return false;
             });
 
             $(".addBookList").click(function () {
-                let bookId = $(this).attr("name");
+                let bookId = $(this).data("book-id");
                 let bookName = $.trim($(this).parent().parent().find("a:first").text());
                 let totalCount;
                 $.get({
@@ -68,7 +68,7 @@
             });
 
             $(".borrowNow").click(function () {
-                let bookId = $(this).attr("name");
+                let bookId = $(this).data("book-id");
                 alert(bookId);
             });
 
@@ -324,9 +324,9 @@
                         <c:forEach items="${requestScope.pageBook.pageItems}" var="book">
                             <div class="col-sm-6 col-md-3">
                                 <div class="thumbnail" style="border: none;">
-                                    <a href="javascript:void(0);" class="getBookDetails" name="${book.id}"><img src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${book.id}.jpg"></a>
+                                    <a href="javascript:void(0);" class="getBookDetails" data-book-id="${book.id}"><img src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${book.id}.jpg"></a>
                                     <div class="caption bookSubClass">
-                                        <a href="javascript:void(0);" class="getBookDetails" name="${book.id}" style="display: block; width: 100%; font-size: 14px; font-weight: bold;margin: 0px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
+                                        <a href="javascript:void(0);" class="getBookDetails" data-book-id="${book.id}" style="display: block; width: 100%; font-size: 14px; font-weight: bold;margin: 0px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
                                                 ${book.name}
                                         </a>
                                         <p style="margin: 0px;font-size: 12px; color: silver;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
@@ -337,10 +337,10 @@
                                         </p>
                                         <p>
                                         <div style="display: inline-block;">
-                                            <a href="javascript:void(0);" class="addBookList" name="${book.id}">加入书单</a>
+                                            <a href="javascript:void(0);" class="addBookList" data-book-id="${book.id}">加入书单</a>
                                         </div>
                                         <div style="display: inline-block;">
-                                            <a href="javascript:void(0);" class="borrowNow" name="${book.id}">立即借阅</a>
+                                            <a href="javascript:void(0);" class="borrowNow" data-book-id="${book.id}">立即借阅</a>
                                         </div>
                                         </p>
                                     </div>

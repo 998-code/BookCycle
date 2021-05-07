@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>借阅书单</title>
+    <title>我要捐书</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/img7.png" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
 
@@ -146,6 +146,10 @@
             color: black;
         }
 
+        #userHome:link{
+            color: tomato;
+        }
+
         a:hover {
             color: #ff0033;
             text-decoration: underline;
@@ -166,13 +170,20 @@
             <div class="col-md-1 column"></div>
             <div class="col-md-10 column">
                 <div style="float: left;text-align: center;">
-                    欢迎光临借书吧！请<a href="#" style="display: inline-block;color: orangered;">登录</a>成为会员！
+                    <c:if test="${sessionScope.user==null}">
+                        欢迎光临借书吧！请<a href="javascript:void(0);" class="login" style="display: inline-block;color: orangered;">登录</a>成为会员！
+                    </c:if>
+                    <c:if test="${sessionScope.user!=null}">
+                        您已登录，尊贵的会员:&nbsp;<p style="display: inline-block;color: tomato;font-weight: bold;">${sessionScope.user.username}</p>
+                    </c:if>
                 </div>
 
                 <div style="width: 15%;float: right;color: rgb(240, 100, 100);">
+                    <a href="javascript:void(0);" id="userHome">
                         <span class="glyphicon glyphicon-user">
                             个人中心
                         </span>
+                    </a>
                 </div>
             </div>
             <div class="col-md-1 column"></div>
@@ -207,16 +218,23 @@
         <div class="col-md-1 column"></div>
         <div class="col-md-10 column" style="margin-bottom:0;height: 40px;background-color:#f0e9e9f5 ;">
             <div style="height: 30px;margin-top: 5px;font-size: 20px;">
-                    <span class="glyphicon glyphicon-exclamation-sign"
-                          style="float:left;margin-top: 5px;color: darkorange;">
-                    </span>
-                <p style="float: left;font-size: 14px;margin-left:10px;margin-top: 6px;">
-                    您还没有登录！登录后捐书您可以获取大量积分！
-                </p>
-                <a href="javascript:void(0);" class="btn btn-danger"
-                   style="height:30px;margin-left:10px;color: snow;">
-                    立即登录
-                </a>
+                <span class="glyphicon glyphicon-exclamation-sign"
+                      style="float:left;margin-top: 5px;color: darkorange;">
+                </span>
+                <c:if test="${sessionScope.user==null}">
+                    <p style="float: left;font-size: 14px;margin-left:10px;margin-top: 6px;">
+                        您还没有登录！登录后借阅书单中的图书信息将保存到您的帐号中
+                    </p>
+                    <a href="javascript:void(0);" class="btn btn-danger login"
+                       style="height:30px;margin-left:10px;color: snow;">
+                        立即登录
+                    </a>
+                </c:if>
+                <c:if test="${sessionScope.user!=null}">
+                    <p style="float: left;font-size: 14px;margin-left:10px;margin-top: 6px;">
+                        您已登录，您可以在个人主页查看更多信息！
+                    </p>
+                </c:if>
             </div>
 
             <div style="margin-top: 10px;">
@@ -290,7 +308,7 @@
                 <div style="margin-top: 30px;height: 50px; background-color: #f5ebeb;line-height:50px;">
                     <a href="javascript:void(0);" style="float: left; margin-left: 5%;">清空捐书单</a>
                     <p style="float: left;margin-left: 10%;">共</p>
-                    <p id="bookCount" style="float: left;color:#ff0033">4</p>
+                    <p id="bookCount" style="float: left;color:#ff0033">1</p>
                     <p style="float: left;">本图书</p>
                     <a href="javascript:void(0);" class="btn btn-danger"
                        style="width: 15%; text-align: center; font-size: 16px; font-weight: bold; float: right;margin-right: 5%; margin-top: 6px; color: snow;">
@@ -299,7 +317,7 @@
                     <div style="float: right;margin-right: 5%;">
                         <p style="float: left;">本次捐书预计可获得积分：</p>
                         <p id="totalPoints" style="float: left;margin-left: 5px; margin-top: 1px;font-size: 24px; color: tomato;">
-                            48
+                            12
                         </p>
                         <p style="float: left; margin-top: 1px; font-size: 20px; color: tomato;">
                             分
