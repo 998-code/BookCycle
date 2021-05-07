@@ -26,6 +26,31 @@
        function myHead() {
            location.href="head";
        }
+
+       window.onload=function () {
+           conversionTime();
+       }
+
+       function conversionTime() {
+           let times = document.querySelectorAll(".date");
+           for (let i = 0; i < times.length; i++) {
+               let time = times[i].innerHTML;
+               let date = new Date(time);
+               let year = date.getFullYear();
+               let month = date.getMonth() + 1;
+               month=month<10?"0"+month:month;
+               let dates = date.getDate();
+               dates=dates<10?"0"+dates:dates;
+               let hour = date.getHours();
+               hour = hour < 10 ? "0" + hour : hour;
+               let minutes = date.getMinutes();
+               minutes = minutes < 10 ? "0" + minutes : minutes;
+               let seconds = date.getSeconds();
+               seconds = seconds < 10 ? "0" + seconds : seconds;
+               let s = year + "-" + month + "-" + dates + " " + hour + ":" + minutes + ":" + seconds;
+               times[i].innerHTML = s;
+           }
+       }
    </script>
 </head>
 <body>
@@ -93,7 +118,7 @@
                                 <tbody>
                                     <c:forEach items="${sessionScope.points}" var="points">
                                         <tr>
-                                            <td>${points.date}</td>
+                                            <td class="date">${points.date}</td>
                                             <td>
                                                 <c:choose>
                                                     <c:when test="${points.status==0}">

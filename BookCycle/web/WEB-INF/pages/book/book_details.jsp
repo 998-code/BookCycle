@@ -22,7 +22,23 @@
                let bookId = $(this).attr("name");
                alert(bookId);
            });
+
        });
+       window.onload=function () {
+           conversionTime();
+       }
+
+       function conversionTime() {
+           let time=$(".date").html();
+           let date = new Date(time);
+           let year=date.getFullYear();
+           let month = date.getMonth() + 1;
+           month=month<10?"0"+month:month;
+           let dates = date.getDate();
+           dates=dates<10?"0"+dates:dates;
+           var s = year+" - "+month+" - "+dates;
+           $(".date").html(s);
+       }
    </script>
 </head>
 <body>
@@ -80,7 +96,14 @@
                         </li>
                         <li class="list-group-item" style="border: none;border-top: 2px dashed #dddddd;">
                             <div style="display: inline-block;">书籍版本：</div>
-                            <div style="display: inline-block;" class="date">${requestScope.bookDetails.datePublication}</div>
+                            <div style="display: inline-block;">
+                                <p class="date" style="display: inline-block">
+                                    ${requestScope.bookDetails.datePublication}
+                                </p>
+                                <p style="display: inline-block">
+
+                                </p>
+                            </div>
                         </li>
                         <li class="list-group-item" style="border: none;border-top: 2px dashed #dddddd;">
                             <div style="display: inline-block;">出版社：</div>
