@@ -12,11 +12,12 @@
     <script>
         $(function () {
             $(".receive").click(function () {
-                let ul = $(this).parent().parent();
-                let status = $.trim(ul.children("td").eq(3).text());
-                let bookListId = ul.find("td:first").text();
-                if (status != "已出库") {
-                    alert("书单[" + bookListId + "]" + status + "，不能接收！");
+                let status = $(this).data("status");
+                let statusArr=["准备中","已出库","借阅中","已归还","已取消"];
+                let bookListId = $(this).data("book-list-id");
+                if (status != 1) {
+                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能接收！");
+                    return false;
                 } else {
                     if (confirm("你确定接收书单[" + bookListId + "]吗？")) {
                         $.post({
@@ -35,11 +36,11 @@
             });
 
             $(".cancel").click(function () {
-                let ul = $(this).parent().parent();
-                let status = $.trim(ul.children("td").eq(3).text());
-                let bookListId = ul.find("td:first").text();
-                if (status != "准备中") {
-                    alert("书单[" + bookListId + "]" + status + "，不能取消！");
+                let status = $(this).data("status");
+                let statusArr=["准备中","已出库","借阅中","已归还","已取消"];
+                let bookListId = $(this).data("book-list-id");
+                if (status != 0) {
+                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能取消！");
                 } else {
                     if (confirm("你确定取消书单[" + bookListId + "]吗？")) {
                         $.post({
@@ -59,11 +60,15 @@
             });
 
             $(".endowCancel").click(function () {
-                let ul = $(this).parent().parent();
-                let status = $.trim(ul.children("td").eq(3).text());
-                let bookListId = ul.find("td:first").text();
-                if (status != "待处理" && status != "处理中") {
-                    alert("书单[" + bookListId + "]" + status + "，不能取消！");
+                // let ul = $(this).parent().parent();
+                // let status = $.trim(ul.children("td").eq(3).text());
+                // let bookListId = ul.find("td:first").text();
+                let status = $(this).data("status");
+                let statusArr=["待处理","处理中","已完成","已取消","已取消"];
+                let bookListId = $(this).data("book-list-id");
+                if (status != 0 && status != 1) {
+                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能取消！");
+                    return false;
                 } else {
                     if (confirm("你确定取消书单[" + bookListId + "]吗？")) {
                         $.post({
@@ -339,10 +344,15 @@
                                     </c:choose>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0);" class="details" data-toggle="modal"
-                                       data-target="#details">详情</a> |
-                                    <a href="javascript:void(0);" class="receive">接收</a> |
-                                    <a href="javascript:void(0);" class="cancel">取消</a>
+                                    <a href="javascript:void(0);" class="details" data-toggle="modal" data-target="#details" data-book-list-id="${bookList.bookListId}">
+                                        详情
+                                    </a> |
+                                    <a href="javascript:void(0);" class="receive" data-book-list-id="${bookList.bookListId}" data-status="${bookList.status}">
+                                        接收
+                                    </a> |
+                                    <a href="javascript:void(0);" class="cancel" data-book-list-id="${bookList.bookListId}" data-status="${bookList.status}">
+                                        取消
+                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -499,9 +509,12 @@
                                     </c:choose>
                                 </td>
                                 <td>
-                                    <a href="javascript:void(0);" class="endowDetails" data-toggle="modal"
-                                       data-target="#endowDetails">详情</a> |
-                                    <a href="javascript:void(0);" class="endowCancel">取消</a>
+                                    <a href="javascript:void(0);" class="endowDetails" data-toggle="modal" data-target="#endowDetails" data-book-list-id="${endowBookList.bookListId}">
+                                        详情
+                                    </a> |
+                                    <a href="javascript:void(0);" class="endowCancel" data-book-list-id="${endowBookList.bookListId}" data-status="${endowBookList.status}">
+                                        取消
+                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>

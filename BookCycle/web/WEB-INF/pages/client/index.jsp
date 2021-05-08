@@ -42,7 +42,7 @@
 
             $(".addBookList").click(function () {
                 let bookId = $(this).data("book-id");
-                let bookName = $.trim($(this).parent().parent().find("a:first").text());
+                let bookName = $(this).data("book-name");
                 let totalCount;
                 $.get({
                     url:"${pageContext.request.contextPath}/cart/addItem",
@@ -337,7 +337,7 @@
                                         </p>
                                         <p>
                                         <div style="display: inline-block;">
-                                            <a href="javascript:void(0);" class="addBookList" data-book-id="${book.id}">加入书单</a>
+                                            <a href="javascript:void(0);" class="addBookList" data-book-id="${book.id}" data-book-name="${book.name}">加入书单</a>
                                         </div>
                                         <div style="display: inline-block;">
                                             <a href="javascript:void(0);" class="borrowNow" data-book-id="${book.id}">立即借阅</a>

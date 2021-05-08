@@ -12,11 +12,12 @@
     <script>
         $(function () {
             $(".receive").click(function () {
-                let ul = $(this).parent().parent();
-                let status = $.trim(ul.children("td").eq(3).text());
-                let bookListId = ul.find("td:first").text();
-                if (status != "已出库") {
-                    alert("书单[" + bookListId + "]" + status + "，不能接收！");
+                let status = $(this).data("status");
+                let statusArr=["准备中","已出库","借阅中","已归还","已取消"];
+                let bookListId = $(this).data("book-list-id");
+                if (status != 1) {
+                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能接收！");
+                    return false;
                 } else {
                     if (confirm("你确定接收书单[" + bookListId + "]吗？")) {
                         $.post({
@@ -35,11 +36,12 @@
             });
 
             $(".cancel").click(function () {
-                let ul = $(this).parent().parent();
-                let status = $.trim(ul.children("td").eq(3).text());
-                let bookListId = ul.find("td:first").text();
-                if (status != "准备中") {
-                    alert("书单[" + bookListId + "]" + status + "，不能取消！");
+                let status = $(this).data("status");
+                let statusArr=["准备中","已出库","借阅中","已归还","已取消"];
+                let bookListId = $(this).data("book-list-id");
+                if (status != 0) {
+                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能取消！");
+                    return false;
                 } else {
                     if (confirm("你确定取消书单[" + bookListId + "]吗？")) {
                         $.post({
@@ -59,10 +61,11 @@
             });
 
             $(".borrowReservation").click(function () {
-                let ul = $(this).parent().parent();
-                let status = $.trim(ul.children("td").eq(2).text());
-                if (status == "可借阅") {
-                    let bookId = $.trim(ul.children("td").eq(0).text());
+                // let ul = $(this).parent().parent();
+                // let status = $.trim(ul.children("td").eq(2).text());
+                let status = $(this).data("status");
+                if (status == 1) {
+                    let bookId=$(this).data("book-id");
                     let userId = "${sessionScope.user.id}";
                     $.post({
                         url: "${pageContext.request.contextPath}/cart/addItem",
@@ -71,13 +74,14 @@
 
                         }
                     })
+                }else {
+                    return false;
                 }
             });
 
             $(".cancelReservation").click(function () {
                 if (confirm("你确定要删除该预约吗？")) {
-                    let ul = $(this).parent().parent();
-                    let id = $.trim(ul.children("td").eq(0).text());
+                    let id=$(this).data("book-id");
                     $.post({
                         url: "${pageContext.request.contextPath}/user/cancelReservation",
                         data: {"id": id},
@@ -259,8 +263,8 @@
                                         </td>
                                         <td>借书单</td>
                                         <td>
-                                            <a href="javascript:void(0);" class="receive">接收</a> |
-                                            <a href="javascript:void(0);" class="cancel">取消</a>
+                                            <a href="javascript:void(0);" class="receive" data-book-list-id="${bookList.bookListId}" data-status="${bookList.status}">接收</a> |
+                                            <a href="javascript:void(0);" class="cancel" data-book-list-id="${bookList.bookListId}" data-status="${bookList.status}">取消</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -314,8 +318,8 @@
                                         </td>
                                         <td>${reservation.points}</td>
                                         <td style="padding: 2px;">
-                                            <a href="javascript:void(0);" class="borrowReservation">借阅</a> |
-                                            <a href="javascript:void(0);" class="cancelReservation">取消</a>
+                                            <a href="javascript:void(0);" class="borrowReservation" data-book-id="${reservation.bookId}" data-status="${reservation.status}">借阅</a> |
+                                            <a href="javascript:void(0);" class="cancelReservation" data-book-id="${reservation.bookId}">取消</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
