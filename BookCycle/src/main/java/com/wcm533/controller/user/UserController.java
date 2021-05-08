@@ -118,7 +118,6 @@ public class UserController {
                     return "/user/user_enroll";
                 }else {
                     userService.enrollUser(user);
-                    request.getSession().setAttribute("user",user);
                     return "redirect:/user/getLogin";
                 }
             }
@@ -176,6 +175,7 @@ public class UserController {
             }
             file.transferTo(new File(realPath +"/"+ "img"+user.getId()+user.getHeadImgPath()));
             request.getSession().setAttribute("errorHead","头像上传成功！");
+            request.getSession().setAttribute("user",user);
             return "redirect:head";
         } catch (IOException e) {
             e.printStackTrace();

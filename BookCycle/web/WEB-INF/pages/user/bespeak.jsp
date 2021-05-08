@@ -7,44 +7,38 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
-   <script>
+    <script>
+        $(function () {
+            $(".borrowReservation").click(function () {
+                let status = $(this).data("status");
+                if(status==1){
+                    let bookId = $(this).data("book-id");
+                    let userId="${sessionScope.user.id}";
+                    $.post({
+                        url:"${pageContext.request.contextPath}/cart/addItem",
+                        data:{"bookId":bookId,"userId":userId},
+                        success:function (data) {
 
-       $(function () {
-           $(".borrowReservation").click(function () {
-               let ul = $(this).parent().parent();
-               let status = $.trim(ul.children("td").eq(2).text());
-               if(status=="可借阅"){
-                   let bookId = $.trim(ul.children("td").eq(0).text());
-                   let userId="${sessionScope.user.id}";
-                   $.post({
-                       url:"${pageContext.request.contextPath}/cart/addItem",
-                       data:{"bookId":bookId,"userId":userId},
-                       success:function (data) {
+                        }
+                    })
+                }
+            });
 
-                       }
-                   })
-               }
-           });
+            $(".cancelReservation").click(function () {
+                if(confirm("你确定要删除该预约吗？")){
+                    let id = $(this).data("book-id")
+                    $.post({
+                        url:"${pageContext.request.contextPath}/user/cancelReservation",
+                        data:{"id":id},
+                        success:function (data) {
 
-           $(".cancelReservation").click(function () {
-               if(confirm("你确定要删除该预约吗？")){
-                   let ul = $(this).parent().parent();
-                   let id = $.trim(ul.children("td").eq(0).text());
-                   $.post({
-                       url:"${pageContext.request.contextPath}/user/cancelReservation",
-                       data:{"id":id},
-                       success:function (data) {
+                        }
+                    })
+                }
+            });
+        })
+    </script>
 
-                       }
-                   })
-               }
-           });
-       });
-
-       function myHead() {
-           location.href="head";
-       }
-   </script>
 </head>
 <body>
     <div class="container">
@@ -123,8 +117,8 @@
                                         </td>
                                         <td>${reservation.points}</td>
                                         <td>
-                                            <a href="javascript:void(0);" class="borrowReservation">借阅</a> |
-                                            <a href="javascript:void(0);" class="cancelReservation">取消</a>
+                                            <a href="javascript:void(0);" class="borrowReservation" data-book-id="${reservation.bookId}" data-status="${reservation.status}">借阅</a> |
+                                            <a href="javascript:void(0);" class="cancelReservation" data-book-id="${reservation.bookId}">取消</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

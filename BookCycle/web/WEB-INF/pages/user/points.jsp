@@ -9,51 +9,8 @@
           type="image/x-icon"/>
     <%@include file="../common/head.jsp" %>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
-    <script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/static/js/myJS/points.js" charset="utf-8"></script>
 
-        $(function () {
-            $(".pointsDetails").click(function () {
-                let ul = $(this).parent().parent();
-                let bookListId = $.trim(ul.children("td").eq(3).html());
-                if (bookListId.length == 0) {
-                    $(".pointsDetailsP").text("");
-                    $(".pointsDetailsP").text("修改昵称");
-                } else {
-                    $(".pointsDetailsP").text("");
-                    $(".pointsDetailsP").text("书单编号为：" + bookListId);
-                }
-            });
-        });
-
-        function myHead() {
-            location.href = "head";
-        }
-
-        window.onload = function () {
-            conversionTime();
-        }
-
-        function conversionTime() {
-            let times = document.querySelectorAll(".date");
-            for (let i = 0; i < times.length; i++) {
-                let time = times[i].innerHTML;
-                let date = new Date(time);
-                let year = date.getFullYear();
-                let month = date.getMonth() + 1;
-                month = month < 10 ? "0" + month : month;
-                let dates = date.getDate();
-                dates = dates < 10 ? "0" + dates : dates;
-                let hour = date.getHours();
-                hour = hour < 10 ? "0" + hour : hour;
-                let minutes = date.getMinutes();
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                let seconds = date.getSeconds();
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                let s = year + "-" + month + "-" + dates + " " + hour + ":" + minutes + ":" + seconds;
-                times[i].innerHTML = s;
-            }
-        }
-    </script>
 </head>
 <body>
 <div class="container">

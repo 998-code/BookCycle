@@ -9,6 +9,7 @@
           type="image/x-icon"/>
     <%@include file="../common/head.jsp" %>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
+    <script src="${pageContext.request.contextPath }/static/js/myJS/conversion.js"></script>
     <script>
         $(function () {
             $(".receive").click(function () {
@@ -93,34 +94,6 @@
             });
         });
 
-        function myHead() {
-            location.href = "head";
-        }
-
-        window.onload = function () {
-            conversionTime();
-        }
-
-        function conversionTime() {
-            let times = document.querySelectorAll(".date");
-            for (let i = 0; i < times.length; i++) {
-                let time = times[i].innerHTML;
-                let date = new Date(time);
-                let year = date.getFullYear();
-                let month = date.getMonth() + 1;
-                month = month < 10 ? "0" + month : month;
-                let dates = date.getDate();
-                dates = dates < 10 ? "0" + dates : dates;
-                let hour = date.getHours();
-                hour = hour < 10 ? "0" + hour : hour;
-                let minutes = date.getMinutes();
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                let seconds = date.getSeconds();
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                let s = year + "-" + month + "-" + dates + " " + hour + ":" + minutes + ":" + seconds;
-                times[i].innerHTML = s;
-            }
-        }
     </script>
 </head>
 <body>
@@ -166,9 +139,9 @@
             <div id="homepage" style="float: right; width: 80%;height: 620px; border: 1px solid #dddddd;">
                 <!-- 首页 -->
                 <div style="border-bottom: 1px solid #dddddd;height: 160px;">
-                    <div style="width: 100px;height: 100px;float: left;margin-left: 30px;margin-top: 30px;">
+                    <div style="float: left;margin-left: 30px;margin-top: 30px;">
                         <img src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}"
-                             class="img-thumbnail">
+                             class="thumbnail" width="100" height="100">
                     </div>
 
                     <div style="width: 40%; height: 100px;margin-left: 30px; margin-top: 30px;float: left;">

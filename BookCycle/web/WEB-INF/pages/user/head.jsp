@@ -6,11 +6,7 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
-   <script>
-       function myHead() {
-           location.href="head";
-       }
-   </script>
+
 </head>
 <body>
     <div class="container">
@@ -98,28 +94,28 @@
                         <div style="margin-top: 20px;">
                             <div class="col-sm-6 col-md-3" >
                                 <a href="#" class="thumbnail" style="border-radius: 50%;">
-                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png">
+                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
                                 </a>
 
                                 <a class="btn btn-primary" style="display: inline-block; width: 100px; margin-left: 30px;">换上</a>
                             </div>
                             <div class="col-sm-6 col-md-3" >
                                 <a href="#" class="thumbnail" style="border-radius: 50%;">
-                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png">
+                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
                                 </a>
 
                                 <a class="btn btn-primary" style="display: inline-block; width: 100px; margin-left: 30px;">换上</a>
                             </div>
                             <div class="col-sm-6 col-md-3" >
                                 <a href="#" class="thumbnail" style="border-radius: 50%;">
-                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png">
+                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
                                 </a>
 
                                 <a class="btn btn-primary" style="display: inline-block; width: 100px; margin-left: 30px;">换上</a>
                             </div>
                             <div class="col-sm-6 col-md-3" >
                                 <a href="#" class="thumbnail" style="border-radius: 50%;">
-                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/img${sessionScope.user.id}.png">
+                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
                                 </a>
 
                                 <a class="btn btn-primary" style="display: inline-block; width: 100px; margin-left: 30px;">换上</a>

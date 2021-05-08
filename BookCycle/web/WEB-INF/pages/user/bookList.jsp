@@ -9,6 +9,7 @@
           type="image/x-icon"/>
     <%@include file="../common/head.jsp" %>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
+    <script src="${pageContext.request.contextPath }/static/js/myJS/conversion.js"></script>
     <script>
         $(function () {
             $(".receive").click(function () {
@@ -60,9 +61,6 @@
             });
 
             $(".endowCancel").click(function () {
-                // let ul = $(this).parent().parent();
-                // let status = $.trim(ul.children("td").eq(3).text());
-                // let bookListId = ul.find("td:first").text();
                 let status = $(this).data("status");
                 let statusArr=["待处理","处理中","已完成","已取消","已取消"];
                 let bookListId = $(this).data("book-list-id");
@@ -221,34 +219,6 @@
             });
         });
 
-        function myHead() {
-            location.href = "head";
-        }
-
-        window.onload = function () {
-            conversionTime();
-        }
-
-        function conversionTime() {
-            let times = document.querySelectorAll(".date");
-            for (let i = 0; i < times.length; i++) {
-                let time = times[i].innerHTML;
-                let date = new Date(time);
-                let year = date.getFullYear();
-                let month = date.getMonth() + 1;
-                month = month < 10 ? "0" + month : month;
-                let dates = date.getDate();
-                dates = dates < 10 ? "0" + dates : dates;
-                let hour = date.getHours();
-                hour = hour < 10 ? "0" + hour : hour;
-                let minutes = date.getMinutes();
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                let seconds = date.getSeconds();
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                let s = year + "-" + month + "-" + dates + " " + hour + ":" + minutes + ":" + seconds;
-                times[i].innerHTML = s;
-            }
-        }
     </script>
 </head>
 <body>

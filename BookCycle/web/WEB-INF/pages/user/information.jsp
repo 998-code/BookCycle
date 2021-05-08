@@ -107,9 +107,6 @@
            });
        }
 
-       function myHead() {
-           location.href="head";
-       }
    </script>
 </head>
 <body>
