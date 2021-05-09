@@ -7,37 +7,7 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
-    <script>
-        $(function () {
-            $(".borrowReservation").click(function () {
-                let status = $(this).data("status");
-                if(status==1){
-                    let bookId = $(this).data("book-id");
-                    let userId="${sessionScope.user.id}";
-                    $.post({
-                        url:"${pageContext.request.contextPath}/cart/addItem",
-                        data:{"bookId":bookId,"userId":userId},
-                        success:function (data) {
-
-                        }
-                    })
-                }
-            });
-
-            $(".cancelReservation").click(function () {
-                if(confirm("你确定要删除该预约吗？")){
-                    let id = $(this).data("book-id")
-                    $.post({
-                        url:"${pageContext.request.contextPath}/user/cancelReservation",
-                        data:{"id":id},
-                        success:function (data) {
-
-                        }
-                    })
-                }
-            });
-        })
-    </script>
+    <script src="${pageContext.request.contextPath }/static/js/myJS/reservation.js"></script>
 
 </head>
 <body>
@@ -117,8 +87,8 @@
                                         </td>
                                         <td>${reservation.points}</td>
                                         <td>
-                                            <a href="javascript:void(0);" class="borrowReservation" data-book-id="${reservation.bookId}" data-status="${reservation.status}">借阅</a> |
-                                            <a href="javascript:void(0);" class="cancelReservation" data-book-id="${reservation.bookId}">取消</a>
+                                            <a href="javascript:void(0);" class="borrowReservation" data-user-id="${sessionScope.user.id}" data-book-id="${reservation.bookId}" data-status="${reservation.status}">借阅</a> |
+                                            <a href="javascript:void(0);" class="cancelReservation" data-id="${reservation.id}">取消</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

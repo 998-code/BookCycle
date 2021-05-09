@@ -6,108 +6,8 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
-   <script>
-       $(function () {
-           $("#username").change(function () {
-               var username = $("#username").val();
-               var usernamePatt=/^[(a-zA-Z0-9\u4e00-\u9fa5){1}_#]{2,12}$/;
-               if(!usernamePatt.test(username)){
-                   $("#username").val("${sessionScope.user.username}");
-                   $("span.errorUsername").text("用户名["+username+"]不合法！");
-                   return false;
-               }
-               $.post({
-                   url:"${pageContext.request.contextPath}/user/ajaxUsername",
-                   data:{"username":username},
-                   success:function (data) {
-                       if(data){
-                           $("#username").val("${sessionScope.user.username}");
-                           $("span.errorUsername").text("用户名["+username+"]已存在！");
-                       }else{
-                           $("span.errorUsername").text("用户名可用！");
-                       }
-                   }
-               });
-           });
+    <script src="${pageContext.request.contextPath }/static/js/myJS/information.js"></script>
 
-           $("#email").change(function () {
-               let email = $("#email").val();
-               var emailPatt = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
-               if(!emailPatt.test(email)){
-                   $("#email").val("${sessionScope.user.email}")
-                   $("span.errorEmail").text("邮箱["+email+"]格式不匹配！");
-                   return false;
-               }
-               $.post({
-                   url:"${pageContext.request.contextPath}/user/ajaxEmail",
-                   data:{"email":email},
-                   success:function (data) {
-                       if(data){
-                           $("#email").val("${sessionScope.user.email}")
-                           $("span.errorEmail").text("该邮箱["+email+"]已被注册！");
-                       }else{
-                           $("span.errorEmail").text("该邮箱可用！");
-                       }
-                   }
-               });
-           });
-
-           $("#save").click(function () {
-               let username = $.trim($("#username").val());
-               let email = $.trim($("#email").val());
-               let address = $.trim($("#address").val());
-               if(username=="${sessionScope.user.username}"&&email=="${sessionScope.user.email}"){
-                   alert("提交的用户信息与原信息相同！");
-                   return false;
-               }
-               if(confirm("你确定保存信息吗？")){
-                   $.post({
-                       url:"${pageContext.request.contextPath}/user/updateUser",
-                       data:{"username":username,"email":email,"address":address},
-                       success:function (data) {
-                           if(data){
-                               alert("修改成功！");
-                           }else{
-                               alert("修改失败！");
-                           }
-                       }
-                   });
-               }
-           })
-       });
-
-       function updatePassword() {
-           var userId = $("#userId").text();
-           let oldPassword = $("#oldPassword").val();
-           let newPassword = $("#newPassword").val();
-           var passwordPatt=/^\w{6,16}$/;
-           $("span.errorOld").text("");
-           $("span.errorNew").text("");
-           $("span.errorConfirm").text("");
-           $("span.errorUpdate").text("");
-           if(!passwordPatt.test(newPassword)){
-               $("span.errorNew").text("密码不合法！");
-               return false;
-           }
-           var confirm = $("#confirm").val();
-           if(newPassword!=confirm){
-               $("span.errorConfirm").text("密码与确认密码不符！");
-               return false;
-           }
-           $.post({
-               url:"${pageContext.request.contextPath}/user/ajaxUpdatePassword",
-               data:{"userId":userId,"oldPassword":oldPassword,"newPassword":newPassword},
-               success:function (data) {
-                   if(data){
-                       $("span.errorUpdate").text("修改成功！");
-                   }else{
-                       $("span.errorOld").text("密码错误！");
-                   }
-               }
-           });
-       }
-
-   </script>
 </head>
 <body>
     <div class="container">
@@ -155,7 +55,7 @@
                             <div class="form-group">
                               <label class="col-sm-2 control-label" style="color: #837d7d;">昵称：</label>
                               <div class="col-sm-10" style="width: 30%;display: inline-block;">
-                                <input type="text" id="username" class="form-control" value="${sessionScope.user.username}">
+                                <input type="text" id="username" class="form-control" value="${sessionScope.user.username}" data-username="${sessionScope.user.username}">
                               </div>
                               <span class="errorUsername" style="display: inline-block; margin-top: 5px; color: #a19c9c;">
                                    注：修改一次昵称需要消耗6积分
@@ -172,7 +72,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" style="color: #837d7d;">邮箱：</label>
                                 <div class="col-sm-10" style="width: 30%;display: inline-block;">
-                                  <input type="text" id="email" class="form-control" value="${sessionScope.user.email}">
+                                  <input type="text" id="email" class="form-control" value="${sessionScope.user.email}" data-email="${sessionScope.user.email}">
                                 </div>
                                 <span class="errorEmail" style="display: inline-block; margin-top: 5px; color: #a19c9c;">
 
@@ -201,7 +101,7 @@
 
                             <div class="form-group" style="margin: 0; margin-top: 20px; border-top: 1px solid #dddddd;">
                                 <div class="col-sm-10" style="width: 100%;">
-                                    <button type="submit" class="btn btn-primary" id="save" style="margin-top: 20px;width: 15%; margin-left: 42%;">
+                                    <button type="submit" class="btn btn-primary" id="save" data-username="${sessionScope.user.username}" data-email="${sessionScope.user.email}" style="margin-top: 20px;width: 15%; margin-left: 42%;">
                                         保存
                                     </button>
                                 </div>
@@ -247,7 +147,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-10">
-                                                    <a href="javascript:void(0);" onclick="updatePassword()" type="submit" id="updatePassword" class="btn btn-primary" style="width: 30%;margin-left: 35%;text-align: center">保存</a>
+                                                    <a href="javascript:void(0);" type="submit" id="updatePassword" class="btn btn-primary" data-user-id="${sessionScope.user.id}" style="width: 30%;margin-left: 35%;text-align: center">保存</a>
                                                     <span class="errorUpdate" style="display: inline-block; margin-top: 5px; color: red;">
 
                                                                 </span>
