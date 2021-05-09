@@ -1,9 +1,7 @@
 package com.wcm533.service.impl;
 
-import com.wcm533.dao.BookDetailsMapper;
-import com.wcm533.dao.BookListItemsMapper;
-import com.wcm533.dao.BookListMapper;
-import com.wcm533.dao.BookMapper;
+import com.fasterxml.jackson.annotation.JsonTypeId;
+import com.wcm533.dao.*;
 import com.wcm533.pojo.*;
 import com.wcm533.service.BookListService;
 
@@ -24,6 +22,7 @@ public class BookListServiceImpl implements BookListService {
     private BookListItemsMapper bookListItemsMapper;
     private BookMapper bookMapper;
     private BookDetailsMapper bookDetailsMapper;
+    private UserMapper userMapper;
 
     public void setBookListMapper(BookListMapper bookListMapper) {
         this.bookListMapper = bookListMapper;
@@ -41,29 +40,32 @@ public class BookListServiceImpl implements BookListService {
         this.bookDetailsMapper = bookDetailsMapper;
     }
 
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
     @Override
-    public String createBookList(Cart cart, int userId) {
-        //生成唯一订单号
+    public String createBookList(int userId, String[] bookIdArr, String[] bookCountArr) {
         String bookListId=System.currentTimeMillis()+""+userId;
-        //创建订单对象
-        BookList bookList = new BookList(bookListId, new Date(), cart.getTotalPrice(), userId);
-        //保存订单
+        int points=Integer.parseInt(bookIdArr[bookIdArr.length-1]);
+        BookList bookList = new BookList(bookListId, new Date(), points, userId);
         bookListMapper.addBookList(bookList);
-        //遍历购物车
-        for(Map.Entry<Integer, CartItem> entry:cart.getItems().entrySet()){
-            //获取商品项
-            CartItem cartItem = entry.getValue();
-            Book book = bookMapper.queryBookById(cartItem.getBookId());
-            //创建订单项
-            BookListItems bookListItems = new BookListItems( cartItem.getBookId(),book.getName(), cartItem.getPoints(), cartItem.getCount(),  bookListId);
-            //保存订单项到数据库
-            bookListItemsMapper.addBookListItems(bookListItems);
-            //更新库存和销量
-            book.setStock(book.getStock()-cartItem.getCount());
+        for(int i=0;i<bookIdArr.length-1;i++){
+            Book book = bookMapper.queryBookById(Integer.parseInt(bookIdArr[i]));
+            BookListItems items = new BookListItems();
+            items.setBookId(book.getId());
+            items.setBookName(book.getName());
+            items.setCount(Integer.parseInt(bookCountArr[i]));
+            items.setPoints(book.getPoints());
+            items.setBookListId(bookListId);
+            bookListItemsMapper.addBookListItems(items);
+            book.setLoan(book.getLoan()+1);
+            System.out.println(book);
             bookMapper.updateBook(book);
         }
-        //清空购物车
-        cart.clear();
+        User user = userMapper.queryUserById(userId);
+        user.setPoints(user.getPoints()-points);
+        userMapper.updateUser(user);
         return bookListId;
     }
 

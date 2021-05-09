@@ -28,6 +28,7 @@
         <property name="bookListItemsMapper" ref="bookListItemsMapper"></property>
         <property name="bookMapper" ref="bookMapper"></property>
         <property name="bookDetailsMapper" ref="bookDetailsMapper"></property>
+        <property name="userMapper" ref="userMapper"></property>
     </bean>
 
     <bean id="EndowBookListServiceImpl" class="com.wcm533.service.impl.EndowBookListServiceImpl">

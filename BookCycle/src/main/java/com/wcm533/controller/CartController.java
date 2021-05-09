@@ -46,6 +46,9 @@ public class CartController {
         if(book==null){
             return Cart.NOT_EXISTED;
         }
+        if(book.getLoan()==book.getStock()){
+            return Cart.INVENTORY_SHORTAGE;
+        }
         CartItem cartItem=new CartItem(book.getId(),book.getName(),1,book.getPoints(),book.getPoints(),0);
         User user = (User) request.getSession().getAttribute("user");
         Cart cart = (Cart)request.getSession().getAttribute("cart");
@@ -55,9 +58,8 @@ public class CartController {
         }
         Map<Integer, CartItem> items = cart.getItems();
         if(items.get(bookId)!=null){
-            return Cart.ADDED;
+            return Cart.SUCCESS;
         }
-        items.get(bookId);
         int authority;
         if(user==null){
             authority=User.ORDINARY_MEMBER;

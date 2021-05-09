@@ -3,6 +3,7 @@ package com.wcm533.utils;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -12,9 +13,9 @@ import java.util.Map;
  * @Date 2020/9/13 14:17
  **/
 public class WebUtils {
-    public static <T> T copyParamToBean(T bean,Map value){
+    public static <T> T copyParamToBean(T bean, Map value) {
         try {
-            BeanUtils.populate(bean,value);
+            BeanUtils.populate(bean, value);
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         } catch (InvocationTargetException e) {
@@ -22,7 +23,8 @@ public class WebUtils {
         }
         return bean;
     }
-    public static int parseInt(String strInt,int a){
+
+    public static int parseInt(String strInt, int a) {
         try {
             return Integer.parseInt(strInt);
         } catch (NumberFormatException e) {
@@ -30,5 +32,14 @@ public class WebUtils {
         }
         return a;
     }
+
+    public static Date parseString(String str) {
+        String s = str.substring(0, 13);
+        Long aLong = Long.parseLong(s);
+        Date date = new Date(aLong);
+        return date;
+    }
+
+
 
 }

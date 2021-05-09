@@ -15,7 +15,7 @@ import java.util.List;
  **/
 public interface BookListService {
 
-    String createBookList(Cart cart,int userId);
+    String createBookList(int userId,String[] bookIdArr,String[] bookCountArr);
 
     boolean deleteBookList(String bookListId);
 

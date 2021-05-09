@@ -15,10 +15,22 @@ public class Cart {
     public static final int ORDINARY_MEMBER_TOTAL_COUNT=5;
     public static final int SUPER_MEMBER_TOTAL_COUNT=10;
 
-    public static final int SUCCESS=0;//成功
-    public static final int NOT_EXISTED=1;//图书不存在
-    public static final int ADDED=2;//已添加
-    public static final int INSUFFICIENT_PERMISSIONS=3;//权限不足
+    /**
+     * 成功
+     */
+    public static final int SUCCESS=0;
+    /**
+     * 图书不存在
+     */
+    public static final int NOT_EXISTED=1;
+    /**
+     * 库存不足
+     */
+    public static final int INVENTORY_SHORTAGE=2;
+    /**
+     * 权限不足
+     */
+    public static final int INSUFFICIENT_PERMISSIONS=3;
 
     private Map<Integer,CartItem> items=new LinkedHashMap<Integer, CartItem>();
 

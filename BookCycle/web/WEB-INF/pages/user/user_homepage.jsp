@@ -11,7 +11,13 @@
     <script src="${pageContext.request.contextPath }/static/js/myJS/homepage.js"></script>
     <script src="${pageContext.request.contextPath }/static/js/myJS/conversion.js"></script>
     <script src="${pageContext.request.contextPath }/static/js/myJS/user_homepage.js"></script>
-
+    <script>
+        $(function () {
+            $("#signOut").click(function () {
+                location.href="signOut";
+            });
+        })
+    </script>
 </head>
 <body>
 <div class="container">
@@ -91,10 +97,17 @@
                             </div>
                         </div>
                     </div>
-                    <div style="border:1px solid #dddddd;float: right;margin-right: 20%; margin-top:70px ;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
-                        <a href="javascript:void(0);" onclick="myInformation()"><span
-                                style="color: #837d7d;">修改资料</span></a>
+                    <div style="display:inline-block; margin-top:70px ;">
+                        <div style="border:1px solid #dddddd;display:inline-block;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
+                            <a href="javascript:void(0);" onclick="myInformation()"><span
+                                    style="color: #837d7d;">修改资料</span></a>
+                        </div>
+                        <div style="border:1px solid #dddddd;display:inline-block;margin-left:30px;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
+                            <a href="javascript:void(0);" id="signOut"><span
+                                    style="color: #837d7d;">退出登录</span></a>
+                        </div>
                     </div>
+
 
                 </div>
                 <!-- 书单 -->
@@ -212,7 +225,8 @@
                                         </td>
                                         <td>${reservation.points}</td>
                                         <td style="padding: 2px;">
-                                            <a href="javascript:void(0);" class="borrowReservation" data-user-id="${sessionScope.user.id}"
+                                            <a href="javascript:void(0);" class="borrowReservation"
+                                               data-user-id="${sessionScope.user.id}"
                                                data-book-id="${reservation.bookId}" data-status="${reservation.status}">借阅</a>
                                             |
                                             <a href="javascript:void(0);" class="cancelReservation"

@@ -2,8 +2,12 @@ package com.wcm533.controller.bookList;
 
 import com.wcm533.pojo.BookList;
 import com.wcm533.pojo.BookListItems;
+import com.wcm533.pojo.Points;
 import com.wcm533.pojo.User;
 import com.wcm533.service.impl.BookListServiceImpl;
+import com.wcm533.service.impl.PointsServiceImpl;
+import com.wcm533.service.impl.ReservationServiceImpl;
+import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -31,17 +35,23 @@ public class BookListController {
     private BookListServiceImpl bookListService;
 
     @Autowired
+    @Qualifier("PointsServiceImpl")
+    private PointsServiceImpl pointsService;
+
+    @Autowired
     HttpServletRequest request;
 
 
     @RequestMapping("/create")
     @ResponseBody
-    public String createBookList(String bookId,String bookCount){
-        String[] idArr=bookId.split(",");
-        String[] countArr=bookCount.split(",");
-        System.out.println(bookId);
-        System.out.println(bookCount);
-        return "createBookList";
+    public String createBookList(int userId,String bookId,String bookCount){
+        String[] bookIdArr=bookId.split(",");
+        String[] bookCountArr=bookCount.split(",");
+        String bookListId = bookListService.createBookList(userId, bookIdArr, bookCountArr);
+        Date date = WebUtils.parseString(bookListId);
+        Points points = new Points(userId,date,Integer.parseInt(bookIdArr[bookIdArr.length-1]),Points.BORROW_BOOKS,bookListId);
+        pointsService.addPoints(points);
+        return bookListId;
     }
 
 

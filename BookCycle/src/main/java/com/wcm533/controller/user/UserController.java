@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.Date;
 import java.util.List;
@@ -130,7 +128,18 @@ public class UserController {
         }
     }
 
+    @GetMapping("/signOut")
+    public String signOut(){
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.removeAttribute("bookList");
+        session.removeAttribute("endowBookList");
+        session.removeAttribute("reservations");
+        return "redirect:getLogin";
+    }
+
     @PostMapping("/updateUser")
+    @ResponseBody
     public boolean updateUser(String username,String email,String address){
         User user = (User) request.getSession().getAttribute("user");
         user.setUsername(username);

@@ -34,6 +34,16 @@ public class Book {
         this.bookImg = bookImg;
     }
 
+    public Book(String name, String author, int stock, int loan, int points, int classification, byte[] bookImg) {
+        this.name = name;
+        this.author = author;
+        this.stock = stock;
+        this.loan = loan;
+        this.points = points;
+        this.classification = classification;
+        this.bookImg = bookImg;
+    }
+
     public int getId() {
         return id;
     }

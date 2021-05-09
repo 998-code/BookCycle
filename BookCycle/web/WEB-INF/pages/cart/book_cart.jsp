@@ -10,13 +10,17 @@
 
     <script>
         $(function () {
+            let href = location.href;//获取或设置整个URL
+            let index = href.indexOf("cart");
+            let newHref = href.substr(0, index);
+
             $(".login").click(function () {
-                window.open("${pageContext.request.contextPath}/user/getLogin");
+                window.open(newHref+"user/getLogin");
                 return false;
             });
 
             $("#userHome").click(function () {
-                window.open("${pageContext.request.contextPath}/user/home");
+                window.open(newHref+"user/home");
                 return false;
             });
 
@@ -58,42 +62,61 @@
                 }
                 bookCount();
                 totalPointss();
+                if(checkAll){
+                    $("#borrow").removeClass("disabled");
+
+                }else {
+                    $("#borrow").addClass("disabled");
+                }
             });
 
             $(".check").click(function(){
                 let checkAll = document.getElementById("checkAll");
                 let checks=document.getElementsByClassName("check");
-                let falg=true;
+                let flag=true;
+                let borrowFlag=false;
                 for(var i=0;i<checks.length;i++){
                     if(!checks[i].checked){
-                        falg=false;
-                        break;
+                        flag=false;
+                        //break;
+                    }
+                    if(checks[i].checked){
+                        borrowFlag=true;
                     }
                 }
-                checkAll.checked=falg;
+                checkAll.checked=flag;
                 bookCount();
                 totalPointss();
+                if(!borrowFlag){
+                    $("#borrow").addClass("disabled");
+                }else {
+                    $("#borrow").removeClass("disabled");
+                }
             });
 
             $("#borrow").click(function(){
-                let user="${sessionScope.user}";
-                if(user==""||user.length==0){
-                    alert("您还没有登录，请先登录！");
+                let totalCount=$.trim($("#bookCount").html());
+                let totalPoints=$.trim($("#totalPoints").html());
+                let userId=$(this).data("user-id");
+                if(userId==""||userId.length==0){
+                    $(".book-alert").html("您还没有登录，请先登录！").addClass("book-alert-warning").show().delay(2500).fadeOut();
                     return false;
                 }
                 let bookId = new Array();
                 let bookCount=new Array();
                 $(".check:checked").each(function(i){
                     bookId[i] = $(this).val();
-                });;
+                });
+                bookId.push(totalPoints);
                 $(".count").each(function (i) {
                     bookCount[i]=$(this).val();
-                })
+                });
+                bookCount.push(totalCount);
                 $.get({
-                    url: "${pageContext.request.contextPath}/bookList/create",
-                    data: {"bookId":bookId.toString(),"bookCount":bookCount.toString()},
+                    url: newHref+"bookList/create",
+                    data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
                     success:function(data){
-                        console.log(data);
+                        $(".book-alert").html("已为您生成订单号："+data+"<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
                     }
                 });
 
@@ -154,6 +177,31 @@
         // }
     </script>
     <style>
+        .book-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 200px;
+            margin-left: -100px;
+            z-index: 99999;
+            padding: 15px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .book-alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .book-alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
         input:focus {
             outline: none;
         }
@@ -212,6 +260,7 @@
 </head>
 
 <body>
+<div class="book-alert"></div>
 <div style="margin-bottom:0;height: 30px;background-color:#f0e9e9f5 ;">
     <div class="container">
         <div class="row clearfix" style="margin-top: 5px;">
@@ -365,7 +414,7 @@
                     <p style="float: left;margin-left: 10%;">共</p>
                     <p id="bookCount" style="float: left;color:#ff0033">${sessionScope.cart.totalCount}</p>
                     <p style="float: left;">本图书</p>
-                    <a href="javascript:void(0);" id="borrow" class="btn btn-danger"
+                    <a href="javascript:void(0);" id="borrow" class="btn btn-danger" data-user-id="${sessionScope.user.id}"
                        style="width: 10%; text-align: center; font-size: 16px; font-weight: bold; float: right;margin-right: 5%; margin-top: 6px; color: snow;">
                         结 算
                     </a>

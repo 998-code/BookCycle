@@ -56,7 +56,7 @@
                                 $(".book-alert").html("图书《"+bookName+"》添加出错，图书可能不存在！").addClass("book-alert-warning").show().delay(2500).fadeOut();
                                 break;
                             case 2:
-                                $(".book-alert").html("图书《"+bookName+"》已添加到书单！").addClass("book-alert-warning").show().delay(2500).fadeOut();
+                                $(".book-alert").html("图书《"+bookName+"》全部被借阅，您预约下次借阅！").addClass("book-alert-warning").show().delay(2500).fadeOut();
                                 break;
                             case 3:
                                 totalCount=${empty sessionScope.cart.totalCount ? 5:sessionScope.cart.totalCount};

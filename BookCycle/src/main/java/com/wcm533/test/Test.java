@@ -2,6 +2,8 @@ package com.wcm533.test;
 
 import com.wcm533.utils.FileUtils;
 
+import java.util.Date;
+
 /**
  * @ClassName Test
  * @Descripyion TODO
@@ -10,15 +12,11 @@ import com.wcm533.utils.FileUtils;
  **/
 public class Test {
     public static void main(String[] args) {
-//        byte[] headImg = FileUtils.fileToByte("BookCycle/web/static/img/img1914.png");
-//        FileUtils.byteToFile(headImg,"BookCycle/web/static/img/userImg/","img1914.png");
-//        String originalFilename = "tim.g (1).jpg";//timg (1).jpg
-//        //获取最后一个.的位置
-//        int lastIndexOf = originalFilename.lastIndexOf(".");
-//        //获取文件的后缀名 .jpg
-//        String suffix = originalFilename.substring(lastIndexOf);
-//
-//        System.out.println("suffix = " + suffix);
+//        String str="16205683188631933";
+//        String s = str.substring(0, 12);
+//        System.out.println(s);
+//        Date date = new Date(s);
+//        System.out.println(date);
 
     }
 }
