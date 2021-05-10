@@ -11,7 +11,7 @@
         delete from book where id=#{id}
     </delete>
     <update id="updateBook" parameterType="book">
-        update book set name=#{name},author=#{author},stock=#{stock},loan=#{loan},points=#{points},img_path=#{imgPath} where id=#{id}
+        update book set name=#{name},author=#{author},stock=#{stock},loan=#{loan},points=#{points},img_path=#{bookImg} where id=#{id}
     </update>
     <select id="queryAllBooks" resultType="book">
         select * from book

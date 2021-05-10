@@ -3,6 +3,11 @@ window.addEventListener("load", function () {
     let index = href.indexOf("user");
     let newHref = href.substr(0, index);
 
+    $("#donateBook").click(function () {
+        window.open(newHref + "clientBook/getDonate");
+        return false;
+    });
+
     $(".receive").click(function () {
         let status = $(this).data("status");
         let statusArr = ["准备中", "已出库", "借阅中", "已归还", "已取消"];

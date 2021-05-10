@@ -58,7 +58,7 @@
                     <div style="width: 5px;height: 20px;float: left; margin-left: 30px; margin-top: 15px; border-radius: 2px;background-color: rgb(63, 164, 247);"></div>
                     <span style="float: left; color: rgb(63, 164, 247);margin-top: 15px;margin-left: 5px;">我的书单</span>
                     <div style="border:1px solid rgb(63, 164, 247);float: right;margin-right: 20%; margin-top:15px ;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
-                        <a href="javascript:void(0);" onclick="myBookList()"><span
+                        <a href="javascript:void(0);" id="donateBook"><span
                                 style="color: rgb(63, 164, 247);line-height: normal;">我要捐书</span></a>
                     </div>
                 </div>
