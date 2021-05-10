@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -53,5 +51,17 @@ public class BookController {
         model.addAttribute("info",info);
         model.addAttribute("pageBook",pageBook);
         return "client/index";
+    }
+
+    @RequestMapping(value = "/bookPoints",produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public int bookPoints(String bookName){
+        System.out.println(bookName);
+        Book book = bookService.queryBookByName(bookName);
+        System.out.println(book);
+        if(book!=null){
+            return book.getPoints();
+        }
+        return Book.BOOK_DEFAULT_POINTS;
     }
 }

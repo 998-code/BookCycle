@@ -10,6 +10,11 @@ import java.util.Arrays;
  **/
 public class Book {
 
+    /**
+     * 图书默认积分
+     */
+    public static final int BOOK_DEFAULT_POINTS=12;
+
     private int id;
     private String name;
     private String author;

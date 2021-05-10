@@ -55,6 +55,13 @@ public interface BookMapper {
     Book queryBookById(@Param("id") int id);
 
     /**
+     * 根据图书名查询图书
+     * @param bookName
+     * @return
+     */
+    Book queryBookByBookName(@Param("bookName") String bookName);
+
+    /**
      * 根据图书名称查询图书
      * @param name
      * @return
@@ -112,4 +119,5 @@ public interface BookMapper {
      * @return
      */
     List<Book> queryForPageByClassification(@Param("begin") int begin,@Param("pageSize") int pageSize,@Param("classification") int classification);
+
 }

@@ -22,6 +22,9 @@
     <select id="queryBookById" parameterType="map" resultType="book">
         select * from book where id=#{id}
     </select>
+    <select id="queryBookByBookName" parameterType="map" resultType="book">
+        select * from book where name=#{bookName}
+    </select>
     <select id="queryBookByName" parameterType="map" resultType="book">
         select * from book where name like "%"#{name}"%" limit #{begin},#{pageSize}
     </select>

@@ -60,6 +60,31 @@
     </script>
     <script>
         $(function () {
+            let href = location.href;//获取或设置整个URL
+            let index = href.indexOf("clientBook");
+            let newHref = href.substr(0, index);
+
+            $(".login").click(function () {
+                window.open(newHref+"user/getLogin");
+                return false;
+            });
+
+            $("#userHome").click(function () {
+                window.open(newHref+"user/home");
+                return false;
+            });
+
+            $(".bookName").change(function () {
+                let bookName =$.trim( $(this).val());
+                $.post({
+                    url:newHref+"book/bookPoints",
+                    data:{"bookName":bookName},
+                    success:function (data) {
+                        console.log(data);
+                    }
+                })
+            });
+
 
             $("table").on("click","button[class=lessCount]",function () {
                 let tr = $(this).parent().parent().parent();
@@ -223,7 +248,7 @@
                 </span>
                 <c:if test="${sessionScope.user==null}">
                     <p style="float: left;font-size: 14px;margin-left:10px;margin-top: 6px;">
-                        您还没有登录！登录后借阅书单中的图书信息将保存到您的帐号中
+                        您还没有登录！登录后您的捐赠信息将保存到您的帐号中，并且您将获得大量积分！
                     </p>
                     <a href="javascript:void(0);" class="btn btn-danger login"
                        style="height:30px;margin-left:10px;color: snow;">
@@ -252,14 +277,14 @@
                     <tr>
                         <td>
                             <div>
-                                <input type="text" class="form-control" placeholder="请输入图书名称："
+                                <input type="text" class="form-control bookName" placeholder="请输入图书名称："
                                        style="float:left;width: 200px;">
                             </div>
                         </td>
 
                         <td>
                             <div style="margin-top:5px;">
-                                <p style="float: left;">
+                                <p class="points" style="float: left;">
                                     12
                                 </p>
                                 <p style="float: left;">分</p>
@@ -310,7 +335,7 @@
                     <p style="float: left;margin-left: 10%;">共</p>
                     <p id="bookCount" style="float: left;color:#ff0033">1</p>
                     <p style="float: left;">本图书</p>
-                    <a href="javascript:void(0);" class="btn btn-danger"
+                    <a href="javascript:void(0);" id="donate" class="btn btn-danger" data-user-id="${sessionScope.user.id}"
                        style="width: 15%; text-align: center; font-size: 16px; font-weight: bold; float: right;margin-right: 5%; margin-top: 6px; color: snow;">
                         立即捐书
                     </a>
