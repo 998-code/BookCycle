@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/img7.png" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
 
-    <script type="text/html" id="tr">
+    <%--<script type="text/html" id="tr">
         <tr>
             <td>
                 <div>
@@ -57,7 +57,7 @@
                 <a href="javascript:void(0);" class="deleteTr" style="display: inline-block;margin-top: 5px;">删除</a>
             </td>
         </tr>
-    </script>
+    </script>--%>
     <script>
         $(function () {
             let href = location.href;//获取或设置整个URL
@@ -74,17 +74,58 @@
                 return false;
             });
 
-            $(".bookName").change(function () {
+            $("#donate").click(function () {
+                let userId=$(this).data("user-id");
+                let totalPoints=$.trim($("#totalPoints").html());
+                let totalCount=$.trim($("#bookCount").html());
+                if(userId==""||userId.length==0){
+                    if(!confirm("您还没有登录，确定捐赠吗？")){
+                        return false;
+                    }
+                    userId=0;
+                }
+                let bookId = new Array();
+                let bookCount=new Array();
+                $("input[name=bookName]").each(function(i){
+                    bookId[i] = $(this).data("book-id");
+                });
+                bookId.push(totalPoints);
+                $("input[class=count]").each(function(i){
+                    bookCount[i] = $(this).val();
+                });
+                bookCount.push(totalCount);
+                $.get({
+                    url: newHref+"endowBookList/create",
+                    data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
+                    success:function(data){
+                        if(userId=="userId"){
+                            $(".book-alert").html("捐赠已发起！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                        }else {
+                            $(".book-alert").html("已为您生成捐赠编号："+data+"<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                        }
+                    }
+                });
+
+            });
+
+            $("table").on("change","input[name=bookName]",function () {
                 let bookName =$.trim( $(this).val());
+                let tr=$(this).parent().parent().parent();
+                let p=tr.children("td").eq(1).children("div").children("p").eq(0);
+                let count=tr.children("td").eq(2).children("div").children("div").children("input").val();
+                let totalPoints=tr.children("td").eq(3).children("div").children("p:first");
+                let input = this;
                 $.post({
                     url:newHref+"book/bookPoints",
                     data:{"bookName":bookName},
                     success:function (data) {
-                        console.log(data);
+                        p.html(data[1]);
+                        totalPoints.html(data[1]*count);
+                        input.setAttribute("data-book-id",data[0]);
+                        totalPointss();
                     }
-                })
+                });
             });
-
 
             $("table").on("click","button[class=lessCount]",function () {
                 let tr = $(this).parent().parent().parent();
@@ -128,9 +169,16 @@
                 totalPointss();
             });
 
+            // $("#addTr").click(function () {
+            //     let newTr = $("#tr").html();
+            //     $("#tb").append(newTr);
+            //     bookCount();
+            //     totalPointss();
+            // });
+
             $("#addTr").click(function () {
-                let newTr = $("#tr").html();
-                $("#tb").append(newTr);
+                let tr=document.querySelector("#donate_tr").cloneNode(true);
+                $("#tb").append(tr);
                 bookCount();
                 totalPointss();
             });
@@ -146,6 +194,7 @@
             }
             $("#bookCount").text(bookCount);
         }
+
         function totalPointss(){
             var points=new Array();
             $("p[class=totalPoints]").each(function(){
@@ -159,6 +208,31 @@
         }
     </script>
     <style>
+        .book-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 200px;
+            margin-left: -100px;
+            z-index: 99999;
+            padding: 15px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .book-alert-warning {
+            color: #8a6d3b;
+            background-color: #fcf8e3;
+            border-color: #faebcc;
+        }
+
+        .book-alert-success {
+            color: #3c763d;
+            background-color: #dff0d8;
+            border-color: #d6e9c6;
+        }
+
         input:focus {
             outline: none;
         }
@@ -189,6 +263,7 @@
 </head>
 
 <body>
+<div class="book-alert"></div>
 <div style="margin-bottom:0;height: 30px;background-color:#f0e9e9f5 ;">
     <div class="container">
         <div class="row clearfix" style="margin-top: 5px;">
@@ -274,10 +349,10 @@
                     </tr>
                     </thead>
                     <tbody id="tb">
-                    <tr>
+                    <tr id="donate_tr">
                         <td>
                             <div>
-                                <input type="text" class="form-control bookName" placeholder="请输入图书名称："
+                                <input type="text" class="form-control" name="bookName" placeholder="请输入图书名称："
                                        style="float:left;width: 200px;">
                             </div>
                         </td>

@@ -55,13 +55,16 @@ public class BookController {
 
     @RequestMapping(value = "/bookPoints",produces = "application/json; charset=utf-8")
     @ResponseBody
-    public int bookPoints(String bookName){
-        System.out.println(bookName);
+    public int[] bookPoints(String bookName){
         Book book = bookService.queryBookByName(bookName);
-        System.out.println(book);
+        int[] bookInfo = new int[2];
         if(book!=null){
-            return book.getPoints();
+            bookInfo[0]=book.getId();
+            bookInfo[1]=book.getPoints();
+            return bookInfo;
         }
-        return Book.BOOK_DEFAULT_POINTS;
+        bookInfo[0]=Integer.MAX_VALUE;
+        bookInfo[1]=Book.BOOK_DEFAULT_POINTS;
+        return bookInfo;
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  **/
 public interface EndowBookListService {
 
-    boolean createBookList(Cart cart, String userId);
+    String createBookList(int userId,String[] bookIdArr,String[] bookCountArr);
 
     boolean deleteBookList(String bookListId);
 

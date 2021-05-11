@@ -8,6 +8,7 @@ import com.wcm533.pojo.*;
 import com.wcm533.service.EndowBookListService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,8 +41,30 @@ public class EndowBookListServiceImpl implements EndowBookListService {
     }
 
     @Override
-    public boolean createBookList(Cart cart, String userId) {
-        return false;
+    public String createBookList(int userId, String[] bookIdArr, String[] bookCountArr) {
+        String bookListId;
+        if(userId==0){
+            bookListId=System.currentTimeMillis()+"1916";
+        }else {
+            bookListId=System.currentTimeMillis()+""+userId;
+        }
+        System.out.println(bookListId);
+        int points=Integer.parseInt(bookIdArr[bookIdArr.length-1]);
+        System.out.println(points);
+        EndowBookList endowBookList = new EndowBookList(bookListId, new Date(), points, 1916);
+        System.out.println(endowBookList);
+        endowBookListMapper.addBookList(endowBookList);
+        for(int i=0;i<bookIdArr.length-1;i++){
+            Book book = bookMapper.queryBookById(Integer.parseInt(bookIdArr[i]));
+            EndowBookListItems items = new EndowBookListItems();
+            items.setBookId(book.getId());
+            items.setBookName(book.getName());
+            items.setCount(Integer.parseInt(bookCountArr[i]));
+            items.setPoints(book.getPoints());
+            items.setBookListId(bookListId);
+            endowBookListItemsMapper.addBookListItems(items);
+        }
+        return bookListId;
     }
 
     @Override
