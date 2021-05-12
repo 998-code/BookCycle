@@ -1,12 +1,11 @@
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
    <meta charset="utf-8"> 
-   <title>书单详情</title> 
-   <link rel="stylesheet" href="../../../static/css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-   <link rel="stylesheet" href="../../../static/css/body/body.css">
-   <script src="../../../static/js/jquery-3.6.0.js"></script>
-   <script src="../../../static/css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+   <title>书单详情</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/bookimg1.jpg" type="image/x-icon"/>
+    <%@include file="../common/head.jsp" %>
    
 </head>
 <body>
