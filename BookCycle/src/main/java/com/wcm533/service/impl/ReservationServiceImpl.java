@@ -30,7 +30,11 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
-    public boolean addReservation(Reservation reservation) {
+    public boolean addReservation(int userId,int bookId) {
+        Reservation reservation = new Reservation(bookId,userId);
+        if(reservationMapper.addReservation(reservation)>0){
+            return true;
+        };
         return false;
     }
 

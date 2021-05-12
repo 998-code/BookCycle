@@ -21,6 +21,11 @@ public class Reservation {
         this.userId = userId;
     }
 
+    public Reservation(int bookId, int userId) {
+        this.bookId = bookId;
+        this.userId = userId;
+    }
+
     public int getId() {
         return id;
     }

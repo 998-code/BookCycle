@@ -68,8 +68,24 @@
             });
 
             $("#reservationBook").click(function () {
-                let bookId = $(this).attr("name");
-                alert(bookId);
+                let bookId = $(this).data("book-id");
+                let bookName = $(this).data("book-name");
+                let userId = $("#userHome").data("user-id");
+                if(userId==""||userId.length==0){
+                    $(".book-alert").html("您还没有登录，请先登录！").addClass("book-alert-warning").show().delay(5000).fadeOut();
+                    return false;
+                }
+                $.get({
+                    url:newHref+"user/reservationBook",
+                    data:{"userId":userId,"bookId":bookId},
+                    success:function (data) {
+                        if(data){
+                            $(".book-alert").html("预约成功，您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(5000).fadeOut();
+                        }else {
+                            $(".book-alert").html("预约失败，发生了某种未知错误！").addClass("book-alert-danger").show().delay(5000).fadeOut();
+                        }
+                    }
+                })
             });
 
         });
@@ -209,7 +225,7 @@
                 <button type="button" class="btn btn-success" id="borrowNow" data-book-id="${requestScope.book.id}" data-book-name="${requestScope.book.name}" data-points="${requestScope.book.points}"
                         style="width: 30%;">立即借阅
                 </button>
-                <button type="button" class="btn btn-info" id="reservationBook" data-book-id="${requestScope.book.id}"
+                <button type="button" class="btn btn-info" id="reservationBook" data-book-id="${requestScope.book.id}" data-book-name="${requestScope.book.name}"
                         style="width: 30%;">预约书籍
                 </button>
             </div>
