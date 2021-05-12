@@ -8,12 +8,16 @@
     <%@include file="../common/head.jsp" %>
     <script>
         $(function () {
+            let href = location.href;//获取或设置整个URL
+            let index = href.indexOf("book");
+            let newHref = href.substr(0, index);
+
             $("#addBookList").click(function () {
                 let bookId = $(this).data("book-id");
                 let bookName = $.trim($("#bookName").html());
                 let totalCount;
                 $.get({
-                    url:"${pageContext.request.contextPath}/cart/addItem",
+                    url:newHref+"cart/addItem",
                     data:{"bookId":bookId},
                     success:function (data) {
                         switch (data) {
@@ -36,8 +40,31 @@
             });
 
             $("#borrowNow").click(function () {
-                let bookId = $(this).attr("name");
-                alert(bookId);
+                let id = $(this).data("book-id");
+                let bookName = $(this).data("book-name");
+                let points = $(this).data("points");
+                let userId = $("#userHome").data("user-id");
+                if(userId==""||userId.length==0){
+                    $(".book-alert").html("您还没有登录，请先登录！").addClass("book-alert-warning").show().delay(5000).fadeOut();
+                    return false;
+                }
+                let bookId = new Array();
+                let bookCount=new Array();
+                bookId.push(id);
+                bookId.push(points);
+                bookCount.push(1);
+                bookCount.push(1);
+                $.get({
+                    url:newHref+"bookList/borrowNow",
+                    data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
+                    success:function (data) {
+                        if(data=="bookListId"){
+                            $(".book-alert").html("图书《"+bookName+"》全部被借阅，您预约下次借阅！").addClass("book-alert-warning").show().delay(2500).fadeOut();
+                        }else {
+                            $(".book-alert").html("已为您生成订单号：" + data + "<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                        }
+                    }
+                })
             });
 
             $("#reservationBook").click(function () {
@@ -175,11 +202,11 @@
                 </ul>
             </div>
 
-            <div>
+            <div id="userHome" data-user-id="${sessionScope.user.id}">
                 <button type="button" class="btn btn-danger" id="addBookList" data-book-id="${requestScope.book.id}"
                         style="width: 30%;margin-left: 2%;">加入书单
                 </button>
-                <button type="button" class="btn btn-success" id="borrowNow" data-book-id="${requestScope.book.id}"
+                <button type="button" class="btn btn-success" id="borrowNow" data-book-id="${requestScope.book.id}" data-book-name="${requestScope.book.name}" data-points="${requestScope.book.points}"
                         style="width: 30%;">立即借阅
                 </button>
                 <button type="button" class="btn btn-info" id="reservationBook" data-book-id="${requestScope.book.id}"

@@ -1,10 +1,8 @@
 package com.wcm533.controller.bookList;
 
-import com.wcm533.pojo.BookList;
-import com.wcm533.pojo.BookListItems;
-import com.wcm533.pojo.Points;
-import com.wcm533.pojo.User;
+import com.wcm533.pojo.*;
 import com.wcm533.service.impl.BookListServiceImpl;
+import com.wcm533.service.impl.BookServiceImpl;
 import com.wcm533.service.impl.PointsServiceImpl;
 import com.wcm533.service.impl.ReservationServiceImpl;
 import com.wcm533.utils.WebUtils;
@@ -31,6 +29,10 @@ import java.util.Map;
 public class BookListController {
 
     @Autowired
+    @Qualifier("BookServiceImpl")
+    private BookServiceImpl bookService;
+
+    @Autowired
     @Qualifier("BookListServiceImpl")
     private BookListServiceImpl bookListService;
 
@@ -52,6 +54,25 @@ public class BookListController {
         Points points = new Points(userId,date,Integer.parseInt(bookIdArr[bookIdArr.length-1]),Points.BORROW_BOOKS,bookListId);
         pointsService.addPoints(points);
         return bookListId;
+    }
+
+    @RequestMapping("/borrowNow")
+    @ResponseBody
+    public String borrowNow(int userId,String bookId,String bookCount){
+        String[] bookIdArr=bookId.split(",");
+        String[] bookCountArr=bookCount.split(",");
+        Book book = bookService.queryBookById(Integer.parseInt(bookIdArr[0]));
+        if (book.getStock()>book.getLoan()){
+            String bookListId = bookListService.createBookList(userId, bookIdArr, bookCountArr);
+            Date date = WebUtils.parseString(bookListId);
+            Points points = new Points(userId,date,Integer.parseInt(bookIdArr[bookIdArr.length-1]),Points.BORROW_BOOKS,bookListId);
+            pointsService.addPoints(points);
+            List<BookList> bookLists = bookListService.queryBookListsByUserId(userId, 0, BookList.USER_PAGE_SIZE);
+            request.getSession().setAttribute("bookLists",bookLists);
+            return bookListId;
+        }else {
+            return "bookListId";
+        }
     }
 
 

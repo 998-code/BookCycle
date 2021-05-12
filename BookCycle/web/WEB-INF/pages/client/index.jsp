@@ -8,35 +8,37 @@
     <%@include file="../common/head.jsp"%>
     <script>
         $(function () {
+            let href = location.href;//获取或设置整个URL
+
             $("#login").click(function () {
-                window.open("${pageContext.request.contextPath}/user/getLogin");
+                window.open(href+"user/getLogin");
                 return false;
             });
 
             $("#search").click(function () {
                 let info = $.trim($("#info").val());
-                location.href="${pageContext.request.contextPath}/book/search/"+info+"?pageNo=1";
+                location.href=href+"book/search/"+info+"?pageNo=1";
                 return false;
             });
 
             $("#borrowBookList").click(function () {
-                window.open("${pageContext.request.contextPath}/cart/getCart");
+                window.open(href+"cart/getCart");
                 return false;
             });
 
             $("#userHome").click(function () {
-                window.open("${pageContext.request.contextPath}/user/home");
+                window.open(href+"user/home");
                 return false;
             });
 
             $("#donateBook").click(function () {
-                window.open("${pageContext.request.contextPath}/clientBook/getDonate");
+                window.open(href+"clientBook/getDonate");
                 return false;
             });
 
             $(".getBookDetails").click(function () {
                 let bookId = $(this).data("book-id");
-                window.open("${pageContext.request.contextPath}/book/bookDetails/"+bookId);
+                window.open(href+"book/bookDetails/"+bookId);
                 return false;
             });
 
@@ -45,7 +47,7 @@
                 let bookName = $(this).data("book-name");
                 let totalCount;
                 $.get({
-                    url:"${pageContext.request.contextPath}/cart/addItem",
+                    url:href+"cart/addItem",
                     data:{"bookId":bookId},
                     success:function (data) {
                         switch (data) {
@@ -68,8 +70,31 @@
             });
 
             $(".borrowNow").click(function () {
-                let bookId = $(this).data("book-id");
-                alert(bookId);
+                let id = $(this).data("book-id");
+                let bookName = $(this).data("book-name");
+                let points = $(this).data("points");
+                let userId = $("#userHome").data("user-id");
+                if(userId==""||userId.length==0){
+                    $(".book-alert").html("您还没有登录，请先登录！").addClass("book-alert-warning").show().delay(5000).fadeOut();
+                    return false;
+                }
+                let bookId = new Array();
+                let bookCount=new Array();
+                bookId.push(id);
+                bookId.push(points);
+                bookCount.push(1);
+                bookCount.push(1);
+                $.get({
+                    url:href+"bookList/borrowNow",
+                    data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
+                    success:function (data) {
+                        if(data=="bookListId"){
+                            $(".book-alert").html("图书《"+bookName+"》全部被借阅，您预约下次借阅！").addClass("book-alert-warning").show().delay(2500).fadeOut();
+                        }else {
+                            $(".book-alert").html("已为您生成订单号：" + data + "<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                        }
+                    }
+                })
             });
 
             $(".previousPage").click(function () {
@@ -174,7 +199,7 @@
                             借阅书单
                         </span>
                     </a>
-                    <a href="javascript:void(0);" id="userHome" class="btn alert-info">
+                    <a href="javascript:void(0);" id="userHome" class="btn alert-info" data-user-id="${sessionScope.user.id}">
                         <span class="glyphicon glyphicon-user">
                             个人中心
                         </span>
@@ -340,7 +365,7 @@
                                             <a href="javascript:void(0);" class="addBookList" data-book-id="${book.id}" data-book-name="${book.name}">加入书单</a>
                                         </div>
                                         <div style="display: inline-block;">
-                                            <a href="javascript:void(0);" class="borrowNow" data-book-id="${book.id}">立即借阅</a>
+                                            <a href="javascript:void(0);" class="borrowNow" data-book-id="${book.id}" data-book-name="${book.name}" data-points="${book.points}">立即借阅</a>
                                         </div>
                                         </p>
                                     </div>
