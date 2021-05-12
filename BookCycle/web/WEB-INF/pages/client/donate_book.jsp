@@ -98,7 +98,7 @@
                     url: newHref+"endowBookList/create",
                     data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
                     success:function(data){
-                        if(userId=="userId"){
+                        if(userId==0){
                             $(".book-alert").html("捐赠已发起！").addClass("book-alert-success").show().delay(2500).fadeOut();
                         }else {
                             $(".book-alert").html("已为您生成捐赠编号："+data+"<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();

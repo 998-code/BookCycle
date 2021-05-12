@@ -39,6 +39,8 @@ public class EndowBookListController {
         String[] bookIdArr=bookId.split(",");
         String[] bookCountArr=bookCount.split(",");
         String bookListId = endowBookListService.createBookList(userId, bookIdArr, bookCountArr);
+        List<EndowBookList> endowBookLists = endowBookListService.queryBookListsByUserId(userId, 0, EndowBookList.USER_PAGE_SIZE);
+        request.getSession().setAttribute("endowBookLists",endowBookLists);
         return bookListId;
     }
 

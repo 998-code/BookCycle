@@ -45,13 +45,14 @@ public class EndowBookListServiceImpl implements EndowBookListService {
         String bookListId;
         if(userId==0){
             bookListId=System.currentTimeMillis()+"1916";
+            userId=1916;
         }else {
             bookListId=System.currentTimeMillis()+""+userId;
         }
         System.out.println(bookListId);
         int points=Integer.parseInt(bookIdArr[bookIdArr.length-1]);
         System.out.println(points);
-        EndowBookList endowBookList = new EndowBookList(bookListId, new Date(), points, 1916);
+        EndowBookList endowBookList = new EndowBookList(bookListId, new Date(), points, userId);
         System.out.println(endowBookList);
         endowBookListMapper.addBookList(endowBookList);
         for(int i=0;i<bookIdArr.length-1;i++){
