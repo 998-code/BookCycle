@@ -64,10 +64,10 @@ public class UserController {
     public String login(String key,String password,Model model){
         User user = userService.login(key, password);
         if(user!=null){
-            if(user.getAuthority()>2){
-                return "redirect:manager/manager_home";
-            }
             request.getSession().setAttribute("user",user);
+            if(user.getAuthority()>2){
+                return "manager/manager_home";
+            }
             String realPath = request.getServletContext().getRealPath("/static/img/userImg/");
             System.out.println(realPath);
             FileUtils.byteToFile(user.getHeadImg(),realPath,"img"+user.getId()+user.getHeadImgPath());

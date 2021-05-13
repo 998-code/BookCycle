@@ -4,52 +4,39 @@ import com.wcm533.pojo.Book;
 import com.wcm533.pojo.Page;
 import com.wcm533.service.impl.BookDetailsServiceImpl;
 import com.wcm533.service.impl.BookServiceImpl;
-import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @ClassName managerHome
+ * @ClassName managerBook
  * @Descripyion TODO
  * @Author 吴超民
- * @Date 2021/05/12 22:28
+ * @Date 2021/05/13 11:34
  **/
 
 @Controller
 @RequestMapping("/manager")
-public class managerHome {
+public class managerBook {
 
     @Autowired
     @Qualifier("BookServiceImpl")
     private BookServiceImpl bookService;
 
-    @RequestMapping("/getBook")
-    public String getBook(String pageNo,Model model){
-        int No = WebUtils.parseInt(pageNo, 1);
-        Page<Book> bookPage = bookService.queryBooksByPage(No, Page.PAGE_MANAGER_SIZE);
-        bookPage.setPageUrl("/manager/getBook?pageNo=1");
+    @Autowired
+    @Qualifier("BookDetailsServiceImpl")
+    private BookDetailsServiceImpl bookDetailsService;
+
+    @GetMapping("/searchBook/{info}")
+    public String search(@PathVariable String info, int pageNo, Model model){
+        System.out.println(info);
+        Page<Book> bookPage = bookService.queryBooksByInfo(pageNo, Page.PAGE_INDEX_SIZE, info);
+        model.addAttribute("info",info);
         model.addAttribute("bookPage",bookPage);
         return "manager/manager_book";
-    }
-
-    @RequestMapping("/getBookList")
-    public String getBookList(){
-
-        return "manager/manager_bookList";
-    }
-
-    @RequestMapping("/getUser")
-    public String getUser(){
-
-        return "manager/manager_user";
-    }
-
-    @RequestMapping("/getArticle")
-    public String getArticle(){
-
-        return "manager/manager_article";
     }
 }

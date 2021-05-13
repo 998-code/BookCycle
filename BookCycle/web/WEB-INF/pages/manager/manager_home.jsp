@@ -18,7 +18,7 @@
             let index = href.indexOf("user");
             let newHref = href.substr(0, index);
             $("#book").click(function () {
-                location.href=newHref+"manager/getBook";
+                location.href=newHref+"manager/getBook?pageNo=1";
             });
         })
     </script>

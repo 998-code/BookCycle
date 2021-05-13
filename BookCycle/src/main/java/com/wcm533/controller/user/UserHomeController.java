@@ -39,8 +39,12 @@ public class UserHomeController {
 
     @RequestMapping("/home")
     public String home(){
-        if(request.getSession().getAttribute("user")==null){
+        User user = (User) request.getSession().getAttribute("user");
+        if(user==null){
             return "user/user_login";
+        }
+        if(user.getAuthority()>2){
+            return "manager/manager_home";
         }
         return "user/user_homepage";
     }
