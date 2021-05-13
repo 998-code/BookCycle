@@ -15,8 +15,43 @@
 
             $("#search").click(function () {
                 let info = $.trim($("#info").val());
-                location.href=newHref+"manager/searchBook/"+info+"?pageNo=1";
+                location.href = newHref + "manager/searchBook/" + info + "?pageNo=1";
                 return false;
+            });
+
+            $("#refresh").click(function () {
+                window.location.reload();
+            });
+
+            $("#addBook").click(function () {
+
+            });
+
+            $(".updateBook").click(function () {
+                let bookId = $(this).data("book-id");
+                if (bookId == "" || bookId.length == 0) {
+                    return false;
+                }
+                window.open(newHref+"manager/bookDetails/"+bookId);
+                return false;
+            });
+
+            $(".deleteBook").click(function () {
+                let bookId = $(this).data("book-id");
+                if (bookId == "" || bookId.length == 0) {
+                    return false;
+                }
+                $.post({
+                    url: newHref + "",
+                    data: {"bookId": bookId},
+                    success: function (data) {
+                        if (data) {
+
+                        }else {
+
+                        }
+                    }
+                });
             });
 
             $(".previousPage").click(function () {
@@ -53,7 +88,7 @@
             $("#pageSizeSubmit").click(function () {
                 let totalPage = $(this).data("page");
                 let pageSize = $("#pageSize").val();
-                if(pageSize>totalPage||pageSize<=0){
+                if (pageSize > totalPage || pageSize <= 0) {
                     alert("该页码不存在?");
                     return false;
                 }
@@ -83,14 +118,15 @@
 
     <div class="row clearfix">
         <div class="col-md-4 column">
-            <a class="btn btn-primary" href="">新增</a>
+            <a class="btn btn-primary" href="javascript:void(0);" id="addBook">新增</a>
         </div>
 
         <div class="col-md-8 column">
-            <a class="btn btn-primary" style="float: right;" href="#">刷新</a>
+            <a class="btn btn-primary" style="float: right;" href="javascript:void(0);" id="refresh">刷新</a>
             <form class="form-inline" action="" method="POST" style="float: right;margin-right: 20px;">
                 <span style="color: red;font-weight: bold;">ERROR</span>
-                <input type="text" id="info" class="form-control" placeholder="请输入查询书籍的名称：" value="${requestScope.info}">
+                <input type="text" id="info" class="form-control" placeholder="请输入查询书籍的名称："
+                       value="${requestScope.info}">
                 <input type="submit" id="search" value="查询" class="btn btn-primary">
             </form>
         </div>
@@ -125,8 +161,8 @@
                         <td style="text-align: center">${book.stock-book.loan}</td>
                         <td style="text-align: center">${book.points}</td>
                         <td style="text-align: center">
-                            <a href="#">更改</a> |
-                            <a href="#">删除</a>
+                            <a href="javascript:void(0);" class="updateBook" data-book-id="${book.id}">更改</a> |
+                            <a href="javascript:void(0);" class="deleteBook" data-book-id="${book.id}">删除</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -190,9 +226,11 @@
                     <li><span>共有${requestScope.bookPage.pageTotal}页</span></li>
                     <li>
                         <form class="form-inline" style="white-space: nowrap;display:inline-block;">
-                            <input class="form-control" style="width: 100px;" type="number" id="pageSize" value="${requestScope.bookPage.pageNo}"
+                            <input class="form-control" style="width: 100px;" type="number" id="pageSize"
+                                   value="${requestScope.bookPage.pageNo}"
                                    placeholder="查询页码">
-                            <input class="btn btn-primary" type="submit" id="pageSizeSubmit" value="查询" data-page="${requestScope.bookPage.pageTotal}">
+                            <input class="btn btn-primary" type="submit" id="pageSizeSubmit" value="查询"
+                                   data-page="${requestScope.bookPage.pageTotal}">
                         </form>
 
                     </li>

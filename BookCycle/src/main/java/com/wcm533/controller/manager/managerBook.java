@@ -1,6 +1,7 @@
 package com.wcm533.controller.manager;
 
 import com.wcm533.pojo.Book;
+import com.wcm533.pojo.BookDetails;
 import com.wcm533.pojo.Page;
 import com.wcm533.service.impl.BookDetailsServiceImpl;
 import com.wcm533.service.impl.BookServiceImpl;
@@ -38,5 +39,14 @@ public class managerBook {
         model.addAttribute("info",info);
         model.addAttribute("bookPage",bookPage);
         return "manager/manager_book";
+    }
+
+    @RequestMapping("/bookDetails/{bookId}")
+    public String bookDetails(@PathVariable int bookId,Model model){
+        Book book = bookService.queryBookById(bookId);
+        BookDetails bookDetails = bookDetailsService.queryBookDetailsByBookId(bookId);
+        model.addAttribute("book",book);
+        model.addAttribute("bookDetails",bookDetails);
+        return "manager/manager_book_details";
     }
 }
