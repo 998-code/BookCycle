@@ -18,8 +18,7 @@
 
         function conversionTime() {
             let datePublication = $("#datePublication");
-            let time = datePublication.val();
-            console.log(time);
+            let time = datePublication.data("date");
             let date = new Date(time);
             let year = date.getFullYear();
             let month = date.getMonth() + 1;
@@ -28,7 +27,6 @@
             dates = dates < 10 ? "0" + dates : dates;
             let s = year + "-" + month + "-" + dates;
             datePublication.val(s);
-
         }
     </script>
 
@@ -104,7 +102,7 @@
                     <label for="datePublication" class="col-sm-2 control-label">出版时间</label>
                     <div class="col-sm-10">
                         <input type="date" class="form-control" id="datePublication" placeholder="请输入出版时间"
-                               value="${requestScope.bookDetails.datePublication}">
+                               data-date="${requestScope.bookDetails.datePublication}">
                     </div>
                 </div>
                 <div class="form-group">
