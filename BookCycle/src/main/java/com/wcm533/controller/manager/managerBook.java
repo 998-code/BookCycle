@@ -34,7 +34,7 @@ public class managerBook {
     @RequestMapping("/getAddBook")
     public String getAddBook(){
 
-        return "manager/manager_book_details";
+        return "manager/manager_book_add";
     }
 
     @GetMapping("/searchBook/{info}")
