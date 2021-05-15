@@ -36,6 +36,8 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 
     @Override
     public boolean updateBookDetails(BookDetails bd) {
+        BookDetails detailsByBookId = bookDetailsMapper.queryBookDetailsByBookId(bd.getBookId());
+        bd.setId(detailsByBookId.getId());
         if(bookDetailsMapper.updateBookDetails(bd)>0){
             return true;
         }

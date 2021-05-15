@@ -32,7 +32,12 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean updateBook(int bookId) {
+    public boolean updateBook(Book book) {
+        Book bookById = bookMapper.queryBookById(book.getId());
+        book.setBookImg(bookById.getBookImg());
+        if(bookMapper.updateBook(book)>0){
+            return true;
+        }
         return false;
     }
 

@@ -17,7 +17,7 @@ public interface BookService {
 
     boolean deleteBook(int bookId);
 
-    boolean updateBook(int bookId);
+    boolean updateBook(Book book);
 
     boolean updateBookNumber(int bookId);
 

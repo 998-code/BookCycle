@@ -15,6 +15,10 @@
                 let flag=false;
                 for(let i=0;i<inputs.length;i++){
                     let value = $.trim(inputs[i].valueOf().value);
+                    if(value==""||value.length==0){
+                        alert("信息不全，请补全信息！");
+                        return false;
+                    }
                     let info = $.trim(inputs[i].valueOf().dataset.info);
                     if(value!=info){
                         let date = new Date(info);
@@ -26,18 +30,30 @@
                         let s = year + "-" + month + "-" + dates;
                         if(s!=value){
                             flag=true;
-                            console.log(s);
-                            console.log(value);
                             break;
                         }
                     }
                 }
-                console.log(flag);
-                return false;
+                return flag;
             });
         });
         window.addEventListener("load", function () {
+            let summary = document.querySelector("#summary");
+            let info = $.trim(summary.dataset.info);
+            summary.innerHTML=info;
             conversionTime();
+            let inputs = document.querySelectorAll(".bookInfo");
+            for(let i=0;i<inputs.length;i++){
+                inputs[i].onblur=function () {
+                    if(this.value==""||this.value.length==0){
+                        let p = this.parentElement.parentElement.firstElementChild;
+                        p.style.color="red";
+                    }else {
+                        let p = this.parentElement.parentElement.firstElementChild;
+                        p.style.color="snow";
+                    }
+                }
+            }
         })
 
         function conversionTime() {
@@ -77,78 +93,88 @@
             <img src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${requestScope.book.id}.jpg"
                  class="img-thumbnail" style="height: 400px; width: 400px;">
             <div style="margin-top: 50px">
-                <form class="form-horizontal" role="form">
+                <form action="#" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="inputfile" class="col-sm-2 control-label">上传图片</label>
-                        <input type="file" id="inputfile">
+                        <label class="col-sm-2 control-label">上传图片</label>
+                        <input type="file" name="file">
                     </div>
                 </form>
             </div>
         </div>
 
         <div class="col-md-5 column">
-            <form action="#" class="form-horizontal" role="form">
+            <form action="${pageContext.request.contextPath}/manager/updateBook" method="post" class="form-horizontal" role="form">
+                <input type="hidden" name="id" value="${requestScope.book.id}">
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">图书名称</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="width: 80%">
                         <input type="text" class="bookInfo form-control" name="name" data-info="${requestScope.book.name}" placeholder="请输入图书名称"
                                value="${requestScope.book.name}">
                     </div>
                 </div>
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">图书作者</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="width: 80%">
                         <input type="text" class="bookInfo form-control" name="author" data-info="${requestScope.book.author}" placeholder="请输入图书作者"
                                value="${requestScope.book.author}">
                     </div>
                 </div>
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">图书总数</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="width: 80%">
                         <input type="number" class="bookInfo form-control" name="stock" data-info="${requestScope.book.stock}" placeholder="请输入图书总数"
                                value="${requestScope.book.stock}">
                     </div>
                 </div>
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">借出数目</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="width: 80%">
                         <input type="number" class="bookInfo form-control" name="loan" data-info="${requestScope.book.loan}" placeholder="请输入已借出的数目"
                                value="${requestScope.book.loan}">
                     </div>
                 </div>
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">图书积分</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="width: 80%">
                         <input type="number" class="bookInfo form-control" name="points" data-info="${requestScope.book.points}" placeholder="请输入图书积分"
                                value="${requestScope.book.points}">
                     </div>
                 </div>
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">图书版次</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="width: 80%">
                         <input type="text" class="bookInfo form-control" name="edition" data-info="${requestScope.bookDetails.edition}" placeholder="请输入图书版次"
                                value="${requestScope.bookDetails.edition}">
                     </div>
                 </div>
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">出版时间</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="width: 80%">
                         <input type="date" class="bookInfo form-control" id="datePublication" name="datePublication" data-info="${requestScope.bookDetails.datePublication}" placeholder="请输入出版时间"
                                data-date="${requestScope.bookDetails.datePublication}">
                     </div>
                 </div>
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">出版社</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="width: 80%">
                         <input type="text" class="bookInfo form-control" name="bookConcern" data-info="${requestScope.bookDetails.bookConcern}" placeholder="请输入出版社"
                                value="${requestScope.bookDetails.bookConcern}">
                     </div>
                 </div>
                 <div class="form-group">
+                    <p style="float: left;color: snow;font-size: 16px;">*</p>
                     <label class="col-sm-2 control-label">简要描述</label>
-                    <div class="col-sm-10">
-                        <textarea class="bookInfo form-control" rows="7" name="summary" data-info="${requestScope.bookDetails.summary}" placeholder="请输入图书概述">
-                            ${requestScope.bookDetails.summary}
+                    <div class="col-sm-10" style="width: 80%">
+                        <textarea class="bookInfo form-control" rows="7" id="summary" name="summary" data-info="${requestScope.bookDetails.summary}" placeholder="请输入图书概述">
+
                         </textarea>
                     </div>
                 </div>
