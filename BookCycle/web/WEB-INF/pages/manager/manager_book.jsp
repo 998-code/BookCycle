@@ -24,7 +24,8 @@
             });
 
             $("#addBook").click(function () {
-
+                window.open(newHref + "manager/getAddBook");
+                return false;
             });
 
             $(".updateBook").click(function () {
@@ -32,26 +33,17 @@
                 if (bookId == "" || bookId.length == 0) {
                     return false;
                 }
-                window.open(newHref+"manager/bookDetails/"+bookId);
+                window.open(newHref + "manager/bookDetails/" + bookId);
                 return false;
             });
 
             $(".deleteBook").click(function () {
                 let bookId = $(this).data("book-id");
+                let pageNo = $(this).data("page-no");
                 if (bookId == "" || bookId.length == 0) {
                     return false;
                 }
-                $.post({
-                    url: newHref + "",
-                    data: {"bookId": bookId},
-                    success: function (data) {
-                        if (data) {
-
-                        }else {
-
-                        }
-                    }
-                });
+                location.href = newHref + "manager/deleteBook?bookId=" + bookId + "&pageNo=" + pageNo;
             });
 
             $(".previousPage").click(function () {
@@ -161,8 +153,13 @@
                         <td style="text-align: center">${book.stock-book.loan}</td>
                         <td style="text-align: center">${book.points}</td>
                         <td style="text-align: center">
-                            <a href="javascript:void(0);" class="updateBook" data-book-id="${book.id}">更改</a> |
-                            <a href="javascript:void(0);" class="deleteBook" data-book-id="${book.id}">删除</a>
+                            <a href="javascript:void(0);" class="updateBook" data-book-id="${book.id}">
+                                更改
+                            </a> |
+                            <a href="javascript:void(0);" class="deleteBook" data-book-id="${book.id}"
+                               data-page-no="${requestScope.bookPage.pageNo}">
+                                删除
+                            </a>
                         </td>
                     </tr>
                 </c:forEach>

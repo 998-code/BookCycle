@@ -5,6 +5,7 @@ import com.wcm533.pojo.BookDetails;
 import com.wcm533.pojo.Page;
 import com.wcm533.service.impl.BookDetailsServiceImpl;
 import com.wcm533.service.impl.BookServiceImpl;
+import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,12 @@ public class managerBook {
     @Autowired
     @Qualifier("BookDetailsServiceImpl")
     private BookDetailsServiceImpl bookDetailsService;
+
+    @RequestMapping("/getAddBook")
+    public String getAddBook(){
+
+        return "manager/manager_book_details";
+    }
 
     @GetMapping("/searchBook/{info}")
     public String search(@PathVariable String info, int pageNo, Model model){
@@ -58,5 +65,16 @@ public class managerBook {
         model.addAttribute("book",newBook);
         model.addAttribute("bookDetails",newBookDetails);
         return "manager/manager_book_details";
+    }
+
+    @GetMapping("/deleteBook")
+    public String deleteBook(int bookId,String pageNo,Model model){
+        System.out.println(bookId);
+        System.out.println(pageNo);
+        bookService.deleteBook(bookId);
+        int No = WebUtils.parseInt(pageNo, 1);
+        Page<Book> bookPage = bookService.queryBooksByPage(No, Page.PAGE_MANAGER_SIZE);
+        model.addAttribute("bookPage",bookPage);
+        return "redirect:getBook?pageNo="+pageNo;
     }
 }

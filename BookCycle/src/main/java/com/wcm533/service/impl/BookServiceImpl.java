@@ -28,6 +28,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean deleteBook(int bookId) {
+        if(bookMapper.deleteBook(bookId)>0){
+            return true;
+        }
         return false;
     }
 
