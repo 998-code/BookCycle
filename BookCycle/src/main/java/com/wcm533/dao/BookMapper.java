@@ -21,6 +21,13 @@ public interface BookMapper {
     int addBook(Book book);
 
     /**
+     * 查询新添加图书的id
+     * @param name
+     * @return
+     */
+    int queryNewBookId(@Param("name") String name);
+
+    /**
      * 删除图书
      * @param id
      * @return

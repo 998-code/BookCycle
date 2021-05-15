@@ -22,8 +22,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public boolean addBook(Book book) {
-        return false;
+    public int addBook(Book book) {
+        bookMapper.addBook(book);
+        int newBookId = bookMapper.queryNewBookId(book.getName());
+        System.out.println(newBookId);
+        return newBookId;
     }
 
     @Override

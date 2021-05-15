@@ -13,7 +13,7 @@ import java.util.List;
  **/
 public interface BookService {
 
-    boolean addBook(Book book);
+    int addBook(Book book);
 
     boolean deleteBook(int bookId);
 

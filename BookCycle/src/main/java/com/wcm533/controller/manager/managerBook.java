@@ -37,6 +37,24 @@ public class managerBook {
         return "manager/manager_book_add";
     }
 
+    @RequestMapping("/ajaxBookName")
+    @ResponseBody
+    public boolean ajaxBookName(String bookName){
+        Book book = bookService.queryBookByName(bookName);
+        if(book==null){
+            return true;
+        }
+        return false;
+    }
+
+    @PostMapping("/addBook")
+    public String addBook(Book book,BookDetails bookDetails){
+        int bookId = bookService.addBook(book);
+        bookDetails.setBookId(bookId);
+        bookDetailsService.addBookDetails(bookDetails);
+        return "redirect:getBook?pageNo="+1;
+    }
+
     @GetMapping("/searchBook/{info}")
     public String search(@PathVariable String info, int pageNo, Model model){
         System.out.println(info);
@@ -68,13 +86,8 @@ public class managerBook {
     }
 
     @GetMapping("/deleteBook")
-    public String deleteBook(int bookId,String pageNo,Model model){
-        System.out.println(bookId);
-        System.out.println(pageNo);
+    public String deleteBook(int bookId,String pageNo){
         bookService.deleteBook(bookId);
-        int No = WebUtils.parseInt(pageNo, 1);
-        Page<Book> bookPage = bookService.queryBooksByPage(No, Page.PAGE_MANAGER_SIZE);
-        model.addAttribute("bookPage",bookPage);
         return "redirect:getBook?pageNo="+pageNo;
     }
 }

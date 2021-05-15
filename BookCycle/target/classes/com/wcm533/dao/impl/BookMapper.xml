@@ -5,8 +5,11 @@
 <!--namespace:绑定一个作用的接口-->
 <mapper namespace="com.wcm533.dao.BookMapper">
     <insert id="addBook" parameterType="book">
-        insert into book (name,author,stock,loan,points,img_path) values (#{name},#{author},#{stock},#{loan},#{points},#{imgPath})
+        insert into book (name,author,stock,loan,points,img_path) values (#{name},#{author},#{stock},#{loan},#{points},#{bookImg})
     </insert>
+    <select id="queryNewBookId" parameterType="map" resultType="int">
+        select max(id) from book where name=#{name} order by id desc
+    </select>
     <delete id="deleteBook" parameterType="map">
         delete from book where id=#{id}
     </delete>
