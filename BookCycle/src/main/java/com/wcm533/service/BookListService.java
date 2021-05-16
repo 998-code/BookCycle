@@ -32,5 +32,7 @@ public interface BookListService {
 
     List<BookList> queryBookListsByUserId(int userId,int begin,int pageSize);
 
-    Page<BookList> queryBooksByInfo(int pageNo, Integer pageSize, String info);
+    Page<BookList> queryBookListsByInfo(int pageNo, int pageSize, String info);
+
+    Page<BookList> queryBookListsByStatus(int pageNo, int pageSize, String status);
 }

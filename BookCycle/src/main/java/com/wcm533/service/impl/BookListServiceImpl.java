@@ -162,7 +162,7 @@ public class BookListServiceImpl implements BookListService {
     }
 
     @Override
-    public Page<BookList> queryBooksByInfo(int pageNo, Integer pageSize, String info) {
+    public Page<BookList> queryBookListsByInfo(int pageNo, int pageSize, String info) {
         Page<BookList> page = new Page<BookList>();
         page.setPageSize(pageSize);
         int pageTotalCount = bookListMapper.queryForPageTotalCount();
@@ -181,6 +181,28 @@ public class BookListServiceImpl implements BookListService {
         }else {
             BookList bookList = bookListMapper.queryBookByBookListId(info);
             items.add(bookList);
+        }
+        page.setPageItems(items);
+        return page;
+    }
+
+    @Override
+    public Page<BookList> queryBookListsByStatus(int pageNo, int pageSize, String status) {
+        Page<BookList> page = new Page<BookList>();
+        page.setPageSize(pageSize);
+        int bookListStatus = Integer.parseInt(status);
+        int pageTotalCount = bookListMapper.queryForPageTotalCountByStatus(bookListStatus);
+        page.setPageTotalCount(pageTotalCount);
+        Integer pageTotal=pageTotalCount/pageSize;
+        if(pageTotalCount%pageSize>0){
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        page.setPageNo(pageNo);
+        int begin=(page.getPageNo()-1)*pageSize;
+        List<BookList> items=new ArrayList<BookList>();
+        if(pageTotalCount>0){
+            items=bookListMapper.queryBookListsByStatus(bookListStatus,begin,pageSize);
         }
         page.setPageItems(items);
         return page;

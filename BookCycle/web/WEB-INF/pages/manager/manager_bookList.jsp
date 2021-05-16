@@ -8,11 +8,10 @@
     <%@include file="../common/head.jsp" %>
     <script src="${pageContext.request.contextPath }/static/js/myJS/conversion.js"></script>
     <script>
+        let href = location.href;//获取或设置整个URL
+        let index = href.indexOf("manager");
+        let newHref = href.substr(0, index);
         $(function () {
-            let href = location.href;//获取或设置整个URL
-            let index = href.indexOf("manager");
-            let newHref = href.substr(0, index);
-
             $("#search").click(function () {
                 let info = $.trim($("#info").val());
                 let regExp = /^1[0-9]{3,16}$/;
@@ -159,6 +158,17 @@
             });
 
         });
+
+        window.addEventListener("load",function () {
+            let as = document.querySelectorAll(".byStatus");
+            for(let i=0;i<as.length;i++){
+                as[i].addEventListener("click",function () {
+                    let status = this.dataset.status;
+                    location.href = newHref + "manager/bookListByStatus/" + status + "?pageNo=1";
+                });
+            }
+        });
+
     </script>
     <style>
         .book-alert {
@@ -226,11 +236,16 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">准备中</a></li>
-                        <li><a href="#">已出库</a></li>
-                        <li><a href="#">借阅中</a></li>
-                        <li><a href="#">已归还</a></li>
-                        <li><a href="#">已取消</a></li>
+                        <li><a href="javascript:void(0);" class="byStatus" data-status="0">
+                            准备中</a></li>
+                        <li><a href="javascript:void(0);" class="byStatus" data-status="1">
+                            已出库</a></li>
+                        <li><a href="javascript:void(0);" class="byStatus" data-status="2">
+                            借阅中</a></li>
+                        <li><a href="javascript:void(0);" class="byStatus" data-status="3">
+                            已归还</a></li>
+                        <li><a href="javascript:void(0);" class="byStatus" data-status="4">
+                            已取消</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">

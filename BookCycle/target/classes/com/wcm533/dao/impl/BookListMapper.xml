@@ -28,4 +28,10 @@
     <select id="queryForPageTotalCount" resultType="int">
         select count(*) from book_list
     </select>
+    <select id="queryBookListsByStatus" parameterType="map" resultType="bookList">
+        select * from book_list where status=#{status} order by create_time desc limit #{begin},#{pageSize}
+    </select>
+    <select id="queryForPageTotalCountByStatus" parameterType="map" resultType="int">
+        select count(*) from book_list where status=#{status}
+    </select>
 </mapper>

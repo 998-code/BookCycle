@@ -36,10 +36,18 @@ public class managerBookListController {
     @Qualifier("BookListServiceImpl")
     private BookListServiceImpl bookListService;
 
+    @GetMapping("/bookListByStatus/{status}")
+    public String status(@PathVariable String status, int pageNo, Model model){
+        System.out.println(status);
+        Page<BookList> bookListPage = bookListService.queryBookListsByStatus(pageNo, Page.PAGE_INDEX_SIZE, status);
+        model.addAttribute("bookListPage",bookListPage);
+        return "manager/manager_bookList";
+    }
+
     @GetMapping("/searchBookList/{info}")
     public String search(@PathVariable String info, int pageNo, Model model){
         System.out.println(info);
-        Page<BookList> bookListPage = bookListService.queryBooksByInfo(pageNo, Page.PAGE_INDEX_SIZE, info);
+        Page<BookList> bookListPage = bookListService.queryBookListsByInfo(pageNo, Page.PAGE_INDEX_SIZE, info);
         model.addAttribute("info",info);
         model.addAttribute("bookListPage",bookListPage);
         return "manager/manager_bookList";
