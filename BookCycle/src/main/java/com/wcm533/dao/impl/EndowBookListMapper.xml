@@ -17,12 +17,21 @@
         select * from endow_book_list
     </select>
     <select id="queryAllBookListsByPage" parameterType="map" resultType="endowBookList">
-        select * from endow_book_list order by create _time desc limit #{begin},#{pageSize}
+        select * from endow_book_list order by create_time desc limit #{begin},#{pageSize}
     </select>
     <select id="queryBookListsByUserId" parameterType="map" resultType="endowBookList">
         select * from endow_book_list where user_id=#{userId} order by create_time desc limit #{begin},#{pageSize}
     </select>
     <select id="queryBookByBookListId" parameterType="map" resultType="endowBookList">
         select * from endow_book_list where book_list_id=#{bookListId}
+    </select>
+    <select id="queryForPageTotalCount" resultType="int">
+        select count(*) from endow_book_list
+    </select>
+    <select id="queryBookListsByStatus" parameterType="map" resultType="bookList">
+        select * from endow_book_list where status=#{status} order by create_time desc limit #{begin},#{pageSize}
+    </select>
+    <select id="queryForPageTotalCountByStatus" parameterType="map" resultType="int">
+        select count(*) from endow_book_list where status=#{status}
     </select>
 </mapper>

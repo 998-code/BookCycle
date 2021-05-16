@@ -151,7 +151,10 @@ public class BookListServiceImpl implements BookListService {
         page.setPageTotal(pageTotal);
         page.setPageNo(pageNo);
         int begin=(page.getPageNo()-1)*pageSize;
-        List<BookList> items= bookListMapper.queryAllBookListsByPage(begin,pageSize);
+        List<BookList> items=new ArrayList<BookList>();
+        if (pageTotalCount>0){
+            items= bookListMapper.queryAllBookListsByPage(begin,pageSize);
+        }
         page.setPageItems(items);
         return page;
     }

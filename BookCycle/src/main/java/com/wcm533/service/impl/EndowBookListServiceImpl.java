@@ -131,12 +131,39 @@ public class EndowBookListServiceImpl implements EndowBookListService {
     }
 
     @Override
-    public List<EndowBookList> queryBookLists(int begin, int pageSize) {
-        return null;
+    public Page<EndowBookList> queryBookLists(int pageNo, int pageSize) {
+        Page<EndowBookList> page = new Page<EndowBookList>();
+        page.setPageSize(pageSize);
+        int pageTotalCount = endowBookListMapper.queryForPageTotalCount();
+        page.setPageTotalCount(pageTotalCount);
+        Integer pageTotal=pageTotalCount/pageSize;
+        if(pageTotalCount%pageSize>0){
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        page.setPageNo(pageNo);
+        int begin=(page.getPageNo()-1)*pageSize;
+        List<EndowBookList> items=new ArrayList<EndowBookList>();
+        if (pageTotalCount>0){
+            items= endowBookListMapper.queryAllBookListsByPage(begin,pageSize);
+        }
+        page.setPageItems(items);
+        return page;
     }
 
     @Override
     public List<EndowBookList> queryBookListsByUserId(int userId, int begin, int pageSize) {
         return endowBookListMapper.queryBookListsByUserId(userId,begin,pageSize);
+    }
+
+    @Override
+    public Page<EndowBookList> queryBookListsByInfo(int pageNo, int pageSize, String info) {
+
+        return null;
+    }
+
+    @Override
+    public Page<EndowBookList> queryBookListsByStatus(int pageNo, int pageSize, String status) {
+        return null;
     }
 }

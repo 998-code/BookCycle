@@ -1,9 +1,6 @@
 package com.wcm533.service;
 
-import com.wcm533.pojo.BookList;
-import com.wcm533.pojo.Cart;
-import com.wcm533.pojo.EndowBookList;
-import com.wcm533.pojo.ItemsDetails;
+import com.wcm533.pojo.*;
 
 import java.util.List;
 
@@ -29,7 +26,11 @@ public interface EndowBookListService {
 
     List<ItemsDetails> queryBookListItems(String bookListId);
 
-    List<EndowBookList> queryBookLists(int begin, int pageSize);
+    Page<EndowBookList> queryBookLists(int begin, int pageSize);
 
     List<EndowBookList> queryBookListsByUserId(int userId,int begin,int pageSize);
+
+    Page<EndowBookList> queryBookListsByInfo(int pageNo, int pageSize, String info);
+
+    Page<EndowBookList> queryBookListsByStatus(int pageNo, int pageSize, String status);
 }

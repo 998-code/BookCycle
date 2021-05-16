@@ -12,11 +12,6 @@
         let index = href.indexOf("manager");
         let newHref = href.substr(0, index);
         $(function () {
-            $("#getEndowBookList").click(function () {
-                window.open(newHref+"manager/getEndowBookList?pageNo=1");
-                return false;
-            });
-
             $("#search").click(function () {
                 let info = $.trim($("#info").val());
                 let regExp = /^1[0-9]{3,16}$/;
@@ -237,25 +232,23 @@
             <div class="btn-group">
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        借书单
+                        捐书单
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="javascript:void(0);" class="byStatus" data-status="0">
-                            准备中</a></li>
+                            待处理</a></li>
                         <li><a href="javascript:void(0);" class="byStatus" data-status="1">
-                            已出库</a></li>
+                            处理中</a></li>
                         <li><a href="javascript:void(0);" class="byStatus" data-status="2">
-                            借阅中</a></li>
-                        <li><a href="javascript:void(0);" class="byStatus" data-status="3">
-                            已归还</a></li>
+                            已完成</a></li>
                         <li><a href="javascript:void(0);" class="byStatus" data-status="4">
                             已取消</a></li>
                     </ul>
                 </div>
                 <div class="btn-group" style="margin-left: 5px">
-                    <a href="javascript:void(0);" id="getEndowBookList" class="btn btn-primary">
-                        捐书单
+                    <a type="button" class="btn btn-primary">
+                        借书单
                     </a>
 
                 </div>
@@ -289,7 +282,7 @@
                 </thead>
 
                 <tbody>
-                <c:forEach items="${requestScope.bookListPage.pageItems}" var="bookList">
+                <c:forEach items="${requestScope.endowBookListPage.pageItems}" var="bookList">
                     <tr>
                         <td>${bookList.bookListId}</td>
                         <td class="date">${bookList.createTime}</td>

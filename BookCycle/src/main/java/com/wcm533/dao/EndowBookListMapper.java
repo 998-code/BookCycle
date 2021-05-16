@@ -65,4 +65,23 @@ public interface EndowBookListMapper {
      * @return
      */
     EndowBookList queryBookByBookListId(@Param("bookListId") String bookListId);
+
+    /**
+     * 查询订单总数
+     * @return
+     */
+    int queryForPageTotalCount();
+
+    /**
+     * 根据书单状态查询书单
+     * @param status
+     * @return
+     */
+    List<EndowBookList> queryBookListsByStatus(@Param("status") int status,@Param("begin") int begin,@Param("pageSize") int pageSize);
+
+    /**
+     * 根据书单状态查询订单总数
+     * @return
+     */
+    int queryForPageTotalCountByStatus(@Param("status") int status);
 }

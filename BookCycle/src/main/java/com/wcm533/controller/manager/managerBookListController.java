@@ -1,11 +1,10 @@
 package com.wcm533.controller.manager;
 
-import com.wcm533.pojo.Book;
-import com.wcm533.pojo.BookList;
-import com.wcm533.pojo.ItemsDetails;
-import com.wcm533.pojo.Page;
+import com.wcm533.pojo.*;
 import com.wcm533.service.impl.BookListServiceImpl;
 import com.wcm533.service.impl.BookServiceImpl;
+import com.wcm533.service.impl.EndowBookListServiceImpl;
+import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -35,6 +34,10 @@ public class managerBookListController {
     @Autowired
     @Qualifier("BookListServiceImpl")
     private BookListServiceImpl bookListService;
+
+    @Autowired
+    @Qualifier("EndowBookListServiceImpl")
+    private EndowBookListServiceImpl endowBookListService;
 
     @GetMapping("/bookListByStatus/{status}")
     public String status(@PathVariable String status, int pageNo, Model model){
@@ -74,5 +77,13 @@ public class managerBookListController {
         boolean confirmReturn = bookListService.returnBookList(bookListId);
 
         return confirmReturn;
+    }
+
+    @RequestMapping("/getEndowBookList")
+    public String getEndowBookList(String pageNo,Model model){
+        int No = WebUtils.parseInt(pageNo, 1);
+        Page<EndowBookList> endowBookListPage = endowBookListService.queryBookLists(No, Page.PAGE_MANAGER_SIZE);
+        model.addAttribute("endowBookListPage",endowBookListPage);
+        return "manager/manager_bookList_endow";
     }
 }

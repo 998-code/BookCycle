@@ -12,6 +12,11 @@
         let index = href.indexOf("manager");
         let newHref = href.substr(0, index);
         $(function () {
+            $("#getEndowBookList").click(function () {
+                window.open(newHref+"manager/getEndowBookList?pageNo=1");
+                return false;
+            });
+
             $("#search").click(function () {
                 let info = $.trim($("#info").val());
                 let regExp = /^1[0-9]{3,16}$/;
@@ -248,17 +253,11 @@
                             已取消</a></li>
                     </ul>
                 </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <div class="btn-group" style="margin-left: 5px">
+                    <a href="javascript:void(0);" id="getEndowBookList" class="btn btn-primary">
                         捐书单
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">未入库</a></li>
-                        <li><a href="#">已接收</a></li>
-                        <li><a href="#">已确认</a></li>
-                        <li><a href="#">已入库</a></li>
-                    </ul>
+                    </a>
+
                 </div>
             </div>
         </div>

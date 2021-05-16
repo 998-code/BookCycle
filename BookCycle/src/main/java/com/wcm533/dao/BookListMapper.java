@@ -79,7 +79,7 @@ public interface BookListMapper {
     List<BookList> queryBookListsByStatus(@Param("status") int status,@Param("begin") int begin,@Param("pageSize") int pageSize);
 
     /**
-     * 查询订单总数
+     * 根据书单状态查询订单总数
      * @return
      */
     int queryForPageTotalCountByStatus(@Param("status") int status);
