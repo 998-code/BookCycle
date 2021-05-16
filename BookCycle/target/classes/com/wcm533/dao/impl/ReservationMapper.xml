@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:绑定一个作用的接口-->
+<mapper namespace="com.wcm533.dao.ReservationMapper">
+    <insert id="addReservation" parameterType="reservation">
+        insert into reservation (book_id,user_id) values (#{bookId},#{userId})
+    </insert>
+    <delete id="deleteReservation" parameterType="map">
+        delete from reservation where id=#{id}
+    </delete>
+    <select id="queryReservationCount" parameterType="map" resultType="int">
+        select count(*) from reservation where user_id=#{userId}
+    </select>
+    <select id="queryReservationByPage" parameterType="map" resultType="reservation">
+        select * from reservation where user_id=#{userId} order by id desc limit #{begin},#{pageSize}
+    </select>
+</mapper>

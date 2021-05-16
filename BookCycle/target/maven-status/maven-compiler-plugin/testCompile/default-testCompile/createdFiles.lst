@@ -1,0 +1,6 @@
+com\wcm533\dao\PointsMapperTest.class
+com\wcm533\dao\NewsMapperTest.class
+com\wcm533\dao\ReservationMapperTest.class
+com\wcm533\dao\UserMapperTest.class
+com\wcm533\dao\EndowBookListMapperTest.class
+com\wcm533\dao\BookListItemsMapperTest.class

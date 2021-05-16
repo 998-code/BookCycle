@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="6" failures="0" name="com.wcm533.dao.ArticleMapperTest" time="0.36" errors="6" skipped="0">
+  <properties>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="sun.boot.library.path" value="D:\Program Files\Java\jdk1.8.0_131\jre\bin"/>
+    <property name="java.vm.version" value="25.131-b11"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="maven.multiModuleProjectDirectory" value="D:\Users\47217\BookCycleSystem\BookCycle"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="path.separator" value=";"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="file.encoding.pkg" value="sun.io"/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="CN"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="D:\Users\47217\BookCycleSystem\BookCycle"/>
+    <property name="java.runtime.version" value="1.8.0_131-b11"/>
+    <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
+    <property name="java.endorsed.dirs" value="D:\Program Files\Java\jdk1.8.0_131\jre\lib\endorsed"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\吴超民\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="maven.ext.class.path" value="D:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="D:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="GBK"/>
+    <property name="java.library.path" value="D:\Program Files\Java\jdk1.8.0_131\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\WINDOWS\System32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Program Files\Java\jdk1.8.0_131\\bin;D:\Program Files\Java\jdk1.8.0_131\\jre\bin;D:\Program Files\Git\cmd;D:\Program Files\Git\mingw64\bin;D:\Program Files\Git\usr\bin;D:\Users\SDK\platform-tools;D:\Users\SDK\platform;D:\Users\SDK\tools;D:\Tomcat\apache-tomcat-9.0.37\bin;D:\VS-code\mingw64\bin;C:\WINDOWS\system32;C:\WINDOWS\System32\OpenSSH\;D:\Program Files\nodejs\;D:\Program Files\nodejs\node_global\;C:\Users\吴超民\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Bandizip\;D:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\bin;;D:\Users\47217\AppData\Local\Programs\Microsoft VS Code\bin;D:\Program Files\JetBrains\WebStorm 2020.1\bin;;D:\Program Files\nodejs\node_global;D:\Program Files\nodejs;;."/>
+    <property name="maven.conf" value="D:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3/conf"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.class.version" value="52.0"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\吴超民"/>
+    <property name="user.timezone" value="Asia/Shanghai"/>
+    <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
+    <property name="java.specification.version" value="1.8"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="user.name" value="吴超民"/>
+    <property name="java.class.path" value="D:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;D:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3\boot\plexus-classworlds.license"/>
+    <property name="java.vm.specification.version" value="1.8"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.home" value="D:\Program Files\Java\jdk1.8.0_131\jre"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version2020.1.1 install"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.language" value="zh"/>
+    <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
+    <property name="idea.version2020.1.1" value="true"/>
+    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.version" value="1.8.0_131"/>
+    <property name="java.ext.dirs" value="D:\Program Files\Java\jdk1.8.0_131\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="sun.boot.class.path" value="D:\Program Files\Java\jdk1.8.0_131\jre\lib\resources.jar;D:\Program Files\Java\jdk1.8.0_131\jre\lib\rt.jar;D:\Program Files\Java\jdk1.8.0_131\jre\lib\sunrsasign.jar;D:\Program Files\Java\jdk1.8.0_131\jre\lib\jsse.jar;D:\Program Files\Java\jdk1.8.0_131\jre\lib\jce.jar;D:\Program Files\Java\jdk1.8.0_131\jre\lib\charsets.jar;D:\Program Files\Java\jdk1.8.0_131\jre\lib\jfr.jar;D:\Program Files\Java\jdk1.8.0_131\jre\classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="D:\Program Files\JetBrains\IntelliJ IDEA 2020.1.1\plugins\maven\lib\maven3"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.desktop" value="windows"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="com.wcm533.dao.ArticleMapperTest" name="testUpdateArticle" time="0.359">
+    <error message="
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException" type="org.apache.ibatis.exceptions.PersistenceException">org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:100)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:52)
+	at com.wcm533.utils.MybatisUtils.getSqlSession(MybatisUtils.java:37)
+	at com.wcm533.dao.ArticleMapperTest.testUpdateArticle(ArticleMapperTest.java:42)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: java.lang.NullPointerException
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:95)
+	... 28 more
+</error>
+    <system-out>Logging initialized using &apos;class org.apache.ibatis.logging.stdout.StdOutImpl&apos; adapter.
+Class not found: org.jboss.vfs.VFS
+JBoss 6 VFS API is not available in this environment.
+Class not found: org.jboss.vfs.VirtualFile
+VFS implementation org.apache.ibatis.io.JBoss6VFS is not valid in this environment.
+Using VFS adapter org.apache.ibatis.io.DefaultVFS
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo
+Reader entry: Article.class
+Reader entry: Book.class
+Reader entry: BookDetails.class
+Reader entry: BookList.class
+Reader entry: BookListItems.class
+Reader entry: Cart.class
+Reader entry: CartItem.class
+Reader entry: EndowBookList.class
+Reader entry: EndowBookListItems.class
+Reader entry: ItemsDetails.class
+Reader entry: News.class
+Reader entry: Page.class
+Reader entry: Points.class
+Reader entry: Reservation.class
+Reader entry: ReservationDetails.class
+Reader entry: User.class
+Listing file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Article.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Article.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;X
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Book.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Book.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;g
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/BookDetails.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/BookDetails.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;R
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/BookList.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/BookList.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;n
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/BookListItems.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/BookListItems.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;K
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Cart.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Cart.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;?	&amp;#0;&quot;&amp;#0;_
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/CartItem.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/CartItem.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;Q
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/EndowBookList.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/EndowBookList.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;k
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/EndowBookListItems.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/EndowBookListItems.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;K
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/ItemsDetails.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/ItemsDetails.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;Q
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/News.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/News.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;X
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Page.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Page.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;n
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Points.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Points.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;l
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Reservation.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/Reservation.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;:
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/ReservationDetails.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/ReservationDetails.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;S
+Find JAR URL: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/User.class
+Not a JAR: file:/D:/Users/47217/BookCycleSystem/BookCycle/target/classes/com/wcm533/pojo/User.class
+Reader entry: ����&amp;#0;&amp;#0;&amp;#0;2&amp;#0;o
+Checking to see if class com.wcm533.pojo.Article matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.Book matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.BookDetails matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.BookList matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.BookListItems matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.Cart matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.CartItem matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.EndowBookList matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.EndowBookListItems matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.ItemsDetails matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.News matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.Page matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.Points matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.Reservation matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.ReservationDetails matches criteria [is assignable to Object]
+Checking to see if class com.wcm533.pojo.User matches criteria [is assignable to Object]
+</system-out>
+  </testcase>
+  <testcase classname="com.wcm533.dao.ArticleMapperTest" name="testQueryArticleById" time="0">
+    <error message="
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException" type="org.apache.ibatis.exceptions.PersistenceException">org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:100)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:52)
+	at com.wcm533.utils.MybatisUtils.getSqlSession(MybatisUtils.java:37)
+	at com.wcm533.dao.ArticleMapperTest.testQueryArticleById(ArticleMapperTest.java:64)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: java.lang.NullPointerException
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:95)
+	... 28 more
+</error>
+  </testcase>
+  <testcase classname="com.wcm533.dao.ArticleMapperTest" name="testAddArticle" time="0">
+    <error message="
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException" type="org.apache.ibatis.exceptions.PersistenceException">org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:100)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:52)
+	at com.wcm533.utils.MybatisUtils.getSqlSession(MybatisUtils.java:37)
+	at com.wcm533.dao.ArticleMapperTest.testAddArticle(ArticleMapperTest.java:22)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: java.lang.NullPointerException
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:95)
+	... 28 more
+</error>
+  </testcase>
+  <testcase classname="com.wcm533.dao.ArticleMapperTest" name="testQueryArticleByName" time="0">
+    <error message="
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException" type="org.apache.ibatis.exceptions.PersistenceException">org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:100)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:52)
+	at com.wcm533.utils.MybatisUtils.getSqlSession(MybatisUtils.java:37)
+	at com.wcm533.dao.ArticleMapperTest.testQueryArticleByName(ArticleMapperTest.java:72)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: java.lang.NullPointerException
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:95)
+	... 28 more
+</error>
+  </testcase>
+  <testcase classname="com.wcm533.dao.ArticleMapperTest" name="testDeleteArticle" time="0.001">
+    <error message="
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException" type="org.apache.ibatis.exceptions.PersistenceException">org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:100)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:52)
+	at com.wcm533.utils.MybatisUtils.getSqlSession(MybatisUtils.java:37)
+	at com.wcm533.dao.ArticleMapperTest.testDeleteArticle(ArticleMapperTest.java:34)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: java.lang.NullPointerException
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:95)
+	... 28 more
+</error>
+  </testcase>
+  <testcase classname="com.wcm533.dao.ArticleMapperTest" name="testQueryAllArticles" time="0">
+    <error message="
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException" type="org.apache.ibatis.exceptions.PersistenceException">org.apache.ibatis.exceptions.PersistenceException: 
+### Error opening session.  Cause: java.lang.NullPointerException
+### Cause: java.lang.NullPointerException
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:100)
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession(DefaultSqlSessionFactory.java:52)
+	at com.wcm533.utils.MybatisUtils.getSqlSession(MybatisUtils.java:37)
+	at com.wcm533.dao.ArticleMapperTest.testQueryAllArticles(ArticleMapperTest.java:54)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at junit.framework.TestCase.runTest(TestCase.java:176)
+	at junit.framework.TestCase.runBare(TestCase.java:141)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:129)
+	at junit.framework.TestSuite.runTest(TestSuite.java:252)
+	at junit.framework.TestSuite.run(TestSuite.java:247)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:86)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: java.lang.NullPointerException
+	at org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(DefaultSqlSessionFactory.java:95)
+	... 28 more
+</error>
+  </testcase>
+</testsuite>

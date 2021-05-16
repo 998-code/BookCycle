@@ -32,4 +32,5 @@ public interface BookListService {
 
     List<BookList> queryBookListsByUserId(int userId,int begin,int pageSize);
 
+    Page<BookList> queryBooksByInfo(int pageNo, Integer pageSize, String info);
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace:绑定一个作用的接口-->
+<mapper namespace="com.wcm533.dao.PointsMapper">
+    <insert id="addPoints" parameterType="points">
+        insert into points (user_id,date,points,status,other) values (#{userId},#{date},#{points},#{status},#{other});
+    </insert>
+    <select id="queryPointsByUserId" parameterType="map" resultType="points">
+        select * from points where user_id=#{userId} order by date desc limit #{begin},#{pageSize}
+    </select>
+</mapper>

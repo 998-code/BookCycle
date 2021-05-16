@@ -1,12 +1,17 @@
 package com.wcm533.controller.manager;
 
+import com.wcm533.pojo.Book;
 import com.wcm533.pojo.BookList;
 import com.wcm533.pojo.ItemsDetails;
+import com.wcm533.pojo.Page;
 import com.wcm533.service.impl.BookListServiceImpl;
 import com.wcm533.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -30,6 +35,15 @@ public class managerBookListController {
     @Autowired
     @Qualifier("BookListServiceImpl")
     private BookListServiceImpl bookListService;
+
+    @GetMapping("/searchBookList/{info}")
+    public String search(@PathVariable String info, int pageNo, Model model){
+        System.out.println(info);
+        Page<BookList> bookListPage = bookListService.queryBooksByInfo(pageNo, Page.PAGE_INDEX_SIZE, info);
+        model.addAttribute("info",info);
+        model.addAttribute("bookListPage",bookListPage);
+        return "manager/manager_bookList";
+    }
 
     @RequestMapping("/details/bookList")
     @ResponseBody
