@@ -1,9 +1,6 @@
 package com.wcm533.service;
 
-import com.wcm533.pojo.BookList;
-import com.wcm533.pojo.BookListItems;
-import com.wcm533.pojo.Cart;
-import com.wcm533.pojo.ItemsDetails;
+import com.wcm533.pojo.*;
 
 import java.util.List;
 
@@ -31,7 +28,8 @@ public interface BookListService {
 
     List<ItemsDetails> queryBookListItems(String bookListId);
 
-    List<BookList> queryBookLists(int begin,int pageSize);
+    Page<BookList> queryBookLists(int pageNo,int pageSize);
 
     List<BookList> queryBookListsByUserId(int userId,int begin,int pageSize);
+
 }

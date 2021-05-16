@@ -139,8 +139,21 @@ public class BookListServiceImpl implements BookListService {
     }
 
     @Override
-    public List<BookList> queryBookLists(int begin, int pageSize) {
-        return bookListMapper.queryAllBookListsByPage(begin,pageSize);
+    public Page<BookList> queryBookLists(int pageNo, int pageSize) {
+        Page<BookList> page = new Page<BookList>();
+        page.setPageSize(pageSize);
+        int pageTotalCount = bookListMapper.queryForPageTotalCount();
+        page.setPageTotalCount(pageTotalCount);
+        Integer pageTotal=pageTotalCount/pageSize;
+        if(pageTotalCount%pageSize>0){
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        page.setPageNo(pageNo);
+        int begin=(page.getPageNo()-1)*pageSize;
+        List<BookList> items= bookListMapper.queryAllBookListsByPage(begin,pageSize);
+        page.setPageItems(items);
+        return page;
     }
 
     @Override

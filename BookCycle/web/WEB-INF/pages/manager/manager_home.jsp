@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>管理中心</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/bookimg1.jpg" type="image/x-icon"/>
     <%@include file="../common/head.jsp" %>
 
@@ -18,7 +18,13 @@
             let index = href.indexOf("user");
             let newHref = href.substr(0, index);
             $("#book").click(function () {
-                location.href=newHref+"manager/getBook?pageNo=1";
+                window.open(newHref+"manager/getBook?pageNo=1");
+                return false;
+            });
+
+            $("#bookList").click(function () {
+                window.open(newHref+"manager/getBookList?pageNo=1");
+                return false;
             });
         })
     </script>
@@ -46,7 +52,7 @@
         <h3 class="panel-title">面板标题</h3>
     </div>
     <div class="panel-body">
-        这是一个基本的面板
+        <a href="javascript:void(0);" id="bookList">书单管理</a>
     </div>
 </div>
 <div class="panel panel-warning">

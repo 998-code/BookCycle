@@ -64,4 +64,10 @@ public interface BookListMapper {
      * @return
      */
     BookList queryBookByBookListId(@Param("bookListId") String bookListId);
+
+    /**
+     * 查询订单总数
+     * @return
+     */
+    int queryForPageTotalCount();
 }
