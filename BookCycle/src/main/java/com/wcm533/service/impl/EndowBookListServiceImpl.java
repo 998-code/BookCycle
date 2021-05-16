@@ -158,12 +158,52 @@ public class EndowBookListServiceImpl implements EndowBookListService {
 
     @Override
     public Page<EndowBookList> queryBookListsByInfo(int pageNo, int pageSize, String info) {
-
-        return null;
+        Page<EndowBookList> page = new Page<EndowBookList>();
+        page.setPageSize(pageSize);
+        int userId=0;
+        int pageTotalCount=1;
+        if(info.length()<10){
+            userId = Integer.parseInt(info);
+            pageTotalCount=endowBookListMapper.queryForPageTotalCountByUserId(userId);
+        }
+        page.setPageTotalCount(pageTotalCount);
+        Integer pageTotal=pageTotalCount/pageSize;
+        if(pageTotalCount%pageSize>0){
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        page.setPageNo(pageNo);
+        int begin=(page.getPageNo()-1)*pageSize;
+        List<EndowBookList> items=new ArrayList<EndowBookList>();
+        if(info.length()<10){
+            items= endowBookListMapper.queryBookListsByUserId(userId, begin, pageSize);
+        }else {
+            EndowBookList endowBookList = endowBookListMapper.queryBookByBookListId(info);
+            items.add(endowBookList);
+        }
+        page.setPageItems(items);
+        return page;
     }
 
     @Override
     public Page<EndowBookList> queryBookListsByStatus(int pageNo, int pageSize, String status) {
-        return null;
+        Page<EndowBookList> page = new Page<EndowBookList>();
+        page.setPageSize(pageSize);
+        int bookListStatus = Integer.parseInt(status);
+        int pageTotalCount = endowBookListMapper.queryForPageTotalCountByStatus(bookListStatus);
+        page.setPageTotalCount(pageTotalCount);
+        Integer pageTotal=pageTotalCount/pageSize;
+        if(pageTotalCount%pageSize>0){
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        page.setPageNo(pageNo);
+        int begin=(page.getPageNo()-1)*pageSize;
+        List<EndowBookList> items=new ArrayList<EndowBookList>();
+        if (pageTotalCount>0){
+            items= endowBookListMapper.queryBookListsByStatus(bookListStatus,begin,pageSize);
+        }
+        page.setPageItems(items);
+        return page;
     }
 }

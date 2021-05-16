@@ -16,7 +16,7 @@
                 let info = $.trim($("#info").val());
                 let regExp = /^1[0-9]{3,16}$/;
                 if (regExp.test(info)) {
-                    location.href = newHref + "manager/searchBookList/" + info + "?pageNo=1";
+                    location.href = newHref + "manager/searchEndowBookList/" + info + "?pageNo=1";
                     return false;
                 } else {
                     $(".book-alert").html("输入数据格式不匹配！").addClass("book-alert-danger").show().delay(5000).fadeOut();
@@ -29,21 +29,21 @@
                 window.location.reload();
             });
 
-            $(".outOfStock").click(function () {
+            $(".startProcessing").click(function () {
                 let status = $(this).data("status");
-                let statusArr = ["准备中", "已出库", "借阅中", "已归还", "已取消"];
+                let statusArr = ["待处理", "处理中", "已完成", "已取消", "已取消"];
                 let bookListId = $(this).data("book-list-id");
                 if (status != 0) {
-                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能进行出库操作！");
+                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能进行处理操作！");
                     return false;
                 } else {
-                    if (confirm("书单[" + bookListId + "]确定出库吗？")) {
+                    if (confirm("确定开始处理书单[" + bookListId + "]吗？")) {
                         $.post({
-                            url: newHref + "manager/bookList/outOfStock",
+                            url: newHref + "manager/endowBookList/startProcessing",
                             data: {"bookListId": bookListId},
                             success: function (data) {
                                 if (data) {
-                                    $(".book-alert").html("书单号为[" + bookListId + "]的订单出库成功！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                                    $(".book-alert").html("书单号为[" + bookListId + "]的订单开始处理！").addClass("book-alert-success").show().delay(2500).fadeOut();
                                 } else {
                                     $(".book-alert").html("操作失败！请重试！").addClass("book-alert-danger").show().delay(3000).fadeOut();
                                 }
@@ -53,20 +53,20 @@
                 }
             });
 
-            $(".confirmReturn").click(function () {
+            $(".confirmComplete").click(function () {
                 let status = $(this).data("status");
-                let statusArr = ["准备中", "已出库", "借阅中", "已归还", "已取消"];
+                let statusArr = ["待处理", "处理中", "已完成", "已取消", "已取消"];
                 let bookListId = $(this).data("book-list-id");
                 if (status != 2) {
-                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能进行归还操作！");
+                    alert("书单[" + bookListId + "]" + statusArr[status] + "，不能进行完成操作！");
                 } else {
-                    if (confirm("请确定书单[" + bookListId + "]的图书已归还吗？")) {
+                    if (confirm("请确定书单[" + bookListId + "]的处理完成吗？")) {
                         $.post({
-                            url: newHref + "manager/bookList/confirmReturn",
+                            url: newHref + "manager/endowBookList/confirmComplete",
                             data: {"bookListId": bookListId},
                             success: function (data) {
                                 if (data) {
-                                    $(".book-alert").html("书单号为[" + bookListId + "]的订单归还成功！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                                    $(".book-alert").html("书单号为[" + bookListId + "]的订单处理完成！").addClass("book-alert-success").show().delay(2500).fadeOut();
                                 } else {
                                     $(".book-alert").html("操作失败！请重试！").addClass("book-alert-danger").show().delay(3000).fadeOut();
                                 }
@@ -77,22 +77,22 @@
 
             });
 
-            $("#outOfStock").click(function () {
+            $("#startProcessing").click(function () {
                 let ul = $(this).parent().parent().parent().parent().parent();
                 let bookListId = ul.find("td:first").text();
                 let status = $.trim(ul.children("td").eq(4).text());
-                if (status != "准备中") {
-                    alert("书单[" + bookListId + "]" + status + "，不能进行出库操作！");
+                if (status != "待处理") {
+                    alert("书单[" + bookListId + "]" + status + "，不能进行处理操作！");
                 } else {
-                    if (confirm("书单[" + bookListId + "]确定出库吗？")) {
+                    if (confirm("确定开始处理书单[" + bookListId + "]吗？")) {
                         $.post({
-                            url: newHref + "manager/bookList/outOfStock",
+                            url: newHref + "manager/endowBookList/startProcessing",
                             data: {"bookListId": bookListId},
                             success: function (data) {
                                 if (data) {
-                                    ul.children("td").eq(4).text("已出库");
+                                    ul.children("td").eq(4).text("处理中");
                                 } else {
-                                    alert("书单[" + bookListId + "]出库操作失败！");
+                                    alert("书单[" + bookListId + "]处理操作失败！");
                                 }
                             }
                         });
@@ -100,22 +100,22 @@
                 }
             });
 
-            $("#confirmReturn").click(function () {
+            $("#confirmComplete").click(function () {
                 let ul = $(this).parent().parent().parent().parent().parent();
                 let bookListId = ul.find("td:first").text();
                 let status = $.trim(ul.children("td").eq(4).text());
-                if (status != "借阅中") {
-                    alert("书单[" + bookListId + "]" + status + "，不能进行归还操作！");
+                if (status != "处理中") {
+                    alert("书单[" + bookListId + "]" + status + "，不能进行完成操作！");
                 } else {
-                    if (confirm("请确定书单[" + bookListId + "]的图书已归还吗？")) {
+                    if (confirm("请确定书单[" + bookListId + "]的处理完成吗？")) {
                         $.post({
-                            url: newHref + "manager/bookList/confirmReturn",
+                            url: newHref + "manager/endowBookList/confirmComplete",
                             data: {"bookListId": bookListId},
                             success: function (data) {
                                 if (data) {
-                                    ul.children("td").eq(4).text("已归还");
+                                    ul.children("td").eq(4).text("已完成");
                                 } else {
-                                    alert("书单[" + bookListId + "]归还操作失败！");
+                                    alert("书单[" + bookListId + "]完成操作失败！");
                                 }
                             }
                         });
@@ -164,7 +164,7 @@
             for(let i=0;i<as.length;i++){
                 as[i].addEventListener("click",function () {
                     let status = this.dataset.status;
-                    location.href = newHref + "manager/bookListByStatus/" + status + "?pageNo=1";
+                    location.href = newHref + "manager/endowBookListByStatus/" + status + "?pageNo=1";
                 });
             }
         });
@@ -290,16 +290,13 @@
                         <td>
                             <c:choose>
                                 <c:when test="${bookList.status==0}">
-                                    准备中
+                                    待处理
                                 </c:when>
                                 <c:when test="${bookList.status==1}">
-                                    已出库
+                                    处理中
                                 </c:when>
                                 <c:when test="${bookList.status==2}">
-                                    借阅中
-                                </c:when>
-                                <c:when test="${bookList.status==3}">
-                                    已归还
+                                    已完成
                                 </c:when>
                                 <c:when test="${bookList.status==4}">
                                     已取消
@@ -307,7 +304,7 @@
                             </c:choose>
                         </td>
                         <td>${bookList.userId}</td>
-                        <td>借书单</td>
+                        <td>捐书单</td>
                         <td>
                             <a href="javascript:void(0);" class="details" data-book-list-id="${bookList.bookListId}"
                                data-toggle="modal" data-target="#details">
@@ -315,13 +312,13 @@
                             </a>
                         </td>
                         <td>
-                            <a href="javascript:void(0);" class="outOfStock" data-book-list-id="${bookList.bookListId}"
+                            <a href="javascript:void(0);" class="startProcessing" data-book-list-id="${bookList.bookListId}"
                                data-status="${bookList.status}">
-                                确认出库
+                                开始处理
                             </a> |
-                            <a href="javascript:void(0);" class="confirmReturn"
+                            <a href="javascript:void(0);" class="confirmComplete"
                                data-book-list-id="${bookList.bookListId}" data-status="${bookList.status}">
-                                确认归还
+                                确认完成
                             </a>
                         </td>
                     </tr>
@@ -371,9 +368,9 @@
                                                         <span class="caret"></span>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="javascript:void(0);" id="outOfStock">确认出库</a>
+                                                        <li><a href="javascript:void(0);" id="startProcessing">开始处理</a>
                                                         </li>
-                                                        <li><a href="javascript:void(0);" id="confirmReturn">确认归还</a>
+                                                        <li><a href="javascript:void(0);" id="confirmComplete">确认完成</a>
                                                         </li>
                                                     </ul>
                                                 </div>

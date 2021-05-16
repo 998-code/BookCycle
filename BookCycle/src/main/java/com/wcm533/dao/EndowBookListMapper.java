@@ -73,6 +73,12 @@ public interface EndowBookListMapper {
     int queryForPageTotalCount();
 
     /**
+     * 根据用户id查询订单总数
+     * @return
+     */
+    int queryForPageTotalCountByUserId(@Param("userId") int userId);
+
+    /**
      * 根据书单状态查询书单
      * @param status
      * @return

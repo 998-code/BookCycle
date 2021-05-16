@@ -86,4 +86,28 @@ public class managerBookListController {
         model.addAttribute("endowBookListPage",endowBookListPage);
         return "manager/manager_bookList_endow";
     }
+
+    @GetMapping("/endowBookListByStatus/{status}")
+    public String statusEndow(@PathVariable String status, int pageNo, Model model){
+        System.out.println(status);
+        Page<EndowBookList> endowBookListPage = endowBookListService.queryBookListsByStatus(pageNo, Page.PAGE_INDEX_SIZE, status);
+        model.addAttribute("endowBookListPage",endowBookListPage);
+        return "manager/manager_bookList_endow";
+    }
+
+    @GetMapping("/searchEndowBookList/{info}")
+    public String searchEndow(@PathVariable String info, int pageNo, Model model){
+        System.out.println(info);
+        Page<EndowBookList> endowBookListPage = endowBookListService.queryBookListsByInfo(pageNo, Page.PAGE_INDEX_SIZE, info);
+        model.addAttribute("info",info);
+        model.addAttribute("endowBookListPage",endowBookListPage);
+        return "manager/manager_bookList_endow";
+    }
+
+    @RequestMapping("/details/endowBookList")
+    @ResponseBody
+    public List<ItemsDetails> endowBookDetails(String bookListId){
+
+        return endowBookListService.queryBookListItems(bookListId);
+    }
 }
