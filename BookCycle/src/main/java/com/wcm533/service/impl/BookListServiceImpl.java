@@ -104,6 +104,13 @@ public class BookListServiceImpl implements BookListService {
     @Override
     public boolean returnBookList(String bookListId) {
         if(bookListMapper.changeBookListStatus(bookListId,BookList.RETURN)>0){
+            List<BookListItems> bookListItems = bookListItemsMapper.queryBookListItemsByBookListId(bookListId);
+            for (int i = 0; i < bookListItems.size(); i++) {
+                int bookId = bookListItems.get(i).getBookId();
+                Book book = bookMapper.queryBookById(bookId);
+                book.setLoan(book.getLoan()-1);
+                bookMapper.updateBook(book);
+            }
             return true;
         }
         return false;
@@ -112,6 +119,13 @@ public class BookListServiceImpl implements BookListService {
     @Override
     public boolean cancelBookList(String bookListId) {
         if (bookListMapper.changeBookListStatus(bookListId,BookList.CANCEL)>0){
+            List<BookListItems> bookListItems = bookListItemsMapper.queryBookListItemsByBookListId(bookListId);
+            for (int i = 0; i < bookListItems.size(); i++) {
+                int bookId = bookListItems.get(i).getBookId();
+                Book book = bookMapper.queryBookById(bookId);
+                book.setLoan(book.getLoan()-1);
+                bookMapper.updateBook(book);
+            }
             return true;
         }
         return false;
