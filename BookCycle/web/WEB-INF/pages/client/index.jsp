@@ -8,8 +8,7 @@
     <%@include file="../common/head.jsp" %>
     <script>
         $(function () {
-            let href = location.href;//获取或设置整个URL
-
+            let href = "${pageContext.request.contextPath}/";
             $("#login").click(function () {
                 window.open(href + "user/getLogin");
                 return false;
@@ -90,8 +89,8 @@
                     success: function (data) {
                         if (data == "bookListId") {
                             $(".book-alert").html("图书《" + bookName + "》全部被借阅，您预约下次借阅！").addClass("book-alert-warning").show().delay(2500).fadeOut();
-                        } else if (data=="InsufficientPoints") {
-                            $(".book-alert").html("您的积分不足！").addClass("book-alert-warning").show().delay(2500).fadeOut();
+                        } else if (data == "InsufficientPoints") {
+                            $(".book-alert").html("您的积分不足！").addClass("book-alert-danger").show().delay(2500).fadeOut();
                         } else {
                             $(".book-alert").html("已为您生成订单号：" + data + "<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
                         }
@@ -358,7 +357,8 @@
                         <div class="col-sm-6 col-md-3">
                             <div class="thumbnail" style="border: none;">
                                 <a href="javascript:void(0);" class="getBookDetails" data-book-id="${book.id}"><img
-                                        src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${book.id}.jpg"></a>
+                                        src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${book.id}.jpg"
+                                        width="150" height="150"></a>
                                 <div class="caption bookSubClass">
                                     <a href="javascript:void(0);" class="getBookDetails" data-book-id="${book.id}"
                                        style="display: block; width: 100%; font-size: 14px; font-weight: bold;margin: 0px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">

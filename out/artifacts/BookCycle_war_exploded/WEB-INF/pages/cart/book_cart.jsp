@@ -116,7 +116,11 @@
                     url: newHref+"bookList/create",
                     data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
                     success:function(data){
-                        $(".book-alert").html("已为您生成订单号："+data+"<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                        if(data=="InsufficientPoints"){
+                            $(".book-alert").html("您的积分不足").addClass("book-alert-danger").show().delay(2500).fadeOut();
+                        }else {
+                            $(".book-alert").html("已为您生成订单号："+data+"<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                        }
                     }
                 });
 
@@ -153,28 +157,6 @@
             }
             $("#totalPoints").text(totalPoints);
         }
-        // function bookCount(){
-        //     var counts=new Array();
-        //     $("input[class=count]").each(function(){
-        //             counts.push($(this).val());
-        //     });
-        //     let bookCount=0;
-        //     for(var i=0;i<counts.length;i++){
-        //         bookCount+=parseInt(counts[i]);
-        //     }
-        //     $("#bookCount").text(bookCount);
-        // }
-        // function totalPointss(){
-        //     var points=new Array();
-        //     $("p[class=totalPoints]").each(function(){
-        //         points.push($.trim($(this).text()));
-        //     });
-        //     let totalPoints=0;
-        //     for(var i=0;i<points.length;i++){
-        //         totalPoints+=parseInt(points[i]);
-        //     }
-        //     $("#totalPoints").text(totalPoints);
-        // }
     </script>
     <style>
         .book-alert {
@@ -201,7 +183,11 @@
             background-color: #dff0d8;
             border-color: #d6e9c6;
         }
-
+        .book-alert-danger {
+            color: #a94442;
+            background-color: #f2dede;
+            border-color: #ebccd1;
+        }
         input:focus {
             outline: none;
         }
