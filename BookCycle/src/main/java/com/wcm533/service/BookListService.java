@@ -35,4 +35,6 @@ public interface BookListService {
     Page<BookList> queryBookListsByInfo(int pageNo, int pageSize, String info);
 
     Page<BookList> queryBookListsByStatus(int pageNo, int pageSize, String status);
+
+    BookList queryBookListsByBookListId(String bookListId);
 }

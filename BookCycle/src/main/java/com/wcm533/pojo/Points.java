@@ -10,9 +10,33 @@ import java.util.Date;
  **/
 public class Points {
 
+    /**
+     * 借书
+     */
     public static final Integer BORROW_BOOKS=0;
+    /**
+     * 取消借书
+     */
+    public static final Integer CANCEL_BORROW_BOOKS=3;
+    /**
+     * 还书
+     */
+    public static final Integer RETURN_BOOKS=4;
+    /**
+     * 捐书
+     */
     public static final Integer DONATE_BOOKS=1;
+    /**
+     * 修改昵称
+     */
     public static final Integer CHANGE_USERNAME=2;
+    /**
+     * 还书返还积分比例
+     */
+    public static final Double POINTS_PROPORTION=0.8;
+    /**
+     * 用户积分变化数据
+     */
     public static final Integer USER_PAGE_SIZE=8;
 
     private int id;

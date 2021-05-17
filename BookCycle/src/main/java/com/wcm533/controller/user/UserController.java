@@ -148,7 +148,7 @@ public class UserController {
         user.setUsername(username);
         user.setEmail(email);
         boolean update = userService.update(user);
-        Points points = new Points(user.getId(),new Date(),6,2,"");
+        Points points = new Points(user.getId(),new Date(),6,Points.CHANGE_USERNAME,"");
         pointsService.addPoints(points);
         User userById = userService.getUserById(user.getId());
         request.getSession().setAttribute("user",userById);

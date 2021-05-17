@@ -111,6 +111,10 @@ public class BookListServiceImpl implements BookListService {
                 book.setLoan(book.getLoan()-1);
                 bookMapper.updateBook(book);
             }
+            BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
+            User user = userMapper.queryUserById(bookList.getUserId());
+            user.setPoints((int) (user.getPoints()+Math.floor(bookList.getPoints()*Points.POINTS_PROPORTION)));
+            userMapper.updateUser(user);
             return true;
         }
         return false;
@@ -126,6 +130,10 @@ public class BookListServiceImpl implements BookListService {
                 book.setLoan(book.getLoan()-1);
                 bookMapper.updateBook(book);
             }
+            BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
+            User user = userMapper.queryUserById(bookList.getUserId());
+            user.setPoints(user.getPoints()+bookList.getPoints());
+            userMapper.updateUser(user);
             return true;
         }
         return false;
@@ -227,6 +235,12 @@ public class BookListServiceImpl implements BookListService {
         }
         page.setPageItems(items);
         return page;
+    }
+
+    @Override
+    public BookList queryBookListsByBookListId(String bookListId) {
+        BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
+        return bookList;
     }
 
 
