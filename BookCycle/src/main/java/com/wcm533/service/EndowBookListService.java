@@ -33,4 +33,6 @@ public interface EndowBookListService {
     Page<EndowBookList> queryBookListsByInfo(int pageNo, int pageSize, String info);
 
     Page<EndowBookList> queryBookListsByStatus(int pageNo, int pageSize, String status);
+
+    EndowBookList queryBookListsByBookListId(String bookListId);
 }

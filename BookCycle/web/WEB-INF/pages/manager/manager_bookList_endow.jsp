@@ -57,7 +57,7 @@
                 let status = $(this).data("status");
                 let statusArr = ["待处理", "处理中", "已完成", "已取消", "已取消"];
                 let bookListId = $(this).data("book-list-id");
-                if (status != 2) {
+                if (status != 1) {
                     alert("书单[" + bookListId + "]" + statusArr[status] + "，不能进行完成操作！");
                 } else {
                     if (confirm("请确定书单[" + bookListId + "]的处理完成吗？")) {

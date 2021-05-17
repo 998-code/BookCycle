@@ -89,10 +89,7 @@ public class BookListController {
     @ResponseBody
     public boolean receive(String bookListId){
         boolean receive = bookListService.borrowBookList(bookListId);
-        BookList bookList = bookListService.queryBookListsByBookListId(bookListId);
         User user = (User)request.getSession().getAttribute("user");
-        Points points = new Points(user.getId(),new Date(), (int) (bookList.getPoints()*Points.POINTS_PROPORTION),Points.RETURN_BOOKS,bookListId);
-        pointsService.addPoints(points);
         List<BookList> bookLists = bookListService.queryBookListsByUserId(user.getId(), 0, BookList.USER_PAGE_SIZE);
         request.getSession().setAttribute("bookLists",bookLists);
         return receive;
@@ -107,7 +104,9 @@ public class BookListController {
         Points points = new Points(user.getId(),new Date(),bookList.getPoints(),Points.CANCEL_BORROW_BOOKS,bookListId);
         pointsService.addPoints(points);
         List<BookList> bookLists = bookListService.queryBookListsByUserId(user.getId(), 0, BookList.USER_PAGE_SIZE);
+        User userById = userService.getUserById(user.getId());
         request.getSession().setAttribute("bookLists",bookLists);
+        request.getSession().setAttribute("user",userById);
         return cancel;
     }
 

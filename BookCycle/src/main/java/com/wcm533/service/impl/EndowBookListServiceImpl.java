@@ -1,9 +1,6 @@
 package com.wcm533.service.impl;
 
-import com.wcm533.dao.BookDetailsMapper;
-import com.wcm533.dao.BookMapper;
-import com.wcm533.dao.EndowBookListItemsMapper;
-import com.wcm533.dao.EndowBookListMapper;
+import com.wcm533.dao.*;
 import com.wcm533.pojo.*;
 import com.wcm533.service.EndowBookListService;
 
@@ -23,6 +20,7 @@ public class EndowBookListServiceImpl implements EndowBookListService {
     private EndowBookListItemsMapper endowBookListItemsMapper;
     private BookMapper bookMapper;
     private BookDetailsMapper bookDetailsMapper;
+    private UserMapper userMapper;
 
     public void setEndowBookListMapper(EndowBookListMapper endowBookListMapper) {
         this.endowBookListMapper = endowBookListMapper;
@@ -38,6 +36,10 @@ public class EndowBookListServiceImpl implements EndowBookListService {
 
     public void setBookDetailsMapper(BookDetailsMapper bookDetailsMapper) {
         this.bookDetailsMapper = bookDetailsMapper;
+    }
+
+    public void setUserMapper(UserMapper userMapper) {
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -95,6 +97,17 @@ public class EndowBookListServiceImpl implements EndowBookListService {
     @Override
     public boolean completedBookList(String bookListId) {
         if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.COMPLETED)>0){
+            List<EndowBookListItems> endowBookListItems = endowBookListItemsMapper.queryBookListItemsByBookListId(bookListId);
+            for (int i = 0; i <endowBookListItems.size() ; i++) {
+                int bookId = endowBookListItems.get(i).getBookId();
+                Book book = bookMapper.queryBookById(bookId);
+                book.setStock(book.getStock()+1);
+                bookMapper.updateBook(book);
+            }
+            EndowBookList endowBookList = endowBookListMapper.queryBookByBookListId(bookListId);
+            User user = userMapper.queryUserById(endowBookList.getUserId());
+            user.setPoints(user.getPoints()+endowBookList.getPoints());
+            userMapper.updateUser(user);
             return true;
         }
         return false;
@@ -205,5 +218,11 @@ public class EndowBookListServiceImpl implements EndowBookListService {
         }
         page.setPageItems(items);
         return page;
+    }
+
+    @Override
+    public EndowBookList queryBookListsByBookListId(String bookListId) {
+        EndowBookList endowBookList = endowBookListMapper.queryBookByBookListId(bookListId);
+        return endowBookList;
     }
 }

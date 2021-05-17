@@ -4,6 +4,7 @@ import com.wcm533.pojo.*;
 import com.wcm533.service.impl.BookListServiceImpl;
 import com.wcm533.service.impl.BookServiceImpl;
 import com.wcm533.service.impl.EndowBookListServiceImpl;
+import com.wcm533.service.impl.PointsServiceImpl;
 import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,6 +40,10 @@ public class managerBookListController {
     @Autowired
     @Qualifier("EndowBookListServiceImpl")
     private EndowBookListServiceImpl endowBookListService;
+
+    @Autowired
+    @Qualifier("PointsServiceImpl")
+    private PointsServiceImpl pointsService;
 
     @GetMapping("/bookListByStatus/{status}")
     public String status(@PathVariable String status, int pageNo, Model model){
@@ -75,7 +81,9 @@ public class managerBookListController {
     @ResponseBody
     public boolean confirmReturn(String bookListId){
         boolean confirmReturn = bookListService.returnBookList(bookListId);
-
+        BookList bookList = bookListService.queryBookListsByBookListId(bookListId);
+        Points points = new Points(bookList.getUserId(),new Date(), (int) (bookList.getPoints()*Points.POINTS_PROPORTION),Points.RETURN_BOOKS,bookListId);
+        pointsService.addPoints(points);
         return confirmReturn;
     }
 
@@ -109,5 +117,24 @@ public class managerBookListController {
     public List<ItemsDetails> endowBookDetails(String bookListId){
 
         return endowBookListService.queryBookListItems(bookListId);
+    }
+
+    @RequestMapping("/endowBookList/startProcessing")
+    @ResponseBody
+    public boolean startProcessing(String bookListId){
+        System.out.println(bookListId);
+        boolean startProcessing = endowBookListService.processingBookList(bookListId);
+        return startProcessing;
+    }
+
+    @RequestMapping("/endowBookList/confirmComplete")
+    @ResponseBody
+    public boolean confirmComplete(String bookListId){
+        System.out.println(bookListId);
+        boolean confirmComplete = endowBookListService.completedBookList(bookListId);
+        EndowBookList endowBookList = endowBookListService.queryBookListsByBookListId(bookListId);
+        Points points = new Points(endowBookList.getUserId(),new Date(), endowBookList.getPoints(),Points.DONATE_BOOKS,bookListId);
+        pointsService.addPoints(points);
+        return confirmComplete;
     }
 }
