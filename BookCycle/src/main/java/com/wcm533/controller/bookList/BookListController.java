@@ -1,10 +1,7 @@
 package com.wcm533.controller.bookList;
 
 import com.wcm533.pojo.*;
-import com.wcm533.service.impl.BookListServiceImpl;
-import com.wcm533.service.impl.BookServiceImpl;
-import com.wcm533.service.impl.PointsServiceImpl;
-import com.wcm533.service.impl.ReservationServiceImpl;
+import com.wcm533.service.impl.*;
 import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,6 +38,10 @@ public class BookListController {
     private PointsServiceImpl pointsService;
 
     @Autowired
+    @Qualifier("UserServiceImpl")
+    private UserServiceImpl userService;
+
+    @Autowired
     HttpServletRequest request;
 
 
@@ -49,6 +50,10 @@ public class BookListController {
     public String createBookList(int userId,String bookId,String bookCount){
         String[] bookIdArr=bookId.split(",");
         String[] bookCountArr=bookCount.split(",");
+        User user = userService.getUserById(userId);
+        if(user.getPoints()<Integer.parseInt(bookIdArr[bookIdArr.length-1])){
+            return "InsufficientPoints";
+        }
         String bookListId = bookListService.createBookList(userId, bookIdArr, bookCountArr);
         Date date = WebUtils.parseString(bookListId);
         Points points = new Points(userId,date,Integer.parseInt(bookIdArr[bookIdArr.length-1]),Points.BORROW_BOOKS,bookListId);
@@ -62,6 +67,10 @@ public class BookListController {
         String[] bookIdArr=bookId.split(",");
         String[] bookCountArr=bookCount.split(",");
         Book book = bookService.queryBookById(Integer.parseInt(bookIdArr[0]));
+        User user = userService.getUserById(userId);
+        if(user.getPoints()<Integer.parseInt(bookIdArr[bookIdArr.length-1])){
+            return "InsufficientPoints";
+        }
         if (book.getStock()>book.getLoan()){
             String bookListId = bookListService.createBookList(userId, bookIdArr, bookCountArr);
             Date date = WebUtils.parseString(bookListId);

@@ -95,6 +95,12 @@
                                             <c:when test="${points.status==2}">
                                                 -
                                             </c:when>
+                                            <c:when test="${points.status==3}">
+                                                +
+                                            </c:when>
+                                            <c:when test="${points.status==4}">
+                                                +
+                                            </c:when>
                                         </c:choose>
                                             ${points.points}
                                     </td>
@@ -108,6 +114,12 @@
                                             </c:when>
                                             <c:when test="${points.status==2}">
                                                 修改昵称
+                                            </c:when>
+                                            <c:when test="${points.status==3}">
+                                                取消借书
+                                            </c:when>
+                                            <c:when test="${points.status==4}">
+                                                还书
                                             </c:when>
                                         </c:choose>
                                     </td>
