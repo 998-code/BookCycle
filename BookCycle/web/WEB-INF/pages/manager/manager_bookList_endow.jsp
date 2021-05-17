@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>书单管理</title>
+    <title>捐书单</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/bookimg1.jpg" type="image/x-icon"/>
     <%@include file="../common/head.jsp" %>
     <script src="${pageContext.request.contextPath }/static/js/myJS/conversion.js"></script>
@@ -258,7 +258,7 @@
             <a class="btn btn-primary" style="float: right;" href="javascript:void(0);" id="refresh">刷新</a>
             <form class="form-inline" action="" method="POST" style="float: right;margin-right: 20px;">
                 <span style="color: red;font-weight: bold;">ERROR</span>
-                <input type="text" id="info" class="form-control" placeholder="请输入书单ID或用户ID：">
+                <input type="text" id="info" class="form-control" placeholder="请输入书单ID或用户ID：" value="${requestScope.info}">
                 <input type="submit" id="search" value="查询" class="btn btn-primary">
             </form>
         </div>

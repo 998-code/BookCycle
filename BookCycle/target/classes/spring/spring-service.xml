@@ -36,6 +36,7 @@
         <property name="endowBookListItemsMapper" ref="endowBookListItemsMapper"></property>
         <property name="bookMapper" ref="bookMapper"></property>
         <property name="bookDetailsMapper" ref="bookDetailsMapper"></property>
+        <property name="userMapper" ref="userMapper"></property>
     </bean>
 
     <bean id="ReservationServiceImpl" class="com.wcm533.service.impl.ReservationServiceImpl">

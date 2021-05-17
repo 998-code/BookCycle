@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>书单管理</title>
+    <title>借书单</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/bookimg1.jpg" type="image/x-icon"/>
     <%@include file="../common/head.jsp" %>
     <script src="${pageContext.request.contextPath }/static/js/myJS/conversion.js"></script>
