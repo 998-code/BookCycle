@@ -99,7 +99,7 @@
             <div class="page-header">
                 <h1>
                     <small><a class="btn btn-primary" href="#">返回首页</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="#">书籍管理</a></small>
+                    <small style="float: right;margin-top:15px;">书籍管理</small>
                     <small style="float: right;margin-top:15px;"><a href="#">书单管理&nbsp;</a></small>
                     <small style="float: right;margin-top:15px;"><a href="#">文章管理&nbsp;</a></small>
                     <small style="float: right;margin-top:15px;"><a href="#">用户管理&nbsp;</a></small>
@@ -229,7 +229,6 @@
                             <input class="btn btn-primary" type="submit" id="pageSizeSubmit" value="查询"
                                    data-page="${requestScope.bookPage.pageTotal}">
                         </form>
-
                     </li>
                 </ul>
             </nav>

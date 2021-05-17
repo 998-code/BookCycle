@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>书单管理</title>
+    <title>借书单</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/bookimg1.jpg" type="image/x-icon"/>
     <%@include file="../common/head.jsp" %>
     <script src="${pageContext.request.contextPath }/static/js/myJS/conversion.js"></script>
@@ -162,6 +162,48 @@
                 });
             });
 
+            $(".previousPage").click(function () {
+                let No = $(this).data("page-no");
+                let pageNo = No - 1;
+                location.href = pathname + "?pageNo=" + pageNo;
+                return false;
+            });
+
+            $(".nextPage").click(function () {
+                let No = $(this).data("page-no");
+                let pageNo = No + 1;
+                location.href = pathname + "?pageNo=" + pageNo;
+                return false;
+            });
+
+            $(".pageBook").click(function () {
+                let pageNo = $.trim($(this).text());
+                location.href = pathname + "?pageNo=" + pageNo;
+                return false;
+            });
+
+            $("#goFirst").click(function () {
+                location.href = pathname + "?pageNo=1";
+                return false;
+            });
+
+            $("#goLast").click(function () {
+                let last = $(this).data("last");
+                location.href = pathname + "?pageNo=" + last;
+                return false;
+            });
+
+            $("#pageSizeSubmit").click(function () {
+                let totalPage = $(this).data("page");
+                let pageSize = $("#pageSize").val();
+                if (pageSize > totalPage || pageSize <= 0) {
+                    alert("该页码不存在?");
+                    return false;
+                }
+                location.href = pathname + "?pageNo=" + pageSize;
+                return false;
+            });
+
         });
 
         window.addEventListener("load",function () {
@@ -224,7 +266,7 @@
                 <h1>
                     <small><a class="btn btn-primary" href="#">返回首页</a></small>
                     <small style="float: right;margin-top:15px;"><a href="#">书籍管理</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="#">书单管理&nbsp;</a></small>
+                    <small style="float: right;margin-top:15px;">书单管理&nbsp;</small>
                     <small style="float: right;margin-top:15px;"><a href="#">文章管理&nbsp;</a></small>
                     <small style="float: right;margin-top:15px;"><a href="#">用户管理&nbsp;</a></small>
                 </h1>
@@ -428,31 +470,61 @@
         <div class="col-md-12 colum">
             <nav aria-label="Page navigation" style="text-align: center;">
                 <ul class="pagination" style="display: inline-block;float: none;margin: 0em;">
-                    <li><a href="#">首页</a></li>
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">末页</a></li>
-                    <li><span>共有10页</span></li>
+                    <c:if test="${requestScope.bookListPage.pageNo>1}">
+                        <li><a href="javascript:void(0);" id="goFirst">首页</a></li>
+                        <li><a href="javascript:void(0);" class="previousPage"
+                               data-page-no="${requestScope.bookListPage.pageNo}">&laquo;</a></li>
+                    </c:if>
+
+                    <c:choose>
+                        <c:when test="${requestScope.bookListPage.pageTotal<=5}">
+                            <c:set var="begin" value="1"></c:set>
+                            <c:set var="end" value="${requestScope.bookListPage.pageTotal}"></c:set>
+                        </c:when>
+                        <c:when test="${requestScope.bookListPage.pageTotal>5}">
+                            <c:choose>
+                                <c:when test="${requestScope.bookListPage.pageNo<=3}">
+                                    <c:set var="begin" value="1"></c:set>
+                                    <c:set var="end" value="5"></c:set>
+                                </c:when>
+                                <c:when test="${requestScope.bookListPage.pageNo>=requestScope.bookListPage.pageTotal-3}">
+                                    <c:set var="begin" value="${requestScope.bookListPage.pageTotal-4}"></c:set>
+                                    <c:set var="end" value="${requestScope.bookListPage.pageTotal}"></c:set>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:set var="begin" value="${requestScope.bookListPage.pageNo-2}"></c:set>
+                                    <c:set var="end" value="${requestScope.bookListPage.pageNo+2}"></c:set>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                    </c:choose>
+
+                    <c:forEach begin="${begin}" end="${end}" var="i">
+                        <c:if test="${requestScope.bookListPage.pageNo==i}">
+                            <li class="active"><a href="javascript:void(0);" class="pageBook">${i}</a></li>
+                        </c:if>
+                        <c:if test="${requestScope.bookListPage.pageNo!=i}">
+                            <li><a href="javascript:void(0);" class="pageBook">${i}</a></li>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:if test="${requestScope.bookListPage.pageNo<requestScope.bookListPage.pageTotal}">
+                        <li><a href="javascript:void(0);" class="nextPage"
+                               data-page-no="${requestScope.bookListPage.pageNo}">&raquo;</a>
+                        </li>
+                        <li><a href="javascript:void(0);" id="goLast"
+                               data-last="${requestScope.bookListPage.pageTotal}">末页</a>
+                        </li>
+                    </c:if>
+                    <li><span>共有${requestScope.bookListPage.pageTotal}页</span></li>
                     <li>
                         <form class="form-inline" style="white-space: nowrap;display:inline-block;">
-                            <input class="form-control" style="width: 100px;" type="number" name="pageSize"
+                            <input class="form-control" style="width: 100px;" type="number" id="pageSize"
+                                   value="${requestScope.bookListPage.pageNo}"
                                    placeholder="查询页码">
-                            <input class="btn btn-primary" type="submit" value="查询">
+                            <input class="btn btn-primary" type="submit" id="pageSizeSubmit" value="查询"
+                                   data-page="${requestScope.bookListPage.pageTotal}">
                         </form>
-
                     </li>
                 </ul>
             </nav>

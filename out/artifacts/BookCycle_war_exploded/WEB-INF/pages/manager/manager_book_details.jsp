@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>书籍管理</title>
+    <title>更新图书信息</title>
     <link rel="shortcut icon"
           href="${pageContext.request.contextPath}/static/img/bookImg/bookimg${requestScope.book.id}.jpg"
           type="image/x-icon"/>
