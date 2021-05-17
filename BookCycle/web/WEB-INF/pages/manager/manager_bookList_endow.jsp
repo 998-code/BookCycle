@@ -14,7 +14,7 @@
         $(function () {
             $("#search").click(function () {
                 let info = $.trim($("#info").val());
-                let regExp = /^1[0-9]{3,16}$/;
+                let regExp = /^[^0][0-9]{3,16}$/;
                 if (regExp.test(info)) {
                     location.href = newHref + "manager/searchEndowBookList/" + info + "?pageNo=1";
                     return false;
