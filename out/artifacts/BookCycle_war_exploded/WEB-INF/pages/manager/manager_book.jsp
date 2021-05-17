@@ -13,6 +13,11 @@
             let newHref = href.substr(0, index);
             let pathname = window.location.pathname;
 
+            $("#getBookList").click(function () {
+                window.open(newHref + "manager/getBookList?pageNo=1");
+                return false;
+            });
+
             $("#search").click(function () {
                 let info = $.trim($("#info").val());
                 location.href = newHref + "manager/searchBook/" + info + "?pageNo=1";
@@ -99,10 +104,10 @@
             <div class="page-header">
                 <h1>
                     <small><a class="btn btn-primary" href="#">返回首页</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="#">书籍管理</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="#">书单管理&nbsp;</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="#">文章管理&nbsp;</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="#">用户管理&nbsp;</a></small>
+                    <small style="float: right;margin-top:15px;">书籍管理</small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);" id="getBookList">书单管理&nbsp;</a></small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);">文章管理&nbsp;</a></small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);">用户管理&nbsp;</a></small>
                 </h1>
             </div>
         </div>
@@ -229,7 +234,6 @@
                             <input class="btn btn-primary" type="submit" id="pageSizeSubmit" value="查询"
                                    data-page="${requestScope.bookPage.pageTotal}">
                         </form>
-
                     </li>
                 </ul>
             </nav>

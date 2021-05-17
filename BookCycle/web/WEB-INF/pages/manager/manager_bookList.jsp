@@ -13,6 +13,11 @@
         let newHref = href.substr(0, index);
         $(function () {
             let pathname = window.location.pathname;
+            $("#getBook").click(function () {
+                window.open(newHref + "manager/getBook?pageNo=1");
+                return false;
+            });
+
             $("#getEndowBookList").click(function () {
                 window.open(newHref+"manager/getEndowBookList?pageNo=1");
                 return false;
@@ -266,10 +271,10 @@
             <div class="page-header">
                 <h1>
                     <small><a class="btn btn-primary" href="#">返回首页</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="#">书籍管理</a></small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);" id="getBook">书籍管理</a></small>
                     <small style="float: right;margin-top:15px;">书单管理&nbsp;</small>
-                    <small style="float: right;margin-top:15px;"><a href="#">文章管理&nbsp;</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="#">用户管理&nbsp;</a></small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);">文章管理&nbsp;</a></small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);">用户管理&nbsp;</a></small>
                 </h1>
             </div>
         </div>
