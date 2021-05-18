@@ -47,5 +47,10 @@
     <select id="queryUserForPage" parameterType="map" resultType="user">
         select * from user limit #{begin},#{pageSize}
     </select>
-
+    <select id="queryUserCountByAuthority" parameterType="map" resultType="int">
+        select count(*) from user where authority=#{authority}
+    </select>
+    <select id="queryUserForPageByAuthority" parameterType="map" resultType="user">
+        select * from user where authority=#{authority} order by id desc limit #{begin},#{pageSize}
+    </select>
 </mapper>

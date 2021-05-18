@@ -122,4 +122,23 @@ public class UserServiceImpl implements UserService {
         page.setPageItems(items);
         return page;
     }
+
+    @Override
+    public Page<User> queryUsersByAuthority(int pageNo, int pageSize, int authority) {
+        Page<User> page = new Page<User>();
+        page.setPageSize(pageSize);
+        int pageTotalCount = userMapper.queryUserCountByAuthority(authority);
+        page.setPageTotalCount(pageTotalCount);
+        Integer pageTotal=pageTotalCount/pageSize;
+        if(pageTotalCount%pageSize>0){
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        page.setPageNo(pageNo);
+        int begin=(page.getPageNo()-1)*pageSize;
+        List<User> items= userMapper.queryUserForPageByAuthority(begin,pageSize,authority);
+        page.setPageItems(items);
+        return page;
+    }
+
 }

@@ -120,4 +120,18 @@ public interface UserMapper {
      * @return
      */
     List<User> queryUserForPage(@Param("begin") int begin,@Param("pageSize") int pageSize);
+
+    /**
+     * 根据用户的权限查询用户人数
+     * @return
+     */
+    int queryUserCountByAuthority(@Param("authority") int authority);
+
+    /**
+     * 使用分页查询所有用户
+     * @param begin
+     * @param pageSize
+     * @return
+     */
+    List<User> queryUserForPageByAuthority(@Param("begin") int begin,@Param("pageSize") int pageSize,@Param("authority") int authority);
 }

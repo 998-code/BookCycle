@@ -31,4 +31,6 @@ public interface UserService {
     boolean replaceHead(byte[] head,String headImgPath,int userId);
 
     Page<User> queryUsersByPage(int pageNo, Integer pageSize);
+
+    Page<User> queryUsersByAuthority(int pageNo, int pageSize, int authority);
 }

@@ -26,6 +26,11 @@
                 window.open(newHref+"manager/getBookList?pageNo=1");
                 return false;
             });
+
+            $("#user").click(function () {
+                window.open(newHref+"manager/getUser?pageNo=1");
+                return false;
+            });
         })
     </script>
 </head>
@@ -60,7 +65,7 @@
         <h3 class="panel-title">面板标题</h3>
     </div>
     <div class="panel-body">
-        这是一个基本的面板
+        <a href="javascript:void(0);" id="user">用户管理</a>
     </div>
 </div>
 <div class="panel panel-danger">

@@ -6,7 +6,95 @@
    <title>用户管理</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/bookimg1.jpg" type="image/x-icon"/>
     <%@include file="../common/head.jsp" %>
-   
+   <script>
+       let href = location.href;//获取或设置整个URL
+       let index = href.indexOf("manager");
+       let newHref = href.substr(0, index);
+       $(function () {
+           let pathname = window.location.pathname;
+           $("#getBook").click(function () {
+               window.open(newHref + "manager/getBook?pageNo=1");
+               return false;
+           });
+
+           $("#getEndowBookList").click(function () {
+               window.open(newHref+"manager/getEndowBookList?pageNo=1");
+               return false;
+           });
+
+           $("#search").click(function () {
+               let info = $.trim($("#info").val());
+               let regExp = /^[^0][0-9]{3,16}$/;
+               if (regExp.test(info)) {
+                   location.href = newHref + "manager/searchBookList/" + info + "?pageNo=1";
+                   return false;
+               } else {
+                   $(".book-alert").html("输入数据格式不匹配！").addClass("book-alert-danger").show().delay(5000).fadeOut();
+                   return false;
+               }
+
+           });
+
+           $("#refresh").click(function () {
+               window.location.reload();
+           });
+
+
+
+           $(".previousPage").click(function () {
+               let No = $(this).data("page-no");
+               let pageNo = No - 1;
+               location.href = pathname + "?pageNo=" + pageNo;
+               return false;
+           });
+
+           $(".nextPage").click(function () {
+               let No = $(this).data("page-no");
+               let pageNo = No + 1;
+               location.href = pathname + "?pageNo=" + pageNo;
+               return false;
+           });
+
+           $(".pageBook").click(function () {
+               let pageNo = $.trim($(this).text());
+               location.href = pathname + "?pageNo=" + pageNo;
+               return false;
+           });
+
+           $("#goFirst").click(function () {
+               location.href = pathname + "?pageNo=1";
+               return false;
+           });
+
+           $("#goLast").click(function () {
+               let last = $(this).data("last");
+               location.href = pathname + "?pageNo=" + last;
+               return false;
+           });
+
+           $("#pageSizeSubmit").click(function () {
+               let totalPage = $(this).data("page");
+               let pageSize = $("#pageSize").val();
+               if (pageSize > totalPage || pageSize <= 0) {
+                   alert("该页码不存在?");
+                   return false;
+               }
+               location.href = pathname + "?pageNo=" + pageSize;
+               return false;
+           });
+
+       });
+
+       window.addEventListener("load",function () {
+           let as = document.querySelectorAll(".byAuthority");
+           for(let i=0;i<as.length;i++){
+               as[i].addEventListener("click",function () {
+                   let authority = this.dataset.authority;
+                   location.href = newHref + "manager/userByAuthority/" + authority + "?pageNo=1";
+               });
+           }
+       });
+   </script>
 </head>
 <body>
     <div class="container">
@@ -16,10 +104,10 @@
                 <div class="page-header">
                     <h1>
                         <small><a class="btn btn-primary" href="#">返回首页</a></small>
-                        <small style="float: right;margin-top:15px;"><a href="#">书籍管理</a></small>
-                        <small style="float: right;margin-top:15px;"><a href="#">书单管理&nbsp;</a></small>
-                        <small style="float: right;margin-top:15px;"><a href="#">文章管理&nbsp;</a></small>
-                        <small style="float: right;margin-top:15px;"><a href="#">用户管理&nbsp;</a></small>   
+                        <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">书籍管理</a></small>
+                        <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">书单管理&nbsp;</a></small>
+                        <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">文章管理&nbsp;</a></small>
+                        <small style="float: right;margin-top:15px;">用户管理&nbsp;</small>
                     </h1>
                 </div>
             </div>
@@ -34,10 +122,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a href="#">普通用户</a></li>
-                        <li><a href="#">会员用户</a></li>
-                        <li><a href="#">管理员</a></li>
-                        <li><a href="#">超级管理员</a></li>
+                        <li><a href="javascript:void(0);" class="byAuthority" data-authority="1">普通用户</a></li>
+                        <li><a href="javascript:void(0);" class="byAuthority" data-authority="2">会员用户</a></li>
+                        <li><a href="javascript:void(0);" class="byAuthority" data-authority="3">管理员</a></li>
+                        <li><a href="javascript:void(0);" class="byAuthority" data-authority="4">超级管理员</a></li>
                     </ul>
                     </div>
                 </div>
@@ -77,93 +165,44 @@
                     </thead>
      
                     <tbody>
-                        
-                        <tr>
-                            <td>1901</td>
-                            <td>许世烽</td>
-                            <td>123456</td>
-                            <td>xushifeng@qq.com</td>
-                            <td>普通用户</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        修改权限
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">普通用户</a></li>
-                                        <li><a href="#">会员用户</a></li>
-                                        <li><a href="#">管理员</a></li>
-                                        <li><a href="#">超级管理员</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>    
-                        <tr>
-                            <td>1902</td>
-                            <td>李九军</td>
-                            <td>123456</td>
-                            <td>lijiujun@qq.com</td>
-                            <td>会员用户</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        修改权限
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">普通用户</a></li>
-                                        <li><a href="#">会员用户</a></li>
-                                        <li><a href="#">管理员</a></li>
-                                        <li><a href="#">超级管理员</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1903</td>
-                            <td>张桦</td>
-                            <td>123456</td>
-                            <td>zhanghua@qq.com</td>
-                            <td>会员用户</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        修改权限
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">普通用户</a></li>
-                                        <li><a href="#">会员用户</a></li>
-                                        <li><a href="#">管理员</a></li>
-                                        <li><a href="#">超级管理员</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1904</td>
-                            <td>周泽清</td>
-                            <td>123456</td>
-                            <td>zhouzheqing@qq.com</td>
-                            <td>会员用户</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        修改权限
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">普通用户</a></li>
-                                        <li><a href="#">会员用户</a></li>
-                                        <li><a href="#">管理员</a></li>
-                                        <li><a href="#">超级管理员</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-
-                            
+                        <c:forEach items="${requestScope.userPage.pageItems}" var="user">
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>${user.username}</td>
+                                <td>******</td>
+                                <td>${user.email}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${user.authority==1}">
+                                            普通会员
+                                        </c:when>
+                                        <c:when test="${user.authority==2}">
+                                            超级会员
+                                        </c:when>
+                                        <c:when test="${user.authority==3}">
+                                            管理员
+                                        </c:when>
+                                        <c:when test="${user.authority==4}">
+                                            超级管理员
+                                        </c:when>
+                                    </c:choose>
+                                </td>
+                                <td style="padding: 3px;">
+                                    <div class="btn-group" style="margin:0;padding: 0;">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                            修改权限
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">普通用户</a></li>
+                                            <li><a href="#">会员用户</a></li>
+                                            <li><a href="#">管理员</a></li>
+                                            <li><a href="#">超级管理员</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
@@ -174,31 +213,62 @@
             <div class="col-md-12 colum">
                 <nav aria-label="Page navigation" style="text-align: center;">
                     <ul class="pagination" style="display: inline-block;float: none;margin: 0em;">
-                       <li><a href="#">首页</a></li>
-                       <li>
-                        <a href="#" aria-label="Previous">
-                          <span aria-hidden="true">&laquo;</span>
-                        </a>
-                      </li>
-                      <li><a href="#">1</a></li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li><a href="#">4</a></li>
-                      <li><a href="#">5</a></li>
-                      <li>
-                        <a href="#" aria-label="Next">
-                          <span aria-hidden="true">&raquo;</span>
-                        </a>
-                      </li>
-                      <li><a href="#">末页</a></li>
-                      <li><span>共有10页</span></li>
-                      <li> 
-                        <form class="form-inline" style="white-space: nowrap;display:inline-block;">
-                            <input class="form-control" style="width: 100px;" type="number" name="pageSize" placeholder="查询页码">
-                            <input class="btn btn-primary" type="submit" value="查询">
-                        </form>
-                                                                               
-                      </li>
+                        <c:if test="${requestScope.userPage.pageNo>1}">
+                            <li><a href="javascript:void(0);" id="goFirst">首页</a></li>
+                            <li><a href="javascript:void(0);" class="previousPage"
+                                   data-page-no="${requestScope.userPage.pageNo}">&laquo;</a></li>
+                        </c:if>
+
+                        <c:choose>
+                            <c:when test="${requestScope.userPage.pageTotal<=5}">
+                                <c:set var="begin" value="1"></c:set>
+                                <c:set var="end" value="${requestScope.userPage.pageTotal}"></c:set>
+                            </c:when>
+                            <c:when test="${requestScope.userPage.pageTotal>5}">
+                                <c:choose>
+                                    <c:when test="${requestScope.userPage.pageNo<=3}">
+                                        <c:set var="begin" value="1"></c:set>
+                                        <c:set var="end" value="5"></c:set>
+                                    </c:when>
+                                    <c:when test="${requestScope.userPage.pageNo>=requestScope.userPage.pageTotal-3}">
+                                        <c:set var="begin" value="${requestScope.userPage.pageTotal-4}"></c:set>
+                                        <c:set var="end" value="${requestScope.userPage.pageTotal}"></c:set>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:set var="begin" value="${requestScope.userPage.pageNo-2}"></c:set>
+                                        <c:set var="end" value="${requestScope.userPage.pageNo+2}"></c:set>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:when>
+                        </c:choose>
+
+                        <c:forEach begin="${begin}" end="${end}" var="i">
+                            <c:if test="${requestScope.userPage.pageNo==i}">
+                                <li class="active"><a href="javascript:void(0);" class="pageBook">${i}</a></li>
+                            </c:if>
+                            <c:if test="${requestScope.userPage.pageNo!=i}">
+                                <li><a href="javascript:void(0);" class="pageBook">${i}</a></li>
+                            </c:if>
+                        </c:forEach>
+
+                        <c:if test="${requestScope.userPage.pageNo<requestScope.userPage.pageTotal}">
+                            <li><a href="javascript:void(0);" class="nextPage"
+                                   data-page-no="${requestScope.userPage.pageNo}">&raquo;</a>
+                            </li>
+                            <li><a href="javascript:void(0);" id="goLast"
+                                   data-last="${requestScope.userPage.pageTotal}">末页</a>
+                            </li>
+                        </c:if>
+                        <li><span>共有${requestScope.userPage.pageTotal}页</span></li>
+                        <li>
+                            <form class="form-inline" style="white-space: nowrap;display:inline-block;">
+                                <input class="form-control" style="width: 100px;" type="number" id="pageSize"
+                                       value="${requestScope.userPage.pageNo}"
+                                       placeholder="查询页码">
+                                <input class="btn btn-primary" type="submit" id="pageSizeSubmit" value="查询"
+                                       data-page="${requestScope.userPage.pageTotal}">
+                            </form>
+                        </li>
                     </ul>
                   </nav>
             </div>
