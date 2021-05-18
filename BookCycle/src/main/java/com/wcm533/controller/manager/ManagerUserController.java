@@ -34,4 +34,13 @@ public class ManagerUserController {
         model.addAttribute("userPage",userPage);
         return "manager/manager_user";
     }
+
+    @GetMapping("/searchUser/{info}")
+    public String search(@PathVariable String info, int pageNo, Model model){
+        System.out.println(info);
+        Page<User> userPage = userService.queryUserssByInfo(pageNo, Page.PAGE_MANAGER_SIZE, info);
+        model.addAttribute("info",info);
+        model.addAttribute("userPage",userPage);
+        return "manager/manager_user";
+    }
 }

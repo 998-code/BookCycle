@@ -33,4 +33,6 @@ public interface UserService {
     Page<User> queryUsersByPage(int pageNo, Integer pageSize);
 
     Page<User> queryUsersByAuthority(int pageNo, int pageSize, int authority);
+
+    Page<User> queryUserssByInfo(int pageNo, int pageSize, String info);
 }

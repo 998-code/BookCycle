@@ -134,4 +134,36 @@ public interface UserMapper {
      * @return
      */
     List<User> queryUserForPageByAuthority(@Param("begin") int begin,@Param("pageSize") int pageSize,@Param("authority") int authority);
+
+    /**
+     * 根据用户id模糊查询用户数量
+     * @param id
+     * @return
+     */
+    int queryUserCountByUserId(@Param("id") int id);
+
+    /**
+     * 根据用户名模糊查询用户数量
+     * @param username
+     * @return
+     */
+    int queryUserCountByUsername(@Param("username") String username);
+
+    /**
+     * 根据用户id模糊查询所有用户
+     * @param begin
+     * @param pageSize
+     * @param id
+     * @return
+     */
+    List<User> queryUserForPageByUserId(@Param("begin") int begin, @Param("pageSize") int pageSize, @Param("id") int id);
+
+    /**
+     * 根据用户名模糊查询所有用户
+     * @param begin
+     * @param pageSize
+     * @param username
+     * @return
+     */
+    List<User> queryUserForPageByUsername(@Param("begin") int begin, @Param("pageSize") int pageSize, @Param("username") String username);
 }

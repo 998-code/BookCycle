@@ -6,7 +6,9 @@ import com.wcm533.pojo.Page;
 import com.wcm533.pojo.User;
 import com.wcm533.service.UserService;
 import com.wcm533.utils.FileUtils;
+import com.wcm533.utils.WebUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -140,5 +142,36 @@ public class UserServiceImpl implements UserService {
         page.setPageItems(items);
         return page;
     }
+
+    @Override
+    public Page<User> queryUserssByInfo(int pageNo, int pageSize, String info) {
+        Page<User> page = new Page<User>();
+        page.setPageSize(pageSize);
+        int pageTotalCount;
+        if(WebUtils.isNum(info)){
+            int userId = Integer.parseInt(info);
+            pageTotalCount = userMapper.queryUserCountByUserId(userId);
+        }else {
+            pageTotalCount = userMapper.queryUserCountByUsername(info);
+        }
+        page.setPageTotalCount(pageTotalCount);
+        Integer pageTotal=pageTotalCount/pageSize;
+        if(pageTotalCount%pageSize>0){
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        page.setPageNo(pageNo);
+        int begin=(page.getPageNo()-1)*pageSize;
+        List<User> items=new ArrayList<User>();
+        if(WebUtils.isNum(info)){
+            int userId = Integer.parseInt(info);
+            items= userMapper.queryUserForPageByUserId(begin,pageSize,userId);
+        }else {
+            items= userMapper.queryUserForPageByUsername(begin,pageSize,info);
+        }
+        page.setPageItems(items);
+        return page;
+    }
+
 
 }

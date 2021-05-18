@@ -26,7 +26,7 @@
                let info = $.trim($("#info").val());
                let regExp = /^[^0][0-9]{3,16}$/;
                if (regExp.test(info)) {
-                   location.href = newHref + "manager/searchBookList/" + info + "?pageNo=1";
+                   location.href = newHref + "manager/searchUser/" + info + "?pageNo=1";
                    return false;
                } else {
                    $(".book-alert").html("输入数据格式不匹配！").addClass("book-alert-danger").show().delay(5000).fadeOut();
@@ -132,11 +132,11 @@
             </div>
             
             <div class="col-md-8 column">
-                <a class="btn btn-primary" style="float: right;" href="#">刷新</a>
-                <form class="form-inline" action="" method="POST" style="float: right;margin-right: 20px;">
+                <a class="btn btn-primary" style="float: right;" href="javascript:void(0);" id="refresh">刷新</a>
+                <form class="form-inline" style="float: right;margin-right: 20px;">
                     <span style="color: red;font-weight: bold;">ERROR</span>
-                    <input type="text" name="" class="form-control" placeholder="请输入用户名或ID：">
-                    <input type="submit" value="查询" class="btn btn-primary">
+                    <input type="text" id="info" class="form-control" placeholder="请输入用户名或ID：">
+                    <input type="submit" value="查询" id="search" class="btn btn-primary">
                 </form>
             </div>
         </div>

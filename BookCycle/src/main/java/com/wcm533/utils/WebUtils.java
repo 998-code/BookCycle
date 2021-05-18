@@ -3,6 +3,7 @@ package com.wcm533.utils;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
 
@@ -40,6 +41,13 @@ public class WebUtils {
         return date;
     }
 
-
+    public static boolean isNum(String str) {
+        try {
+            new BigDecimal(str);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 }
