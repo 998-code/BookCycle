@@ -1,9 +1,13 @@
 package com.wcm533.service.impl;
 
 import com.wcm533.dao.UserMapper;
+import com.wcm533.pojo.Book;
+import com.wcm533.pojo.Page;
 import com.wcm533.pojo.User;
 import com.wcm533.service.UserService;
 import com.wcm533.utils.FileUtils;
+
+import java.util.List;
 
 /**
  * @ClassName UserServiceImpl
@@ -93,5 +97,29 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Page<User> queryUsersByPage(int pageNo, Integer pageSize) {
+        Page<User> page = new Page<User>();
+
+        //设置当前页数据个数
+        page.setPageSize(pageSize);
+        //设置图书总数
+        int pageTotalCount = userMapper.queryUserCount();
+        page.setPageTotalCount(pageTotalCount);
+        //设置总页码
+        Integer pageTotal=pageTotalCount/pageSize;
+        if(pageTotalCount%pageSize>0){
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        //设置当前页码
+        page.setPageNo(pageNo);
+        //设置页面图书数据
+        int begin=(page.getPageNo()-1)*pageSize;
+        List<User> items= userMapper.queryUserForPage(begin,pageSize);
+        page.setPageItems(items);
+        return page;
     }
 }

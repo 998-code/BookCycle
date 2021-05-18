@@ -16,10 +16,10 @@
                 <div class="page-header">
                     <h1>
                         <small><a class="btn btn-primary" href="#">返回首页</a></small>
-                        <small style="float: right;margin-top:15px;"><a href="#">书籍管理</a></small>
-                        <small style="float: right;margin-top:15px;"><a href="#">书单管理&nbsp;</a></small>
-                        <small style="float: right;margin-top:15px;"><a href="#">文章管理&nbsp;</a></small>
-                        <small style="float: right;margin-top:15px;"><a href="#">用户管理&nbsp;</a></small>   
+                        <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">书籍管理</a></small>
+                        <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">书单管理&nbsp;</a></small>
+                        <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">文章管理&nbsp;</a></small>
+                        <small style="float: right;margin-top:15px;">用户管理&nbsp;</small>
                     </h1>
                 </div>
             </div>
@@ -77,93 +77,44 @@
                     </thead>
      
                     <tbody>
-                        
-                        <tr>
-                            <td>1901</td>
-                            <td>许世烽</td>
-                            <td>123456</td>
-                            <td>xushifeng@qq.com</td>
-                            <td>普通用户</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        修改权限
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">普通用户</a></li>
-                                        <li><a href="#">会员用户</a></li>
-                                        <li><a href="#">管理员</a></li>
-                                        <li><a href="#">超级管理员</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>    
-                        <tr>
-                            <td>1902</td>
-                            <td>李九军</td>
-                            <td>123456</td>
-                            <td>lijiujun@qq.com</td>
-                            <td>会员用户</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        修改权限
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">普通用户</a></li>
-                                        <li><a href="#">会员用户</a></li>
-                                        <li><a href="#">管理员</a></li>
-                                        <li><a href="#">超级管理员</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1903</td>
-                            <td>张桦</td>
-                            <td>123456</td>
-                            <td>zhanghua@qq.com</td>
-                            <td>会员用户</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        修改权限
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">普通用户</a></li>
-                                        <li><a href="#">会员用户</a></li>
-                                        <li><a href="#">管理员</a></li>
-                                        <li><a href="#">超级管理员</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1904</td>
-                            <td>周泽清</td>
-                            <td>123456</td>
-                            <td>zhouzheqing@qq.com</td>
-                            <td>会员用户</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        修改权限
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">普通用户</a></li>
-                                        <li><a href="#">会员用户</a></li>
-                                        <li><a href="#">管理员</a></li>
-                                        <li><a href="#">超级管理员</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-
-                            
+                        <c:forEach items="${requestScope.userPage.pageItems}" var="user">
+                            <tr>
+                                <td>${user.id}</td>
+                                <td>${user.username}</td>
+                                <td>******</td>
+                                <td>${user.email}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${user.authority==1}">
+                                            普通会员
+                                        </c:when>
+                                        <c:when test="${user.authority==2}">
+                                            超级会员
+                                        </c:when>
+                                        <c:when test="${user.authority==3}">
+                                            管理员
+                                        </c:when>
+                                        <c:when test="${user.authority==4}">
+                                            超级管理员
+                                        </c:when>
+                                    </c:choose>
+                                </td>
+                                <td style="padding: 3px;">
+                                    <div class="btn-group" style="margin:0;padding: 0;">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                            修改权限
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">普通用户</a></li>
+                                            <li><a href="#">会员用户</a></li>
+                                            <li><a href="#">管理员</a></li>
+                                            <li><a href="#">超级管理员</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>

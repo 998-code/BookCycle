@@ -3,9 +3,11 @@ package com.wcm533.controller.manager;
 import com.wcm533.pojo.Book;
 import com.wcm533.pojo.BookList;
 import com.wcm533.pojo.Page;
+import com.wcm533.pojo.User;
 import com.wcm533.service.impl.BookDetailsServiceImpl;
 import com.wcm533.service.impl.BookListServiceImpl;
 import com.wcm533.service.impl.BookServiceImpl;
+import com.wcm533.service.impl.UserServiceImpl;
 import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,6 +34,10 @@ public class ManagerHomeController {
     @Qualifier("BookListServiceImpl")
     private BookListServiceImpl bookListService;
 
+    @Autowired
+    @Qualifier("UserServiceImpl")
+    private UserServiceImpl userService;
+
     @RequestMapping("/getBook")
     public String getBook(String pageNo,Model model){
         int No = WebUtils.parseInt(pageNo, 1);
@@ -50,8 +56,10 @@ public class ManagerHomeController {
     }
 
     @RequestMapping("/getUser")
-    public String getUser(){
-
+    public String getUser(String pageNo,Model model){
+        int No = WebUtils.parseInt(pageNo, 1);
+        Page<User> userPage = userService.queryUsersByPage(No, Page.PAGE_MANAGER_SIZE);
+        model.addAttribute("userPage",userPage);
         return "manager/manager_user";
     }
 

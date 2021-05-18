@@ -1,7 +1,10 @@
 package com.wcm533.service;
 
+import com.wcm533.pojo.Page;
 import com.wcm533.pojo.User;
 import org.omg.CORBA.portable.InputStream;
+
+import java.util.List;
 
 /**
  * @ClassName UserService
@@ -26,4 +29,6 @@ public interface UserService {
     boolean updateUserPassword(String password, int userId);
 
     boolean replaceHead(byte[] head,String headImgPath,int userId);
+
+    Page<User> queryUsersByPage(int pageNo, Integer pageSize);
 }
