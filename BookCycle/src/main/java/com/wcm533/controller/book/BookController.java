@@ -46,7 +46,6 @@ public class BookController {
 
     @GetMapping("/search/{info}")
     public String search(@PathVariable String info,int pageNo, Model model){
-        System.out.println(info);
         Page<Book> pageBook = bookService.queryBooksByInfo(pageNo, Page.PAGE_INDEX_SIZE, info);
         model.addAttribute("info",info);
         model.addAttribute("pageBook",pageBook);

@@ -47,7 +47,6 @@ public class managerBookListController {
 
     @GetMapping("/bookListByStatus/{status}")
     public String status(@PathVariable String status, int pageNo, Model model){
-        System.out.println(status);
         Page<BookList> bookListPage = bookListService.queryBookListsByStatus(pageNo, Page.PAGE_INDEX_SIZE, status);
         model.addAttribute("bookListPage",bookListPage);
         return "manager/manager_bookList";
@@ -55,7 +54,6 @@ public class managerBookListController {
 
     @GetMapping("/searchBookList/{info}")
     public String search(@PathVariable String info, int pageNo, Model model){
-        System.out.println(info);
         Page<BookList> bookListPage = bookListService.queryBookListsByInfo(pageNo, Page.PAGE_INDEX_SIZE, info);
         model.addAttribute("info",info);
         model.addAttribute("bookListPage",bookListPage);
@@ -97,7 +95,6 @@ public class managerBookListController {
 
     @GetMapping("/endowBookListByStatus/{status}")
     public String statusEndow(@PathVariable String status, int pageNo, Model model){
-        System.out.println(status);
         Page<EndowBookList> endowBookListPage = endowBookListService.queryBookListsByStatus(pageNo, Page.PAGE_INDEX_SIZE, status);
         model.addAttribute("endowBookListPage",endowBookListPage);
         return "manager/manager_bookList_endow";
@@ -105,7 +102,6 @@ public class managerBookListController {
 
     @GetMapping("/searchEndowBookList/{info}")
     public String searchEndow(@PathVariable String info, int pageNo, Model model){
-        System.out.println(info);
         Page<EndowBookList> endowBookListPage = endowBookListService.queryBookListsByInfo(pageNo, Page.PAGE_INDEX_SIZE, info);
         model.addAttribute("info",info);
         model.addAttribute("endowBookListPage",endowBookListPage);
@@ -122,7 +118,6 @@ public class managerBookListController {
     @RequestMapping("/endowBookList/startProcessing")
     @ResponseBody
     public boolean startProcessing(String bookListId){
-        System.out.println(bookListId);
         boolean startProcessing = endowBookListService.processingBookList(bookListId);
         return startProcessing;
     }
@@ -130,7 +125,6 @@ public class managerBookListController {
     @RequestMapping("/endowBookList/confirmComplete")
     @ResponseBody
     public boolean confirmComplete(String bookListId){
-        System.out.println(bookListId);
         boolean confirmComplete = endowBookListService.completedBookList(bookListId);
         EndowBookList endowBookList = endowBookListService.queryBookListsByBookListId(bookListId);
         Points points = new Points(endowBookList.getUserId(),new Date(), endowBookList.getPoints(),Points.DONATE_BOOKS,bookListId);

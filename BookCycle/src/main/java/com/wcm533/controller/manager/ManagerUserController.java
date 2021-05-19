@@ -29,7 +29,6 @@ public class ManagerUserController {
 
     @GetMapping("/userByAuthority/{authority}")
     public String status(@PathVariable int authority, int pageNo, Model model){
-        System.out.println(authority);
         Page<User> userPage = userService.queryUsersByAuthority(pageNo, Page.PAGE_MANAGER_SIZE, authority);
         model.addAttribute("userPage",userPage);
         return "manager/manager_user";
@@ -37,7 +36,6 @@ public class ManagerUserController {
 
     @GetMapping("/searchUser/{info}")
     public String search(@PathVariable String info, int pageNo, Model model){
-        System.out.println(info);
         Page<User> userPage = userService.queryUserssByInfo(pageNo, Page.PAGE_MANAGER_SIZE, info);
         model.addAttribute("info",info);
         model.addAttribute("userPage",userPage);
