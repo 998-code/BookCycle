@@ -18,6 +18,11 @@
                 return false;
             });
 
+            $("#getUser").click(function () {
+                window.open(newHref + "manager/getUser?pageNo=1");
+                return false;
+            });
+
             $("#getEndowBookList").click(function () {
                 window.open(newHref+"manager/getEndowBookList?pageNo=1");
                 return false;
@@ -274,7 +279,7 @@
                     <small style="float: right;margin-top:15px;"><a href="javascript:void(0);" id="getBook">书籍管理</a></small>
                     <small style="float: right;margin-top:15px;">书单管理&nbsp;</small>
                     <small style="float: right;margin-top:15px;"><a href="javascript:void(0);">文章管理&nbsp;</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);">用户管理&nbsp;</a></small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);" id="getUser">用户管理&nbsp;</a></small>
                 </h1>
             </div>
         </div>

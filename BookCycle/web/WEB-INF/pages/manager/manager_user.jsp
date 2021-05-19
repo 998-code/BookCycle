@@ -17,8 +17,8 @@
                 return false;
             });
 
-            $("#getEndowBookList").click(function () {
-                window.open(newHref + "manager/getEndowBookList?pageNo=1");
+            $("#getBookList").click(function () {
+                window.open(newHref + "manager/getBookList?pageNo=1");
                 return false;
             });
 
@@ -175,8 +175,8 @@
             <div class="page-header">
                 <h1>
                     <small><a class="btn btn-primary" href="#">返回首页</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">书籍管理</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">书单管理&nbsp;</a></small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0)" id="getBook">书籍管理</a></small>
+                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0)" id="getBookList">书单管理&nbsp;</a></small>
                     <small style="float: right;margin-top:15px;"><a href="javascript:void(0)">文章管理&nbsp;</a></small>
                     <small style="float: right;margin-top:15px;">用户管理&nbsp;</small>
                 </h1>
