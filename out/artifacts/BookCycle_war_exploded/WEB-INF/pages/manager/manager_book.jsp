@@ -18,6 +18,11 @@
                 return false;
             });
 
+            $("#getUser").click(function () {
+                window.open(newHref + "manager/getUser?pageNo=1");
+                return false;
+            });
+
             $("#search").click(function () {
                 let info = $.trim($("#info").val());
                 location.href = newHref + "manager/searchBook/" + info + "?pageNo=1";
@@ -103,11 +108,10 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    <small><a class="btn btn-primary" href="#">返回首页</a></small>
-                    <small style="float: right;margin-top:15px;">书籍管理</small>
-                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);" id="getBookList">书单管理&nbsp;</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);">文章管理&nbsp;</a></small>
-                    <small style="float: right;margin-top:15px;"><a href="javascript:void(0);">用户管理&nbsp;</a></small>
+                    <small style="margin-top:15px;">书籍管理</small>
+                    <small style="margin-top:15px;"><a href="javascript:void(0);" id="getBookList">书单管理&nbsp;</a></small>
+                    <small style="margin-top:15px;"><a href="javascript:void(0);">文章管理&nbsp;</a></small>
+                    <small style="margin-top:15px;"><a href="javascript:void(0);" id="getUser">用户管理&nbsp;</a></small>
                 </h1>
             </div>
         </div>
