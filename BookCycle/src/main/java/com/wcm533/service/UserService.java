@@ -24,6 +24,8 @@ public interface UserService {
 
     boolean update(User user);
 
+    boolean updateAuthority(int userId, int authority);
+
     User getUserById(int id);
 
     boolean updateUserPassword(String password, int userId);

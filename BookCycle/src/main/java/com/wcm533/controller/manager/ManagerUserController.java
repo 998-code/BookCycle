@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName ManagerUserController
@@ -27,6 +27,9 @@ public class ManagerUserController {
     @Qualifier("UserServiceImpl")
     private UserServiceImpl userService;
 
+    @Autowired
+    HttpServletRequest request;
+
     @GetMapping("/userByAuthority/{authority}")
     public String status(@PathVariable int authority, int pageNo, Model model){
         Page<User> userPage = userService.queryUsersByAuthority(pageNo, Page.PAGE_MANAGER_SIZE, authority);
@@ -40,5 +43,22 @@ public class ManagerUserController {
         model.addAttribute("info",info);
         model.addAttribute("userPage",userPage);
         return "manager/manager_user";
+    }
+
+    @PostMapping("/updateUserAuthority")
+    @ResponseBody
+    public int updateUserAuthority(int userId,int authority){
+        User user = (User) request.getSession().getAttribute("user");
+        User userById = userService.getUserById(user.getId());
+        if(userId==userById.getId()){
+            return 501;
+        }
+        if(userById.getAuthority()<4&&authority>2){
+            return 404;
+        }
+        if (userService.updateAuthority(userId, authority)){
+            return 200;
+        }
+        return 500;
     }
 }

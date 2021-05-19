@@ -70,6 +70,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean updateAuthority(int userId, int authority) {
+        User user = userMapper.queryUserById(userId);
+        user.setAuthority(authority);
+        if(userMapper.updateUser(user)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public User getUserById(int id) {
         return userMapper.queryUserById(id);
     }
