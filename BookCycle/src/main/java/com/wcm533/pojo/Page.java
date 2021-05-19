@@ -65,6 +65,9 @@ public class Page<T> {
         if(pageNo>pageTotal){
             pageNo=pageTotal;
         }
+        if(pageNo==0){
+            pageNo=1;
+        }
         this.pageNo = pageNo;
     }
 

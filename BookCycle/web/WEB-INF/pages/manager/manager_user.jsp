@@ -24,8 +24,8 @@
 
            $("#search").click(function () {
                let info = $.trim($("#info").val());
-               let regExp = /^[^0][0-9]{3,16}$/;
-               if (regExp.test(info)) {
+               //let regExp = /^[^0][0-9]{3,16}$/;
+               if (info!=""||info.length!=0) {
                    location.href = newHref + "manager/searchUser/" + info + "?pageNo=1";
                    return false;
                } else {
@@ -135,7 +135,7 @@
                 <a class="btn btn-primary" style="float: right;" href="javascript:void(0);" id="refresh">刷新</a>
                 <form class="form-inline" style="float: right;margin-right: 20px;">
                     <span style="color: red;font-weight: bold;">ERROR</span>
-                    <input type="text" id="info" class="form-control" placeholder="请输入用户名或ID：">
+                    <input type="text" id="info" class="form-control" placeholder="请输入用户名或ID：" value="${requestScope.info}">
                     <input type="submit" value="查询" id="search" class="btn btn-primary">
                 </form>
             </div>

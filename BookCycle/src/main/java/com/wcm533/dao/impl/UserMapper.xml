@@ -54,13 +54,13 @@
         select * from user where authority=#{authority} order by id desc limit #{begin},#{pageSize}
     </select>
     <select id="queryUserCountByUserId" parameterType="map" resultType="int">
-        select count(*) from user where id like #{id}
+        select count(*) from user where id like concat('%',#{id},'%')
     </select>
     <select id="queryUserCountByUsername" parameterType="map" resultType="int">
         select count(*) from user where username like "%"#{username}"%"
     </select>
     <select id="queryUserForPageByUserId" parameterType="map" resultType="user">
-        select * from user where id like #{id} order by id desc limit #{begin},#{pageSize}
+        select * from user where id like concat('%',#{id},'%') order by id desc limit #{begin},#{pageSize}
     </select>
     <select id="queryUserForPageByUsername" parameterType="map" resultType="user">
         select * from user where username like "%"#{username}"%" order by id desc limit #{begin},#{pageSize}

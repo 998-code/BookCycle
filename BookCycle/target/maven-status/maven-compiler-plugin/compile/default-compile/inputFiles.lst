@@ -45,6 +45,7 @@ D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\pojo\User.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\service\UserService.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\controller\user\UserHomeController.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\dao\UserMapper.java
+D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\controller\manager\ManagerUserController.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\dao\BookDetailsMapper.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\utils\WebUtils.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\pojo\CartItem.java
