@@ -50,37 +50,16 @@ public class CartController {
             return Cart.INVENTORY_SHORTAGE;
         }
         CartItem cartItem=new CartItem(book.getId(),book.getName(),1,book.getPoints(),book.getPoints(),0);
-        User user = (User) request.getSession().getAttribute("user");
         Cart cart = (Cart)request.getSession().getAttribute("cart");
         if(cart==null){
             cart = new Cart();
             request.getSession().setAttribute("cart",cart);
         }
         Map<Integer, CartItem> items = cart.getItems();
-        if(items.get(bookId)!=null){
-            return Cart.SUCCESS;
+        if(items.get(bookId)==null){
+            cart.addItem(cartItem);
         }
-        int authority;
-        if(user==null){
-            authority=User.ORDINARY_MEMBER;
-        }else {
-            authority = user.getAuthority();
-        }
-        if(authority<User.SUPER_MEMBER){
-            if(cart.getTotalCount()<Cart.ORDINARY_MEMBER_TOTAL_COUNT){
-                cart.addItem(cartItem);
-                return Cart.SUCCESS;
-            }else {
-                return Cart.INSUFFICIENT_PERMISSIONS;
-            }
-        }else {
-            if(cart.getTotalCount()<Cart.SUPER_MEMBER_TOTAL_COUNT){
-                cart.addItem(cartItem);
-                return Cart.SUCCESS;
-            }else {
-                return Cart.INSUFFICIENT_PERMISSIONS;
-            }
-        }
+        return Cart.SUCCESS;
     }
 
 }
