@@ -69,13 +69,10 @@ public class UserController {
                 return "manager/manager_home";
             }
             String realPath = request.getServletContext().getRealPath("/static/img/userImg/");
-            System.out.println(realPath);
             FileUtils.byteToFile(user.getHeadImg(),realPath,"img"+user.getId()+user.getHeadImgPath());
             List<BookList> bookLists = bookListService.queryBookListsByUserId(user.getId(), 0, BookList.USER_PAGE_SIZE);
-            List<EndowBookList> endowBookLists = endowBookListService.queryBookListsByUserId(user.getId(), 0, EndowBookList.USER_PAGE_SIZE);
             List<ReservationDetails> reservations = reservationService.queryReservationByUserId(user.getId(), 0, ReservationDetails.USER_HOMEPAGE_PAGE_SIZE);
             request.getSession().setAttribute("bookLists",bookLists);
-            request.getSession().setAttribute("endowBookLists",endowBookLists);
             request.getSession().setAttribute("reservations",reservations);
             return "redirect:home";
         }else {

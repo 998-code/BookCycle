@@ -116,10 +116,18 @@
                     url: newHref+"bookList/create",
                     data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
                     success:function(data){
-                        if(data=="InsufficientPoints"){
-                            $(".book-alert").html("您的积分不足").addClass("book-alert-danger").show().delay(2500).fadeOut();
-                        }else {
-                            $(".book-alert").html("已为您生成订单号："+data+"<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
+                        switch (data) {
+                            case "countError5":
+                                $(".book-alert").html("您是普通会员，一次最多只能借阅5本图书！").addClass("book-alert-info").show().delay(2500).fadeOut();
+                                break;
+                            case "countError10":
+                                $(".book-alert").html("您是超级会员，一次最多只能借阅10本图书！").addClass("book-alert-info").show().delay(2500).fadeOut();
+                                break;
+                            case "InsufficientPoints":
+                                $(".book-alert").html("您的积分不足").addClass("book-alert-danger").show().delay(2500).fadeOut();
+                                break;
+                            default:
+                                $(".book-alert").html("已为您生成订单号："+data+"<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
                         }
                     }
                 });
@@ -176,6 +184,12 @@
             color: #8a6d3b;
             background-color: #fcf8e3;
             border-color: #faebcc;
+        }
+
+        .book-alert-info {
+            color: #31708f;
+            background-color: #d9edf7;
+            border-color: #bce8f1;
         }
 
         .book-alert-success {

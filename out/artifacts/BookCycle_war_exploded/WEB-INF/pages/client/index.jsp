@@ -44,7 +44,6 @@
             $(".addBookList").click(function () {
                 let bookId = $(this).data("book-id");
                 let bookName = $(this).data("book-name");
-                let totalCount;
                 $.get({
                     url: href + "cart/addItem",
                     data: {"bookId": bookId},
@@ -58,10 +57,6 @@
                                 break;
                             case 2:
                                 $(".book-alert").html("图书《" + bookName + "》全部被借阅，您预约下次借阅！").addClass("book-alert-warning").show().delay(2500).fadeOut();
-                                break;
-                            case 3:
-                                totalCount =${empty sessionScope.cart.totalCount ? 5:sessionScope.cart.totalCount};
-                                $(".book-alert").html("您最多只能添加" + totalCount + "本书！").addClass("book-alert-danger").show().delay(5000).fadeOut();
                                 break;
                         }
                     }

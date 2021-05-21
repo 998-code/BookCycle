@@ -1,10 +1,7 @@
 package com.wcm533.controller.user;
 
-import com.wcm533.pojo.Points;
-import com.wcm533.pojo.ReservationDetails;
-import com.wcm533.pojo.User;
-import com.wcm533.service.impl.PointsServiceImpl;
-import com.wcm533.service.impl.ReservationServiceImpl;
+import com.wcm533.pojo.*;
+import com.wcm533.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -27,6 +24,18 @@ import java.util.List;
 public class UserHomeController {
 
     @Autowired
+    @Qualifier("UserServiceImpl")
+    private UserServiceImpl userService;
+
+    @Autowired
+    @Qualifier("BookListServiceImpl")
+    private BookListServiceImpl bookListService;
+
+    @Autowired
+    @Qualifier("EndowBookListServiceImpl")
+    private EndowBookListServiceImpl endowBookListService;
+
+    @Autowired
     @Qualifier("PointsServiceImpl")
     private PointsServiceImpl pointsService;
 
@@ -46,6 +55,12 @@ public class UserHomeController {
         if(user.getAuthority()>2){
             return "manager/manager_home";
         }
+        User userById = userService.getUserById(user.getId());
+        List<BookList> bookLists = bookListService.queryBookListsByUserId(user.getId(), 0, BookList.USER_PAGE_SIZE);
+        List<ReservationDetails> reservations = reservationService.queryReservationByUserId(user.getId(), 0, ReservationDetails.USER_HOMEPAGE_PAGE_SIZE);
+        request.getSession().setAttribute("user",userById);
+        request.getSession().setAttribute("bookLists",bookLists);
+        request.getSession().setAttribute("reservations",reservations);
         return "user/user_homepage";
     }
 
@@ -63,7 +78,11 @@ public class UserHomeController {
 
     @RequestMapping("/bookList")
     public String bookList(){
-
+        User user = (User) request.getSession().getAttribute("user");
+        List<BookList> bookLists = bookListService.queryBookListsByUserId(user.getId(), 0, BookList.USER_PAGE_SIZE);
+        List<EndowBookList> endowBookLists = endowBookListService.queryBookListsByUserId(user.getId(), 0, EndowBookList.USER_PAGE_SIZE);
+        request.getSession().setAttribute("bookLists",bookLists);
+        request.getSession().setAttribute("endowBookLists",endowBookLists);
         return "user/bookList";
     }
 
