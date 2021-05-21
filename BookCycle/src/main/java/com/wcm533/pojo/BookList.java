@@ -31,8 +31,14 @@ public class BookList {
      */
     public static final Integer CANCEL=4;
     /**
-     *
+     * 即将超时
      */
+    public static final Integer ABOUT_TO_TIME_OUT=5;
+    /**
+     * 超时
+     */
+    public static final Integer TIME_OUT=6;
+
     public static final Integer USER_PAGE_SIZE=4;
     public static final Integer MANAGER_PAGE_SIZE=4;
 

@@ -103,6 +103,7 @@ public class BookListServiceImpl implements BookListService {
 
     @Override
     public boolean returnBookList(String bookListId) {
+        BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
         if(bookListMapper.changeBookListStatus(bookListId,BookList.RETURN)>0){
             List<BookListItems> bookListItems = bookListItemsMapper.queryBookListItemsByBookListId(bookListId);
             for (int i = 0; i < bookListItems.size(); i++) {
@@ -111,10 +112,11 @@ public class BookListServiceImpl implements BookListService {
                 book.setLoan(book.getLoan()-1);
                 bookMapper.updateBook(book);
             }
-            BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
-            User user = userMapper.queryUserById(bookList.getUserId());
-            user.setPoints((int) (user.getPoints()+Math.floor(bookList.getPoints()*Points.POINTS_PROPORTION)));
-            userMapper.updateUser(user);
+            if(bookList.getStatus()!=BookList.TIME_OUT){
+                User user = userMapper.queryUserById(bookList.getUserId());
+                user.setPoints((int) (user.getPoints()+Math.floor(bookList.getPoints()*Points.POINTS_PROPORTION)));
+                userMapper.updateUser(user);
+            }
             return true;
         }
         return false;
@@ -134,6 +136,22 @@ public class BookListServiceImpl implements BookListService {
             User user = userMapper.queryUserById(bookList.getUserId());
             user.setPoints(user.getPoints()+bookList.getPoints());
             userMapper.updateUser(user);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean aboutOfTimeOutBookList(String bookListId) {
+        if(bookListMapper.changeBookListStatus(bookListId,BookList.ABOUT_TO_TIME_OUT)>0){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean overTimeBookList(String bookListId) {
+        if(bookListMapper.changeBookListStatus(bookListId,BookList.TIME_OUT)>0){
             return true;
         }
         return false;
@@ -241,6 +259,11 @@ public class BookListServiceImpl implements BookListService {
     public BookList queryBookListsByBookListId(String bookListId) {
         BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
         return bookList;
+    }
+
+    @Override
+    public List<BookList> queryAllBookLists() {
+        return bookListMapper.queryAllBookLists();
     }
 
 

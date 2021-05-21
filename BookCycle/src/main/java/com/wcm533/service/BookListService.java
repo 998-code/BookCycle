@@ -26,6 +26,10 @@ public interface BookListService {
 
     boolean cancelBookList(String bookListId);
 
+    boolean aboutOfTimeOutBookList(String bookListId);
+
+    boolean overTimeBookList(String bookListId);
+
     List<ItemsDetails> queryBookListItems(String bookListId);
 
     Page<BookList> queryBookLists(int pageNo,int pageSize);
@@ -37,4 +41,6 @@ public interface BookListService {
     Page<BookList> queryBookListsByStatus(int pageNo, int pageSize, String status);
 
     BookList queryBookListsByBookListId(String bookListId);
+
+    List<BookList> queryAllBookLists();
 }
