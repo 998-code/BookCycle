@@ -44,7 +44,6 @@
             $(".addBookList").click(function () {
                 let bookId = $(this).data("book-id");
                 let bookName = $(this).data("book-name");
-                let totalCount;
                 $.get({
                     url: href + "cart/addItem",
                     data: {"bookId": bookId},

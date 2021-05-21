@@ -50,7 +50,14 @@ public class BookListController {
     public String createBookList(int userId,String bookId,String bookCount){
         String[] bookIdArr=bookId.split(",");
         String[] bookCountArr=bookCount.split(",");
+        int totalCount = Integer.parseInt(bookCountArr[bookCountArr.length - 1]);
         User user = userService.getUserById(userId);
+        if(user.getAuthority()==1&&totalCount>5){
+            return "countError5";
+        }
+        if(user.getAuthority()==2&&totalCount>10){
+            return "countError10";
+        }
         if(user.getPoints()<Integer.parseInt(bookIdArr[bookIdArr.length-1])){
             return "InsufficientPoints";
         }
