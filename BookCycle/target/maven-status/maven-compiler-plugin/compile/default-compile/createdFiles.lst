@@ -1,14 +1,8 @@
 com\wcm533\controller\manager\ManagerBookController.class
 com\wcm533\utils\WebUtils.class
 com\wcm533\utils\MybatisUtils.class
-com\wcm533\timer\TimerManager2.class
 com\wcm533\controller\manager\managerBookListController.class
-com\wcm533\timer\NFDFlightDataTimerTask.class
 com\wcm533\controller\manager\ManagerUserController.class
 com\wcm533\controller\manager\ManagerHomeController.class
-com\wcm533\timer\TimerManager.class
-com\wcm533\timer\NFDFlightDataTaskListener.class
-com\wcm533\timer\DataTimerTask.class
 com\wcm533\utils\FileUtils.class
 com\wcm533\timer\DateTimeTask.class
-com\wcm533\timer\DataTaskListener.class

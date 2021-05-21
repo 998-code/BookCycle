@@ -28,7 +28,7 @@ public class DateTimeTask {
     @Qualifier("BookListServiceImpl")
     private BookListServiceImpl bookListService;
 
-    @Scheduled(cron = "0 0 0 * ?") // 每天0点执行
+    @Scheduled(cron = "0 0 0 * * ?") // 每天0点执行
     public void taskCycle() {
         List<BookList> bookLists = bookListService.queryAllBookLists();
         for (BookList bookList : bookLists) {
