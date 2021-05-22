@@ -80,8 +80,10 @@ public class managerBookListController {
     public boolean confirmReturn(String bookListId){
         boolean confirmReturn = bookListService.returnBookList(bookListId);
         BookList bookList = bookListService.queryBookListsByBookListId(bookListId);
-        Points points = new Points(bookList.getUserId(),new Date(), (int) (bookList.getPoints()*Points.POINTS_PROPORTION),Points.RETURN_BOOKS,bookListId);
-        pointsService.addPoints(points);
+        if(bookList.getStatus()!=BookList.TIME_OUT){
+            Points points = new Points(bookList.getUserId(),new Date(), (int) (bookList.getPoints()*Points.POINTS_PROPORTION),Points.RETURN_BOOKS,bookListId);
+            pointsService.addPoints(points);
+        }
         return confirmReturn;
     }
 
