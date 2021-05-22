@@ -45,13 +45,13 @@
                 </div>
                 
                 <div style="float: right; width: 80%;height: 620px; border: 1px solid #dddddd;">
-                    <div style="width: 100%; height: 49px;padding-top:0px; border-bottom: 1px solid #dddddd;">
+                    <div style="width: 100%; height: 49px;padding-top:0; border-bottom: 1px solid #dddddd;">
                         <div style="width: 5px;height: 20px;float: left; margin-left: 30px; margin-top: 15px; border-radius: 2px;background-color: rgb(63, 164, 247);"></div>
                         <span style="float: left; color: rgb(63, 164, 247);margin-top: 15px;margin-left: 5px;">我的预约</span>
                     </div>
                     
                     <div >
-                        <div style="height: 50px;padding-top:0px;">
+                        <div style="height: 50px;padding-top:0;">
                             <span style="float: left;margin-top: 15px;margin-left: 30px;font-size: 20px;font-weight: bolder;">
                                 预约信息：
                             </span>

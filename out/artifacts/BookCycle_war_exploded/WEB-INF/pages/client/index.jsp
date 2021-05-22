@@ -68,12 +68,12 @@
                 let bookName = $(this).data("book-name");
                 let points = $(this).data("points");
                 let userId = $("#userHome").data("user-id");
-                if (userId == "" || userId.length == 0) {
+                if (userId === "" || userId.length === 0) {
                     $(".book-alert").html("您还没有登录，请先登录！").addClass("book-alert-warning").show().delay(5000).fadeOut();
                     return false;
                 }
-                let bookId = new Array();
-                let bookCount = new Array();
+                let bookId = [];
+                let bookCount = [];
                 bookId.push(id);
                 bookId.push(points);
                 bookCount.push(1);
@@ -82,9 +82,9 @@
                     url: href + "bookList/borrowNow",
                     data: {"userId": userId, "bookId": bookId.toString(), "bookCount": bookCount.toString()},
                     success: function (data) {
-                        if (data == "bookListId") {
+                        if (data === "bookListId") {
                             $(".book-alert").html("图书《" + bookName + "》全部被借阅，您预约下次借阅！").addClass("book-alert-warning").show().delay(2500).fadeOut();
-                        } else if (data == "InsufficientPoints") {
+                        } else if (data === "InsufficientPoints") {
                             $(".book-alert").html("您的积分不足！").addClass("book-alert-danger").show().delay(2500).fadeOut();
                         } else {
                             $(".book-alert").html("已为您生成订单号：" + data + "<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
@@ -137,11 +137,6 @@
             border-color: #d6e9c6;
         }
 
-        .book-alert-info {
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-        }
 
         .book-alert-warning {
             color: #8a6d3b;
@@ -343,7 +338,7 @@
         <div class="col-md-7 column">
 
             <!-- 推荐书籍 -->
-            <div style="margin-top: 0px;">
+            <div style="margin-top: 0;">
                 <p style="font-size: 18px;color: dimgrey;">推荐书籍</p>
                 <!-- 书籍组 -->
                 <div class="row">
@@ -351,15 +346,16 @@
                     <c:forEach items="${requestScope.pageBook.pageItems}" var="book">
                         <div class="col-sm-6 col-md-3">
                             <div class="thumbnail" style="border: none;">
-                                <a href="javascript:void(0);" class="getBookDetails" data-book-id="${book.id}"><img
-                                        src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${book.id}.jpg"
-                                        width="150" height="150"></a>
+                                <a href="javascript:void(0);" class="getBookDetails" data-book-id="${book.id}">
+                                    <img src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${book.id}.jpg"
+                                        width="150" height="150" alt="">
+                                </a>
                                 <div class="caption bookSubClass">
                                     <a href="javascript:void(0);" class="getBookDetails" data-book-id="${book.id}"
-                                       style="display: block; width: 100%; font-size: 14px; font-weight: bold;margin: 0px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
+                                       style="display: block; width: 100%; font-size: 14px; font-weight: bold;margin: 0;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
                                             ${book.name}
                                     </a>
-                                    <p style="margin: 0px;font-size: 12px; color: silver;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
+                                    <p style="margin: 0;font-size: 12px; color: silver;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">
                                         著：${book.author}
                                     </p>
                                     <p style="font-weight: bold; font-size: 14px; color: tomato;">
@@ -374,14 +370,13 @@
                                         <a href="javascript:void(0);" class="borrowNow" data-book-id="${book.id}"
                                            data-book-name="${book.name}" data-points="${book.points}">立即借阅</a>
                                     </div>
-                                    </p>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
                 <!-- 分页 -->
-                <nav aria-label="Page navigation" style="text-align: center;margin-top: 0px;">
+                <nav aria-label="Page navigation" style="text-align: center;margin-top: 0;">
                     <ul class="pagination" style="display: inline-block;float: none;margin: 0em;">
                         <c:if test="${requestScope.pageBook.pageNo>1}">
                             <li><a href="javascript:void(0);" class="previousPage">&laquo;</a></li>

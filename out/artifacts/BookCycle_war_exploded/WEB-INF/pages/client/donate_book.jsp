@@ -8,56 +8,6 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/img/img7.png" type="image/x-icon" />
     <%@include file="../common/head.jsp"%>
 
-    <%--<script type="text/html" id="tr">
-        <tr>
-            <td>
-                <div>
-                    <input type="text" class="form-control" placeholder="请输入图书名称：" style="float:left;width: 200px;">
-                </div>
-            </td>
-
-            <td>
-                <div style="margin-top:5px;">
-                    <p style="float: left;">
-                        12
-                    </p>
-                    <p style="float: left;">分</p>
-                </div>
-            </td>
-
-            <td>
-                <div>
-                    <button class="lessCount"
-                            style="float: left;background-color: #dddddd;border: none; height:30px;width:30px;">
-                        -
-                    </button>
-                    <div style="float: left;">
-                        <input type="text" class="count" value="1"
-                               style="border:0.5px solid #dddddd;width: 40px;height: 30px;text-align:center;line-height:25px;">
-                    </div>
-                    <button class="plusCount"
-                            style="float: left;background-color: #dddddd ;border: none;height:30px;width: 30px;">
-                        +
-                    </button>
-                </div>
-
-            </td>
-
-            <td>
-                <div style="margin-top:5px;">
-                    <p class="totalPoints" style="float: left;">
-                        12
-                    </p>
-                    <p style="float: left;">分</p>
-                </div>
-            </td>
-
-            <td style="font-size: 13px;">
-                <a href="javascript:void(0);" style="display: inline-block;">重置</a><br>
-                <a href="javascript:void(0);" class="deleteTr" style="display: inline-block;margin-top: 5px;">删除</a>
-            </td>
-        </tr>
-    </script>--%>
     <script>
         $(function () {
             let href = location.href;//获取或设置整个URL
@@ -78,14 +28,14 @@
                 let userId=$(this).data("user-id");
                 let totalPoints=$.trim($("#totalPoints").html());
                 let totalCount=$.trim($("#bookCount").html());
-                if(userId==""||userId.length==0){
+                if(userId===""||userId.length===0){
                     if(!confirm("您还没有登录，确定捐赠吗？")){
                         return false;
                     }
                     userId=0;
                 }
-                let bookId = new Array();
-                let bookCount=new Array();
+                let bookId = [];
+                let bookCount=[];
                 $("input[name=bookName]").each(function(i){
                     bookId[i] = $(this).data("book-id");
                 });
@@ -98,7 +48,7 @@
                     url: newHref+"endowBookList/create",
                     data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
                     success:function(data){
-                        if(userId==0){
+                        if(userId===0){
                             $(".book-alert").html("捐赠已发起！").addClass("book-alert-success").show().delay(2500).fadeOut();
                         }else {
                             $(".book-alert").html("已为您生成捐赠编号："+data+"<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
@@ -162,7 +112,7 @@
             $("table").on("click","a[class=deleteTr]",function () {
                 let thisTr=$(this).parent().parent();
                 let index=$("tbody tr").index(thisTr);
-                if(index!=0){
+                if(index!==0){
                     $(this).parent().parent().remove();
                 }
                 bookCount();
@@ -184,7 +134,7 @@
             });
         });
         function bookCount(){
-            var counts=new Array();
+            var counts=[];
             $("input[class=count]").each(function(){
                 counts.push($(this).val());
             });
@@ -196,7 +146,7 @@
         }
 
         function totalPointss(){
-            var points=new Array();
+            var points=[];
             $("p[class=totalPoints]").each(function(){
                 points.push($.trim($(this).text()));
             });
@@ -219,12 +169,6 @@
             padding: 15px;
             border: 1px solid transparent;
             border-radius: 4px;
-        }
-
-        .book-alert-warning {
-            color: #8a6d3b;
-            background-color: #fcf8e3;
-            border-color: #faebcc;
         }
 
         .book-alert-success {
@@ -252,7 +196,6 @@
         a:hover {
             color: #ff0033;
             text-decoration: underline;
-            TEXT-DECORATION: none;
         }
 
         a:active {
@@ -297,10 +240,10 @@
         <div class="col-md-10 column">
             <div>
                 <div style="float: left;">
-                    <img src="${pageContext.request.contextPath}/static/img/img7.png" height="80px">
+                    <img src="${pageContext.request.contextPath}/static/img/img7.png" height="80px" alt="">
                 </div>
                 <p
-                        style="float:left;margin-left:20px;margin-top:40px;margin-bottom:0px;color: rgb(88, 84, 84);font-size: 30px;">
+                        style="float:left;margin-left:20px;margin-top:40px;margin-bottom:0;color: rgb(88, 84, 84);font-size: 30px;">
                     我要捐书
                 </p>
             </div>
