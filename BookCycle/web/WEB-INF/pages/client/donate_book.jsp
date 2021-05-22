@@ -36,9 +36,20 @@
                 }
                 let bookId = [];
                 let bookCount=[];
+                let flag=true;
                 $("input[name=bookName]").each(function(i){
-                    bookId[i] = $(this).data("book-id");
+                    let bookId = $(this).data("book-id");
+                    let bookName = $(this).val();
+                    if (bookName===""||bookName.length===0){
+                        flag=false;
+                        alert("您要捐赠的图书没有填写书名！");
+                    }else {
+                        bookId[i] = bookId;
+                    }
                 });
+                if(!flag){
+                    return false;
+                }
                 bookId.push(totalPoints);
                 $("input[class=count]").each(function(i){
                     bookCount[i] = $(this).val();
@@ -119,12 +130,6 @@
                 totalPointss();
             });
 
-            // $("#addTr").click(function () {
-            //     let newTr = $("#tr").html();
-            //     $("#tb").append(newTr);
-            //     bookCount();
-            //     totalPointss();
-            // });
 
             $("#addTr").click(function () {
                 let tr=document.querySelector("#donate_tr").cloneNode(true);

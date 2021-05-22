@@ -46,8 +46,8 @@ public class EndowBookListServiceImpl implements EndowBookListService {
     public String createBookList(int userId, String[] bookIdArr, String[] bookCountArr) {
         String bookListId;
         if(userId==0){
-            bookListId=System.currentTimeMillis()+"1916";
-            userId=1916;
+            bookListId=System.currentTimeMillis()+"1934";
+            userId=1934;
         }else {
             bookListId=System.currentTimeMillis()+""+userId;
         }
