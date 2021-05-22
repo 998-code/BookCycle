@@ -37,11 +37,13 @@ D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\dao\BookMapper
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\pojo\Points.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\service\BookListService.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\controller\manager\managerBookListController.java
+D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\filter\ManagerFilter.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\pojo\Cart.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\controller\bookList\BookListDetailsController.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\dao\EndowBookListItemsMapper.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\pojo\Article.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\dao\CartItemMapper.java
+D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\filter\LoginFilter.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\pojo\User.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\service\UserService.java
 D:\Users\47217\BookCycleSystem\BookCycle\src\main\java\com\wcm533\controller\user\UserHomeController.java

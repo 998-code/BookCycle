@@ -1,6 +1,8 @@
 com\wcm533\controller\manager\ManagerBookController.class
 com\wcm533\utils\WebUtils.class
 com\wcm533\utils\MybatisUtils.class
+com\wcm533\filter\ManagerFilter.class
+com\wcm533\filter\LoginFilter.class
 com\wcm533\controller\manager\managerBookListController.class
 com\wcm533\controller\manager\ManagerUserController.class
 com\wcm533\controller\manager\ManagerHomeController.class

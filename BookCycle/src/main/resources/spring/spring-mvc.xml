@@ -42,4 +42,15 @@
     <!-- 扫描定时任务 -->
     <context:component-scan base-package="com.wcm533.timer" />
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/user/**"/>
+            <bean id="loginInterceptor" class="com.wcm533.filter.LoginFilter"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/manager/**"/>
+            <bean id="managerInterceptor" class="com.wcm533.filter.ManagerFilter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>
