@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -39,7 +40,15 @@ public class CartController {
 
     @RequestMapping("/getCart")
     public String getCart(){
-
+        User user = (User) request.getSession().getAttribute("user");
+        if (user!=null){
+            Cart cart = new Cart();
+            List<CartItem> cartItems = cartItemService.queryCartItemByUserId(user.getId());
+            for (CartItem cartItem : cartItems) {
+                cart.addItem(cartItem);
+            }
+            request.getSession().setAttribute("cart",cart);
+        }
         return "cart/book_cart";
     }
 

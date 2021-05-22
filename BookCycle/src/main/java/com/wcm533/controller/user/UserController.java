@@ -3,6 +3,7 @@ package com.wcm533.controller.user;
 import com.wcm533.pojo.*;
 import com.wcm533.service.impl.*;
 import com.wcm533.utils.FileUtils;
+import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
@@ -36,9 +36,6 @@ public class UserController {
     @Qualifier("bookListServiceImpl")
     private BookListServiceImpl bookListService;
 
-    @Autowired
-    @Qualifier("endowBookListServiceImpl")
-    private EndowBookListServiceImpl endowBookListService;
 
     @Autowired
     @Qualifier("reservationServiceImpl")
@@ -47,6 +44,10 @@ public class UserController {
     @Autowired
     @Qualifier("pointsServiceImpl")
     private PointsServiceImpl pointsService;
+
+    @Autowired
+    @Qualifier("cartItemServiceImpl")
+    private CartItemServiceImpl cartItemService;
 
     @Autowired
     HttpServletRequest request;
@@ -74,6 +75,12 @@ public class UserController {
             List<ReservationDetails> reservations = reservationService.queryReservationByUserId(user.getId(), 0, ReservationDetails.USER_HOMEPAGE_PAGE_SIZE);
             request.getSession().setAttribute("bookLists",bookLists);
             request.getSession().setAttribute("reservations",reservations);
+            Cart cart = (Cart) request.getSession().getAttribute("cart");
+            if(cart!=null){
+                Map<Integer, CartItem> cartItems = cart.getItems();
+                List<CartItem> cartItemList = WebUtils.MapToCartItemList(cartItems,user.getId());
+                cartItemService.addCartItems(cartItemList);
+            }
             return "redirect:home";
         }else {
             model.addAttribute("msg","登录名或密码错误！");

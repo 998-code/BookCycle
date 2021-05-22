@@ -11,43 +11,44 @@
     <context:component-scan base-package="com.wcm533.service" />
 
     <!--BookServiceImpl注入到IOC容器中-->
-    <bean id="BookServiceImpl" class="com.wcm533.service.impl.BookServiceImpl">
+    <bean id="bookServiceImpl" class="com.wcm533.service.impl.BookServiceImpl">
         <property name="bookMapper" ref="bookMapper"/>
     </bean>
 
-    <bean id="BookDetailsServiceImpl" class="com.wcm533.service.impl.BookDetailsServiceImpl">
-        <property name="bookDetailsMapper" ref="bookDetailsMapper"></property>
+    <bean id="bookDetailsServiceImpl" class="com.wcm533.service.impl.BookDetailsServiceImpl">
+        <property name="bookDetailsMapper" ref="bookDetailsMapper"/>
     </bean>
 
-    <bean id="UserServiceImpl" class="com.wcm533.service.impl.UserServiceImpl">
-        <property name="userMapper" ref="userMapper"></property>
+    <bean id="userServiceImpl" class="com.wcm533.service.impl.UserServiceImpl">
+        <property name="userMapper" ref="userMapper"/>
     </bean>
 
-    <bean id="BookListServiceImpl" class="com.wcm533.service.impl.BookListServiceImpl">
-        <property name="bookListMapper" ref="bookListMapper"></property>
-        <property name="bookListItemsMapper" ref="bookListItemsMapper"></property>
-        <property name="bookMapper" ref="bookMapper"></property>
-        <property name="bookDetailsMapper" ref="bookDetailsMapper"></property>
-        <property name="userMapper" ref="userMapper"></property>
+    <bean id="bookListServiceImpl" class="com.wcm533.service.impl.BookListServiceImpl">
+        <property name="bookListMapper" ref="bookListMapper"/>
+        <property name="bookListItemsMapper" ref="bookListItemsMapper"/>
+        <property name="bookMapper" ref="bookMapper"/>
+        <property name="bookDetailsMapper" ref="bookDetailsMapper"/>
+        <property name="userMapper" ref="userMapper"/>
     </bean>
 
-    <bean id="EndowBookListServiceImpl" class="com.wcm533.service.impl.EndowBookListServiceImpl">
-        <property name="endowBookListMapper" ref="endowBookListMapper"></property>
-        <property name="endowBookListItemsMapper" ref="endowBookListItemsMapper"></property>
-        <property name="bookMapper" ref="bookMapper"></property>
-        <property name="bookDetailsMapper" ref="bookDetailsMapper"></property>
-        <property name="userMapper" ref="userMapper"></property>
+    <bean id="endowBookListServiceImpl" class="com.wcm533.service.impl.EndowBookListServiceImpl">
+        <property name="endowBookListMapper" ref="endowBookListMapper"/>
+        <property name="endowBookListItemsMapper" ref="endowBookListItemsMapper"/>
+        <property name="bookMapper" ref="bookMapper"/>
+        <property name="bookDetailsMapper" ref="bookDetailsMapper"/>
+        <property name="userMapper" ref="userMapper"/>
     </bean>
 
-    <bean id="ReservationServiceImpl" class="com.wcm533.service.impl.ReservationServiceImpl">
-        <property name="reservationMapper" ref="reservationMapper"></property>
-        <property name="bookMapper" ref="bookMapper"></property>
+    <bean id="reservationServiceImpl" class="com.wcm533.service.impl.ReservationServiceImpl">
+        <property name="reservationMapper" ref="reservationMapper"/>
+        <property name="bookMapper" ref="bookMapper"/>
     </bean>
-    <bean id="PointsServiceImpl" class="com.wcm533.service.impl.PointsServiceImpl">
-        <property name="pointsMapper" ref="pointsMapper"></property>
+    <bean id="pointsServiceImpl" class="com.wcm533.service.impl.PointsServiceImpl">
+        <property name="pointsMapper" ref="pointsMapper"/>
     </bean>
-    <bean id="CartItemServiceImpl" class="com.wcm533.service.impl.CartItemServiceImpl">
-        <property name="cartItemMapper" ref="cartItemMapper"></property>
+    <bean id="cartItemServiceImpl" class="com.wcm533.service.impl.CartItemServiceImpl">
+        <property name="cartItemMapper" ref="cartItemMapper"/>
+        <property name="bookMapper" ref="bookMapper"/>
     </bean>
 <!--    <bean id="OrderServiceImpl" class="com.wcm533.service.impl.OrderServiceImpl">-->
 <!--        <property name="orderMapper" ref="orderMapper"></property>-->

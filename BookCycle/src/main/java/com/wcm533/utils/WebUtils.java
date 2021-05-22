@@ -1,11 +1,11 @@
 package com.wcm533.utils;
 
+import com.wcm533.pojo.CartItem;
 import org.apache.commons.beanutils.BeanUtils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @ClassName WebUtils
@@ -13,7 +13,7 @@ import java.util.Map;
  * @Author 吴超民
  * @Date 2020/9/13 14:17
  **/
-public class WebUtils {
+public class WebUtils<T> {
     public static <T> T copyParamToBean(T bean, Map value) {
         try {
             BeanUtils.populate(bean, value);
@@ -48,6 +48,30 @@ public class WebUtils {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static <E, K> List<E> MapToList(Map<K,E> map){
+        List<E> values=new ArrayList<E>();
+        Set<Map.Entry<K, E>> entries = map.entrySet();
+        Iterator<Map.Entry<K, E>> iterator = entries.iterator();
+        while (iterator.hasNext()){
+            Map.Entry<K, E> next = iterator.next();
+            values.add(next.getValue());
+        }
+        return values;
+    }
+
+    public static List<CartItem> MapToCartItemList(Map<Integer,CartItem> map,int userId){
+        ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+        Set<Map.Entry<Integer, CartItem>> entries = map.entrySet();
+        Iterator<Map.Entry<Integer, CartItem>> iterator = entries.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<Integer, CartItem> next = iterator.next();
+            CartItem value = next.getValue();
+            value.setUserId(userId);
+            cartItems.add(value);
+        }
+        return cartItems;
     }
 
 }

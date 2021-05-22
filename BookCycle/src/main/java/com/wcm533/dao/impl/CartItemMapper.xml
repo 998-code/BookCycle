@@ -17,6 +17,6 @@
         select * from cart_item where book_id=#{bookId} and user_id=#{userId}
     </select>
     <select id="queryCartItemsByUserId" parameterType="map" resultType="cartItem">
-        select * from cart_item where user_id=#{userId}
+        select * from cart_item where user_id=#{userId} order by id desc
     </select>
 </mapper>
