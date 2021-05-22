@@ -162,6 +162,12 @@
                                                 <c:when test="${bookList.status==4}">
                                                     已取消
                                                 </c:when>
+                                                <c:when test="${bookList.status==5}">
+                                                    即将超时
+                                                </c:when>
+                                                <c:when test="${bookList.status==6}">
+                                                    已超时
+                                                </c:when>
                                             </c:choose>
                                         </td>
                                         <td>借书单</td>

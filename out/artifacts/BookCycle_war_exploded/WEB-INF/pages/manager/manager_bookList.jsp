@@ -303,6 +303,10 @@
                             已归还</a></li>
                         <li><a href="javascript:void(0);" class="byStatus" data-status="4">
                             已取消</a></li>
+                        <li><a href="javascript:void(0);" class="byStatus" data-status="5">
+                            即将超时</a></li>
+                        <li><a href="javascript:void(0);" class="byStatus" data-status="6">
+                            已超时</a></li>
                     </ul>
                 </div>
                 <div class="btn-group" style="margin-left: 5px">
@@ -362,6 +366,12 @@
                                 </c:when>
                                 <c:when test="${bookList.status==4}">
                                     已取消
+                                </c:when>
+                                <c:when test="${bookList.status==5}">
+                                    即将超时
+                                </c:when>
+                                <c:when test="${bookList.status==6}">
+                                    已超时
                                 </c:when>
                             </c:choose>
                         </td>
