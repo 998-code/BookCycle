@@ -136,6 +136,16 @@
 
         });
 
+        window.addEventListener("load",function () {
+            let bookCount = document.querySelector("#bookCount");
+            let innerHTML = bookCount.innerHTML.trim();
+            if (innerHTML==""||innerHTML.length==0){
+                $("#borrow").addClass("disabled");
+            }else {
+                $("#borrow").removeClass("disabled");
+            }
+        });
+
         function bookCount() {
             let checks=document.getElementsByClassName("check");
             var counts=new Array();

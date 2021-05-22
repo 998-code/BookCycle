@@ -1,6 +1,5 @@
 package com.wcm533.controller.manager;
 
-import com.wcm533.pojo.BookList;
 import com.wcm533.pojo.Page;
 import com.wcm533.pojo.User;
 import com.wcm533.service.impl.UserServiceImpl;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ManagerUserController {
 
     @Autowired
-    @Qualifier("UserServiceImpl")
+    @Qualifier("userServiceImpl")
     private UserServiceImpl userService;
 
     @Autowired

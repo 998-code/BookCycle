@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 public class indexController {
 
     @Autowired
-    @Qualifier("BookServiceImpl")
+    @Qualifier("bookServiceImpl")
     private BookServiceImpl bookService;
 
     @Autowired

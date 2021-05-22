@@ -2,6 +2,8 @@ package com.wcm533.service;
 
 import com.wcm533.pojo.CartItem;
 
+import java.util.List;
+
 /**
  * @ClassName CartItemService
  * @Descripyion TODO
@@ -11,4 +13,8 @@ import com.wcm533.pojo.CartItem;
 public interface CartItemService {
 
     boolean addCartItem(CartItem cartItem);
+
+    boolean addCartItems(List<CartItem> cartItems);
+
+    List<CartItem> queryCartItemByUserId(int userId);
 }

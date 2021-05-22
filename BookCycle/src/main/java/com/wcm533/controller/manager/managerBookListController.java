@@ -30,19 +30,19 @@ import java.util.List;
 public class managerBookListController {
 
     @Autowired
-    @Qualifier("BookServiceImpl")
+    @Qualifier("bookServiceImpl")
     private BookServiceImpl bookService;
 
     @Autowired
-    @Qualifier("BookListServiceImpl")
+    @Qualifier("bookListServiceImpl")
     private BookListServiceImpl bookListService;
 
     @Autowired
-    @Qualifier("EndowBookListServiceImpl")
+    @Qualifier("endowBookListServiceImpl")
     private EndowBookListServiceImpl endowBookListService;
 
     @Autowired
-    @Qualifier("PointsServiceImpl")
+    @Qualifier("pointsServiceImpl")
     private PointsServiceImpl pointsService;
 
     @GetMapping("/bookListByStatus/{status}")

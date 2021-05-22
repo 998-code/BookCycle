@@ -27,15 +27,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ManagerHomeController {
 
     @Autowired
-    @Qualifier("BookServiceImpl")
+    @Qualifier("bookServiceImpl")
     private BookServiceImpl bookService;
 
     @Autowired
-    @Qualifier("BookListServiceImpl")
+    @Qualifier("bookListServiceImpl")
     private BookListServiceImpl bookListService;
 
     @Autowired
-    @Qualifier("UserServiceImpl")
+    @Qualifier("userServiceImpl")
     private UserServiceImpl userService;
 
     @RequestMapping("/getBook")

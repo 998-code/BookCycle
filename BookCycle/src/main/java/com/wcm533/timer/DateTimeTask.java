@@ -21,11 +21,11 @@ import java.util.List;
 @Component
 public class DateTimeTask {
 
-    private static long OVER_TIME = 30 * 24 * 60 * 60 * 1000;
-    private static long ABOUT_OF_TIME_OUT = 27 * 24 * 60 * 60 * 1000;
+    private static final long OVER_TIME = 30 * 24 * 60 * 60 * 1000;
+    private static final long ABOUT_OF_TIME_OUT = 27 * 24 * 60 * 60 * 1000;
 
     @Autowired
-    @Qualifier("BookListServiceImpl")
+    @Qualifier("bookListServiceImpl")
     private BookListServiceImpl bookListService;
 
     @Scheduled(cron = "0 0 0 * * ?") // 每天0点执行

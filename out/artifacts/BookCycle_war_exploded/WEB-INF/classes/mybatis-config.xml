@@ -52,5 +52,6 @@
         <mapper resource="com\wcm533\dao\impl\NewsMapper.xml"/>
         <mapper resource="com\wcm533\dao\impl\PointsMapper.xml"/>
         <mapper resource="com\wcm533\dao\impl\ReservationMapper.xml"/>
+        <mapper resource="com\wcm533\dao\impl\CartItemMapper.xml"/>
     </mappers>
 </configuration>

@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.*;
 public class ManagerBookController {
 
     @Autowired
-    @Qualifier("BookServiceImpl")
+    @Qualifier("bookServiceImpl")
     private BookServiceImpl bookService;
 
     @Autowired
-    @Qualifier("BookDetailsServiceImpl")
+    @Qualifier("bookDetailsServiceImpl")
     private BookDetailsServiceImpl bookDetailsService;
 
     @RequestMapping("/getAddBook")

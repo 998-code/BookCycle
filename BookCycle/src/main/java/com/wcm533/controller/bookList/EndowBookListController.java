@@ -1,10 +1,8 @@
 package com.wcm533.controller.bookList;
 
 import com.wcm533.pojo.EndowBookList;
-import com.wcm533.pojo.Points;
 import com.wcm533.pojo.User;
 import com.wcm533.service.impl.EndowBookListServiceImpl;
-import com.wcm533.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,7 +24,7 @@ import java.util.List;
 public class EndowBookListController {
 
     @Autowired
-    @Qualifier("EndowBookListServiceImpl")
+    @Qualifier("endowBookListServiceImpl")
     private EndowBookListServiceImpl endowBookListService;
 
     @Autowired

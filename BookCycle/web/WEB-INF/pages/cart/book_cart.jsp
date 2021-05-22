@@ -98,12 +98,12 @@
                 let totalCount=$.trim($("#bookCount").html());
                 let totalPoints=$.trim($("#totalPoints").html());
                 let userId=$(this).data("user-id");
-                if(userId==""||userId.length==0){
+                if(userId===""||userId.length===0){
                     $(".book-alert").html("您还没有登录，请先登录！").addClass("book-alert-warning").show().delay(2500).fadeOut();
                     return false;
                 }
-                let bookId = new Array();
-                let bookCount=new Array();
+                let bookId = [];
+                let bookCount=[];
                 $(".check:checked").each(function(i){
                     bookId[i] = $(this).val();
                 });
@@ -139,7 +139,7 @@
         window.addEventListener("load",function () {
             let bookCount = document.querySelector("#bookCount");
             let innerHTML = bookCount.innerHTML.trim();
-            if (innerHTML==""||innerHTML.length==0){
+            if (innerHTML===""||innerHTML.length===0){
                 $("#borrow").addClass("disabled");
             }else {
                 $("#borrow").removeClass("disabled");
@@ -148,7 +148,7 @@
 
         function bookCount() {
             let checks=document.getElementsByClassName("check");
-            var counts=new Array();
+            var counts=[];
             $("input[class=count]").each(function(){
                 counts.push($(this).val());
             });
@@ -163,7 +163,7 @@
 
         function totalPointss(){
             let checks=document.getElementsByClassName("check");
-            var points=new Array();
+            var points=[];
             $("p[class=totalPoints]").each(function(){
                 points.push($.trim($(this).text()));
             });
@@ -232,7 +232,6 @@
         a:hover {
             color: #ff0033;
             text-decoration: underline;
-            TEXT-DECORATION: none;
         }
 
         a:active {
@@ -304,7 +303,7 @@
         <div class="col-md-10 column">
             <div>
                 <div style="float: left;">
-                    <img src="${pageContext.request.contextPath}/static/img/img7.png" height="80px">
+                    <img src="${pageContext.request.contextPath}/static/img/img7.png" height="80" alt="">
                 </div>
                 <p
                         style="float:left;margin-left:20px;margin-top:40px;margin-bottom:0px;color: rgb(88, 84, 84);font-size: 30px;">

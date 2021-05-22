@@ -1,6 +1,5 @@
 package com.wcm533.controller.bookList;
 
-import com.wcm533.pojo.BookListItems;
 import com.wcm533.pojo.ItemsDetails;
 import com.wcm533.service.impl.BookListServiceImpl;
 import com.wcm533.service.impl.EndowBookListServiceImpl;
@@ -24,11 +23,11 @@ import java.util.List;
 public class BookListDetailsController {
 
     @Autowired
-    @Qualifier("BookListServiceImpl")
+    @Qualifier("bookListServiceImpl")
     private BookListServiceImpl bookListService;
 
     @Autowired
-    @Qualifier("EndowBookListServiceImpl")
+    @Qualifier("endowBookListServiceImpl")
     private EndowBookListServiceImpl endowBookListService;
 
     @PostMapping("/bookList")

@@ -25,11 +25,11 @@ import javax.servlet.http.HttpServletRequest;
 public class BookController {
 
     @Autowired
-    @Qualifier("BookServiceImpl")
+    @Qualifier("bookServiceImpl")
     private BookServiceImpl bookService;
 
     @Autowired
-    @Qualifier("BookDetailsServiceImpl")
+    @Qualifier("bookDetailsServiceImpl")
     private BookDetailsServiceImpl bookDetailsService;
 
     @Autowired

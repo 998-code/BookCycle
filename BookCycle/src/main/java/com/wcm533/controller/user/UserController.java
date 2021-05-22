@@ -29,23 +29,23 @@ import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 public class UserController {
 
     @Autowired
-    @Qualifier("UserServiceImpl")
+    @Qualifier("userServiceImpl")
     private UserServiceImpl userService;
 
     @Autowired
-    @Qualifier("BookListServiceImpl")
+    @Qualifier("bookListServiceImpl")
     private BookListServiceImpl bookListService;
 
     @Autowired
-    @Qualifier("EndowBookListServiceImpl")
+    @Qualifier("endowBookListServiceImpl")
     private EndowBookListServiceImpl endowBookListService;
 
     @Autowired
-    @Qualifier("ReservationServiceImpl")
+    @Qualifier("reservationServiceImpl")
     private ReservationServiceImpl reservationService;
 
     @Autowired
-    @Qualifier("PointsServiceImpl")
+    @Qualifier("pointsServiceImpl")
     private PointsServiceImpl pointsService;
 
     @Autowired

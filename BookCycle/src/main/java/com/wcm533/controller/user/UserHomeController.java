@@ -24,23 +24,23 @@ import java.util.List;
 public class UserHomeController {
 
     @Autowired
-    @Qualifier("UserServiceImpl")
+    @Qualifier("userServiceImpl")
     private UserServiceImpl userService;
 
     @Autowired
-    @Qualifier("BookListServiceImpl")
+    @Qualifier("bookListServiceImpl")
     private BookListServiceImpl bookListService;
 
     @Autowired
-    @Qualifier("EndowBookListServiceImpl")
+    @Qualifier("endowBookListServiceImpl")
     private EndowBookListServiceImpl endowBookListService;
 
     @Autowired
-    @Qualifier("PointsServiceImpl")
+    @Qualifier("pointsServiceImpl")
     private PointsServiceImpl pointsService;
 
     @Autowired
-    @Qualifier("ReservationServiceImpl")
+    @Qualifier("reservationServiceImpl")
     private ReservationServiceImpl reservationService;
 
     @Autowired

@@ -26,19 +26,19 @@ import java.util.Map;
 public class BookListController {
 
     @Autowired
-    @Qualifier("BookServiceImpl")
+    @Qualifier("bookServiceImpl")
     private BookServiceImpl bookService;
 
     @Autowired
-    @Qualifier("BookListServiceImpl")
+    @Qualifier("bookListServiceImpl")
     private BookListServiceImpl bookListService;
 
     @Autowired
-    @Qualifier("PointsServiceImpl")
+    @Qualifier("pointsServiceImpl")
     private PointsServiceImpl pointsService;
 
     @Autowired
-    @Qualifier("UserServiceImpl")
+    @Qualifier("userServiceImpl")
     private UserServiceImpl userService;
 
     @Autowired
