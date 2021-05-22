@@ -54,7 +54,7 @@
             </div>
 
             <div style="float: right; width: 80%;height: 620px; border: 1px solid #dddddd;">
-                <div style="width: 100%; height: 49px;padding-top:0px; border-bottom: 1px solid #dddddd;">
+                <div style="width: 100%; height: 49px;padding-top:0; border-bottom: 1px solid #dddddd;">
                     <div style="width: 5px;height: 20px;float: left; margin-left: 30px; margin-top: 15px; border-radius: 2px;background-color: rgb(63, 164, 247);"></div>
                     <span style="float: left; color: rgb(63, 164, 247);margin-top: 15px;margin-left: 5px;">我的书单</span>
                     <div style="border:1px solid rgb(63, 164, 247);float: right;margin-right: 20%; margin-top:15px ;border-radius: 5px;padding-left:15px ;padding-right: 15px;">
@@ -64,7 +64,7 @@
                 </div>
                 <!-- 借书单 -->
                 <div style="border-bottom: 1px solid #dddddd;">
-                    <div style="width: 100%; height: 50px;padding-top:0px;">
+                    <div style="width: 100%; height: 50px;padding-top:0;">
                         <div style="width: 5px;height: 20px;float: left; margin-left: 30px; margin-top: 15px; border-radius: 2px;"></div>
                         <span style="float: left;margin-top: 15px;margin-left: 5px;color: rgb(63, 164, 247);">借书单</span>
                     </div>
@@ -238,7 +238,7 @@
                 </div>
                 <!-- 捐书单 -->
                 <div>
-                    <div style="width: 100%; height: 50px;padding-top:0px;">
+                    <div style="width: 100%; height: 50px;padding-top:0;">
                         <div style="width: 5px;height: 20px;float: left; margin-left: 30px; margin-top: 15px; border-radius: 2px;"></div>
                         <span style="float: left;margin-top: 15px;margin-left: 5px;color: rgb(63, 164, 247);">捐书单</span>
                     </div>

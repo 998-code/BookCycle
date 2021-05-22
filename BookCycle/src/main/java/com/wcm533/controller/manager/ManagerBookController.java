@@ -40,10 +40,7 @@ public class ManagerBookController {
     @ResponseBody
     public boolean ajaxBookName(String bookName){
         Book book = bookService.queryBookByName(bookName);
-        if(book==null){
-            return true;
-        }
-        return false;
+        return book == null;
     }
 
     @PostMapping("/addBook")

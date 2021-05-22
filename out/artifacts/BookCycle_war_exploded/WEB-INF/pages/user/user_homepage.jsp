@@ -64,7 +64,7 @@
                 <div style="border-bottom: 1px solid #dddddd;height: 160px;">
                     <div style="float: left;margin-left: 30px;margin-top: 30px;">
                         <img src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}"
-                             class="thumbnail" width="100" height="100">
+                             class="thumbnail" width="100" height="100" alt="">
                     </div>
 
                     <div style="width: 40%; height: 100px;margin-left: 30px; margin-top: 30px;float: left;">
@@ -113,7 +113,7 @@
                 <!-- 书单 -->
                 <div style="border-bottom: 1px solid #dddddd;">
                     <p class="btn-lg"
-                       style="display: inline-block; margin-bottom: 0px; font-size: 30px;color: rgb(20, 233, 180);">
+                       style="display: inline-block; margin-bottom: 0; font-size: 30px;color: rgb(20, 233, 180);">
                         <span class="glyphicon glyphicon-book"></span></p>
 
                     <div style="display: inline-block;">
@@ -189,7 +189,7 @@
                 <!-- 预约 -->
                 <div>
                     <p class="btn-lg"
-                       style="display: inline-block; margin-bottom: 0px; font-size: 30px;color: rgb(233, 148, 20);">
+                       style="display: inline-block; margin-bottom: 0; font-size: 30px;color: rgb(233, 148, 20);">
                         <span class="glyphicon glyphicon-time"></span></p>
 
                     <div style="display: inline-block;">

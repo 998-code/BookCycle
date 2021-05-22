@@ -1,14 +1,11 @@
 package com.wcm533.service.impl;
 
 import com.wcm533.dao.UserMapper;
-import com.wcm533.pojo.Book;
 import com.wcm533.pojo.Page;
 import com.wcm533.pojo.User;
 import com.wcm533.service.UserService;
-import com.wcm533.utils.FileUtils;
 import com.wcm533.utils.WebUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,43 +37,30 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean existsUsername(String username) {
-        if(userMapper.queryUserByUsername(username)!=null){
-            return true;
-        }
-        return false;
+        return userMapper.queryUserByUsername(username) != null;
     }
 
     @Override
     public boolean existsEmail(String email) {
-        if(userMapper.queryUserByEmail(email)!=null){
-            return true;
-        }
-        return false;
+        return userMapper.queryUserByEmail(email) != null;
     }
 
     @Override
     public int enrollUser(User user) {
-        int i = userMapper.insertUser(user);
-        return i;
+        return userMapper.insertUser(user);
     }
 
     @Override
     public boolean update(User user) {
         user.setPoints(user.getPoints()-6);
-        if (userMapper.updateUser(user)>0){
-            return true;
-        }
-        return false;
+        return userMapper.updateUser(user) > 0;
     }
 
     @Override
     public boolean updateAuthority(int userId, int authority) {
         User user = userMapper.queryUserById(userId);
         user.setAuthority(authority);
-        if(userMapper.updateUser(user)>0){
-            return true;
-        }
-        return false;
+        return userMapper.updateUser(user) > 0;
     }
 
     @Override
@@ -96,19 +80,13 @@ public class UserServiceImpl implements UserService {
         updateUser.setPoints(userById.getPoints());
         updateUser.setHeadImg(userById.getHeadImg());
         updateUser.setHeadImgPath(userById.getHeadImgPath());
-        if(userMapper.updateUser(updateUser)>0){
-            return true;
-        }
-        return false;
+        return userMapper.updateUser(updateUser) > 0;
     }
 
     @Override
     public boolean replaceHead(byte[] head,String headImgPath, int userId) {
 //        FileUtils.byteToFile(head,"web\\static\\img\\","img"+userId+headImgPath);
-        if(userMapper.replaceHead(head,headImgPath, userId)>0){
-            return true;
-        }
-        return false;
+        return userMapper.replaceHead(head, headImgPath, userId) > 0;
     }
 
     @Override
@@ -172,7 +150,7 @@ public class UserServiceImpl implements UserService {
         page.setPageTotal(pageTotal);
         page.setPageNo(pageNo);
         int begin=(page.getPageNo()-1)*pageSize;
-        List<User> items=new ArrayList<User>();
+        List<User> items;
         if(WebUtils.isNum(info)){
             int userId = Integer.parseInt(info);
             items= userMapper.queryUserForPageByUserId(begin,pageSize,userId);

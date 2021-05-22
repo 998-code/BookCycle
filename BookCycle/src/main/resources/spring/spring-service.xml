@@ -48,7 +48,6 @@
     </bean>
     <bean id="cartItemServiceImpl" class="com.wcm533.service.impl.CartItemServiceImpl">
         <property name="cartItemMapper" ref="cartItemMapper"/>
-        <property name="bookMapper" ref="bookMapper"/>
     </bean>
 <!--    <bean id="OrderServiceImpl" class="com.wcm533.service.impl.OrderServiceImpl">-->
 <!--        <property name="orderMapper" ref="orderMapper"></property>-->

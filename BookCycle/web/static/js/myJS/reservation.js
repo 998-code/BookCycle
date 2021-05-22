@@ -4,7 +4,7 @@ window.addEventListener("load", function () {
     let newHref = href.substr(0, index);
     $(".borrowReservation").click(function () {
         let status = $(this).data("status");
-        if (status == 1) {
+        if (status === 1) {
             let bookId = $(this).data("book-id");
             let userId = $(this).data("user-id");
             $.post({

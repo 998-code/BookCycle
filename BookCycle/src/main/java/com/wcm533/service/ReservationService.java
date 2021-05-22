@@ -2,7 +2,6 @@ package com.wcm533.service;
 
 import com.wcm533.pojo.Reservation;
 import com.wcm533.pojo.ReservationDetails;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

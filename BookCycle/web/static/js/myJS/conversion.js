@@ -18,7 +18,6 @@ function conversionTime() {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         let seconds = date.getSeconds();
         seconds = seconds < 10 ? "0" + seconds : seconds;
-        let s = year + "-" + month + "-" + dates + " " + hour + ":" + minutes + ":" + seconds;
-        times[i].innerHTML = s;
+        times[i].innerHTML = year + "-" + month + "-" + dates + " " + hour + ":" + minutes + ":" + seconds;
     }
 }

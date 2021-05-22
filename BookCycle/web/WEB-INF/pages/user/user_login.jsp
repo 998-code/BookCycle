@@ -48,7 +48,7 @@
 
             <div class="col-md-5 column" style="border-right:1px solid #dddddd;">
                <div style="margin-right: 5%;">
-                <img src="${pageContext.request.contextPath }/static/img/img7.png" class="img-rounded" style="height: 350px; width:100%;">
+                <img src="${pageContext.request.contextPath }/static/img/img7.png" class="img-rounded" style="height: 350px; width:100%;" alt="">
                </div>
             </div>
             

@@ -43,7 +43,7 @@
                 </div>
                 
                 <div style="float: right; width: 80%;height: 620px; border: 1px solid #dddddd;">
-                    <div style="width: 100%; height: 49px;padding-top:0px; border-bottom: 1px solid #dddddd;">
+                    <div style="width: 100%; height: 49px;padding-top:0; border-bottom: 1px solid #dddddd;">
                         <div style="width: 5px;height: 20px;float: left; margin-left: 30px; margin-top: 15px; border-radius: 2px;background-color: rgb(63, 164, 247);"></div>
                         <span style="float: left; color: rgb(63, 164, 247);margin-top: 15px;margin-left: 5px;">
                             我的头像
@@ -55,7 +55,7 @@
 
                     <div style="margin-top: 20px;">
                         <div style="width: 200px; height: 200px; margin: 0 auto; border-radius: 50%; border: 1px solid #dddddd;">
-                            <img style=" height: 50%; width: 50%; margin-top: 50px; margin-left: 50px; border-radius: 50%; "src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
+                            <img style=" height: 50%; width: 50%; margin-top: 50px; margin-left: 50px; border-radius: 50%; " src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" alt="">
                             <a href="#" data-toggle="modal" data-target="#myModal">
                                 <div style="height:35%;width: 35%; border-radius: 50%;background-color: skyblue;">
                                     <span style="float: left; margin-left: 20px;margin-top: 15px;color: snow;">更换<br>头像</span>
@@ -86,7 +86,7 @@
                     </div>
 
                     <div style="margin-top: 40px; border-top: 1px solid #dddddd;">
-                        <div style="width: 100%; height: 50px;padding-top:0px;">
+                        <div style="width: 100%; height: 50px;padding-top:0;">
                             <div style="width: 5px;height: 20px;float: left; margin-left: 30px; margin-top: 15px; border-radius: 2px;"></div>
                             <span style="float: left; color: rgb(63, 164, 247);margin-top: 15px;margin-left: 5px;">历史头像</span>
                         </div>
@@ -94,28 +94,28 @@
                         <div style="margin-top: 20px;">
                             <div class="col-sm-6 col-md-3" >
                                 <a href="#" class="thumbnail" style="border-radius: 50%;">
-                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
+                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" alt="">
                                 </a>
 
                                 <a class="btn btn-primary" style="display: inline-block; width: 100px; margin-left: 30px;">换上</a>
                             </div>
                             <div class="col-sm-6 col-md-3" >
                                 <a href="#" class="thumbnail" style="border-radius: 50%;">
-                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
+                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" alt="">
                                 </a>
 
                                 <a class="btn btn-primary" style="display: inline-block; width: 100px; margin-left: 30px;">换上</a>
                             </div>
                             <div class="col-sm-6 col-md-3" >
                                 <a href="#" class="thumbnail" style="border-radius: 50%;">
-                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
+                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" alt="">
                                 </a>
 
                                 <a class="btn btn-primary" style="display: inline-block; width: 100px; margin-left: 30px;">换上</a>
                             </div>
                             <div class="col-sm-6 col-md-3" >
                                 <a href="#" class="thumbnail" style="border-radius: 50%;">
-                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}">
+                                    <img style="width: 150px;height: 150px; border-radius: 50%;" src="${pageContext.request.contextPath}/static/img/userImg/img${sessionScope.user.id}${sessionScope.user.headImgPath}" alt="">
                                 </a>
 
                                 <a class="btn btn-primary" style="display: inline-block; width: 100px; margin-left: 30px;">换上</a>

@@ -72,36 +72,27 @@ public class EndowBookListServiceImpl implements EndowBookListService {
 
     @Override
     public boolean deleteBookList(String bookListId) {
-        if(endowBookListMapper.deleteBookList(bookListId)>0){
-            return true;
-        }
-        return false;
+        return endowBookListMapper.deleteBookList(bookListId) > 0;
     }
 
     @Override
     public boolean readyBookList(String bookListId) {
-        if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.READY)>0){
-            return true;
-        }
-        return false;
+        return endowBookListMapper.changeBookListStatus(bookListId, EndowBookList.READY) > 0;
     }
 
     @Override
     public boolean processingBookList(String bookListId) {
-        if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.PROCESSING)>0){
-            return true;
-        }
-        return false;
+        return endowBookListMapper.changeBookListStatus(bookListId, EndowBookList.PROCESSING) > 0;
     }
 
     @Override
     public boolean completedBookList(String bookListId) {
         if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.COMPLETED)>0){
             List<EndowBookListItems> endowBookListItems = endowBookListItemsMapper.queryBookListItemsByBookListId(bookListId);
-            for (int i = 0; i <endowBookListItems.size() ; i++) {
-                int bookId = endowBookListItems.get(i).getBookId();
+            for (EndowBookListItems endowBookListItem : endowBookListItems) {
+                int bookId = endowBookListItem.getBookId();
                 Book book = bookMapper.queryBookById(bookId);
-                book.setStock(book.getStock()+1);
+                book.setStock(book.getStock() + 1);
                 bookMapper.updateBook(book);
             }
             EndowBookList endowBookList = endowBookListMapper.queryBookByBookListId(bookListId);
@@ -115,10 +106,7 @@ public class EndowBookListServiceImpl implements EndowBookListService {
 
     @Override
     public boolean cancelBookList(String bookListId) {
-        if(endowBookListMapper.changeBookListStatus(bookListId,EndowBookList.CANCEL)>0){
-            return true;
-        }
-        return false;
+        return endowBookListMapper.changeBookListStatus(bookListId, EndowBookList.CANCEL) > 0;
     }
 
     @Override
@@ -222,7 +210,6 @@ public class EndowBookListServiceImpl implements EndowBookListService {
 
     @Override
     public EndowBookList queryBookListsByBookListId(String bookListId) {
-        EndowBookList endowBookList = endowBookListMapper.queryBookByBookListId(bookListId);
-        return endowBookList;
+        return endowBookListMapper.queryBookByBookListId(bookListId);
     }
 }

@@ -116,7 +116,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", points=" + points +
                 ", headImgPath='" + headImgPath + '\'' +
-                ", headImg=" + headImg +
+                ", headImg=" + Arrays.toString(headImg) +
                 ", authority=" + authority +
                 '}';
     }

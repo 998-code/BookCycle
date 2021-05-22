@@ -174,6 +174,7 @@ public class UserController {
     @PostMapping("/updateHead")
     public String updateHead(@RequestParam("file") MultipartFile file){
         String originalFilename = file.getOriginalFilename();
+        assert originalFilename != null;
         int lastIndexOf = originalFilename.lastIndexOf(".");
         String headImgPath = originalFilename.substring(lastIndexOf);
         User user =(User)request.getSession().getAttribute("user");
@@ -202,20 +203,12 @@ public class UserController {
     @RequestMapping("/ajaxUsername")
     @ResponseBody
     public boolean ajaxUsername(String username){
-        if(userService.existsUsername(username)){
-            return true;
-        }else{
-            return false;
-        }
+        return userService.existsUsername(username);
     }
 
     @RequestMapping("/ajaxEmail")
     @ResponseBody
     public boolean ajaxEmail(String email){
-        if(userService.existsEmail(email)){
-            return true;
-        }else{
-            return false;
-        }
+        return userService.existsEmail(email);
     }
 }

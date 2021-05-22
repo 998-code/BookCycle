@@ -58,7 +58,7 @@ public class FileUtils {
             in = new BufferedInputStream(new FileInputStream(file));
             int buf_size = 1024;
             byte[] buffer = new byte[buf_size];
-            int len = 0;
+            int len;
             while (-1 != (len = in.read(buffer, 0, buf_size))) {
                 bos.write(buffer, 0, len);
             }
@@ -92,7 +92,7 @@ public class FileUtils {
     public static void byteToFile(byte[] bfile, String filePath, String fileName) {
         BufferedOutputStream bos = null;
         FileOutputStream fos = null;
-        File file = null;
+        File file;
         try {
             File dir = new File(filePath);
             if (!dir.exists() && !dir.isDirectory()) {//判断文件目录是否存在

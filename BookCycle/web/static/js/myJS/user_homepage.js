@@ -7,7 +7,7 @@ window.addEventListener("load",function () {
         let status = $(this).data("status");
         let statusArr = ["准备中", "已出库", "借阅中", "已归还", "已取消"];
         let bookListId = $(this).data("book-list-id");
-        if (status != 1) {
+        if (status !== 1) {
             alert("书单[" + bookListId + "]" + statusArr[status] + "，不能接收！");
             return false;
         } else {
@@ -31,7 +31,7 @@ window.addEventListener("load",function () {
         let status = $(this).data("status");
         let statusArr = ["准备中", "已出库", "借阅中", "已归还", "已取消"];
         let bookListId = $(this).data("book-list-id");
-        if (status != 0) {
+        if (status !== 0) {
             alert("书单[" + bookListId + "]" + statusArr[status] + "，不能取消！");
             return false;
         } else {
@@ -54,7 +54,7 @@ window.addEventListener("load",function () {
 
     $(".borrowReservation").click(function () {
         let status = $(this).data("status");
-        if (status == 1) {
+        if (status === 1) {
             let bookId = $(this).data("book-id");
             let userId = $(this).data("user-id");
             $.post({

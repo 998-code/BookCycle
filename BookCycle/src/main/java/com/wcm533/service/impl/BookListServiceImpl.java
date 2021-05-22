@@ -1,6 +1,5 @@
 package com.wcm533.service.impl;
 
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.wcm533.dao.*;
 import com.wcm533.pojo.*;
 import com.wcm533.service.BookListService;
@@ -8,7 +7,6 @@ import com.wcm533.service.BookListService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName BookListServiceImpl
@@ -71,34 +69,22 @@ public class BookListServiceImpl implements BookListService {
 
     @Override
     public boolean deleteBookList(String bookListId) {
-        if(bookListMapper.deleteBookList(bookListId)>0){
-            return true;
-        }
-        return false;
+        return bookListMapper.deleteBookList(bookListId) > 0;
     }
 
     @Override
     public boolean readyBookList(String bookListId) {
-        if(bookListMapper.changeBookListStatus(bookListId,BookList.READY)>0){
-            return true;
-        }
-        return false;
+        return bookListMapper.changeBookListStatus(bookListId, BookList.READY) > 0;
     }
 
     @Override
     public boolean sendBookList(String bookListId) {
-        if(bookListMapper.changeBookListStatus(bookListId,BookList.SEND)>0){
-            return true;
-        }
-        return false;
+        return bookListMapper.changeBookListStatus(bookListId, BookList.SEND) > 0;
     }
 
     @Override
     public boolean borrowBookList(String bookListId) {
-        if(bookListMapper.changeBookListStatus(bookListId,BookList.BORROW)>0){
-            return true;
-        }
-        return false;
+        return bookListMapper.changeBookListStatus(bookListId, BookList.BORROW) > 0;
     }
 
     @Override
@@ -106,10 +92,10 @@ public class BookListServiceImpl implements BookListService {
         BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
         if(bookListMapper.changeBookListStatus(bookListId,BookList.RETURN)>0){
             List<BookListItems> bookListItems = bookListItemsMapper.queryBookListItemsByBookListId(bookListId);
-            for (int i = 0; i < bookListItems.size(); i++) {
-                int bookId = bookListItems.get(i).getBookId();
+            for (BookListItems bookListItem : bookListItems) {
+                int bookId = bookListItem.getBookId();
                 Book book = bookMapper.queryBookById(bookId);
-                book.setLoan(book.getLoan()-1);
+                book.setLoan(book.getLoan() - 1);
                 bookMapper.updateBook(book);
             }
             if(bookList.getStatus()!=BookList.TIME_OUT){
@@ -126,10 +112,10 @@ public class BookListServiceImpl implements BookListService {
     public boolean cancelBookList(String bookListId) {
         if (bookListMapper.changeBookListStatus(bookListId,BookList.CANCEL)>0){
             List<BookListItems> bookListItems = bookListItemsMapper.queryBookListItemsByBookListId(bookListId);
-            for (int i = 0; i < bookListItems.size(); i++) {
-                int bookId = bookListItems.get(i).getBookId();
+            for (BookListItems bookListItem : bookListItems) {
+                int bookId = bookListItem.getBookId();
                 Book book = bookMapper.queryBookById(bookId);
-                book.setLoan(book.getLoan()-1);
+                book.setLoan(book.getLoan() - 1);
                 bookMapper.updateBook(book);
             }
             BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
@@ -143,18 +129,12 @@ public class BookListServiceImpl implements BookListService {
 
     @Override
     public boolean aboutOfTimeOutBookList(String bookListId) {
-        if(bookListMapper.changeBookListStatus(bookListId,BookList.ABOUT_TO_TIME_OUT)>0){
-            return true;
-        }
-        return false;
+        return bookListMapper.changeBookListStatus(bookListId, BookList.ABOUT_TO_TIME_OUT) > 0;
     }
 
     @Override
     public boolean overTimeBookList(String bookListId) {
-        if(bookListMapper.changeBookListStatus(bookListId,BookList.TIME_OUT)>0){
-            return true;
-        }
-        return false;
+        return bookListMapper.changeBookListStatus(bookListId, BookList.TIME_OUT) > 0;
     }
 
     @Override
@@ -257,8 +237,7 @@ public class BookListServiceImpl implements BookListService {
 
     @Override
     public BookList queryBookListsByBookListId(String bookListId) {
-        BookList bookList = bookListMapper.queryBookByBookListId(bookListId);
-        return bookList;
+        return bookListMapper.queryBookByBookListId(bookListId);
     }
 
     @Override

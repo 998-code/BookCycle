@@ -6,7 +6,7 @@ window.addEventListener("load", function () {
         var username = $(this).val();
         let oldUsername = $(this).data("username");
         var usernamePatt = /^[(a-zA-Z0-9\u4e00-\u9fa5){1}_#]{2,12}$/;
-        if (username == oldUsername) {
+        if (username === oldUsername) {
             return false;
         }
         $("span.errorUsername").text("");
@@ -33,7 +33,7 @@ window.addEventListener("load", function () {
         let email = $(this).val();
         let oldEmail = $(this).data("email");
         var emailPatt = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
-        if (email == oldEmail) {
+        if (email === oldEmail) {
             return false;
         }
         $("span.errorEmail").text("");
@@ -62,7 +62,7 @@ window.addEventListener("load", function () {
         let address = $.trim($("#address").val());
         let oldUsername = $(this).data("username");
         let oldEmail = $(this).data("email");
-        if (username == oldUsername && email == oldEmail) {
+        if (username === oldUsername && email === oldEmail) {
             alert("提交的用户信息与原信息相同！");
             return false;
         }
@@ -95,7 +95,7 @@ window.addEventListener("load", function () {
             return false;
         }
         var confirm = $("#confirm").val();
-        if (newPassword != confirm) {
+        if (newPassword !== confirm) {
             $("span.errorConfirm").text("密码与确认密码不符！");
             return false;
         }

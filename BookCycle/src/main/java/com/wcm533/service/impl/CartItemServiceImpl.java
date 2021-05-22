@@ -1,8 +1,6 @@
 package com.wcm533.service.impl;
 
-import com.wcm533.dao.BookMapper;
 import com.wcm533.dao.CartItemMapper;
-import com.wcm533.pojo.Book;
 import com.wcm533.pojo.CartItem;
 import com.wcm533.service.CartItemService;
 
@@ -17,15 +15,11 @@ import java.util.List;
 public class CartItemServiceImpl implements CartItemService {
 
     private CartItemMapper cartItemMapper;
-    private BookMapper bookMapper;
 
     public void setCartItemMapper(CartItemMapper cartItemMapper) {
         this.cartItemMapper = cartItemMapper;
     }
 
-    public void setBookMapper(BookMapper bookMapper) {
-        this.bookMapper = bookMapper;
-    }
 
     @Override
     public boolean addCartItem(CartItem cartItem) {

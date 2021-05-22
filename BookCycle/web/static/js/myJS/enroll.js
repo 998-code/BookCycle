@@ -2,7 +2,6 @@ window.addEventListener("load", function () {
     let href = location.href;//获取或设置整个URL
     let index = href.indexOf("user");
     let newHref = href.substr(0, index);
-    alert(newHref);
 
     $("#username").blur(function () {
         var username = this.value;
@@ -52,7 +51,7 @@ window.addEventListener("load", function () {
             return false;
         }
         var repwd = $("#repwd").val();
-        if (password != repwd) {
+        if (password !== repwd) {
             $("span.errorMsg").text("密码与确认密码不符！");
             return false;
         }
@@ -62,9 +61,8 @@ window.addEventListener("load", function () {
             $("span.errorMsg").text("邮箱格式不匹配！");
             return false;
         }
-        var code = $("#code").val();
-        var code = $.trim(code);
-        if (code == null || code == "") {
+        var code = $.trim($("#code").val());
+        if (code == null || code === "") {
             $("span.errorMsg").text("验证码错误！");
             return false;
         }

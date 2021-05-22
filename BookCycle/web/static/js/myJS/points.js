@@ -2,7 +2,7 @@ window.addEventListener("load", function () {
     $(".pointsDetails").click(function () {
         let ul = $(this).parent().parent();
         let bookListId = $.trim(ul.children("td").eq(3).html());
-        if (bookListId.length == 0) {
+        if (bookListId.length === 0) {
             $(".pointsDetailsP").text("");
             $(".pointsDetailsP").text("修改昵称");
         } else {
@@ -30,8 +30,7 @@ function conversionTime() {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         let seconds = date.getSeconds();
         seconds = seconds < 10 ? "0" + seconds : seconds;
-        let s = year + "-" + month + "-" + dates + " " + hour + ":" + minutes + ":" + seconds;
-        times[i].innerHTML = s;
+        times[i].innerHTML = year + "-" + month + "-" + dates + " " + hour + ":" + minutes + ":" + seconds;
     }
 }
 

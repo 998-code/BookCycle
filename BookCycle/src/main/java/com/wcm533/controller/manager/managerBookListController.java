@@ -2,7 +2,6 @@ package com.wcm533.controller.manager;
 
 import com.wcm533.pojo.*;
 import com.wcm533.service.impl.BookListServiceImpl;
-import com.wcm533.service.impl.BookServiceImpl;
 import com.wcm533.service.impl.EndowBookListServiceImpl;
 import com.wcm533.service.impl.PointsServiceImpl;
 import com.wcm533.utils.WebUtils;
@@ -28,10 +27,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/manager")
 public class managerBookListController {
-
-    @Autowired
-    @Qualifier("bookServiceImpl")
-    private BookServiceImpl bookService;
 
     @Autowired
     @Qualifier("bookListServiceImpl")
@@ -70,9 +65,8 @@ public class managerBookListController {
     @RequestMapping("/bookList/outOfStock")
     @ResponseBody
     public boolean outOfStock(String bookListId){
-        boolean outOfStock = bookListService.sendBookList(bookListId);
 
-        return outOfStock;
+        return bookListService.sendBookList(bookListId);
     }
 
     @RequestMapping("/bookList/confirmReturn")
@@ -120,8 +114,7 @@ public class managerBookListController {
     @RequestMapping("/endowBookList/startProcessing")
     @ResponseBody
     public boolean startProcessing(String bookListId){
-        boolean startProcessing = endowBookListService.processingBookList(bookListId);
-        return startProcessing;
+        return endowBookListService.processingBookList(bookListId);
     }
 
     @RequestMapping("/endowBookList/confirmComplete")

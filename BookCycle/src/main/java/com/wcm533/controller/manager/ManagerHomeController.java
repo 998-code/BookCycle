@@ -4,7 +4,6 @@ import com.wcm533.pojo.Book;
 import com.wcm533.pojo.BookList;
 import com.wcm533.pojo.Page;
 import com.wcm533.pojo.User;
-import com.wcm533.service.impl.BookDetailsServiceImpl;
 import com.wcm533.service.impl.BookListServiceImpl;
 import com.wcm533.service.impl.BookServiceImpl;
 import com.wcm533.service.impl.UserServiceImpl;

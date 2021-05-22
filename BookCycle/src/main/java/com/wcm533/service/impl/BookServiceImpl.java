@@ -31,20 +31,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean deleteBook(int bookId) {
-        if(bookMapper.deleteBook(bookId)>0){
-            return true;
-        }
-        return false;
+        return bookMapper.deleteBook(bookId) > 0;
     }
 
     @Override
     public boolean updateBook(Book book) {
         Book bookById = bookMapper.queryBookById(book.getId());
         book.setBookImg(bookById.getBookImg());
-        if(bookMapper.updateBook(book)>0){
-            return true;
-        }
-        return false;
+        return bookMapper.updateBook(book) > 0;
     }
 
     @Override

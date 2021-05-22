@@ -32,18 +32,12 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public boolean addReservation(int userId,int bookId) {
         Reservation reservation = new Reservation(bookId,userId);
-        if(reservationMapper.addReservation(reservation)>0){
-            return true;
-        };
-        return false;
+        return reservationMapper.addReservation(reservation) > 0;
     }
 
     @Override
     public boolean deleteReservation(int id) {
-        if(reservationMapper.deleteReservation(id)>0){
-            return true;
-        }
-        return false;
+        return reservationMapper.deleteReservation(id) > 0;
     }
 
     @Override

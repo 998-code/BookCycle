@@ -22,6 +22,9 @@ public class LoginFilter implements HandlerInterceptor {
         if (request.getRequestURI().contains("getLogin")) {
             return true;
         }
+        if (request.getRequestURI().contains("getEnroll")) {
+            return true;
+        }
         if (request.getRequestURI().contains("login")) {
             return true;
         }
@@ -38,11 +41,11 @@ public class LoginFilter implements HandlerInterceptor {
         return false;
     }
 
-    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) {
 
     }
 
-    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
 
     }
 }

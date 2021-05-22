@@ -22,10 +22,7 @@ public class PointsServiceImpl implements PointsService {
 
     @Override
     public boolean addPoints(Points points) {
-        if(pointsMapper.addPoints(points)>0){
-            return true;
-        }
-        return false;
+        return pointsMapper.addPoints(points) > 0;
     }
 
     @Override

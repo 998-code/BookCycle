@@ -44,12 +44,12 @@
                 let bookName = $(this).data("book-name");
                 let points = $(this).data("points");
                 let userId = $("#userHome").data("user-id");
-                if(userId==""||userId.length==0){
+                if(userId===""||userId.length===0){
                     $(".book-alert").html("您还没有登录，请先登录！").addClass("book-alert-warning").show().delay(5000).fadeOut();
                     return false;
                 }
-                let bookId = new Array();
-                let bookCount=new Array();
+                let bookId = [];
+                let bookCount=[];
                 bookId.push(id);
                 bookId.push(points);
                 bookCount.push(1);
@@ -58,7 +58,7 @@
                     url:newHref+"bookList/borrowNow",
                     data: {"userId":userId,"bookId":bookId.toString(),"bookCount":bookCount.toString()},
                     success:function (data) {
-                        if(data=="bookListId"){
+                        if(data==="bookListId"){
                             $(".book-alert").html("图书《"+bookName+"》全部被借阅，您预约下次借阅！").addClass("book-alert-warning").show().delay(2500).fadeOut();
                         }else {
                             $(".book-alert").html("已为您生成订单号：" + data + "<br>您可以在个人主页查看详情！").addClass("book-alert-success").show().delay(2500).fadeOut();
@@ -69,9 +69,8 @@
 
             $("#reservationBook").click(function () {
                 let bookId = $(this).data("book-id");
-                let bookName = $(this).data("book-name");
                 let userId = $("#userHome").data("user-id");
-                if(userId==""||userId.length==0){
+                if(userId===""||userId.length===0){
                     $(".book-alert").html("您还没有登录，请先登录！").addClass("book-alert-warning").show().delay(5000).fadeOut();
                     return false;
                 }
@@ -123,11 +122,7 @@
             background-color: #dff0d8;
             border-color: #d6e9c6;
         }
-        .book-alert-info {
-            color: #31708f;
-            background-color: #d9edf7;
-            border-color: #bce8f1;
-        }
+
         .book-alert-warning {
             color: #8a6d3b;
             background-color: #fcf8e3;
@@ -161,7 +156,7 @@
         </div>
         <div class="col-md-5 column">
             <img src="${pageContext.request.contextPath}/static/img/bookimg1.jpg" class="img-thumbnail"
-                 style="height: 600px; width: 400px;">
+                 style="height: 600px; width: 400px;" alt="">
         </div>
 
         <div class="col-md-5 column">

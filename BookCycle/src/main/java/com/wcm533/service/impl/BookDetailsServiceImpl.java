@@ -20,33 +20,23 @@ public class BookDetailsServiceImpl implements BookDetailsService {
 
     @Override
     public boolean addBookDetails(BookDetails bd) {
-        if(bookDetailsMapper.addBookDetails(bd)>0){
-            return true;
-        }
-        return false;
+        return bookDetailsMapper.addBookDetails(bd) > 0;
     }
 
     @Override
     public boolean deleteBookDetails(int bookId) {
-        if(bookDetailsMapper.deleteBookDetails(bookId)>0){
-            return true;
-        }
-        return false;
+        return bookDetailsMapper.deleteBookDetails(bookId) > 0;
     }
 
     @Override
     public boolean updateBookDetails(BookDetails bd) {
         BookDetails detailsByBookId = bookDetailsMapper.queryBookDetailsByBookId(bd.getBookId());
         bd.setId(detailsByBookId.getId());
-        if(bookDetailsMapper.updateBookDetails(bd)>0){
-            return true;
-        }
-        return false;
+        return bookDetailsMapper.updateBookDetails(bd) > 0;
     }
 
     @Override
     public BookDetails queryBookDetailsByBookId(int bookId) {
-        BookDetails bookDetails = bookDetailsMapper.queryBookDetailsByBookId(bookId);
-        return bookDetails;
+        return bookDetailsMapper.queryBookDetailsByBookId(bookId);
     }
 }

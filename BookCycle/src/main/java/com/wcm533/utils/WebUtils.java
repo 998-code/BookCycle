@@ -36,9 +36,8 @@ public class WebUtils<T> {
 
     public static Date parseString(String str) {
         String s = str.substring(0, 13);
-        Long aLong = Long.parseLong(s);
-        Date date = new Date(aLong);
-        return date;
+        long aLong = Long.parseLong(s);
+        return new Date(aLong);
     }
 
     public static boolean isNum(String str) {
@@ -53,9 +52,7 @@ public class WebUtils<T> {
     public static <E, K> List<E> MapToList(Map<K,E> map){
         List<E> values=new ArrayList<E>();
         Set<Map.Entry<K, E>> entries = map.entrySet();
-        Iterator<Map.Entry<K, E>> iterator = entries.iterator();
-        while (iterator.hasNext()){
-            Map.Entry<K, E> next = iterator.next();
+        for (Map.Entry<K, E> next : entries) {
             values.add(next.getValue());
         }
         return values;

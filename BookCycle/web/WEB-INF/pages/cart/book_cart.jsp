@@ -306,7 +306,7 @@
                     <img src="${pageContext.request.contextPath}/static/img/img7.png" height="80" alt="">
                 </div>
                 <p
-                        style="float:left;margin-left:20px;margin-top:40px;margin-bottom:0px;color: rgb(88, 84, 84);font-size: 30px;">
+                        style="float:left;margin-left:20px;margin-top:40px;margin-bottom:0;color: rgb(88, 84, 84);font-size: 30px;">
                     借阅书单
                 </p>
             </div>
@@ -350,7 +350,7 @@
                             <th>
                                 <div>
                                     <input type="checkbox" id="checkAll" checked="checked" style="display: inline-block;margin-top: 5px">
-                                    <p style="display: inline-block;margin: 0px;margin-left: 5px;">全选</p>
+                                    <p style="display: inline-block;margin: 0;margin-left: 5px;">全选</p>
                                 </div>
                             </th>
                             <th>图书信息</th>
@@ -372,9 +372,9 @@
 
                                 <td>
                                     <div style="float: left;margin-bottom: 10px;">
-                                        <img src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${item.bookId}.jpg" height="80px">
+                                        <img src="${pageContext.request.contextPath}/static/img/bookImg/bookimg${item.bookId}.jpg" height="80px" alt="">
                                     </div>
-                                    <p style="float:left;margin-top:10px;margin-left:20px;margin-bottom:0px;color: rgb(88, 84, 84);font-size: 14px;">
+                                    <p style="float:left;margin-top:10px;margin-left:20px;margin-bottom:0;color: rgb(88, 84, 84);font-size: 14px;">
                                         ${item.bookName}（第三版）
                                     </p>
                                 </td>
